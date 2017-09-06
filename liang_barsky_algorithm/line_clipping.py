@@ -156,23 +156,24 @@ def liang_barsky(line, window):
 
 def line_clipper(lines, window):
     line_counter = 1
-    for l in lines:
-        clipping_points = liang_barsky(l, window)
-        store_information(clipping_points["left"], "Left", line_counter)
-        store_information(clipping_points["right"], "Right", line_counter)
-        store_information(clipping_points["top"], "Top", line_counter)
-        store_information(clipping_points["bottom"], "Bottom", line_counter)
-        line_counter += 1
+    with open('output.txt', "w") as file:
+        for l in lines:
+            clipping_points = liang_barsky(l, window)
+            store_information(clipping_points["left"], "Left", line_counter,file)
+            store_information(clipping_points["right"], "Right", line_counter,file)
+            store_information(clipping_points["top"], "Top", line_counter,file)
+            store_information(clipping_points["bottom"], "Bottom", line_counter,file)
+            line_counter += 1
+            file.write('\n')
 
 
-def store_information(clipping_point, side, line_id):
-    with open('output.txt', 'a') as file:
-        message = "{0} limit, line {1}: {2}\n"
-        if clipping_point:
-            message = message.format(side, line_id, clipping_point.to_string())
-        else:
-            message = message.format(side, line_id, "it has no clipping point.")
-        file.write(message)
+def store_information(clipping_point, side, line_id, file):
+    message = "{0} limit, line {1}: {2}\n"
+    if clipping_point:
+        message = message.format(side, line_id, clipping_point.to_string())
+    else:
+        message = message.format(side, line_id, "it has no clipping point.")
+    file.write(message)
 
 
 def main():
