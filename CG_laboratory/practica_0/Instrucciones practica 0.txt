@@ -1,0 +1,53 @@
+Práctica 1. Primitivas gráficas de OpenGL (1 clase)
+
+_________________________________________________________________________________________
+Objetivo de la práctica:
+_________________________________________________________________________________________
+
+- El alumno se familiarizará con el uso de las funciones graficas básicas en OpenGL mediante la elaboración de modelos sencillos en tres dimensiones.
+
+_________________________________________________________________________________________
+Introducción
+_________________________________________________________________________________________
+
+La función RenderizaEscena del archivo Main.cpp es la encarga de limpiar la pantalla y dibujar todo aquello que aparecerá en pantalla.
+
+Para mantener un diseño mas ordenado del programa se usarán subrutinas encargadas de dibujar los distintos elementos que componen la escena y serán invocadas en RenderizaEscena.
+
+En el código proporcionado en el archivo de modificaciones se encuentra una función llamada DibujaPirámide, la cual muestra el uso de funciones básicas de dibujo en OpenGL para crear una pirámide sólida que se encuentra adentro de otra pirámide formada por líneas y con cada uno de los vértices correspondientes en ambas pirámides conectados entre si por líneas de color verde.
+
+Como puede observarse en esta función para dibujar una primitiva gráfica en OpenGL se deben especificar sus vertices entre la llamada a glBegin y glEnd:
+
+glBegin(tipo de primitiva);
+	glVertex3f(valor de x, valor de y, valor de z);
+	...
+glEnd();
+
+los tipos mas usados de primitivas son:
+
+GL_TRIANGLES: Forma un triángulo a partir de 3 vértices
+GL_QUADS: Forma un plano rectangular a partir de 4 vértices
+GL_LINES: Forma una línea a partir de 2 vértices
+GL_LINE_LOOP: Forma un contorno de líneas para los vértices definidos
+GL_POLYGON: Forma un polígono con el número de vérices definidos
+GL_POINT: Dibuja un punto a partir de 1 vértice
+
+Las primitivas pueden dibujarse de distintos colores, para ello habrá que utilizar la siguiente función antes de dibujar la primitiva:
+
+glColor3f(componente roja, componente verde, componente azul);
+
+Cada componente varia de 0.0 a 1.0 de modo que si utilizamos la combinación (1.0, 1.0, 1.0) el color será blanco. Para (0.0, 0.0, 0.0) obtendremos el color negro. Para (1.0, 0.0, 0.0) obtendremos el rojo a intensidad máxima.
+
+OpenGL funciona como una máquina de estados de modo que una vez que se seleccione un color todo lo que se dibuje después tendra ese color hasta que se defina uno distinto.
+
+_________________________________________________________________________________________
+Desarrollo:
+_________________________________________________________________________________________
+
+*Antes de iniciar el desarrollo de esta práctica realiza los cambios indicados en el archivo codigo_cambios.txt
+
+1. Crea una nueva función llamada DibujaPrimitivas y en esa función prueba el uso de los tipos de primitivas mencionados para distintos valores de vértices y usando distintos colores. Posteriormente llama la función desde RenderizaEscena.
+
+2. Crea una nueva función llamada DibujaCubo y en esa función, de manera similar a la función DibujaPirámide, construye un cubo sólido adentro de otro cubo mas grande formado por líneas, usando las coordenadas que indique el profesor. En la función RenderizaEscena reemplaza la llamada a DibujaPrimitivas por DibujaCubo.
+
+3. En la función RenderizaEscena llama a la función DibujaPiramide() para que aparezca en donde se ve en el video y aplica al cubo transformaciones geométricas de traslación y escalamiento para que el cubo suba y baje girando.

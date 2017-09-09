@@ -1,0 +1,118 @@
+*Leer sin ajuste de línea
+
+1. Copiar lo siguiente en el archivo Main.cpp, después de int glHeight;
+
+COLORREF ShowColorDialog(HWND);
+COLORREF gColor = RGB(0, 0, 0);
+bool teclaColor=false;
+_________________________________________________________________________
+
+2. Copiar la siguiente función antes de WndProc
+
+COLORREF ShowColorDialog(HWND hwnd)
+{
+	CHOOSECOLOR cc;                 
+	static COLORREF crCustClr[16];     
+
+	ZeroMemory(&cc, sizeof(cc));
+	cc.lStructSize = sizeof(cc);
+	cc.hwndOwner = hwnd;
+	cc.lpCustColors = (LPDWORD) crCustClr;
+	cc.rgbResult = RGB(0, 255, 0);
+	cc.Flags = CC_FULLOPEN | CC_RGBINIT;
+	ChooseColor(&cc);
+
+	return cc.rgbResult;
+}
+
+_________________________________________________________________________
+
+3. Copiar lo siguiente en WndProc, después de keys[wParam] = TRUE;
+
+		if(teclaColor)
+		{
+			gColor = ShowColorDialog(hWnd);
+			teclaColor=false;
+		}
+
+_________________________________________________________________________
+
+4. Agregar lo siguiente en RenderizaEscena, antes de return TRUE
+
+char szWndText[300];
+sprintf(szWndText,"Color(%.3f, %.3f, %.3f)",(float)GetRValue(gColor)/255.0f, (float)GetGValue(gColor)/255.0f, (float)GetBValue(gColor)/255.0f);
+SetWindowText(hWnd,szWndText);
+
+_________________________________________________________________________
+
+5. Agregar lo siguiente en la función ManejaTeclado, antes de return TRUE
+
+	if((GetAsyncKeyState('C')&1) == 1)
+	{
+		teclaColor=true;
+	}
+_________________________________________________________________________
+
+6. Copiar la siguiente función después de RenderizaEscena:
+
+int RenderizaEscena2(GLvoid)								// Aqui se dibuja todo lo que aparecera en la ventana
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	for(int iNumViewPort=0; iNumViewPort<2; iNumViewPort++)
+	{
+		if(iNumViewPort == 0)//Puerto 1
+		{
+			glViewport(0,0,glWidth*0.5f,glHeight);
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			gluPerspective(45.0f,(GLfloat)(glWidth*0.5f)/(GLfloat)glHeight,1.0f,2000.0f);
+		}
+		if(iNumViewPort == 1)//Puerto 2
+		{
+			glViewport(glWidth*0.5f,0,glWidth*0.5f,glHeight);
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			gluPerspective(45.0f,(GLfloat)(glWidth*0.5f)/(GLfloat)glHeight,1.0f,2000.0f);
+		}
+	
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glClear(GL_DEPTH_BUFFER_BIT);
+		glLoadIdentity();
+				
+		if(iNumViewPort == 0)
+		{	
+			gluLookAt(camX, 40.0f, 100.0f, objX, 10.0f, 0.0f, 0, 1, 0);
+			
+			DibujaEjes();
+			DibujaEjes();	
+			DibujaEscenario();
+
+			char szWndText[300];
+			sprintf(szWndText,"Color(%.3f, %.3f, %.3f)",(float)GetRValue(gColor)/255.0f, (float)GetGValue(gColor)/255.0f, (float)GetBValue(gColor)/255.0f);
+			SetWindowText(hWnd,szWndText);
+		}
+
+		if(iNumViewPort == 1)
+		{	
+			gluLookAt(camX, 40.0f, 100.0f, objX, 10.0f, 0.0f, 0, 1, 0);
+			
+			DibujaEjes();
+			DibujaEjes();	
+			DibujaEscenario();
+
+			char szWndText[300];
+			sprintf(szWndText,"Color(%.3f, %.3f, %.3f)",(float)GetRValue(gColor)/255.0f, (float)GetGValue(gColor)/255.0f, (float)GetBValue(gColor)/255.0f);
+			SetWindowText(hWnd,szWndText);
+		}
+	}
+					
+	return TRUE;
+}
+
+_________________________________________________________________________
+
+7. En la función WinMain cambiar la llamada a RenderizaEscena(); por RenderizaEscena2();
+
+_________________________________________________________________________

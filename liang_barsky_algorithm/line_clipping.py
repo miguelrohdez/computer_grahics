@@ -159,10 +159,10 @@ def line_clipper(lines, window):
     with open('output.txt', "w") as file:
         for l in lines:
             clipping_points = liang_barsky(l, window)
-            store_information(clipping_points["left"], "Left", line_counter,file)
-            store_information(clipping_points["right"], "Right", line_counter,file)
-            store_information(clipping_points["top"], "Top", line_counter,file)
-            store_information(clipping_points["bottom"], "Bottom", line_counter,file)
+            store_information(clipping_points["left"], "Left", line_counter, file)
+            store_information(clipping_points["right"], "Right", line_counter, file)
+            store_information(clipping_points["top"], "Top", line_counter, file)
+            store_information(clipping_points["bottom"], "Bottom", line_counter, file)
             line_counter += 1
             file.write('\n')
 
@@ -184,7 +184,9 @@ def main():
     height = int(input("Height: "))
     w = Window(Point(w_point[0], w_point[1]), width, height)
     line_clipper(lines, w)
+    print("Liang-Barsky algorithm finished!")
 
 
 if __name__ == '__main__':
     main()
+
