@@ -1,0 +1,322 @@
+*Leer sin ajuste de linea
+
+1. Copiar lo siguiente en la sección de declaraciones globales de Main.cpp:
+
+//Variables para el movimiento de las trampas del piso
+float posGrupoTramp1[2];
+float posGrupoTramp2[2];
+
+//Variables para el movimiento del fuego
+float escFuego[4];
+int   dirFuego[4];
+
+_______________________________________________________________________________
+
+2. Copiar las siguientes funciones antes de dibujaEscenario():
+
+void dibujaCilindro(float radio, int lados, float altura, int modoRender)
+{
+	float ang;
+	float a[3], b[3], c[3], d[3];
+	float delta;
+
+	delta=360.0f/lados;
+	
+	for(int i=0; i < lados; i++)
+	{
+		ang=i*delta;
+		
+		a[0]=radio*(float)cos(ang*PI/180.0f);
+		a[1]=0.0f;
+		a[2]=radio*(float)sin(ang*PI/180.0f);
+
+		b[0]=a[0];
+		b[1]=altura;
+		b[2]=a[2];
+
+		ang=(i+1)*delta;
+		
+		c[0]=radio*(float)cos(ang*PI/180.0f);
+		c[1]=altura;
+		c[2]=radio*(float)sin(ang*PI/180.0f);
+
+		d[0]=c[0];
+		d[1]=0.0f;
+		d[2]=c[2];
+
+		glColor3f(1.0f,0.0f,0.0f);
+
+		if(modoRender == 1) glBegin(GL_QUADS);// sólido
+		else if(modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+			glVertex3f(a[0], a[1], a[2]);
+			glVertex3f(b[0], b[1], b[2]);
+			glVertex3f(c[0], c[1], c[2]);
+			glVertex3f(d[0], d[1], d[2]);
+		glEnd();
+
+		//Tapa superior
+		glColor3f(1.0f,1.0f,0.0f);
+
+		if(modoRender == 1) glBegin(GL_TRIANGLES);// sólido
+		else if(modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+			glVertex3f(c[0], c[1], c[2]);
+			glVertex3f(b[0], b[1], b[2]);
+			glVertex3f(0.0f, altura, 0.0f);
+		glEnd();
+
+		//Tapa inferior
+		glColor3f(0.0f,0.0f,1.0f);
+
+		if(modoRender == 1) glBegin(GL_TRIANGLES);// sólido
+		else if(modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+			glVertex3f(a[0], a[1], a[2]);
+			glVertex3f(d[0], d[1], d[2]);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+		glEnd();
+
+		glColor3f(1.0f,1.0f,1.0f);
+	}
+}
+
+void dibujaFuego(float escala)
+{
+	glColor3f(1.0f, 1.0f, 0.0f);
+
+	
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+}
+
+void dibujaLanzallamas()
+{
+
+}
+
+void dibujaTrampa1()
+{
+
+}
+
+void dibujaTrampa2()
+{
+	//1
+	glBegin(GL_QUADS);
+		glColor3f(0.3f, 0.0f, 0.0f);
+		glVertex3f(-1.0f,  0.0f, 10.0f);
+		glVertex3f( 1.0f,  0.0f, 10.0f);
+		glVertex3f( 1.0f, 60.0f, 10.0f);
+		glVertex3f(-1.0f, 60.0f, 10.0f);
+	glEnd();
+
+	//2
+	glBegin(GL_QUADS);
+		glColor3f(0.1f, 0.0f, 0.0f);
+		glVertex3f( 1.0f, 0.0f,  10.0f);
+		glVertex3f(-1.0f, 0.0f,  10.0f);
+		glVertex3f(-1.0f, 0.0f, -10.0f);
+		glVertex3f( 1.0f, 0.0f, -10.0f);
+	glEnd();
+
+	//3
+	glBegin(GL_QUADS);
+		glColor3f(0.4f, 0.0f, 0.0f);
+		glVertex3f(-1.0f, 60.0f,  10.0f);
+		glVertex3f( 1.0f, 60.0f,  10.0f);
+		glVertex3f( 1.0f, 60.0f, -10.0f);
+		glVertex3f(-1.0f, 60.0f, -10.0f);
+	glEnd();
+
+	//4
+	glBegin(GL_QUADS);
+		glColor3f(0.2f, 0.0f, 0.0f);
+		glVertex3f(1.0f,  0.0f,  10.0f);
+		glVertex3f(1.0f,  0.0f, -10.0f);
+		glVertex3f(1.0f, 60.0f, -10.0f);
+		glVertex3f(1.0f, 60.0f,  10.0f);
+	glEnd();
+
+	//5
+	glBegin(GL_QUADS);
+		glColor3f(0.2f, 0.0f, 0.0f);
+		glVertex3f(-1.0f,  0.0f, -10.0f);
+		glVertex3f(-1.0f,  0.0f,  10.0f);
+		glVertex3f(-1.0f, 60.0f,  10.0f);
+		glVertex3f(-1.0f, 60.0f, -10.0f);
+	glEnd();
+
+	//6
+	glBegin(GL_QUADS);
+		glColor3f(0.3f, 0.0f, 0.0f);
+		glVertex3f( 1.0f,  0.0f, -10.0f);
+		glVertex3f(-1.0f,  0.0f, -10.0f);
+		glVertex3f(-1.0f, 60.0f, -10.0f);
+		glVertex3f( 1.0f, 60.0f, -10.0f);
+	glEnd();
+}
+
+_______________________________________________________________________________
+
+3. Copiar las siguientes funciónes antes de IniGL
+
+void inicializaTrampas()
+{
+	//Trampas de piso
+	posGrupoTramp1[0]=-60.0f;
+	posGrupoTramp1[1]=-80.0f;
+
+	posGrupoTramp2[0]=-45.0f;
+	posGrupoTramp2[1]=-65.0f;
+
+	//Fuego de los lanzallamas
+	escFuego[0]=0.0f;
+	escFuego[1]=0.0f;
+	escFuego[2]=0.0f;
+	escFuego[3]=0.0f;
+
+	dirFuego[0]=1; //fuego saliendo del lanzallamas
+	dirFuego[1]=1; //fuego saliendo del lanzallamas
+	dirFuego[2]=1; //fuego saliendo del lanzallamas
+	dirFuego[3]=1; //fuego saliendo del lanzallamas
+}
+
+void actualizaTrampas()
+{
+	//Se actualiza la posición de las trampas de piso
+
+	//Grupo 1
+	if(PosCam.x > 320.0f)
+	{
+		if(posGrupoTramp1[0] < 0.0f)
+			posGrupoTramp1[0]+=0.5f;
+
+		if(posGrupoTramp1[1] < 0.0f)
+			posGrupoTramp1[1]+=0.5f;
+	}
+
+	//Grupo 2
+	if(PosCam.x > 1640.0f)
+	{
+		if(posGrupoTramp2[0] < 15.0f)
+			posGrupoTramp2[0]+=0.5f;
+
+		if(posGrupoTramp2[1] < 15.0f)
+			posGrupoTramp2[1]+=0.5f;
+	}
+
+	//Se actualiza la escala de las llamas
+
+	//Se actualiza la posición de las trampas de techo
+	
+}
+
+_______________________________________________________________________________
+
+4. Copiar lo siguiente en IniGL:
+
+	//Se inicializan las posiciones de las trampas
+	inicializaTrampas();
+
+_______________________________________________________________________________
+
+5. Copiar lo siguiente en la función dibujaEscenario antes de if(render == 2)
+
+	//Trampas de piso (1,2,7 y 8 moviles; 3,4,5 y 6 fijas)
+
+	//Trampa 1
+	glPushMatrix();
+		glTranslatef(420.0f, posGrupoTramp1[0], 12.5f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	//Trampa 2
+	glPushMatrix();
+		glTranslatef(445.0f, posGrupoTramp1[1], 12.5f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	//Trampa 3
+	glPushMatrix();
+		glTranslatef(500.0f, 100.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	//Trampa 4
+	glPushMatrix();
+		glTranslatef(550.0f, 100.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	//Trampa 5
+	glPushMatrix();
+		glTranslatef(1470.0f, 112.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	//Trampa 6
+	glPushMatrix();
+		glTranslatef(1540.0f, 112.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	//Trampa 7
+	glPushMatrix();
+		glTranslatef(1740.0f, posGrupoTramp2[0], 12.5f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	//Trampa 8
+	glPushMatrix();
+		glTranslatef(1780.0f, posGrupoTramp2[1], 12.5f);
+		dibujaTrampa2();
+	glPopMatrix();
+
+	
+	//Lanzallamas
+
+	//1
+	glPushMatrix();
+		glTranslatef(1968.0f, 20.0f, 12.5f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+		dibujaLanzallamas();
+	glPopMatrix();
+
+	//2
+	glPushMatrix();
+		glTranslatef(1968.0f, 40.0f, 12.5f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+		dibujaLanzallamas();
+	glPopMatrix();
+
+	//3
+	glPushMatrix();
+		glTranslatef(1968.0f, 55.0f, 12.5f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+		dibujaLanzallamas();
+	glPopMatrix();
+
+	//4
+	glPushMatrix();
+		glTranslatef(2000.0f, 80.0f, 12.5f);
+		dibujaLanzallamas();
+	glPopMatrix();
+
+	//Fuego de los lanzallamas
+
+	
+	actualizaTrampas();
+_______________________________________________________________________________
+
+6. Copiar las siguientes líneas al final de dibujaEscenario:
+
+glPushMatrix();
+	glTranslatef(-10.0f, 40.0f, 12.5f);
+	dibujaCilindro(3.0f, 14, 20.0f, 2);
+glPopMatrix();
