@@ -312,8 +312,10 @@ void dibujaCono(float radio, int lados, float altura, int modoRender)
 		c[1]=altura;
 		c[2]=0.0f;
 
-
-		glColor3f(1.0f,0.0f,0.0f);
+		if(lados==4 && i==2 || lados==4 && i==0)
+			glColor3f(0.6f, 0.6f, 0.6f);
+		else
+			glColor3f(0.8f, 0.8f, 0.8f);
 
 		if(modoRender == 1) glBegin(GL_TRIANGLES);// sólido
 		else if(modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
@@ -352,6 +354,47 @@ void dibujaLanzallamas()
 
 void dibujaTrampa1()
 {
+
+	glPushMatrix();		
+		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		//glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCilindro(1.75f, 12, 30.0f, 2);
+	glPopMatrix();
+
+	glPushMatrix();		
+		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		//glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCilindro(2.5f, 12, 6.0f, 2);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0.0f, -2.0f, 0.0f);
+		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		//glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCilindro(3.5f, 12, 2.0f, 2);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0.0f, -2.0f, -2.0f);
+		glRotatef(180.0f, 0.0f, 0.0f, 0.0f);  // ángulo, x, y, z (del eje a girar) 
+		//glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 5, 3.0f, 2);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(1.75f, -2.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 0.0f, 0.0f);  // ángulo, x, y, z (del eje a girar) 
+		//glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 5, 3.0f, 2);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-2.0f, -2.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 0.0f, 0.0f);  // ángulo, x, y, z (del eje a girar) 
+		//glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 5, 3.0f, 2);
+	glPopMatrix();
+
 
 }
 
@@ -410,6 +453,94 @@ void dibujaTrampa2()
 		glVertex3f(-1.0f, 60.0f, -10.0f);
 		glVertex3f( 1.0f, 60.0f, -10.0f);
 	glEnd();
+
+	// FILA DE PICOS 1
+	glPushMatrix();
+		glTranslatef(-1.0f, 55.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 55.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 55.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	// FILA DE PICOS 2
+	glPushMatrix();
+		glTranslatef(-1.0f, 48.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 48.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 48.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	// FILA DE PICOS 3
+	glPushMatrix();
+		glTranslatef(-1.0f, 41.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 41.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 41.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	// FILA DE PICOS 4
+	glPushMatrix();
+		glTranslatef(-1.0f, 34.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 34.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-1.0f, 34.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
+	glPopMatrix();
 }
 
 
@@ -2548,7 +2679,47 @@ void dibujaEscenario(int render)
 		dibujaTrampa2();
 	glPopMatrix();
 
-	
+	// Trampas de techo (CILINDROS)
+	glPushMatrix();
+		glTranslated(150.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(170.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(190.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(295.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(315.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(620.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(650.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(680.0f, 76.0f, 12.5f);
+		dibujaTrampa1();
+	glPopMatrix();
+
 	//Lanzallamas
 
 	//1
@@ -2588,19 +2759,12 @@ void dibujaEscenario(int render)
 	//Siempre al final se vuelve al color blanco (default de OpenGL) para que otros gráficos no se vean afectados
 	glColor3f(1.0f, 1.0f, 1.0f);
 
-	glPushMatrix();
-		glTranslatef(-10.0f, 40.0f, 12.5f);
-		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+	/*glPushMatrix();
+		glTranslatef(30.0f, 60.0f, 12.5f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCilindro(3.0f, 14, 20.0f, 2);
-	glPopMatrix();
-
-	glPushMatrix();
-		glTranslatef(30.0f, 40.0f, 12.5f);
-		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(3.0f, 4, 15.0f, 1);
-	glPopMatrix();
+		dibujaCono(3.0f, 15, 15.0f, 1);
+	glPopMatrix();*/
 
 
 	
