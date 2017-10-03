@@ -1,0 +1,803 @@
+*Leer sin ajuste de línea
+
+1. Copiar la siguiente estructura en el archivo Main.h:
+
+struct jerarquiaModelo
+{
+	float Angtx;	//Rot. en x
+	float Angty;	//Rot. en y
+	float Angcx;	//Rot. en x
+	float Angcy;	//Rot. en y
+	float Angbi1x;	//Rot. en X
+	float Angbi1z;	//Rot. en Z
+	float Angbi2x;  //Rot. en X
+	float Angbi2z;  //Rot. en Z
+	float Angbd1x;
+	float Angbd1z;
+	float Angbd2x;
+	float Angbd2z;
+	float Angpizq1x;
+	float Angpizq1z;
+	float Angpizq2x;
+	float Angpizq2z;
+	float Angpder1x;
+	float Angpder1z;
+	float Angpder2x;
+	float Angpder2z;
+	float Angpi;	//Rot. en X
+	float Angpd;	//Rot. en X
+
+	float Xtor;
+	float Ytor;
+	float Ztor;
+};
+
+_____________________________________________________________________________________________
+
+2. En la sección de declaraciones globales de Main.cpp reemplazar los siguiente:
+
+//Nombre y ubicación de los modelos
+#define FILE_NAME1  "Modelos/modelo1.3ds"
+#define FILE_NAME2  "Modelos/modelo2.3ds"
+#define FILE_NAME3  "Modelos/modelo3.3ds"
+
+//Contenedores de texturas de cada modelo
+CTga textureModel1[4];
+CTga textureModel2[4];
+CTga textureModel3[4];
+
+//Contenedor de texturas para el escenario
+CTga textureName[20];
+
+//Objeto que da acceso a las funciones del cargador 3ds
+CLoad3DS g_Load3ds;
+
+//Instancias de la estructura que almacenaran los datos de cada modelo
+t3DModel g_3DModel1;
+t3DModel g_3DModel2;
+t3DModel g_3DModel3;
+
+por esto:
+
+//Nombre y ubicación de los modelos
+#define FILE_NAME1p  "Modelos/torso.3ds"
+#define FILE_NAME2p  "Modelos/cabeza.3ds"
+#define FILE_NAME3p  "Modelos/pierna_a.3ds"
+#define FILE_NAME4p  "Modelos/pierna_b.3ds"
+#define FILE_NAME5p  "Modelos/pie.3ds"
+#define FILE_NAME6p  "Modelos/brazo der_a.3ds"
+#define FILE_NAME7p  "Modelos/brazo der_b.3ds"
+#define FILE_NAME8p  "Modelos/brazo izq_a.3ds"
+#define FILE_NAME9p  "Modelos/brazo izq_b.3ds"
+#define FILE_NAME10p "Modelos/arma.3ds"
+
+//Contenedores de texturas de cada modelo
+CTga textureModel1[10];
+CTga textureModel2[10];
+CTga textureModel3[10];
+CTga textureModel4[10];
+CTga textureModel5[10];
+CTga textureModel6[10];
+CTga textureModel7[10];
+CTga textureModel8[10];
+CTga textureModel9[10];
+CTga textureModel10[10];
+
+//Contenedor de texturas para el escenario
+CTga textura[25];
+
+//Objeto que da acceso a las funciones del cargador 3ds
+CLoad3DS g_Load3ds;
+
+//Instancias de la estructura que almacenaran los datos de cada modelo
+t3DModel g_3DModel1;
+t3DModel g_3DModel2;
+t3DModel g_3DModel3;
+t3DModel g_3DModel4;
+t3DModel g_3DModel5;
+t3DModel g_3DModel6;
+t3DModel g_3DModel7;
+t3DModel g_3DModel8;
+t3DModel g_3DModel9;
+t3DModel g_3DModel10;
+
+//Variables del personaje (para modelado jerárquico)
+jerarquiaModelo player1modelo;	//Acceso a la estructura con las variables de cada pieza del modelo
+
+_____________________________________________________________________________________________
+
+3. Reemplazar las funciones CargaModelos y DescargaModelos por estas:
+
+int CargaModelos()
+{
+	if(!g_Load3ds.Load3DSFile(FILE_NAME1p, &g_3DModel1, textureModel1))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME2p, &g_3DModel2, textureModel2))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME3p, &g_3DModel3, textureModel3))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME4p, &g_3DModel4, textureModel4))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME5p, &g_3DModel5, textureModel5))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME6p, &g_3DModel6, textureModel6))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME7p, &g_3DModel7, textureModel7))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME8p, &g_3DModel8, textureModel8))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME9p, &g_3DModel9, textureModel9))
+		return 0;
+	if(!g_Load3ds.Load3DSFile(FILE_NAME10p, &g_3DModel10, textureModel10))
+		return 0;
+	
+	return TRUE;
+}
+
+void DescargaModelos()
+{
+	g_Load3ds.UnLoad3DSFile(&g_3DModel1, textureModel1);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel2, textureModel2);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel3, textureModel3);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel4, textureModel4);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel5, textureModel5);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel6, textureModel6);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel7, textureModel7);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel8, textureModel8);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel9, textureModel9);
+	g_Load3ds.UnLoad3DSFile(&g_3DModel10, textureModel10);
+}
+
+_____________________________________________________________________________________________
+
+4. LLamar a CargaModelos(); en IniGL y a la función DescargaModelos(); en WinMain antes de 
+DestruyeVentanaOGL();
+_____________________________________________________________________________________________
+
+5. Copiar las siguientes funciones antes de IniGL y llamar a la primera en dicha función:
+
+void iniPersonaje()
+{
+	player1.PosicionObj=CVector(0.0f,40.0f,12.5f);
+	player1.VelocidadObj=0.5f;
+	player1.AngObj=90.0f;
+
+	player1.escalaX=2.1f;
+	player1.escalaY=2.1f;
+	player1.escalaZ=2.1f;
+	player1.visible=true;
+}
+
+void movimientoPersonaje(int dir)
+{
+	if(dir == 1) //derecha
+	{
+		player1.PosicionObj.x+=player1.VelocidadObj;
+		PosCam.x+=player1.VelocidadObj;
+		ObjCam.x+=player1.VelocidadObj;
+		player1.AngObj=90.0f;
+		
+	}
+	else if(dir == 2) //izquierda
+	{
+		player1.PosicionObj.x-=player1.VelocidadObj;
+		PosCam.x-=player1.VelocidadObj;
+		ObjCam.x-=player1.VelocidadObj;
+		player1.AngObj=-90.0f;
+	}
+}
+_____________________________________________________________________________________________
+
+6. Copiar la siguiente función antes de RenderizaEscena:
+
+void dibujaPersonaje()
+{
+	glPushMatrix();
+
+		glTranslatef(player1modelo.Xtor, player1modelo.Ytor, player1modelo.Ztor);
+		glRotatef(player1modelo.Angty, 0.0f, 1.0f, 0.0f);
+		glRotatef(player1modelo.Angtx, 1.0f, 0.0f, 0.0f);
+
+		if(player1.saltando == true)
+			glTranslatef(0.0f, -0.6f, 0.0f);
+		
+		//Torso
+		g_Load3ds.Render3DSFile(&g_3DModel1, textureModel1, 1);
+
+		//Cabeza
+		glPushMatrix();
+			glTranslatef(0.0f, 1.6f ,0.0f);
+			glRotatef(player1modelo.Angcy, 0.0f, 1.0f, 0.0f);
+			glRotatef(player1modelo.Angcx, 1.0f, 0.0f, 0.0f);
+			g_Load3ds.Render3DSFile(&g_3DModel2, textureModel2, 1);
+		glPopMatrix();
+
+		//Pierna derecha_a
+		glPushMatrix();
+			glTranslatef(-0.4f, 0.2f ,0.0f);
+			glRotatef(player1modelo.Angpder1x, 1.0f, 0.0f, 0.0f);
+			g_Load3ds.Render3DSFile(&g_3DModel3, textureModel3, 1);
+
+			//Pierna derecha_b
+			glPushMatrix();
+				glTranslatef(0.0f, -0.8f ,0.0f);
+				glRotatef(player1modelo.Angpder2x, 1.0f, 0.0f, 0.0f);
+				g_Load3ds.Render3DSFile(&g_3DModel4, textureModel4, 1);
+
+				//Pie derecho
+				glPushMatrix();
+					glTranslatef(0.0f, -0.5f ,0.0f);
+					glRotatef(player1modelo.Angpd, 1.0f, 0.0f, 0.0f);
+					g_Load3ds.Render3DSFile(&g_3DModel5, textureModel5, 1);
+				glPopMatrix();
+
+			glPopMatrix();
+
+		glPopMatrix();
+
+		//Pierna izquierda_a
+		
+		//Pierna izquierda_b
+			
+		//Pie izquierdo
+
+				
+		//Brazo derecho_a
+		
+		//Brazo derecho_b
+		
+		//Arma
+				
+
+		//Brazo izquierdo_a
+
+		//Brazo izquierdo_b
+		
+
+	glPopMatrix();
+}
+_____________________________________________________________________________________________
+
+7. Copiar lo siguiente en RenderizaEscena después de la llamada a dibujaEscenario:
+
+	if(player1.visible)
+	{
+		glPushMatrix();
+			glTranslatef(player1.PosicionObj.x,player1.PosicionObj.y+3.0f,player1.PosicionObj.z);
+			glRotatef(player1.AngObj,0.0f,1.0f,0.0f);
+			glScalef(player1.escalaX,player1.escalaY,player1.escalaZ);
+			dibujaPersonaje();
+		glPopMatrix();
+
+	}
+_____________________________________________________________________________________________
+
+8. En la función ManejaTeclado reemplazar lo siguiente:
+
+	if(keys[VK_LEFT])
+	{
+		PosCam.x-=0.5f;
+		ObjCam.x-=0.5f;
+	}
+	if(keys[VK_RIGHT])
+	{
+		PosCam.x+=0.5f;
+		ObjCam.x+=0.5f;
+	}
+
+por esto:
+
+	if(GetKeyState(VK_LEFT) & 0x80) //Si está presionada la tecla LEFT
+	{
+		movimientoPersonaje(2);
+		player1.caminando=true;
+	}
+
+	if(GetKeyState(VK_RIGHT) & 0x80) //Si está presionada la tecla RIGHT
+	{
+		movimientoPersonaje(1);
+		player1.caminando=true;
+	}
+
+	if(keys['X'])
+	{
+		player1modelo.Angtx     = 0.0f;
+		player1modelo.Angty     = 0.0f;
+		player1modelo.Angcx     = 0.0f;
+		player1modelo.Angcy     = 0.0f;
+		player1modelo.Angbi1x   = 0.0f;
+		player1modelo.Angbi1z   = 0.0f;
+		player1modelo.Angbi2x   = 0.0f;
+		player1modelo.Angbi2z   = 0.0f;
+		player1modelo.Angbd1x   = 0.0f;
+		player1modelo.Angbd1z   = 0.0f;
+		player1modelo.Angbd2x   = 0.0f;
+		player1modelo.Angbd2z   = 0.0f;
+		player1modelo.Angpizq1x = 0.0f;
+		player1modelo.Angpizq1z = 0.0f;
+		player1modelo.Angpizq2x = 0.0f;
+		player1modelo.Angpizq2z = 0.0f;
+		player1modelo.Angpder1x = 0.0f;
+		player1modelo.Angpder1z = 0.0f;
+		player1modelo.Angpder2x = 0.0f;
+		player1modelo.Angpder2z = 0.0f;
+		player1modelo.Angpi     = 0.0f;
+		player1modelo.Angpd     = 0.0f;
+		player1modelo.Xtor      = 0.0f;
+		player1modelo.Ytor      = 0.0f;
+		player1modelo.Ztor      = 0.0f;
+	}
+	else
+	{
+		player1modelo.Angtx     = 0.0f;
+		player1modelo.Angty     = 0.0f;
+		player1modelo.Angcx     = 0.0f;
+		player1modelo.Angcy     = 0.0f;
+		player1modelo.Angbi1x   = 0.0f;
+		player1modelo.Angbi1z   = 0.0f;
+		player1modelo.Angbi2x   = 0.0f;
+		player1modelo.Angbi2z   = 0.0f;
+		player1modelo.Angbd1x   = 0.0f;
+		player1modelo.Angbd1z   = 0.0f;
+		player1modelo.Angbd2x   = 0.0f;
+		player1modelo.Angbd2z   = 0.0f;
+		player1modelo.Angpizq1x = 0.0f;
+		player1modelo.Angpizq1z = 0.0f;
+		player1modelo.Angpizq2x = 0.0f;
+		player1modelo.Angpizq2z = 0.0f;
+		player1modelo.Angpder1x = 0.0f;
+		player1modelo.Angpder1z = 0.0f;
+		player1modelo.Angpder2x = 0.0f;
+		player1modelo.Angpder2z = 0.0f;
+		player1modelo.Angpi     = 0.0f;
+		player1modelo.Angpd     = 0.0f;
+		player1modelo.Xtor      = 0.0f;
+		player1modelo.Ytor      = 0.0f;
+		player1modelo.Ztor      = 0.0f;
+	}
+_____________________________________________________________________________________________
+
+_____________________________________________________________________________________________
+Solución de la práctica 3:
+
+//Variables para el movimiento de las trampas del techo
+float posGrupoTrampas1[3];
+int   dirGrupoTrampas1[3]; //banderas para indicar si la trampa sube o baja
+
+float posGrupoTrampas2[2];
+int   dirGrupoTrampas2[2]; //banderas para indicar si la trampa sube o baja
+
+float posGrupoTrampas3[3];
+int   dirGrupoTrampas3[3]; //banderas para indicar si la trampa sube o baja
+
+void inicializaTrampas()
+{
+	//Trampas de piso
+	posGrupoTramp1[0]=-60.0f;
+	posGrupoTramp1[1]=-80.0f;
+
+	posGrupoTramp2[0]=-45.0f;
+	posGrupoTramp2[1]=-65.0f;
+
+	//Fuego de los lanzallamas
+	escFuego[0]=0.0f;
+	escFuego[1]=0.0f;
+	escFuego[2]=0.0f;
+	escFuego[3]=0.0f;
+
+	dirFuego[0]=1; //0: sin hacer nada, 1: saliendo del lanzallamas, 2: regresando al lanzallamas
+	dirFuego[1]=0;
+	dirFuego[2]=0;
+	dirFuego[3]=0;
+
+	//Trampas de techo
+	//Grupo 1
+	posGrupoTrampas1[0]=0.0f;
+	posGrupoTrampas1[1]=0.0f;
+	posGrupoTrampas1[2]=0.0f;
+	dirGrupoTrampas1[0]=1; //0: sin hacer nada, 1: bajando, 2: subiendo
+	dirGrupoTrampas1[1]=0;
+	dirGrupoTrampas1[2]=0;
+
+	//Grupo 2
+	posGrupoTrampas2[0]=0.0f;
+	posGrupoTrampas2[1]=0.0f;
+	dirGrupoTrampas2[0]=1;
+	dirGrupoTrampas2[1]=0;
+
+	//Grupo 3
+	posGrupoTrampas3[0]=0.0f;
+	posGrupoTrampas3[1]=0.0f;
+	posGrupoTrampas3[2]=0.0f;
+	dirGrupoTrampas3[0]=1;
+	dirGrupoTrampas3[1]=0;
+	dirGrupoTrampas3[2]=0;
+}
+
+void actualizaTrampas()
+{
+	//Se actualiza la posición de las trampas de piso
+
+	//Grupo 1
+	if(PosCam.x > 320.0f)
+	{
+		if(posGrupoTramp1[0] < 0.0f)
+			posGrupoTramp1[0]+=0.5f;
+
+		if(posGrupoTramp1[1] < 0.0f)
+			posGrupoTramp1[1]+=0.5f;
+	}
+
+	//Grupo 4
+	if(PosCam.x > 1640.0f)
+	{
+		if(posGrupoTramp2[0] < 15.0f)
+			posGrupoTramp2[0]+=0.5f;
+
+		if(posGrupoTramp2[1] < 15.0f)
+			posGrupoTramp2[1]+=0.5f;
+	}
+
+	//Se actualiza la escala de las llamas
+	//Lanzallamas 1
+	if(dirFuego[0] == 1)
+	{
+		if(escFuego[0] < 12.0f)
+			escFuego[0]+=0.5f;
+		else
+			dirFuego[0]=2;
+	}
+	else if(dirFuego[0] == 2)
+	{
+		if(escFuego[0] > 0.0f)
+			escFuego[0]-=0.5f;
+		else
+		{
+			dirFuego[1]=1;
+			dirFuego[0]=0;
+		}
+	}
+
+	//Lanzallamas 2
+	if(dirFuego[1] == 1)
+	{
+		if(escFuego[1] < 12.0f)
+			escFuego[1]+=0.5f;
+		else
+			dirFuego[1]=2;
+	}
+	else if(dirFuego[1] == 2)
+	{
+		if(escFuego[1] > 0.0f)
+			escFuego[1]-=0.5f;
+		else
+		{
+			dirFuego[2]=1;
+			dirFuego[1]=0;
+		}
+	}
+
+	//Lanzallamas 3
+	if(dirFuego[2] == 1)
+	{
+		if(escFuego[2] < 12.0f)
+			escFuego[2]+=0.5f;
+		else
+			dirFuego[2]=2;
+	}
+	else if(dirFuego[2] == 2)
+	{
+		if(escFuego[2] > 0.0f)
+			escFuego[2]-=0.5f;
+		else
+		{
+			dirFuego[3]=1;
+			dirFuego[2]=0;
+		}
+	}
+
+	//Lanzallamas 4
+	if(dirFuego[3] == 1)
+	{
+		if(escFuego[3] < 30.0f)
+			escFuego[3]+=0.5f;
+		else
+			dirFuego[3]=2;
+	}
+	else if(dirFuego[3] == 2)
+	{
+		if(escFuego[3] > 0.0f)
+			escFuego[3]-=0.5f;
+		else
+		{
+			dirFuego[0]=1;
+			dirFuego[3]=0;
+		}
+	}
+
+	//Se actualiza la posición de las trampas de techo
+	//GRUPO 1 (3 trampas) ///////////////
+	//Trampa 1
+	if(dirGrupoTrampas1[0] == 1)
+	{
+		if(posGrupoTrampas1[0] > -18.0f)
+			posGrupoTrampas1[0]-=1.0f;
+		else
+			dirGrupoTrampas1[0]=2;
+	}
+	else if(dirGrupoTrampas1[0] == 2)
+	{
+		if(posGrupoTrampas1[0] < 0.0f)
+			posGrupoTrampas1[0]+=1.0f;
+		else
+		{
+			dirGrupoTrampas1[1]=1;
+			dirGrupoTrampas1[0]=0;
+		}
+	}
+
+	//Trampa 2
+	if(dirGrupoTrampas1[1] == 1)
+	{
+		if(posGrupoTrampas1[1] > -18.0f)
+			posGrupoTrampas1[1]-=1.0f;
+		else
+			dirGrupoTrampas1[1]=2;
+	}
+	else if(dirGrupoTrampas1[1] == 2)
+	{
+		if(posGrupoTrampas1[1] < 0.0f)
+			posGrupoTrampas1[1]+=1.0f;
+		else
+		{
+			dirGrupoTrampas1[2]=1;
+			dirGrupoTrampas1[1]=0;
+		}
+	}
+
+	//Trampa 3
+	if(dirGrupoTrampas1[2] == 1)
+	{
+		if(posGrupoTrampas1[2] > -18.0f)
+			posGrupoTrampas1[2]-=1.0f;
+		else
+			dirGrupoTrampas1[2]=2;
+	}
+	else if(dirGrupoTrampas1[2] == 2)
+	{
+		if(posGrupoTrampas1[2] < 0.0f)
+			posGrupoTrampas1[2]+=1.0f;
+		else
+		{
+			dirGrupoTrampas1[0]=1;
+			dirGrupoTrampas1[2]=0;
+		}
+	}
+
+	//GRUPO 2 (2 trampas) ///////////////
+	//Trampa 1
+	if(dirGrupoTrampas2[0] == 1)
+	{
+		if(posGrupoTrampas2[0] > -28.0f)
+			posGrupoTrampas2[0]-=1.0f;
+		else
+			dirGrupoTrampas2[0]=2;
+	}
+	else if(dirGrupoTrampas2[0] == 2)
+	{
+		if(posGrupoTrampas2[0] < 0.0f)
+			posGrupoTrampas2[0]+=1.0f;
+		else
+		{
+			dirGrupoTrampas2[1]=1;
+			dirGrupoTrampas2[0]=0;
+		}
+	}
+
+	//Trampa 2
+	if(dirGrupoTrampas2[1] == 1)
+	{
+		if(posGrupoTrampas2[1] > -28.0f)
+			posGrupoTrampas2[1]-=1.0f;
+		else
+			dirGrupoTrampas2[1]=2;
+	}
+	else if(dirGrupoTrampas2[1] == 2)
+	{
+		if(posGrupoTrampas2[1] < 0.0f)
+			posGrupoTrampas2[1]+=1.0f;
+		else
+		{
+			dirGrupoTrampas2[0]=1;
+			dirGrupoTrampas2[1]=0;
+		}
+	}
+
+	//GRUPO 3 (3 trampas) ///////////////
+	//Trampa 1
+	if(dirGrupoTrampas3[0] == 1)
+	{
+		if(posGrupoTrampas3[0] > -18.0f)
+			posGrupoTrampas3[0]-=1.0f;
+		else
+			dirGrupoTrampas3[0]=2;
+	}
+	else if(dirGrupoTrampas3[0] == 2)
+	{
+		if(posGrupoTrampas3[0] < 0.0f)
+			posGrupoTrampas3[0]+=1.0f;
+		else
+		{
+			dirGrupoTrampas3[1]=1;
+			dirGrupoTrampas3[0]=0;
+		}
+	}
+
+	//Trampa 2
+	if(dirGrupoTrampas3[1] == 1)
+	{
+		if(posGrupoTrampas3[1] > -18.0f)
+			posGrupoTrampas3[1]-=1.0f;
+		else
+			dirGrupoTrampas3[1]=2;
+	}
+	else if(dirGrupoTrampas3[1] == 2)
+	{
+		if(posGrupoTrampas3[1] < 0.0f)
+			posGrupoTrampas3[1]+=1.0f;
+		else
+		{
+			dirGrupoTrampas3[2]=1;
+			dirGrupoTrampas3[1]=0;
+		}
+	}
+
+	//Trampa 3
+	if(dirGrupoTrampas3[2] == 1)
+	{
+		if(posGrupoTrampas3[2] > -18.0f)
+			posGrupoTrampas3[2]-=1.0f;
+		else
+			dirGrupoTrampas3[2]=2;
+	}
+	else if(dirGrupoTrampas3[2] == 2)
+	{
+		if(posGrupoTrampas3[2] < 0.0f)
+			posGrupoTrampas3[2]+=1.0f;
+		else
+		{
+			dirGrupoTrampas3[0]=1;
+			dirGrupoTrampas3[2]=0;
+		}
+	}
+}
+
+void dibujaFuego(float escala)
+{
+	glColor3f(1.0f, 1.0f, 0.0f);
+
+	glPushMatrix();
+		glScalef(escala, 1.0f, 1.0f);
+		glBegin(GL_QUADS);
+			glVertex3f(0.0f,-2.0f, 0.0f);
+			glVertex3f(2.0f,-2.0f, 0.0f);
+			glVertex3f(2.0f, 2.0f, 0.0f);
+			glVertex3f(0.0f, 2.0f, 0.0f);
+		glEnd();
+	glPopMatrix();
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+}
+
+En dibujaEscenario:
+
+	//Lanzallamas
+
+	//1
+	glPushMatrix();
+		glTranslatef(1968.0f, 20.0f, 12.5f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+		dibujaLanzallamas(2.0f, 4.0f, 8);
+	glPopMatrix();
+
+	//2
+	glPushMatrix();
+		glTranslatef(1968.0f, 40.0f, 12.5f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+		dibujaLanzallamas(2.0f, 4.0f, 8);
+	glPopMatrix();
+
+	//3
+	glPushMatrix();
+		glTranslatef(1968.0f, 55.0f, 12.5f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+		dibujaLanzallamas(2.0f, 4.0f, 8);
+	glPopMatrix();
+
+	//4
+	glPushMatrix();
+		glTranslatef(2000.0f, 80.0f, 12.5f);
+		dibujaLanzallamas(2.0f, 4.0f, 8);
+	glPopMatrix();
+
+	//Fuego de los lanzallamas
+	//1
+	glPushMatrix();
+		glTranslatef(1968.0f, 20.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		dibujaFuego(escFuego[0]);
+	glPopMatrix();
+
+	//2
+	glPushMatrix();
+		glTranslatef(1968.0f, 40.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		dibujaFuego(escFuego[1]);
+	glPopMatrix();
+
+	//3
+	glPushMatrix();
+		glTranslatef(1968.0f, 55.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		dibujaFuego(escFuego[2]);
+	glPopMatrix();
+
+	//4
+	glPushMatrix();
+		glTranslatef(2000.0f, 80.0f, 12.5f);
+		glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+		dibujaFuego(escFuego[3]);
+	glPopMatrix();
+
+	//Trampas del techo
+	
+	//GRUPO 1 (3 trampas) ///////////////
+	//Trampa 1
+	glPushMatrix();
+		glTranslatef(150.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas1[0], 10);
+	glPopMatrix();
+
+	//Trampa 2
+	glPushMatrix();
+		glTranslatef(165.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas1[1], 10);
+	glPopMatrix();
+
+	//Trampa 3
+	glPushMatrix();
+		glTranslatef(180.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas1[2], 10);
+	glPopMatrix();
+
+	//GRUPO 2 (2 trampas) ///////////////
+	//Trampa 1
+	glPushMatrix();
+		glTranslatef(297.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas2[0], 10);
+	glPopMatrix();
+
+	//Trampa 2
+	glPushMatrix();
+		glTranslatef(312.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas2[1], 10);
+	glPopMatrix();
+
+	//GRUPO 3 (3 trampas) ///////////////
+	//Trampa 1
+	glPushMatrix();
+		glTranslatef(640.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas3[0], 10);
+	glPopMatrix();
+
+	//Trampa 2
+	glPushMatrix();
+		glTranslatef(655.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas3[1], 10);
+	glPopMatrix();
+
+	//Trampa 3
+	glPushMatrix();
+		glTranslatef(670.0f, 76.0f, 12.5f);
+		dibujaTrampa1(2.5f, posGrupoTrampas3[2], 10);
+	glPopMatrix();
