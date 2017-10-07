@@ -17,8 +17,8 @@ selecionado, según sea el caso, en la función de dibujo del archivo
         $ make run
 
 De esta manera todo el trabajo es delegado a Inkscape. Para generar los
-colores, en Inkscape se deben colorear los polígonos, **svg2gl.py**
-también generará el código para cambiar el color de los polígonos; si los polígonos no estan coloreados se pondrán en color Negro por default.  
+colores, en Inkscape se deben colorear los polígonos; **svg2gl.py**
+generará el código para cambiar el color de los polígonos. 
 
 
 #### Restriciones al dibujar los polígonos en Inkscape:
@@ -28,7 +28,7 @@ también generará el código para cambiar el color de los polígonos; si los po
     OpenGL  
 
 #### Dependencias script **svg2gl.py**:  
-*   *numpy *
+*   *numpy*
 *   *svgwrite*  
 *   *svgpathtools*  
 
