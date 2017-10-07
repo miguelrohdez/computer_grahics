@@ -693,7 +693,7 @@ void reshape ( int width , int height )
 	glLoadIdentity();
 
 	// Ortogonal
-	glOrtho(0,160,0,160,-2,2);
+	glOrtho(0, 600, 600, 0, -2, 2);
 
 	glMatrixMode(GL_MODELVIEW); // Seleccionamos Modelview Matrix
 	glLoadIdentity();
