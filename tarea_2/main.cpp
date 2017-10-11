@@ -1746,7 +1746,6 @@ void reshape ( int width , int height )
 // Para cerrar la ventana con la tecla ESC
 void keyboard(unsigned char key, int x, int y)
 {
-    printf("%d\n", key);
 	 switch (key)
 	 {
 		case 27:
