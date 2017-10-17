@@ -93,6 +93,12 @@ int   dirGrupoTrampas2[2]; //banderas para indicar si la trampa sube o baja
 float posGrupoTrampas3[3];
 int   dirGrupoTrampas3[3]; //banderas para indicar si la trampa sube o baja
 
+//Variables de animación de los personajes
+const int maxKF1=3; //Num. total de KeyFrames para la secuencia 1 (caminar)
+const int maxKF2=7; //Num. total de KeyFrames para la secuencia 1 (saltar)
+FRAME KeyFrame1p1[maxKF1]; //Contenedor para almacenar cada keyframe de la secuencia 1 del player 1
+FRAME KeyFrame2p1[maxKF2]; //Contenedor para almacenar cada keyframe de la secuencia 2 del player 1
+varsAnim varsAnimP1; //datos de para animacion del player 1
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaracion de WndProc (Procedimiento de ventana)
 
@@ -500,6 +506,213 @@ void movimientoPersonaje(int dir)
 	}
 }
 
+void InicializaAnim()
+{
+	//player 1
+	//Se inicializan las variables de la secuencia 1
+	for(int i=0; i<maxKF1; i++)
+	{
+		KeyFrame1p1[i].Angtx=0.0f;
+		KeyFrame1p1[i].Angty=0.0f;
+		KeyFrame1p1[i].Angcx=0.0f;
+		KeyFrame1p1[i].Angcy=0.0f;
+		KeyFrame1p1[i].Angbi1x=0.0f;
+		KeyFrame1p1[i].Angbi1z=0.0f;
+		KeyFrame1p1[i].Angbi2x=0.0f;
+		KeyFrame1p1[i].Angbi2z=0.0f;
+		KeyFrame1p1[i].Angbd1x=0.0f;
+		KeyFrame1p1[i].Angbd1z=0.0f;
+		KeyFrame1p1[i].Angbd2x=0.0f;
+		KeyFrame1p1[i].Angbd2z=0.0f;
+		KeyFrame1p1[i].Angpizq1x=0.0f;
+		KeyFrame1p1[i].Angpizq1z=0.0f;
+		KeyFrame1p1[i].Angpizq2x=0.0f;
+		KeyFrame1p1[i].Angpizq2z=0.0f;
+		KeyFrame1p1[i].Angpder1x=0.0f;
+		KeyFrame1p1[i].Angpder1z=0.0f;
+		KeyFrame1p1[i].Angpder2x=0.0f;
+		KeyFrame1p1[i].Angpder2z=0.0f;
+		KeyFrame1p1[i].Angpi=0.0f;
+		KeyFrame1p1[i].Angpd=0.0f;
+		KeyFrame1p1[i].Xtor=0.0f;
+		KeyFrame1p1[i].Ytor=0.0f;
+		KeyFrame1p1[i].Ztor=0.0f;
+
+		KeyFrame1p1[i].incAngtx=0.0f;
+		KeyFrame1p1[i].incAngty=0.0f;
+		KeyFrame1p1[i].incAngcx=0.0f;
+		KeyFrame1p1[i].incAngcy=0.0f;
+		KeyFrame1p1[i].incAngbi1x=0.0f;
+		KeyFrame1p1[i].incAngbi1z=0.0f;
+		KeyFrame1p1[i].incAngbi2x=0.0f;
+		KeyFrame1p1[i].incAngbi2z=0.0f;
+		KeyFrame1p1[i].incAngbd1x=0.0f;
+		KeyFrame1p1[i].incAngbd1z=0.0f;
+		KeyFrame1p1[i].incAngbd2x=0.0f;
+		KeyFrame1p1[i].incAngbd2z=0.0f;
+		KeyFrame1p1[i].incAngpizq1x=0.0f;
+		KeyFrame1p1[i].incAngpizq1z=0.0f;
+		KeyFrame1p1[i].incAngpizq2x=0.0f;
+		KeyFrame1p1[i].incAngpizq2z=0.0f;
+		KeyFrame1p1[i].incAngpder1x=0.0f;
+		KeyFrame1p1[i].incAngpder1z=0.0f;
+		KeyFrame1p1[i].incAngpder2x=0.0f;
+		KeyFrame1p1[i].incAngpder2z=0.0f;
+		KeyFrame1p1[i].incAngpi=0.0f;
+		KeyFrame1p1[i].incAngpd=0.0f;
+		KeyFrame1p1[i].incXtor=0.0f;
+		KeyFrame1p1[i].incYtor=0.0f;
+		KeyFrame1p1[i].incZtor=0.0f;
+	}
+
+	//Se inicializan las variables de la secuencia 1
+	for(int i=0; i<maxKF1; i++)
+	{
+		KeyFrame2p1[i].Angtx=0.0f;
+		KeyFrame2p1[i].Angty=0.0f;
+		KeyFrame2p1[i].Angcx=0.0f;
+		KeyFrame2p1[i].Angcy=0.0f;
+		KeyFrame2p1[i].Angbi1x=0.0f;
+		KeyFrame2p1[i].Angbi1z=0.0f;
+		KeyFrame2p1[i].Angbi2x=0.0f;
+		KeyFrame2p1[i].Angbi2z=0.0f;
+		KeyFrame2p1[i].Angbd1x=0.0f;
+		KeyFrame2p1[i].Angbd1z=0.0f;
+		KeyFrame2p1[i].Angbd2x=0.0f;
+		KeyFrame2p1[i].Angbd2z=0.0f;
+		KeyFrame2p1[i].Angpizq1x=0.0f;
+		KeyFrame2p1[i].Angpizq1z=0.0f;
+		KeyFrame2p1[i].Angpizq2x=0.0f;
+		KeyFrame2p1[i].Angpizq2z=0.0f;
+		KeyFrame2p1[i].Angpder1x=0.0f;
+		KeyFrame2p1[i].Angpder1z=0.0f;
+		KeyFrame2p1[i].Angpder2x=0.0f;
+		KeyFrame2p1[i].Angpder2z=0.0f;
+		KeyFrame2p1[i].Angpi=0.0f;
+		KeyFrame2p1[i].Angpd=0.0f;
+		KeyFrame2p1[i].Xtor=0.0f;
+		KeyFrame2p1[i].Ytor=0.0f;
+		KeyFrame2p1[i].Ztor=0.0f;
+
+		KeyFrame2p1[i].incAngtx=0.0f;
+		KeyFrame2p1[i].incAngty=0.0f;
+		KeyFrame2p1[i].incAngcx=0.0f;
+		KeyFrame2p1[i].incAngcy=0.0f;
+		KeyFrame2p1[i].incAngbi1x=0.0f;
+		KeyFrame2p1[i].incAngbi1z=0.0f;
+		KeyFrame2p1[i].incAngbi2x=0.0f;
+		KeyFrame2p1[i].incAngbi2z=0.0f;
+		KeyFrame2p1[i].incAngbd1x=0.0f;
+		KeyFrame2p1[i].incAngbd1z=0.0f;
+		KeyFrame2p1[i].incAngbd2x=0.0f;
+		KeyFrame2p1[i].incAngbd2z=0.0f;
+		KeyFrame2p1[i].incAngpizq1x=0.0f;
+		KeyFrame2p1[i].incAngpizq1z=0.0f;
+		KeyFrame2p1[i].incAngpizq2x=0.0f;
+		KeyFrame2p1[i].incAngpizq2z=0.0f;
+		KeyFrame2p1[i].incAngpder1x=0.0f;
+		KeyFrame2p1[i].incAngpder1z=0.0f;
+		KeyFrame2p1[i].incAngpder2x=0.0f;
+		KeyFrame2p1[i].incAngpder2z=0.0f;
+		KeyFrame2p1[i].incAngpi=0.0f;
+		KeyFrame2p1[i].incAngpd=0.0f;
+		KeyFrame2p1[i].incXtor=0.0f;
+		KeyFrame2p1[i].incYtor=0.0f;
+		KeyFrame2p1[i].incZtor=0.0f;
+	}
+	
+	varsAnimP1.play=false; //inicialmente sin animación (se activa al presionar la tecla para avanzar)
+	varsAnimP1.playIndex=0;//inicia desde el primer keyframe
+	varsAnimP1.tipoAnim=1;
+	varsAnimP1.loop=0;     //sin repetición ya que se activa mediante el teclado
+}
+
+void DatosAnimacion()
+{
+	//player 1
+	//Secuencia 1 (caminar)
+	KeyFrame1p1[0].Angtx=10.0f;
+	KeyFrame1p1[0].Angty=0.0f;
+	KeyFrame1p1[0].Angcx=-10.0f;
+	KeyFrame1p1[0].Angcy=0.0f;
+	KeyFrame1p1[0].Angbi1x=-45.0f;
+	KeyFrame1p1[0].Angbi1z=-40.0f;
+	KeyFrame1p1[0].Angbi2x=-30.0f;
+	KeyFrame1p1[0].Angbi2z=-40.0f;
+	KeyFrame1p1[0].Angbd1x=45.0f;
+	KeyFrame1p1[0].Angbd1z=0.0f;
+	KeyFrame1p1[0].Angbd2x=-120.0f;
+	KeyFrame1p1[0].Angbd2z=-30.0f;
+	KeyFrame1p1[0].Angpizq1x=-110.0f;
+	KeyFrame1p1[0].Angpizq1z=0.0f;
+	KeyFrame1p1[0].Angpizq2x=90.0f;
+	KeyFrame1p1[0].Angpizq2z=0.0f;
+	KeyFrame1p1[0].Angpder1x=70.0f;
+	KeyFrame1p1[0].Angpder1z=0.0f;
+	KeyFrame1p1[0].Angpder2x=100.0f;
+	KeyFrame1p1[0].Angpder2z=0.0f;
+	KeyFrame1p1[0].Angpi=0.0f;
+	KeyFrame1p1[0].Angpd=0.0f;
+	KeyFrame1p1[0].Xtor=0.0f;
+	KeyFrame1p1[0].Ytor=0.0f;
+	KeyFrame1p1[0].Ztor=0.0f;
+
+	KeyFrame1p1[1].Angtx=20.0f;
+	KeyFrame1p1[1].Angty=0.0f;
+	KeyFrame1p1[1].Angcx=-20.0f;
+	KeyFrame1p1[1].Angcy=0.0f;
+	KeyFrame1p1[1].Angbi1x=-85.0f;
+	KeyFrame1p1[1].Angbi1z=-40.0f;
+	KeyFrame1p1[1].Angbi2x=-30.0f;
+	KeyFrame1p1[1].Angbi2z=-40.0f;
+	KeyFrame1p1[1].Angbd1x=5.0f;
+	KeyFrame1p1[1].Angbd1z=40.0f;
+	KeyFrame1p1[1].Angbd2x=-120.0f;
+	KeyFrame1p1[1].Angbd2z=-30.0f;
+	KeyFrame1p1[1].Angpizq1x=70.0f;
+	KeyFrame1p1[1].Angpizq1z=0.0f;
+	KeyFrame1p1[1].Angpizq2x=100.0f;
+	KeyFrame1p1[1].Angpizq2z=0.0f;
+	KeyFrame1p1[1].Angpder1x=-110.0f;
+	KeyFrame1p1[1].Angpder1z=0.0f;
+	KeyFrame1p1[1].Angpder2x=90.0f;
+	KeyFrame1p1[1].Angpder2z=0.0f;
+	KeyFrame1p1[1].Angpi=0.0f;
+	KeyFrame1p1[1].Angpd=0.0f;
+	KeyFrame1p1[1].Xtor=0.0f;
+	KeyFrame1p1[1].Ytor=0.0f;
+	KeyFrame1p1[1].Ztor=0.0f;
+
+	KeyFrame1p1[2].Angtx=10.0f;
+	KeyFrame1p1[2].Angty=0.0f;
+	KeyFrame1p1[2].Angcx=-10.0f;
+	KeyFrame1p1[2].Angcy=0.0f;
+	KeyFrame1p1[2].Angbi1x=-45.0f;
+	KeyFrame1p1[2].Angbi1z=-40.0f;
+	KeyFrame1p1[2].Angbi2x=-30.0f;
+	KeyFrame1p1[2].Angbi2z=-40.0f;
+	KeyFrame1p1[2].Angbd1x=45.0f;
+	KeyFrame1p1[2].Angbd1z=0.0f;
+	KeyFrame1p1[2].Angbd2x=-120.0f;
+	KeyFrame1p1[2].Angbd2z=-30.0f;
+	KeyFrame1p1[2].Angpizq1x=-110.0f;
+	KeyFrame1p1[2].Angpizq1z=0.0f;
+	KeyFrame1p1[2].Angpizq2x=90.0f;
+	KeyFrame1p1[2].Angpizq2z=0.0f;
+	KeyFrame1p1[2].Angpder1x=70.0f;
+	KeyFrame1p1[2].Angpder1z=0.0f;
+	KeyFrame1p1[2].Angpder2x=100.0f;
+	KeyFrame1p1[2].Angpder2z=0.0f;
+	KeyFrame1p1[2].Angpi=0.0f;
+	KeyFrame1p1[2].Angpd=0.0f;
+	KeyFrame1p1[2].Xtor=0.0f;
+	KeyFrame1p1[2].Ytor=0.0f;
+	KeyFrame1p1[2].Ztor=0.0f;
+
+	//Secuencia 2 (saltar)
+	//TODO: hacer KeyFrame2p1[0]
+}
+
 int IniGL(GLvoid)										// Aqui se configuran los parametros iniciales de OpenGL
 {
 	inicializaCamara();
@@ -521,6 +734,10 @@ int IniGL(GLvoid)										// Aqui se configuran los parametros iniciales de Ope
 	CargaModelos();
 
 	iniPersonaje();
+
+	InicializaAnim();
+
+	DatosAnimacion();
 
 	return TRUE;
 }
@@ -745,7 +962,6 @@ void dibujaTrampa1(float posY)
 	glPopMatrix();
 }
 
-
 void dibujaTrampa2()
 {
 	//1
@@ -890,7 +1106,6 @@ void dibujaTrampa2()
 	dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 }
-
 
 void dibujaEscenario(int render)
 {
@@ -3281,22 +3496,161 @@ void dibujaPersonaje()
 			g_Load3ds.Render3DSFile(&g_3DModel6, textureModel6, 1);
 			//Brazo derecho_b
 			glPushMatrix();	
-				glTranslatef(-0.4f, -0.5f, 0.0f);
+				glTranslatef(-0.4f, -0.7f, 0.0f);
 				glRotatef(player1modelo.Angbd2x, 1.0f, 0.0f, 0.0f);
 				g_Load3ds.Render3DSFile(&g_3DModel7, textureModel7, 1);
 				//Arma
 				glPushMatrix();
-					
+					glTranslatef(0.0f, -1.0f, 0.0f);
+					g_Load3ds.Render3DSFile(&g_3DModel10, textureModel10, 1);
 				glPopMatrix();
 			glPopMatrix();
 		glPopMatrix();
 
-			//Brazo izquierdo_a
-
+		//Brazo izquierdo_a
+		glPushMatrix();
+			glTranslatef(0.7f, 1.5f, 0.0f);
+			glRotatef(player1modelo.Angbi1x, 1.0f, 0.0f, 0.0f);
+			g_Load3ds.Render3DSFile(&g_3DModel8, textureModel8, 1);
 			//Brazo izquierdo_b
-
+			glPushMatrix();	
+				glTranslatef(0.4f, -0.7f, 0.0f);
+				glRotatef(player1modelo.Angbi2x, 1.0f, 0.0f, 0.0f);
+				g_Load3ds.Render3DSFile(&g_3DModel9, textureModel9, 1);
+			glPopMatrix();
+		glPopMatrix();
 
 	glPopMatrix();
+}
+
+void animacion(jerarquiaModelo *varsMod, FRAME *KeyFrame, int maxKF , int frames, varsAnim *anim)
+{
+	if(anim->play)
+	{		
+		if((fabs(KeyFrame[anim->playIndex+1].Angtx-varsMod->Angtx))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angty-varsMod->Angty))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angcx-varsMod->Angcx))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angcy-varsMod->Angcy))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbi1x-varsMod->Angbi1x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbi1z-varsMod->Angbi1z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbi2x-varsMod->Angbi2x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbi2z-varsMod->Angbi2z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbd1x-varsMod->Angbd1x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbd1z-varsMod->Angbd1z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbd2x-varsMod->Angbd2x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angbd2z-varsMod->Angbd2z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpizq1x-varsMod->Angpizq1x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpizq1z-varsMod->Angpizq1z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpizq2x-varsMod->Angpizq2x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpizq2z-varsMod->Angpizq2z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpder1x-varsMod->Angpder1x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpder1z-varsMod->Angpder1z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpder2x-varsMod->Angpder2x))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpder2z-varsMod->Angpder2z))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpi-varsMod->Angpi))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Angpd-varsMod->Angpd))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Xtor-varsMod->Xtor))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Ytor-varsMod->Ytor))<0.1f &&
+		   (fabs(KeyFrame[anim->playIndex+1].Ztor-varsMod->Ztor))<0.1f)
+		{			
+			anim->playIndex++;			
+			if(anim->playIndex > maxKF-2)
+			{
+				anim->playIndex=0;
+				if(anim->loop == 0)
+				{
+					anim->play=false;
+					anim->tipoAnim=0;
+				}
+				else
+				{
+					anim->play=true;
+					varsMod->Angtx     = KeyFrame[anim->playIndex].Angtx;
+					varsMod->Angty     = KeyFrame[anim->playIndex].Angty;
+					varsMod->Angcx     = KeyFrame[anim->playIndex].Angcx;
+					varsMod->Angcy     = KeyFrame[anim->playIndex].Angcy;
+					varsMod->Angbi1x   = KeyFrame[anim->playIndex].Angbi1x;
+					varsMod->Angbi1z   = KeyFrame[anim->playIndex].Angbi1z;
+					varsMod->Angbi2x   = KeyFrame[anim->playIndex].Angbi2x;
+					varsMod->Angbi2z   = KeyFrame[anim->playIndex].Angbi2z;
+					varsMod->Angbd1x   = KeyFrame[anim->playIndex].Angbd1x;
+					varsMod->Angbd1z   = KeyFrame[anim->playIndex].Angbd1z;
+					varsMod->Angbd2x   = KeyFrame[anim->playIndex].Angbd2x;
+					varsMod->Angbd2z   = KeyFrame[anim->playIndex].Angbd2z;
+					varsMod->Angpizq1x = KeyFrame[anim->playIndex].Angpizq1x;
+					varsMod->Angpizq1z = KeyFrame[anim->playIndex].Angpizq1z;
+					varsMod->Angpizq2x = KeyFrame[anim->playIndex].Angpizq2x;
+					varsMod->Angpizq2z = KeyFrame[anim->playIndex].Angpizq2z;
+					varsMod->Angpder1x = KeyFrame[anim->playIndex].Angpder1x;
+					varsMod->Angpder1z = KeyFrame[anim->playIndex].Angpder1z;
+					varsMod->Angpder2x = KeyFrame[anim->playIndex].Angpder2x;
+					varsMod->Angpder2z = KeyFrame[anim->playIndex].Angpder2z;
+					varsMod->Angpi     = KeyFrame[anim->playIndex].Angpi;
+					varsMod->Angpd     = KeyFrame[anim->playIndex].Angpd;
+					varsMod->Xtor      = KeyFrame[anim->playIndex].Xtor;
+					varsMod->Ytor      = KeyFrame[anim->playIndex].Ytor;
+					varsMod->Ztor      = KeyFrame[anim->playIndex].Ztor;
+				}
+			}
+		}
+		else
+		{
+
+			KeyFrame[anim->playIndex].incAngtx		= (KeyFrame[anim->playIndex+1].Angtx-KeyFrame[anim->playIndex].Angtx)/frames;
+			KeyFrame[anim->playIndex].incAngty		= (KeyFrame[anim->playIndex+1].Angty-KeyFrame[anim->playIndex].Angty)/frames;
+			KeyFrame[anim->playIndex].incAngcx		= (KeyFrame[anim->playIndex+1].Angcx-KeyFrame[anim->playIndex].Angcx)/frames;
+			KeyFrame[anim->playIndex].incAngcy		= (KeyFrame[anim->playIndex+1].Angcy-KeyFrame[anim->playIndex].Angcy)/frames;
+			KeyFrame[anim->playIndex].incAngbi1x	= (KeyFrame[anim->playIndex+1].Angbi1x-KeyFrame[anim->playIndex].Angbi1x)/frames;
+			KeyFrame[anim->playIndex].incAngbi1z	= (KeyFrame[anim->playIndex+1].Angbi1z-KeyFrame[anim->playIndex].Angbi1z)/frames;
+			KeyFrame[anim->playIndex].incAngbi2x	= (KeyFrame[anim->playIndex+1].Angbi2x-KeyFrame[anim->playIndex].Angbi2x)/frames;
+			KeyFrame[anim->playIndex].incAngbi2z	= (KeyFrame[anim->playIndex+1].Angbi2z-KeyFrame[anim->playIndex].Angbi2z)/frames;
+			KeyFrame[anim->playIndex].incAngbd1x	= (KeyFrame[anim->playIndex+1].Angbd1x-KeyFrame[anim->playIndex].Angbd1x)/frames;
+			KeyFrame[anim->playIndex].incAngbd1z	= (KeyFrame[anim->playIndex+1].Angbd1z-KeyFrame[anim->playIndex].Angbd1z)/frames;
+			KeyFrame[anim->playIndex].incAngbd2x	= (KeyFrame[anim->playIndex+1].Angbd2x-KeyFrame[anim->playIndex].Angbd2x)/frames;
+			KeyFrame[anim->playIndex].incAngbd2z	= (KeyFrame[anim->playIndex+1].Angbd2z-KeyFrame[anim->playIndex].Angbd2z)/frames;
+			KeyFrame[anim->playIndex].incAngpizq1x	= (KeyFrame[anim->playIndex+1].Angpizq1x-KeyFrame[anim->playIndex].Angpizq1x)/frames;
+			KeyFrame[anim->playIndex].incAngpizq1z	= (KeyFrame[anim->playIndex+1].Angpizq1z-KeyFrame[anim->playIndex].Angpizq1z)/frames;
+			KeyFrame[anim->playIndex].incAngpizq2x	= (KeyFrame[anim->playIndex+1].Angpizq2x-KeyFrame[anim->playIndex].Angpizq2x)/frames;
+			KeyFrame[anim->playIndex].incAngpizq2z	= (KeyFrame[anim->playIndex+1].Angpizq2z-KeyFrame[anim->playIndex].Angpizq2z)/frames;
+			KeyFrame[anim->playIndex].incAngpder1x	= (KeyFrame[anim->playIndex+1].Angpder1x-KeyFrame[anim->playIndex].Angpder1x)/frames;
+			KeyFrame[anim->playIndex].incAngpder1z	= (KeyFrame[anim->playIndex+1].Angpder1z-KeyFrame[anim->playIndex].Angpder1z)/frames;
+			KeyFrame[anim->playIndex].incAngpder2x	= (KeyFrame[anim->playIndex+1].Angpder2x-KeyFrame[anim->playIndex].Angpder2x)/frames;
+			KeyFrame[anim->playIndex].incAngpder2z	= (KeyFrame[anim->playIndex+1].Angpder2z-KeyFrame[anim->playIndex].Angpder2z)/frames;
+			KeyFrame[anim->playIndex].incAngpi		= (KeyFrame[anim->playIndex+1].Angpi-KeyFrame[anim->playIndex].Angpi)/frames;
+			KeyFrame[anim->playIndex].incAngpd		= (KeyFrame[anim->playIndex+1].Angpd-KeyFrame[anim->playIndex].Angpd)/frames;
+			KeyFrame[anim->playIndex].incXtor		= (KeyFrame[anim->playIndex+1].Xtor-KeyFrame[anim->playIndex].Xtor)/frames;
+			KeyFrame[anim->playIndex].incYtor		= (KeyFrame[anim->playIndex+1].Ytor-KeyFrame[anim->playIndex].Ytor)/frames;
+			KeyFrame[anim->playIndex].incZtor		= (KeyFrame[anim->playIndex+1].Ztor-KeyFrame[anim->playIndex].Ztor)/frames;
+			
+
+			varsMod->Angtx     += KeyFrame[anim->playIndex].incAngtx;
+			varsMod->Angty     += KeyFrame[anim->playIndex].incAngty;
+			varsMod->Angcx     += KeyFrame[anim->playIndex].incAngcx;
+			varsMod->Angcy     += KeyFrame[anim->playIndex].incAngcy;
+			varsMod->Angbi1x   += KeyFrame[anim->playIndex].incAngbi1x;
+			varsMod->Angbi1z   += KeyFrame[anim->playIndex].incAngbi1z;
+			varsMod->Angbi2x   += KeyFrame[anim->playIndex].incAngbi2x;
+			varsMod->Angbi2z   += KeyFrame[anim->playIndex].incAngbi2z;
+			varsMod->Angbd1x   += KeyFrame[anim->playIndex].incAngbd1x;
+			varsMod->Angbd1z   += KeyFrame[anim->playIndex].incAngbd1z;
+			varsMod->Angbd2x   += KeyFrame[anim->playIndex].incAngbd2x;
+			varsMod->Angbd2z   += KeyFrame[anim->playIndex].incAngbd2z;
+			varsMod->Angpizq1x += KeyFrame[anim->playIndex].incAngpizq1x;
+			varsMod->Angpizq1z += KeyFrame[anim->playIndex].incAngpizq1z;
+			varsMod->Angpizq2x += KeyFrame[anim->playIndex].incAngpizq2x;
+			varsMod->Angpizq2z += KeyFrame[anim->playIndex].incAngpizq2z;
+			varsMod->Angpder1x += KeyFrame[anim->playIndex].incAngpder1x;
+			varsMod->Angpder1z += KeyFrame[anim->playIndex].incAngpder1z;
+			varsMod->Angpder2x += KeyFrame[anim->playIndex].incAngpder2x;
+			varsMod->Angpder2z += KeyFrame[anim->playIndex].incAngpder2z;
+			varsMod->Angpi     += KeyFrame[anim->playIndex].incAngpi;
+			varsMod->Angpd     += KeyFrame[anim->playIndex].incAngpd;
+			varsMod->Xtor      += KeyFrame[anim->playIndex].incXtor;
+			varsMod->Ytor      += KeyFrame[anim->playIndex].incYtor;
+			varsMod->Ztor      += KeyFrame[anim->playIndex].incZtor;
+		
+		}
+	}
 }
 
 int RenderizaEscena(GLvoid)								// Aqui se dibuja todo lo que aparecera en la ventana
@@ -3306,7 +3660,7 @@ int RenderizaEscena(GLvoid)								// Aqui se dibuja todo lo que aparecera en la
 	glLoadIdentity();
 
 	//gluLookAt(80.0f, 120.0f, 170.0f, 0.0f, 0.0f, 0.0f, 0, 1, 0);
-	gluLookAt(PosCam.x, PosCam.y, PosCam.z, ObjCam.x, ObjCam.y, ObjCam.z, 0, 1, 0);
+	gluLookAt(PosCam.x, PosCam.y, PosCam.z - 85.0f, ObjCam.x, ObjCam.y, ObjCam.z, 0, 1, 0);
 
 	DibujaEjes();
 	dibujaEscenario(renderModo);
@@ -3315,7 +3669,7 @@ int RenderizaEscena(GLvoid)								// Aqui se dibuja todo lo que aparecera en la
 	{
 		glPushMatrix();
 		glTranslatef(player1.PosicionObj.x, player1.PosicionObj.y + 3.0f, player1.PosicionObj.z);
-		//glRotatef(player1.AngObj, 0.0f, 1.0f, 0.0f);
+		glRotatef(player1.AngObj, 0.0f, 1.0f, 0.0f);
 		glScalef(player1.escalaX, player1.escalaY, player1.escalaZ);
 		dibujaPersonaje();
 		glPopMatrix();
@@ -3719,6 +4073,15 @@ int WINAPI WinMain(HINSTANCE	hInstance,			// Instancia
 				{
 					RenderizaEscena();				// Dibuja la escena
 					SwapBuffers(hDC);				// Intercambia los Buffers (Double Buffering)
+					if(varsAnimP1.play)
+					{
+						if(varsAnimP1.tipoAnim == 1) //caminar
+							animacion(&player1modelo, KeyFrame1p1, maxKF1 , 15, &varsAnimP1);
+						else if(varsAnimP1.tipoAnim == 2) //salto
+							animacion(&player1modelo, KeyFrame2p1, maxKF2 , 5, &varsAnimP1);
+						/*else if(varsAnimP1.tipoAnim == 3) //caminar disparando
+							animacion(&player1modelo, KeyFrame3p1, maxKF3 , 15, &varsAnimP1);*/
+					}
 				}
 
 				if (!ManejaTeclado()) return 0;
@@ -3749,13 +4112,210 @@ int ManejaTeclado()
 	if (GetKeyState(VK_LEFT) & 0x80) //Si está presionada la tecla LEFT
 	{
 		movimientoPersonaje(2);
-		player1.caminando = true;
+		player1.caminando=true;
+		
+		if(varsAnimP1.play==false) //Para que la asignación de valores siguiente solo se haga una vez y empiece la animación
+		{
+			//Se le asignan a las variables del personaje los 
+			//valores almacenados en el primer keyframe para que
+			//inicie desde ahí la animación.
+			player1modelo.Angtx     = KeyFrame1p1[0].Angtx;
+			player1modelo.Angty     = KeyFrame1p1[0].Angty;
+			player1modelo.Angcx     = KeyFrame1p1[0].Angcx;
+			player1modelo.Angcy     = KeyFrame1p1[0].Angcy;
+			player1modelo.Angbi1x   = KeyFrame1p1[0].Angbi1x;
+			player1modelo.Angbi1z   = KeyFrame1p1[0].Angbi1z;
+			player1modelo.Angbi2x   = KeyFrame1p1[0].Angbi2x;
+			player1modelo.Angbi2z   = KeyFrame1p1[0].Angbi2z;
+			player1modelo.Angbd1x   = KeyFrame1p1[0].Angbd1x;
+			player1modelo.Angbd1z   = KeyFrame1p1[0].Angbd1z;
+			player1modelo.Angbd2x   = KeyFrame1p1[0].Angbd2x;
+			player1modelo.Angbd2z   = KeyFrame1p1[0].Angbd2z;
+			player1modelo.Angpizq1x = KeyFrame1p1[0].Angpizq1x;
+			player1modelo.Angpizq1z = KeyFrame1p1[0].Angpizq1z;
+			player1modelo.Angpizq2x = KeyFrame1p1[0].Angpizq2x;
+			player1modelo.Angpizq2z = KeyFrame1p1[0].Angpizq2z;
+			player1modelo.Angpder1x = KeyFrame1p1[0].Angpder1x;
+			player1modelo.Angpder1z = KeyFrame1p1[0].Angpder1z;
+			player1modelo.Angpder2x = KeyFrame1p1[0].Angpder2x;
+			player1modelo.Angpder2z = KeyFrame1p1[0].Angpder2z;
+			player1modelo.Angpi     = KeyFrame1p1[0].Angpi;
+			player1modelo.Angpd     = KeyFrame1p1[0].Angpd;
+			player1modelo.Xtor      = KeyFrame1p1[0].Xtor;
+			player1modelo.Ytor      = KeyFrame1p1[0].Ytor;
+			player1modelo.Ztor      = KeyFrame1p1[0].Ztor;
+
+			varsAnimP1.play=true;
+			varsAnimP1.playIndex=0;
+			varsAnimP1.tipoAnim=1;
+			varsAnimP1.loop=0;
+		}
 	}
 
 	if (GetKeyState(VK_RIGHT) & 0x80) //Si está presionada la tecla RIGHT
 	{
 		movimientoPersonaje(1);
-		player1.caminando = true;
+		player1.caminando=true;
+			
+		if(varsAnimP1.play==false) //Para que la asignación de valores siguiente solo se haga una vez y empiece la animación
+		{
+			//Se le asignan a las variables del personaje los 
+			//valores almacenados en el primer keyframe para que
+			//inicie desde ahí la animación.
+			player1modelo.Angtx     = KeyFrame1p1[0].Angtx;
+			player1modelo.Angty     = KeyFrame1p1[0].Angty;
+			player1modelo.Angcx     = KeyFrame1p1[0].Angcx;
+			player1modelo.Angcy     = KeyFrame1p1[0].Angcy;
+			player1modelo.Angbi1x   = KeyFrame1p1[0].Angbi1x;
+			player1modelo.Angbi1z   = KeyFrame1p1[0].Angbi1z;
+			player1modelo.Angbi2x   = KeyFrame1p1[0].Angbi2x;
+			player1modelo.Angbi2z   = KeyFrame1p1[0].Angbi2z;
+			player1modelo.Angbd1x   = KeyFrame1p1[0].Angbd1x;
+			player1modelo.Angbd1z   = KeyFrame1p1[0].Angbd1z;
+			player1modelo.Angbd2x   = KeyFrame1p1[0].Angbd2x;
+			player1modelo.Angbd2z   = KeyFrame1p1[0].Angbd2z;
+			player1modelo.Angpizq1x = KeyFrame1p1[0].Angpizq1x;
+			player1modelo.Angpizq1z = KeyFrame1p1[0].Angpizq1z;
+			player1modelo.Angpizq2x = KeyFrame1p1[0].Angpizq2x;
+			player1modelo.Angpizq2z = KeyFrame1p1[0].Angpizq2z;
+			player1modelo.Angpder1x = KeyFrame1p1[0].Angpder1x;
+			player1modelo.Angpder1z = KeyFrame1p1[0].Angpder1z;
+			player1modelo.Angpder2x = KeyFrame1p1[0].Angpder2x;
+			player1modelo.Angpder2z = KeyFrame1p1[0].Angpder2z;
+			player1modelo.Angpi     = KeyFrame1p1[0].Angpi;
+			player1modelo.Angpd     = KeyFrame1p1[0].Angpd;
+			player1modelo.Xtor      = KeyFrame1p1[0].Xtor;
+			player1modelo.Ytor      = KeyFrame1p1[0].Ytor;
+			player1modelo.Ztor      = KeyFrame1p1[0].Ztor;
+
+			varsAnimP1.play=true;
+			varsAnimP1.playIndex=0;
+			varsAnimP1.tipoAnim=1;
+			varsAnimP1.loop=0;
+		}
+	}
+	if(GetKeyState(VK_RIGHT) & 0x80) //Si está presionada la tecla RIGHT
+	{
+		movimientoPersonaje(1);
+		player1.caminando=true;
+			
+		if(varsAnimP1.play==false) //Para que la asignación de valores siguiente solo se haga una vez y empiece la animación
+		{
+			//Se le asignan a las variables del personaje los 
+			//valores almacenados en el primer keyframe para que
+			//inicie desde ahí la animación.
+			player1modelo.Angtx     = KeyFrame1p1[0].Angtx;
+			player1modelo.Angty     = KeyFrame1p1[0].Angty;
+			player1modelo.Angcx     = KeyFrame1p1[0].Angcx;
+			player1modelo.Angcy     = KeyFrame1p1[0].Angcy;
+			player1modelo.Angbi1x   = KeyFrame1p1[0].Angbi1x;
+			player1modelo.Angbi1z   = KeyFrame1p1[0].Angbi1z;
+			player1modelo.Angbi2x   = KeyFrame1p1[0].Angbi2x;
+			player1modelo.Angbi2z   = KeyFrame1p1[0].Angbi2z;
+			player1modelo.Angbd1x   = KeyFrame1p1[0].Angbd1x;
+			player1modelo.Angbd1z   = KeyFrame1p1[0].Angbd1z;
+			player1modelo.Angbd2x   = KeyFrame1p1[0].Angbd2x;
+			player1modelo.Angbd2z   = KeyFrame1p1[0].Angbd2z;
+			player1modelo.Angpizq1x = KeyFrame1p1[0].Angpizq1x;
+			player1modelo.Angpizq1z = KeyFrame1p1[0].Angpizq1z;
+			player1modelo.Angpizq2x = KeyFrame1p1[0].Angpizq2x;
+			player1modelo.Angpizq2z = KeyFrame1p1[0].Angpizq2z;
+			player1modelo.Angpder1x = KeyFrame1p1[0].Angpder1x;
+			player1modelo.Angpder1z = KeyFrame1p1[0].Angpder1z;
+			player1modelo.Angpder2x = KeyFrame1p1[0].Angpder2x;
+			player1modelo.Angpder2z = KeyFrame1p1[0].Angpder2z;
+			player1modelo.Angpi     = KeyFrame1p1[0].Angpi;
+			player1modelo.Angpd     = KeyFrame1p1[0].Angpd;
+			player1modelo.Xtor      = KeyFrame1p1[0].Xtor;
+			player1modelo.Ytor      = KeyFrame1p1[0].Ytor;
+			player1modelo.Ztor      = KeyFrame1p1[0].Ztor;
+
+			varsAnimP1.play=true;
+			varsAnimP1.playIndex=0;
+			varsAnimP1.tipoAnim=1;
+			varsAnimP1.loop=0;
+		}
+	}
+
+	if((GetAsyncKeyState('Z')&1) == 1)
+	{
+		if(varsAnimP1.tipoAnim != 2) //Para que la asignación de valores siguiente solo se haga una vez y empiece la animación
+		{
+			//Se le asignan a las variables del personaje los 
+			//valores almacenados en el primer keyframe para que
+			//inicie desde ahí la animación.
+			player1modelo.Angtx     = KeyFrame2p1[0].Angtx;
+			player1modelo.Angty     = KeyFrame2p1[0].Angty;
+			player1modelo.Angcx     = KeyFrame2p1[0].Angcx;
+			player1modelo.Angcy     = KeyFrame2p1[0].Angcy;
+			player1modelo.Angbi1x   = KeyFrame2p1[0].Angbi1x;
+			player1modelo.Angbi1z   = KeyFrame2p1[0].Angbi1z;
+			player1modelo.Angbi2x   = KeyFrame2p1[0].Angbi2x;
+			player1modelo.Angbi2z   = KeyFrame2p1[0].Angbi2z;
+			player1modelo.Angbd1x   = KeyFrame2p1[0].Angbd1x;
+			player1modelo.Angbd1z   = KeyFrame2p1[0].Angbd1z;
+			player1modelo.Angbd2x   = KeyFrame2p1[0].Angbd2x;
+			player1modelo.Angbd2z   = KeyFrame2p1[0].Angbd2z;
+			player1modelo.Angpizq1x = KeyFrame2p1[0].Angpizq1x;
+			player1modelo.Angpizq1z = KeyFrame2p1[0].Angpizq1z;
+			player1modelo.Angpizq2x = KeyFrame2p1[0].Angpizq2x;
+			player1modelo.Angpizq2z = KeyFrame2p1[0].Angpizq2z;
+			player1modelo.Angpder1x = KeyFrame2p1[0].Angpder1x;
+			player1modelo.Angpder1z = KeyFrame2p1[0].Angpder1z;
+			player1modelo.Angpder2x = KeyFrame2p1[0].Angpder2x;
+			player1modelo.Angpder2z = KeyFrame2p1[0].Angpder2z;
+			player1modelo.Angpi     = KeyFrame2p1[0].Angpi;
+			player1modelo.Angpd     = KeyFrame2p1[0].Angpd;
+			player1modelo.Xtor      = KeyFrame2p1[0].Xtor;
+			player1modelo.Ytor      = KeyFrame2p1[0].Ytor;
+			player1modelo.Ztor      = KeyFrame2p1[0].Ztor;
+
+			varsAnimP1.play=true;
+			varsAnimP1.playIndex=0;
+			varsAnimP1.tipoAnim=2;
+			varsAnimP1.loop=0;
+		}
+	}
+
+	//Para que al soltar la tecla presionada el personaje no quede en una posición
+	//intermedia de la animación se asignan los valores originales a las variables
+	if(!(GetKeyState(VK_UP) & 0x80 || GetKeyState(VK_DOWN) & 0x80
+	|| GetKeyState(VK_LEFT) & 0x80 || GetKeyState(VK_RIGHT) & 0x80)) //Si no está presionada alguna de esas teclas
+	{
+		if(varsAnimP1.tipoAnim == 1)
+		{
+			varsAnimP1.play=false;
+			player1modelo.Angtx     = 0.0f;
+			player1modelo.Angty     = 0.0f;
+			player1modelo.Angcx     = 0.0f;
+			player1modelo.Angcy     = 0.0f;
+			player1modelo.Angbi1x   = 0.0f;
+			player1modelo.Angbi1z   = 0.0f;
+			player1modelo.Angbi2x   = 0.0f;
+			player1modelo.Angbi2z   = 0.0f;
+			player1modelo.Angbd1x   = 0.0f;
+			player1modelo.Angbd1z   = 0.0f;
+			player1modelo.Angbd2x   = 0.0f;
+			player1modelo.Angbd2z   = 0.0f;
+			player1modelo.Angpizq1x = 0.0f;
+			player1modelo.Angpizq1z = 0.0f;
+			player1modelo.Angpizq2x = 0.0f;
+			player1modelo.Angpizq2z = 0.0f;
+			player1modelo.Angpder1x = 0.0f;
+			player1modelo.Angpder1z = 0.0f;
+			player1modelo.Angpder2x = 0.0f;
+			player1modelo.Angpder2z = 0.0f;
+			player1modelo.Angpi     = 0.0f;
+			player1modelo.Angpd     = 0.0f;
+			player1modelo.Xtor      = 0.0f;
+			player1modelo.Ytor      = 0.0f;
+			player1modelo.Ztor      = 0.0f;
+
+			varsAnimP1.tipoAnim=0;
+		}
+
+		player1.caminando=false;
+
 	}
 
 	if (keys['X'])
@@ -3764,21 +4324,21 @@ int ManejaTeclado()
 		player1modelo.Angty = 0.0f;
 		player1modelo.Angcx = 0.0f;
 		player1modelo.Angcy = 0.0f;
-		player1modelo.Angbi1x = 0.0f;
+		player1modelo.Angbi1x = -55.0f;
 		player1modelo.Angbi1z = 0.0f;
-		player1modelo.Angbi2x = 0.0f;
+		player1modelo.Angbi2x = -75.0f;
 		player1modelo.Angbi2z = 0.0f;
-		player1modelo.Angbd1x = 0.0f;
+		player1modelo.Angbd1x = 40.0f;
 		player1modelo.Angbd1z = 0.0f;
-		player1modelo.Angbd2x = 0.0f;
+		player1modelo.Angbd2x = -130.0f;
 		player1modelo.Angbd2z = 0.0f;
-		player1modelo.Angpizq1x = 0.0f;
+		player1modelo.Angpizq1x = 20.0f;
 		player1modelo.Angpizq1z = 0.0f;
-		player1modelo.Angpizq2x = 0.0f;
+		player1modelo.Angpizq2x = -10.0f;
 		player1modelo.Angpizq2z = 0.0f;
-		player1modelo.Angpder1x = 0.0f;
+		player1modelo.Angpder1x = -40.0f;
 		player1modelo.Angpder1z = 0.0f;
-		player1modelo.Angpder2x = 0.0f;
+		player1modelo.Angpder2x = 30.0f;
 		player1modelo.Angpder2z = 0.0f;
 		player1modelo.Angpi = 0.0f;
 		player1modelo.Angpd = 0.0f;
@@ -3788,7 +4348,7 @@ int ManejaTeclado()
 	}
 	else
 	{
-		player1modelo.Angtx = 0.0f;
+		/*player1modelo.Angtx = 0.0f;
 		player1modelo.Angty = 0.0f;
 		player1modelo.Angcx = 0.0f;
 		player1modelo.Angcy = 0.0f;
@@ -3812,7 +4372,7 @@ int ManejaTeclado()
 		player1modelo.Angpd = 0.0f;
 		player1modelo.Xtor = 0.0f;
 		player1modelo.Ytor = 0.0f;
-		player1modelo.Ztor = 0.0f;
+		player1modelo.Ztor = 0.0f;*/
 	}
 
 	if (keys[VK_PRIOR])
