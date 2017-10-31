@@ -101,7 +101,7 @@ FRAME KeyFrame2p1[maxKF2]; //Contenedor para almacenar cada keyframe de la secue
 varsAnim varsAnimP1; //datos de para animacion del player 1
 
 //Variables para iluminacion
-GLfloat LightPos[] = {0.0f, 250.0f, 400.0f, 1.0f};		// Posición de la luz
+GLfloat LightPos[] = {-100.0f, 50.0f, 50.0f, 1.0f};		// Posición de la luz
 GLfloat LightAmb[] = { 0.7f, 0.7f, 0.7f, 1.0f};			// Valores de la componente ambiente
 GLfloat LightDif[] = { 1.0f, 1.0f, 1.0f, 1.0f};			// Valores de la componente difusa
 GLfloat LightSpc[] = { 0.8f, 0.8f, 0.8f, 1.0f};			// Valores de la componente especular
@@ -119,10 +119,10 @@ GLfloat nmetalSpe[] = {0.6f, 0.3f, 0.1f, 1.0f};
 GLfloat nmetalShi = 110.0f;
 
 //Verde metalico
-GLfloat vmetalAmb[] = {0.0f, 0.0f, 0.0f, 1.0f};
-GLfloat vmetalDif[] = {0.0f, 0.0f, 0.0f, 1.0f};
-GLfloat vmetalSpe[] = {0.0f, 0.0f, 0.0f, 1.0f};
-GLfloat vmetalShi = 0.0f;
+GLfloat vmetalAmb[] = {0.1f, 0.3f, 0.1f, 1.0f};
+GLfloat vmetalDif[] = {0.4f, 0.5f, 0.4f, 1.0f};
+GLfloat vmetalSpe[] = {0.2f, 0.6f, 0.2f, 1.0f};
+GLfloat vmetalShi = 110.0f;
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaracion de WndProc (Procedimiento de ventana)
 
@@ -1052,6 +1052,7 @@ void DibujaEjes()
 
 void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 {
+	CVector Na, Nb, Nc, Nd;
 	float ang;
 	float a[3], b[3], c[3], d[3];
 	float delta;
@@ -1060,6 +1061,7 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 	deltaColor = 1.0f / lados;
 	delta = 360.0f / lados;
 
+	SeleccionaMaterial(2);
 	for (int i = 0; i < lados; i++)  //Por la forma de renderizar de openGL se usa for
 	{
 		ang = i*delta;
@@ -1082,13 +1084,21 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 		d[1] = 0.0f;
 		d[2] = c[2];
 
-		glColor3f(i*deltaColor, i*deltaColor, 0.0f);
+		//glColor3f(i*deltaColor, i*deltaColor, 0.0f);
+		Na = Normaliza(CVector(a[0], a[1], a[2]));
+		Nb = Normaliza(CVector(b[0], b[1], b[2]) - CVector(0.0f, altura, 0.0f));
+		Nc = Normaliza(CVector(c[0], c[1], c[2]) - CVector(0.0f, altura, 0.0f));
+		Nd = Normaliza(CVector(d[0], d[1], d[2]));
 
 		if (modoRender == 1) glBegin(GL_QUADS);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+		glNormal3f(Na.x, Na.y, Na.z);
 		glVertex3f(a[0], a[1], a[2]);
+		glNormal3f(Nb.x, Nb.y, Nb.z);
 		glVertex3f(b[0], b[1], b[2]);
+		glNormal3f(Nc.x, Nc.y, Nc.z);
 		glVertex3f(c[0], c[1], c[2]);
+		glNormal3f(Nd.x, Nd.y, Nd.z);
 		glVertex3f(d[0], d[1], d[2]);
 		glEnd();
 
@@ -1097,6 +1107,7 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 
 		if (modoRender == 1) glBegin(GL_TRIANGLES);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+		glNormal3f(0.0f, 1.0f, 0.0f);
 		glVertex3f(c[0], c[1], c[2]);
 		glVertex3f(b[0], b[1], b[2]);
 		glVertex3f(0.0f, altura, 0.0f);
@@ -1107,23 +1118,25 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 
 		if (modoRender == 1) glBegin(GL_TRIANGLES);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+		glNormal3f(0.0f, -1.0f, 0.0f);
 		glVertex3f(a[0], a[1], a[2]);
 		glVertex3f(d[0], d[1], d[2]);
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glEnd();
-
-		glColor3f(1.0f, 1.0f, 1.0f);
 	}
+	SeleccionaMaterial(0);
 }
 
 void dibujaCono(float radio, int lados, float altura, int modoRender)
 {
+	
+	CVector N, vec1, vec2;
 	float ang;
 	float a[3], b[3], c[3];
 	float delta;
 
 	delta = 360.0f / lados;
-
+	SeleccionaMaterial(1);
 	for (int i = 0; i < lados; i++)  //Por la forma de renderizar de openGL se usa for
 	{
 		ang = i*delta;
@@ -1142,28 +1155,29 @@ void dibujaCono(float radio, int lados, float altura, int modoRender)
 		c[1] = altura;
 		c[2] = 0.0f;
 
-		if (lados == 4)
-			(i == 1 || i == 3) ? glColor3f(0.5f, 0.5f, 0.5f) : glColor3f(0.7f, 0.7f, 0.7f);
+		// Vectores para calcular la normal para iluminación
+		vec1 = CVector(a[0], a[1], a[2]) - CVector(b[0], b[1], b[2]);
+		vec2 = CVector(c[0], c[1], c[2]) - CVector(b[0], b[1], b[2]);
+		N = Normaliza(Cruz(vec1, vec2));
 
 		if (modoRender == 1) glBegin(GL_TRIANGLES);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+		glNormal3f(N.x, N.y, N.z);
 		glVertex3f(a[0], a[1], a[2]);
 		glVertex3f(c[0], c[1], c[2]);
 		glVertex3f(b[0], b[1], b[2]);
 		glEnd();
 
 		//Tapa inferior
-		glColor3f(0.0f, 0.0f, 0.0f);
-
 		if (modoRender == 1) glBegin(GL_TRIANGLES);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
+		glNormal3f(0.0f, -1, 0.0f);
 		glVertex3f(a[0], a[1], a[2]);
-		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(b[0], b[1], b[2]);
+		glVertex3f(0.0f, 0.0f, 0.0f);
 		glEnd();
-
-		glColor3f(1.0f, 1.0f, 1.0f);
 	}
+	SeleccionaMaterial(0);
 }
 
 void dibujaFuego(float escala)
@@ -1192,41 +1206,41 @@ void dibujaTrampa1(float posY)
 {
 	// Cilindro delgado
 	glPushMatrix();
-	glTranslatef(0.0f, posY, 0.0f);
-	glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
-	dibujaCilindro(1.75f, 12, 30.0f, 1);
+		glTranslatef(0.0f, posY, 0.0f);
+		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
+		dibujaCilindro(1.75f, 12, 30.0f, 1);
 	glPopMatrix();
 
 	//Cilindro fijo
 	glPushMatrix();
-	glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
-	dibujaCilindro(2.5f, 12, 6.0f, 1);
+		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
+		dibujaCilindro(2.5f, 12, 6.0f, 1);
 	glPopMatrix();
 
 	//Cilindro ancho
 	glPushMatrix();
-	glTranslatef(0.0f, posY - 2.0f, 0.0f);
-	glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
-	dibujaCilindro(3.5f, 12, 2.0f, 1);
+		glTranslatef(0.0f, posY - 2.0f, 0.0f);
+		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
+		dibujaCilindro(3.5f, 12, 2.0f, 1);
 	glPopMatrix();
-
+	 
 	//Picos de las trampas de techo
 	glPushMatrix();
-	glTranslatef(0.0f, posY - 2.0f, -2.0f);
-	glRotatef(180.0f, 0.0f, 0.0f, 0.0f);
-	dibujaCono(1.0f, 4, 3.0f, 1);
+		glTranslatef(0.0f, posY - 2.0f, -2.0f);
+		glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
+		dibujaCono(1.0f, 15, 3.0f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(1.75f, posY - 2.0f, 1.0f);
-	glRotatef(180.0f, 0.0f, 0.0f, 0.0f);
-	dibujaCono(1.0f, 4, 3.0f, 1);
+		glTranslatef(1.75f, posY - 2.0f, 1.0f);
+		glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
+		dibujaCono(1.0f, 15, 3.0f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-2.0f, posY - 2.0f, 1.0f);
-	glRotatef(180.0f, 0.0f, 0.0f, 0.0f);
-	dibujaCono(1.0f, 4, 3.0f, 1);
+		glTranslatef(-2.0f, posY - 2.0f, 1.0f);
+		glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
+		dibujaCono(1.0f, 15, 3.0f, 1);
 	glPopMatrix();
 }
 
@@ -1292,26 +1306,27 @@ void dibujaTrampa2()
 		glVertex3f(1.0f, 60.0f, -10.0f);
 	glEnd();
 
+	glEnable(GL_NORMALIZE);
 	// FILA DE PICOS 1
 	glPushMatrix();
 		glTranslatef(-1.0f, 55.0f, -6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 55.0f, 0.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 55.0f, 6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	// FILA DE PICOS 2
@@ -1319,21 +1334,21 @@ void dibujaTrampa2()
 		glTranslatef(-1.0f, 48.0f, -6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 48.0f, 0.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 48.0f, 6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	// FILA DE PICOS 3
@@ -1341,21 +1356,21 @@ void dibujaTrampa2()
 		glTranslatef(-1.0f, 41.0f, -6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 41.0f, 0.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 41.0f, 6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	// FILA DE PICOS 4
@@ -1363,22 +1378,23 @@ void dibujaTrampa2()
 		glTranslatef(-1.0f, 34.0f, -6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 34.0f, 0.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-1.0f, 34.0f, 6.0f);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
 		glScalef(2.25f, 2.25f, 2.25f);
-		dibujaCono(1.0f, 4, 2.5f, 1);
+		dibujaCono(1.0f, 15, 2.5f, 1);
 	glPopMatrix();
+	glDisable(GL_NORMALIZE);
 }
 
 void dibujaEscenario(int render)
@@ -3731,40 +3747,40 @@ void dibujaEscenario(int render)
 	// Trampas de techo (CILINDROS)
 	//GRUPO 1 (3 trampas)
 	glPushMatrix();
-	glTranslated(150.0f, 76.0f, 12.5f);
-	dibujaTrampa1(posGrupoTrampas1[0]);
+		glTranslated(150.0f, 76.0f, 12.5f);
+		dibujaTrampa1(posGrupoTrampas1[0]);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(170.0f, 76.0f, 12.5f);
-	dibujaTrampa1(posGrupoTrampas1[1]);
+		glTranslated(170.0f, 76.0f, 12.5f);
+		dibujaTrampa1(posGrupoTrampas1[1]);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(190.0f, 76.0f, 12.5f);
-	dibujaTrampa1(posGrupoTrampas1[2]);
+		glTranslated(190.0f, 76.0f, 12.5f);
+		dibujaTrampa1(posGrupoTrampas1[2]);
 	glPopMatrix();
 
 	//GRUPO 2 (2 trampas)
 	glPushMatrix();
-	glTranslated(295.0f, 76.0f, 12.5f);
-	dibujaTrampa1(posGrupoTrampas2[0]);
+		glTranslated(295.0f, 76.0f, 12.5f);
+		dibujaTrampa1(posGrupoTrampas2[0]);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(315.0f, 76.0f, 12.5f);
-	dibujaTrampa1(posGrupoTrampas2[1]);
+		glTranslated(315.0f, 76.0f, 12.5f);
+		dibujaTrampa1(posGrupoTrampas2[1]);
 	glPopMatrix();
 
 	//GRUPO 3 (3 trampas)
 	glPushMatrix();
-	glTranslated(620.0f, 76.0f, 12.5f);
-	dibujaTrampa1(posGrupoTrampas3[0]);
+		glTranslated(620.0f, 76.0f, 12.5f);
+		dibujaTrampa1(posGrupoTrampas3[0]);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(650.0f, 76.0f, 12.5f);
-	dibujaTrampa1(posGrupoTrampas3[1]);
+		glTranslated(650.0f, 76.0f, 12.5f);
+		dibujaTrampa1(posGrupoTrampas3[1]);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -4149,7 +4165,7 @@ void animacion(jerarquiaModelo *varsMod, FRAME *KeyFrame, int maxKF, int frames,
 
 int RenderizaEscena(GLvoid)								// Aqui se dibuja todo lo que aparecera en la ventana
 {
-
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
@@ -4157,7 +4173,7 @@ int RenderizaEscena(GLvoid)								// Aqui se dibuja todo lo que aparecera en la
 	gluLookAt(PosCam.x, PosCam.y, PosCam.z, ObjCam.x, ObjCam.y, ObjCam.z, 0, 1, 0);
 
 	DibujaEjes();
-	dibujaEscenario(renderModo);
+	dibujaEscenario(renderModo);	
 
 	if (player1.visible)
 	{
@@ -4572,7 +4588,7 @@ int WINAPI WinMain(HINSTANCE	hInstance,			// Instancia
 						if (varsAnimP1.tipoAnim == 1) //caminar
 							animacion(&player1modelo, KeyFrame1p1, maxKF1, 15, &varsAnimP1);
 						else if (varsAnimP1.tipoAnim == 2) //salto
-							animacion(&player1modelo, KeyFrame2p1, maxKF2, 5, &varsAnimP1);
+							animacion(&player1modelo, KeyFrame2p1, maxKF2, 15, &varsAnimP1);
 						/*else if(varsAnimP1.tipoAnim == 3) //caminar disparando
 						animacion(&player1modelo, KeyFrame3p1, maxKF3 , 15, &varsAnimP1);*/
 					}
