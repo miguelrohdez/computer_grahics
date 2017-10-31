@@ -1234,144 +1234,150 @@ void dibujaTrampa2()
 {
 	//1
 	glBegin(GL_QUADS);
-	glColor3f(0.3f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 0.0f, 10.0f);
-	glVertex3f(1.0f, 0.0f, 10.0f);
-	glVertex3f(1.0f, 60.0f, 10.0f);
-	glVertex3f(-1.0f, 60.0f, 10.0f);
+		glColor3f(0.3f, 0.0f, 0.0f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(-1.0f, 0.0f, 10.0f);
+		glVertex3f(1.0f, 0.0f, 10.0f);
+		glVertex3f(1.0f, 60.0f, 10.0f);
+		glVertex3f(-1.0f, 60.0f, 10.0f);
 	glEnd();
 
 	//2
 	glBegin(GL_QUADS);
-	glColor3f(0.1f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 10.0f);
-	glVertex3f(-1.0f, 0.0f, 10.0f);
-	glVertex3f(-1.0f, 0.0f, -10.0f);
-	glVertex3f(1.0f, 0.0f, -10.0f);
+		glColor3f(0.1f, 0.0f, 0.0f);
+		glNormal3f(0.0f, -1.0f, 0.0f);
+		glVertex3f(1.0f, 0.0f, 10.0f);
+		glVertex3f(-1.0f, 0.0f, 10.0f);
+		glVertex3f(-1.0f, 0.0f, -10.0f);
+		glVertex3f(1.0f, 0.0f, -10.0f);
 	glEnd();
 
 	//3
 	glBegin(GL_QUADS);
-	glColor3f(0.4f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 60.0f, 10.0f);
-	glVertex3f(1.0f, 60.0f, 10.0f);
-	glVertex3f(1.0f, 60.0f, -10.0f);
-	glVertex3f(-1.0f, 60.0f, -10.0f);
+		glColor3f(0.4f, 0.0f, 0.0f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(-1.0f, 60.0f, 10.0f);
+		glVertex3f(1.0f, 60.0f, 10.0f);
+		glVertex3f(1.0f, 60.0f, -10.0f);
+		glVertex3f(-1.0f, 60.0f, -10.0f);
 	glEnd();
 
 	//4
 	glBegin(GL_QUADS);
-	glColor3f(0.2f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 10.0f);
-	glVertex3f(1.0f, 0.0f, -10.0f);
-	glVertex3f(1.0f, 60.0f, -10.0f);
-	glVertex3f(1.0f, 60.0f, 10.0f);
+		glColor3f(0.2f, 0.0f, 0.0f);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(1.0f, 0.0f, 10.0f);
+		glVertex3f(1.0f, 0.0f, -10.0f);
+		glVertex3f(1.0f, 60.0f, -10.0f);
+		glVertex3f(1.0f, 60.0f, 10.0f);
 	glEnd();
 
 	//5
 	glBegin(GL_QUADS);
-	glColor3f(0.2f, 0.0f, 0.0f);
-	glVertex3f(-1.0f, 0.0f, -10.0f);
-	glVertex3f(-1.0f, 0.0f, 10.0f);
-	glVertex3f(-1.0f, 60.0f, 10.0f);
-	glVertex3f(-1.0f, 60.0f, -10.0f);
+		glColor3f(0.2f, 0.0f, 0.0f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(-1.0f, 0.0f, -10.0f);
+		glVertex3f(-1.0f, 0.0f, 10.0f);
+		glVertex3f(-1.0f, 60.0f, 10.0f);
+		glVertex3f(-1.0f, 60.0f, -10.0f);
 	glEnd();
 
 	//6
 	glBegin(GL_QUADS);
-	glColor3f(0.3f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, -10.0f);
-	glVertex3f(-1.0f, 0.0f, -10.0f);
-	glVertex3f(-1.0f, 60.0f, -10.0f);
-	glVertex3f(1.0f, 60.0f, -10.0f);
+		glColor3f(0.3f, 0.0f, 0.0f);
+		glNormal3f(0.0f, 0.0f, -1.0f);
+		glVertex3f(1.0f, 0.0f, -10.0f);
+		glVertex3f(-1.0f, 0.0f, -10.0f);
+		glVertex3f(-1.0f, 60.0f, -10.0f);
+		glVertex3f(1.0f, 60.0f, -10.0f);
 	glEnd();
 
 	// FILA DE PICOS 1
 	glPushMatrix();
-	glTranslatef(-1.0f, 55.0f, -6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 55.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 55.0f, 0.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 55.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 55.0f, 6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 55.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	// FILA DE PICOS 2
 	glPushMatrix();
-	glTranslatef(-1.0f, 48.0f, -6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 48.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 48.0f, 0.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 48.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 48.0f, 6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 48.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	// FILA DE PICOS 3
 	glPushMatrix();
-	glTranslatef(-1.0f, 41.0f, -6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 41.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 41.0f, 0.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 41.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 41.0f, 6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 41.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	// FILA DE PICOS 4
 	glPushMatrix();
-	glTranslatef(-1.0f, 34.0f, -6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 34.0f, -6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 34.0f, 0.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 34.0f, 0.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.0f, 34.0f, 6.0f);
-	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
-	glScalef(2.25f, 2.25f, 2.25f);
-	dibujaCono(1.0f, 4, 2.5f, 1);
+		glTranslatef(-1.0f, 34.0f, 6.0f);
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);  // ángulo, x, y, z (del eje a girar) 
+		glScalef(2.25f, 2.25f, 2.25f);
+		dibujaCono(1.0f, 4, 2.5f, 1);
 	glPopMatrix();
 }
 
@@ -2877,123 +2883,136 @@ void dibujaEscenario(int render)
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.8f, 0.0f, 0.0f);
-	glVertex3f(1275.0f, 22.0f, 21.0f);
-	glVertex3f(1325.0f, 22.0f, 21.0f);
-	glVertex3f(1325.0f, 30.0f, 21.0f);
-	glVertex3f(1275.0f, 30.0f, 21.0f);
+		glColor3f(0.8f, 0.0f, 0.0f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1275.0f, 22.0f, 21.0f);
+		glVertex3f(1325.0f, 22.0f, 21.0f);
+		glVertex3f(1325.0f, 30.0f, 21.0f);
+		glVertex3f(1275.0f, 30.0f, 21.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
-	glColor3f(0.8f, 0.0f, 0.0f);
-	glVertex3f(1325.0f, 22.0f, 21.0f);
-	glVertex3f(1325.0f, 22.0f, 4.0f);
-	glVertex3f(1325.0f, 30.0f, 4.0f);
-	glVertex3f(1325.0f, 30.0f, 21.0f);
+		glColor3f(0.8f, 0.0f, 0.0f);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(1325.0f, 22.0f, 21.0f);
+		glVertex3f(1325.0f, 22.0f, 4.0f);
+		glVertex3f(1325.0f, 30.0f, 4.0f);
+		glVertex3f(1325.0f, 30.0f, 21.0f);
 	glEnd();
 
 	//Plano 3
 	glBegin(GL_QUADS);
-	glColor3f(0.4f, 0.0f, 0.0f);
-	glVertex3f(1275.0f, 22.0f, 21.0f);
-	glVertex3f(1275.0f, 30.0f, 21.0f);
-	glVertex3f(1275.0f, 30.0f, 4.0f);
-	glVertex3f(1275.0f, 22.0f, 4.0f);
+		glColor3f(0.4f, 0.0f, 0.0f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(1275.0f, 22.0f, 21.0f);
+		glVertex3f(1275.0f, 30.0f, 21.0f);
+		glVertex3f(1275.0f, 30.0f, 4.0f);
+		glVertex3f(1275.0f, 22.0f, 4.0f);
 	glEnd();
 
 	//Plano 4
 	glBegin(GL_QUADS);
-	glColor3f(0.8f, 0.0f, 0.0f);
-	glVertex3f(1275.0f, 30.0f, 21.0f);
-	glVertex3f(1325.0f, 30.0f, 21.0f);
-	glVertex3f(1325.0f, 30.0f, 4.0f);
-	glVertex3f(1275.0f, 30.0f, 4.0f);
+		glColor3f(0.8f, 0.0f, 0.0f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1275.0f, 30.0f, 21.0f);
+		glVertex3f(1325.0f, 30.0f, 21.0f);
+		glVertex3f(1325.0f, 30.0f, 4.0f);
+		glVertex3f(1275.0f, 30.0f, 4.0f);
 	glEnd();
 
 	//Plano 5
 	glBegin(GL_QUADS);
-	glColor3f(0.8f, 0.0f, 0.0f);
-	glVertex3f(1275.0f, 22.0f, 21.0f);
-	glVertex3f(1275.0f, 22.0f, 4.0f);
-	glVertex3f(1325.0f, 22.0f, 4.0f);
-	glVertex3f(1325.0f, 22.0f, 21.0f);
+		glColor3f(0.8f, 0.0f, 0.0f);
+		glNormal3f(0.0f, -1.0f, 0.0f);
+		glVertex3f(1275.0f, 22.0f, 21.0f);
+		glVertex3f(1275.0f, 22.0f, 4.0f);
+		glVertex3f(1325.0f, 22.0f, 4.0f);
+		glVertex3f(1325.0f, 22.0f, 21.0f);
 	glEnd();
 
 	//OBJETO 47 (5 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.67f, 0.99f, 0.45f);
-	glVertex3f(1345.0f, 34.0f, 21.0f);
-	glVertex3f(1390.0f, 34.0f, 21.0f);
-	glVertex3f(1390.0f, 42.0f, 21.0f);
-	glVertex3f(1345.0f, 42.0f, 21.0f);
+		glColor3f(0.67f, 0.99f, 0.45f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1345.0f, 34.0f, 21.0f);
+		glVertex3f(1390.0f, 34.0f, 21.0f);
+		glVertex3f(1390.0f, 42.0f, 21.0f);
+		glVertex3f(1345.0f, 42.0f, 21.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
-	glColor3f(0.67f, 0.99f, 0.45f);
-	glVertex3f(1390.0f, 34.0f, 21.0f);
-	glVertex3f(1390.0f, 34.0f, 4.0f);
-	glVertex3f(1390.0f, 42.0f, 4.0f);
-	glVertex3f(1390.0f, 42.0f, 21.0f);
+		glColor3f(0.67f, 0.99f, 0.45f);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(1390.0f, 34.0f, 21.0f);
+		glVertex3f(1390.0f, 34.0f, 4.0f);
+		glVertex3f(1390.0f, 42.0f, 4.0f);
+		glVertex3f(1390.0f, 42.0f, 21.0f);
 	glEnd();
 
 	//Plano 3
 	glBegin(GL_QUADS);
-	glColor3f(0.34f, 0.47f, 0.27f);
-	glVertex3f(1345.0f, 34.0f, 21.0f);
-	glVertex3f(1345.0f, 42.0f, 21.0f);
-	glVertex3f(1345.0f, 42.0f, 4.0f);
-	glVertex3f(1345.0f, 34.0f, 4.0f);
+		glColor3f(0.34f, 0.47f, 0.27f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(1345.0f, 34.0f, 21.0f);
+		glVertex3f(1345.0f, 42.0f, 21.0f);
+		glVertex3f(1345.0f, 42.0f, 4.0f);
+		glVertex3f(1345.0f, 34.0f, 4.0f);
 	glEnd();
 
 	//Plano 4
 	glBegin(GL_QUADS);
-	glColor3f(0.67f, 0.99f, 0.45f);
-	glVertex3f(1345.0f, 42.0f, 21.0f);
-	glVertex3f(1390.0f, 42.0f, 21.0f);
-	glVertex3f(1390.0f, 42.0f, 4.0f);
-	glVertex3f(1345.0f, 42.0f, 4.0f);
+		glColor3f(0.67f, 0.99f, 0.45f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1345.0f, 42.0f, 21.0f);
+		glVertex3f(1390.0f, 42.0f, 21.0f);
+		glVertex3f(1390.0f, 42.0f, 4.0f);
+		glVertex3f(1345.0f, 42.0f, 4.0f);
 	glEnd();
 
 	//Plano 5
 	glBegin(GL_QUADS);
-	glColor3f(0.67f, 0.99f, 0.45f);
-	glVertex3f(1345.0f, 34.0f, 21.0f);
-	glVertex3f(1345.0f, 34.0f, 4.0f);
-	glVertex3f(1390.0f, 34.0f, 4.0f);
-	glVertex3f(1390.0f, 34.0f, 21.0f);
+		glColor3f(0.67f, 0.99f, 0.45f);
+		glNormal3f(0.0f, -1.0f, 0.0f);
+		glVertex3f(1345.0f, 34.0f, 21.0f);
+		glVertex3f(1345.0f, 34.0f, 4.0f);
+		glVertex3f(1390.0f, 34.0f, 4.0f);
+		glVertex3f(1390.0f, 34.0f, 21.0f);
 	glEnd();
 
 	//OBJETO 48 (3 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.45f, 0.99f, 0.67f);
-	glVertex3f(1405.0f, 0.0f, 25.0f);
-	glVertex3f(1650.0f, 0.0f, 25.0f);
-	glVertex3f(1650.0f, 10.0f, 25.0f);
-	glVertex3f(1405.0f, 10.0f, 25.0f);
+		glColor3f(0.45f, 0.99f, 0.67f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1405.0f, 0.0f, 25.0f);
+		glVertex3f(1650.0f, 0.0f, 25.0f);
+		glVertex3f(1650.0f, 10.0f, 25.0f);
+		glVertex3f(1405.0f, 10.0f, 25.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
-	glColor3f(0.45f, 0.99f, 0.67f);
-	glVertex3f(1405.0f, 10.0f, 25.0f);
-	glVertex3f(1650.0f, 10.0f, 25.0f);
-	glVertex3f(1650.0f, 10.0f, 0.0f);
-	glVertex3f(1405.0f, 10.0f, 0.0f);
+		glColor3f(0.45f, 0.99f, 0.67f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1405.0f, 10.0f, 25.0f);
+		glVertex3f(1650.0f, 10.0f, 25.0f);
+		glVertex3f(1650.0f, 10.0f, 0.0f);
+		glVertex3f(1405.0f, 10.0f, 0.0f);
 	glEnd();
 
 	//Plano 3
 	glBegin(GL_QUADS);
-	glColor3f(0.24f, 0.47f, 0.43f);
-	glVertex3f(1405.0f, 0.0f, 25.0f);
-	glVertex3f(1405.0f, 10.0f, 25.0f);
-	glVertex3f(1405.0f, 10.0f, 0.0f);
-	glVertex3f(1405.0f, 0.0f, 0.0f);
+		glColor3f(0.24f, 0.47f, 0.43f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(1405.0f, 0.0f, 25.0f);
+		glVertex3f(1405.0f, 10.0f, 25.0f);
+		glVertex3f(1405.0f, 10.0f, 0.0f);
+		glVertex3f(1405.0f, 0.0f, 0.0f);
 	glEnd();
 
 
@@ -3001,214 +3020,236 @@ void dibujaEscenario(int render)
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.7f, 0.2f, 0.1f);
-	glVertex3f(1405.0f, 10.0f, 4.0f);
-	glVertex3f(1650.0f, 10.0f, 4.0f);
-	glVertex3f(1650.0f, 15.0f, 4.0f);
-	glVertex3f(1405.0f, 15.0f, 4.0f);
+		glColor3f(0.7f, 0.2f, 0.1f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1405.0f, 10.0f, 4.0f);
+		glVertex3f(1650.0f, 10.0f, 4.0f);
+		glVertex3f(1650.0f, 15.0f, 4.0f);
+		glVertex3f(1405.0f, 15.0f, 4.0f);
 	glEnd();
 
 	//OBJETO 50 (5 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 1.0f, 0.14f);
-	glVertex3f(1410.0f, 44.0f, 21.0f);
-	glVertex3f(1600.0f, 44.0f, 21.0f);
-	glVertex3f(1600.0f, 52.0f, 21.0f);
-	glVertex3f(1410.0f, 52.0f, 21.0f);
+		glColor3f(1.0f, 1.0f, 0.14f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1410.0f, 44.0f, 21.0f);
+		glVertex3f(1600.0f, 44.0f, 21.0f);
+		glVertex3f(1600.0f, 52.0f, 21.0f);
+		glVertex3f(1410.0f, 52.0f, 21.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 1.0f, 0.14f);
-	glVertex3f(1410.0f, 52.0f, 21.0f);
-	glVertex3f(1600.0f, 52.0f, 21.0f);
-	glVertex3f(1600.0f, 52.0f, 4.0f);
-	glVertex3f(1410.0f, 52.0f, 4.0f);
+		glColor3f(1.0f, 1.0f, 0.14f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1410.0f, 52.0f, 21.0f);
+		glVertex3f(1600.0f, 52.0f, 21.0f);
+		glVertex3f(1600.0f, 52.0f, 4.0f);
+		glVertex3f(1410.0f, 52.0f, 4.0f);
 	glEnd();
 
 	//Plano 3
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 1.0f, 0.14f);
-	glVertex3f(1600.0f, 44.0f, 21.0f);
-	glVertex3f(1410.0f, 44.0f, 21.0f);
-	glVertex3f(1410.0f, 44.0f, 4.0f);
-	glVertex3f(1600.0f, 44.0f, 4.0f);
+		glColor3f(1.0f, 1.0f, 0.14f);
+		glNormal3f(0.0f, -1.0f, 0.0f);
+		glVertex3f(1600.0f, 44.0f, 21.0f);
+		glVertex3f(1410.0f, 44.0f, 21.0f);
+		glVertex3f(1410.0f, 44.0f, 4.0f);
+		glVertex3f(1600.0f, 44.0f, 4.0f);
 	glEnd();
 
 	//Plano 4
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 1.0f, 0.14f);
-	glVertex3f(1600.0f, 44.0f, 21.0f);
-	glVertex3f(1600.0f, 44.0f, 4.0f);
-	glVertex3f(1600.0f, 52.0f, 4.0f);
-	glVertex3f(1600.0f, 52.0f, 21.0f);
+		glColor3f(1.0f, 1.0f, 0.14f);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(1600.0f, 44.0f, 21.0f);
+		glVertex3f(1600.0f, 44.0f, 4.0f);
+		glVertex3f(1600.0f, 52.0f, 4.0f);
+		glVertex3f(1600.0f, 52.0f, 21.0f);
 	glEnd();
 
 	//Plano 5
 	glBegin(GL_QUADS);
-	glColor3f(0.51f, 0.51f, 0.13f);
-	glVertex3f(1410.0f, 44.0f, 4.0f);
-	glVertex3f(1410.0f, 44.0f, 21.0f);
-	glVertex3f(1410.0f, 52.0f, 21.0f);
-	glVertex3f(1410.0f, 52.0f, 4.0f);
+		glColor3f(0.51f, 0.51f, 0.13f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(1410.0f, 44.0f, 4.0f);
+		glVertex3f(1410.0f, 44.0f, 21.0f);
+		glVertex3f(1410.0f, 52.0f, 21.0f);
+		glVertex3f(1410.0f, 52.0f, 4.0f);
 	glEnd();
 
 	//OBJETO 51 (4 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.99f, 0.45f);
-	glVertex3f(1650.0f, 0.0f, 25.0f);
-	glVertex3f(1705.0f, 0.0f, 25.0f);
-	glVertex3f(1705.0f, 25.0f, 25.0f);
-	glVertex3f(1650.0f, 25.0f, 25.0f);
+		glColor3f(1.0f, 0.99f, 0.45f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1650.0f, 0.0f, 25.0f);
+		glVertex3f(1705.0f, 0.0f, 25.0f);
+		glVertex3f(1705.0f, 25.0f, 25.0f);
+		glVertex3f(1650.0f, 25.0f, 25.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.99f, 0.45f);
-	glVertex3f(1650.0f, 25.0f, 25.0f);
-	glVertex3f(1705.0f, 25.0f, 25.0f);
-	glVertex3f(1705.0f, 25.0f, 0.0f);
-	glVertex3f(1650.0f, 25.0f, 0.0f);
+		glColor3f(1.0f, 0.99f, 0.45f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1650.0f, 25.0f, 25.0f);
+		glVertex3f(1705.0f, 25.0f, 25.0f);
+		glVertex3f(1705.0f, 25.0f, 0.0f);
+		glVertex3f(1650.0f, 25.0f, 0.0f);
 	glEnd();
 
 	//Plano 3
 	glBegin(GL_QUADS);
-	glColor3f(0.42f, 0.46f, 0.25f);
-	glVertex3f(1650.0f, 0.0f, 25.0f);
-	glVertex3f(1650.0f, 25.0f, 25.0f);
-	glVertex3f(1650.0f, 25.0f, 0.0f);
-	glVertex3f(1650.0f, 0.0f, 0.0f);
+		glColor3f(0.42f, 0.46f, 0.25f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(1650.0f, 0.0f, 25.0f);
+		glVertex3f(1650.0f, 25.0f, 25.0f);
+		glVertex3f(1650.0f, 25.0f, 0.0f);
+		glVertex3f(1650.0f, 0.0f, 0.0f);
 	glEnd();
 
 	//Plano 4
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.99f, 0.45f);
-	glVertex3f(1705.0f, 0.0f, 25.0f);
-	glVertex3f(1705.0f, 0.0f, 0.0f);
-	glVertex3f(1705.0f, 25.0f, 0.0f);
-	glVertex3f(1705.0f, 25.0f, 25.0f);
+		glColor3f(1.0f, 0.99f, 0.45f);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(1705.0f, 0.0f, 25.0f);
+		glVertex3f(1705.0f, 0.0f, 0.0f);
+		glVertex3f(1705.0f, 25.0f, 0.0f);
+		glVertex3f(1705.0f, 25.0f, 25.0f);
 	glEnd();
 
 	//OBJETO 52 (1 planos) /////////////// NOGGGG
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.7f, 0.2f, 0.1f);
-	glVertex3f(1650.0f, 25.0f, 4.0f);
-	glVertex3f(1705.0f, 25.0f, 4.0f);
-	glVertex3f(1705.0f, 30.0f, 4.0f);
-	glVertex3f(1650.0f, 30.0f, 4.0f);
+		glColor3f(0.7f, 0.2f, 0.1f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1650.0f, 25.0f, 4.0f);
+		glVertex3f(1705.0f, 25.0f, 4.0f);
+		glVertex3f(1705.0f, 30.0f, 4.0f);
+		glVertex3f(1650.0f, 30.0f, 4.0f);
 	glEnd();
 
 	//OBJETO 53 (4 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.71f, 1.0f, 0.83f);
-	glVertex3f(1705.0f, 0.0f, 25.0f);
-	glVertex3f(1815.0f, 0.0f, 25.0f);
-	glVertex3f(1815.0f, 40.0f, 25.0f);
-	glVertex3f(1705.0f, 40.0f, 25.0f);
+		glColor3f(0.71f, 1.0f, 0.83f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1705.0f, 0.0f, 25.0f);
+		glVertex3f(1815.0f, 0.0f, 25.0f);
+		glVertex3f(1815.0f, 40.0f, 25.0f);
+		glVertex3f(1705.0f, 40.0f, 25.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
-	glColor3f(0.71f, 1.0f, 0.83f);
-	glVertex3f(1705.0f, 40.0f, 25.0f);
-	glVertex3f(1815.0f, 40.0f, 25.0f);
-	glVertex3f(1815.0f, 40.0f, 0.0f);
-	glVertex3f(1705.0f, 40.0f, 0.0f);
+		glColor3f(0.71f, 1.0f, 0.83f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1705.0f, 40.0f, 25.0f);
+		glVertex3f(1815.0f, 40.0f, 25.0f);
+		glVertex3f(1815.0f, 40.0f, 0.0f);
+		glVertex3f(1705.0f, 40.0f, 0.0f);
 	glEnd();
 
 	//Plano 3
 	glBegin(GL_QUADS);
-	glColor3f(0.35f, 0.47f, 0.40f);
-	glVertex3f(1705.0f, 0.0f, 25.0f);
-	glVertex3f(1705.0f, 40.0f, 25.0f);
-	glVertex3f(1705.0f, 40.0f, 0.0f);
-	glVertex3f(1705.0f, 0.0f, 0.0f);
+		glColor3f(0.35f, 0.47f, 0.40f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(1705.0f, 0.0f, 25.0f);
+		glVertex3f(1705.0f, 40.0f, 25.0f);
+		glVertex3f(1705.0f, 40.0f, 0.0f);
+		glVertex3f(1705.0f, 0.0f, 0.0f);
 	glEnd();
 
 	//Plano 4
 	glBegin(GL_QUADS);
-	glColor3f(0.71f, 1.0f, 0.83f);
-	glVertex3f(1815.0f, 0.0f, 25.0f);
-	glVertex3f(1815.0f, 0.0f, 0.0f);
-	glVertex3f(1815.0f, 40.0f, 0.0f);
-	glVertex3f(1815.0f, 40.0f, 25.0f);
+		glColor3f(0.71f, 1.0f, 0.83f);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(1815.0f, 0.0f, 25.0f);
+		glVertex3f(1815.0f, 0.0f, 0.0f);
+		glVertex3f(1815.0f, 40.0f, 0.0f);
+		glVertex3f(1815.0f, 40.0f, 25.0f);
 	glEnd();
 
 	//OBJETO 54 (1 planos) /////////////// NOGGG
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.7f, 0.2f, 0.1f);
-	glVertex3f(1705.0f, 40.0f, 4.0f);
-	glVertex3f(1815.0f, 40.0f, 4.0f);
-	glVertex3f(1815.0f, 45.0f, 4.0f);
-	glVertex3f(1705.0f, 45.0f, 4.0f);
+		glColor3f(0.7f, 0.2f, 0.1f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1705.0f, 40.0f, 4.0f);
+		glVertex3f(1815.0f, 40.0f, 4.0f);
+		glVertex3f(1815.0f, 45.0f, 4.0f);
+		glVertex3f(1705.0f, 45.0f, 4.0f);
 	glEnd();
 
 	//OBJETO 55 (1 planos) ///////////////  CAMBIO Z
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(1600.0f, 10.0f, 0.0f);
-	glVertex3f(2020.0f, 10.0f, 0.0f);
-	glVertex3f(2020.0f, 82.0f, 0.0f);
-	glVertex3f(1600.0f, 82.0f, 0.0f);
+		glColor3f(0.5f, 0.5f, 0.5f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1600.0f, 10.0f, 0.0f);
+		glVertex3f(2020.0f, 10.0f, 0.0f);
+		glVertex3f(2020.0f, 82.0f, 0.0f);
+		glVertex3f(1600.0f, 82.0f, 0.0f);
 	glEnd();
 
 	//OBJETO 56 (2 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.89f, 0.46f);
-	glVertex3f(1815.0f, 0.0f, 25.0f);
-	glVertex3f(2020.0f, 0.0f, 25.0f);
-	glVertex3f(2020.0f, 10.0f, 25.0f);
-	glVertex3f(1815.0f, 10.0f, 25.0f);
+		glColor3f(1.0f, 0.89f, 0.46f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1815.0f, 0.0f, 25.0f);
+		glVertex3f(2020.0f, 0.0f, 25.0f);
+		glVertex3f(2020.0f, 10.0f, 25.0f);
+		glVertex3f(1815.0f, 10.0f, 25.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.89f, 0.46f);
-	glVertex3f(1815.0f, 10.0f, 25.0f);
-	glVertex3f(2020.0f, 10.0f, 25.0f);
-	glVertex3f(2020.0f, 10.0f, 0.0f);
-	glVertex3f(1815.0f, 10.0f, 0.0f);
+		glColor3f(1.0f, 0.89f, 0.46f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1815.0f, 10.0f, 25.0f);
+		glVertex3f(2020.0f, 10.0f, 25.0f);
+		glVertex3f(2020.0f, 10.0f, 0.0f);
+		glVertex3f(1815.0f, 10.0f, 0.0f);
 	glEnd();
 
 	//OBJETO 57 (5 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.7f, 0.2f, 0.1f);
-	glVertex3f(1815.0f, 10.0f, 4.0f);
-	glVertex3f(2020.0f, 10.0f, 4.0f);
-	glVertex3f(2020.0f, 15.0f, 4.0f);
-	glVertex3f(1815.0f, 15.0f, 4.0f);
+		glColor3f(0.7f, 0.2f, 0.1f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1815.0f, 10.0f, 4.0f);
+		glVertex3f(2020.0f, 10.0f, 4.0f);
+		glVertex3f(2020.0f, 15.0f, 4.0f);
+		glVertex3f(1815.0f, 15.0f, 4.0f);
 	glEnd();
 
 	//OBJETO 58 (3 planos) ///////////////
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.6f, 0.1f, 0.0f);
-	glVertex3f(1870.0f, 10.0f, 7.0f);
-	glVertex3f(1873.0f, 10.0f, 7.0f);
-	glVertex3f(1873.0f, 140.0f, 7.0f);
-	glVertex3f(1870.0f, 140.0f, 7.0f);
+		glColor3f(0.6f, 0.1f, 0.0f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(1870.0f, 10.0f, 7.0f);
+		glVertex3f(1873.0f, 10.0f, 7.0f);
+		glVertex3f(1873.0f, 140.0f, 7.0f);
+		glVertex3f(1870.0f, 140.0f, 7.0f);
 	glEnd();
 
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.0f, 0.0f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(1873.0f, 10.0f, 7.0f);
 	glVertex3f(1873.0f, 10.0f, 0.0f);
 	glVertex3f(1873.0f, 140.0f, 0.0f);
@@ -3218,6 +3259,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.0f, 0.0f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(1870.0f, 10.0f, 7.0f);
 	glVertex3f(1870.0f, 140.0f, 7.0f);
 	glVertex3f(1870.0f, 140.0f, 0.0f);
@@ -3229,6 +3271,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.6f, 0.3f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1870.0f, 40.0f, 25.0f);
 	glVertex3f(1873.0f, 40.0f, 25.0f);
 	glVertex3f(1873.0f, 140.0f, 25.0f);
@@ -3238,6 +3281,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.7f, 0.5f, 0.2f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(1873.0f, 40.0f, 25.0f);
 	glVertex3f(1873.0f, 40.0f, 7.0f);
 	glVertex3f(1873.0f, 140.0f, 7.0f);
@@ -3247,6 +3291,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.6f, 0.4f, 0.1f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(1870.0f, 40.0f, 25.0f);
 	glVertex3f(1870.0f, 140.0f, 25.0f);
 	glVertex3f(1870.0f, 140.0f, 7.0f);
@@ -3256,6 +3301,7 @@ void dibujaEscenario(int render)
 	//Plano 4
 	glBegin(GL_QUADS);
 	glColor3f(0.6f, 0.4f, 0.1f);
+	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(1870.0f, 40.0f, 25.0f);
 	glVertex3f(1870.0f, 40.0f, 7.0f);
 	glVertex3f(1873.0f, 40.0f, 7.0f);
@@ -3267,6 +3313,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.20f, 0.35f, 0.55f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1897.0f, 10.0f, 7.0f);
 	glVertex3f(1900.0f, 10.0f, 7.0f);
 	glVertex3f(1900.0f, 140.0f, 7.0f);
@@ -3276,6 +3323,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.13f, 0.21f, 0.34f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(1897.0f, 10.0f, 0.0f);
 	glVertex3f(1897.0f, 10.0f, 7.0f);
 	glVertex3f(1897.0f, 140.0f, 7.0f);
@@ -3285,6 +3333,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.20f, 0.35f, 0.55f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(1900.0f, 10.0f, 7.0f);
 	glVertex3f(1900.0f, 10.0f, 0.0f);
 	glVertex3f(1900.0f, 140.0f, 0.0f);
@@ -3296,6 +3345,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.57f, 0.96f, 0.88f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1897.0f, 40.0f, 25.0f);
 	glVertex3f(1900.0f, 40.0f, 25.0f);
 	glVertex3f(1900.0f, 140.0f, 25.0f);
@@ -3305,6 +3355,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.25f, 0.46f, 0.42f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(1897.0f, 40.0f, 25.0f);
 	glVertex3f(1897.0f, 140.0f, 25.0f);
 	glVertex3f(1897.0f, 140.0f, 7.0f);
@@ -3314,6 +3365,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.57f, 0.96f, 0.88f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(1900.0f, 40.0f, 25.0f);
 	glVertex3f(1900.0f, 40.0f, 7.0f);
 	glVertex3f(1900.0f, 140.0f, 7.0f);
@@ -3323,6 +3375,7 @@ void dibujaEscenario(int render)
 	//Plano 4
 	glBegin(GL_QUADS);
 	glColor3f(0.57f, 0.96f, 0.88f);
+	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(1897.0f, 40.0f, 25.0f);
 	glVertex3f(1897.0f, 40.0f, 7.0f);
 	glVertex3f(1900.0f, 40.0f, 7.0f);
@@ -3334,6 +3387,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.95f, 0.72f, 1.00f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1930.0f, 30.0f, 25.0f);
 	glVertex3f(1945.0f, 30.0f, 25.0f);
 	glVertex3f(1945.0f, 140.0f, 25.0f);
@@ -3343,6 +3397,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.95f, 0.72f, 1.00f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(1945.0f, 30.0f, 25.0f);
 	glVertex3f(1945.0f, 30.0f, 7.0f);
 	glVertex3f(1945.0f, 140.0f, 7.0f);
@@ -3352,6 +3407,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.45f, 0.36f, 0.47f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(1930.0f, 30.0f, 25.0f);
 	glVertex3f(1930.0f, 140.0f, 25.0f);
 	glVertex3f(1930.0f, 140.0f, 7.0f);
@@ -3361,6 +3417,7 @@ void dibujaEscenario(int render)
 	//Plano 4
 	glBegin(GL_QUADS);
 	glColor3f(0.95f, 0.72f, 1.00f);
+	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(1930.0f, 30.0f, 25.0f);
 	glVertex3f(1930.0f, 30.0f, 7.0f);
 	glVertex3f(1945.0f, 30.0f, 7.0f);
@@ -3372,6 +3429,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.12f, 0.11f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1970.0f, 10.0f, 25.0f);
 	glVertex3f(1985.0f, 10.0f, 25.0f);
 	glVertex3f(1985.0f, 65.0f, 25.0f);
@@ -3381,6 +3439,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.12f, 0.11f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(1985.0f, 10.0f, 25.0f);
 	glVertex3f(1985.0f, 10.0f, 7.0f);
 	glVertex3f(1985.0f, 65.0f, 7.0f);
@@ -3390,6 +3449,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.51f, 0.12f, 0.12f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(1970.0f, 10.0f, 25.0f);
 	glVertex3f(1970.0f, 65.0f, 25.0f);
 	glVertex3f(1970.0f, 65.0f, 7.0f);
@@ -3399,6 +3459,7 @@ void dibujaEscenario(int render)
 	//Plano 4
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.12f, 0.11f);
+	glNormal3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(1970.0f, 65.0f, 25.0f);
 	glVertex3f(1985.0f, 65.0f, 25.0f);
 	glVertex3f(1985.0f, 65.0f, 7.0f);
@@ -3410,6 +3471,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.22f, 0.22f, 0.72f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1945.0f, 30.0f, 25.0f);
 	glVertex3f(1970.0f, 30.0f, 25.0f);
 	glVertex3f(1970.0f, 33.0f, 25.0f);
@@ -3419,6 +3481,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.22f, 0.22f, 0.72f);
+	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(1945.0f, 30.0f, 25.0f);
 	glVertex3f(1945.0f, 30.0f, 7.0f);
 	glVertex3f(1970.0f, 30.0f, 7.0f);
@@ -3428,6 +3491,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.22f, 0.22f, 0.72f);
+	glNormal3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(1945.0f, 33.0f, 25.0f);
 	glVertex3f(1970.0f, 33.0f, 25.0f);
 	glVertex3f(1970.0f, 33.0f, 7.0f);
@@ -3439,6 +3503,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.55f, 0.82f, 0.89f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1945.0f, 46.0f, 25.0f);
 	glVertex3f(1970.0f, 46.0f, 25.0f);
 	glVertex3f(1970.0f, 49.0f, 25.0f);
@@ -3448,6 +3513,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.55f, 0.82f, 0.89f);
+	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(1945.0f, 46.0f, 25.0f);
 	glVertex3f(1945.0f, 46.0f, 7.0f);
 	glVertex3f(1970.0f, 46.0f, 7.0f);
@@ -3457,6 +3523,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.55f, 0.82f, 0.89f);
+	glNormal3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(1945.0f, 49.0f, 25.0f);
 	glVertex3f(1970.0f, 49.0f, 25.0f);
 	glVertex3f(1970.0f, 49.0f, 7.0f);
@@ -3468,6 +3535,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.55f, 0.62f, 0.26f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1945.0f, 62.0f, 25.0f);
 	glVertex3f(1970.0f, 62.0f, 25.0f);
 	glVertex3f(1970.0f, 65.0f, 25.0f);
@@ -3477,6 +3545,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.55f, 0.62f, 0.26f);
+	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(1945.0f, 62.0f, 25.0f);
 	glVertex3f(1945.0f, 62.0f, 7.0f);
 	glVertex3f(1970.0f, 62.0f, 7.0f);
@@ -3486,6 +3555,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.55f, 0.62f, 0.26f);
+	glNormal3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(1945.0f, 65.0f, 25.0f);
 	glVertex3f(1970.0f, 65.0f, 25.0f);
 	glVertex3f(1970.0f, 65.0f, 7.0f);
@@ -3497,6 +3567,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.36f, 0.65f, 0.14f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(2020.0f, 0.0f, 25.0f);
 	glVertex3f(2060.0f, 0.0f, 25.0f);
 	glVertex3f(2060.0f, 25.0f, 25.0f);
@@ -3506,6 +3577,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.36f, 0.65f, 0.14f);
+	glNormal3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(2020.0f, 25.0f, 25.0f);
 	glVertex3f(2060.0f, 25.0f, 25.0f);
 	glVertex3f(2060.0f, 25.0f, 0.0f);
@@ -3515,6 +3587,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.13f, 0.24f, 0.16f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(2020.0f, 0.0f, 25.0f);
 	glVertex3f(2020.0f, 25.0f, 25.0f);
 	glVertex3f(2020.0f, 25.0f, 0.0f);
@@ -3524,6 +3597,7 @@ void dibujaEscenario(int render)
 	//Plano 4
 	glBegin(GL_QUADS);
 	glColor3f(0.36f, 0.65f, 0.14f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(2060.0f, 0.0f, 25.0f);
 	glVertex3f(2060.0f, 0.0f, 0.0f);
 	glVertex3f(2060.0f, 25.0f, 0.0f);
@@ -3535,6 +3609,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.7f, 0.2f, 0.1f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(2020.0f, 25.0f, 4.0f);
 	glVertex3f(2060.0f, 25.0f, 4.0f);
 	glVertex3f(2060.0f, 30.0f, 4.0f);
@@ -3546,6 +3621,7 @@ void dibujaEscenario(int render)
 	//Plano 1
 	glBegin(GL_QUADS);
 	glColor3f(0.14f, 0.42f, 0.22f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(2060.0f, 0.0f, 25.0f);
 	glVertex3f(2270.0f, 0.0f, 25.0f);
 	glVertex3f(2270.0f, 40.0f, 25.0f);
@@ -3555,6 +3631,7 @@ void dibujaEscenario(int render)
 	//Plano 2
 	glBegin(GL_QUADS);
 	glColor3f(0.14f, 0.42f, 0.22f);
+	glNormal3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(2060.0f, 40.0f, 25.0f);
 	glVertex3f(2270.0f, 40.0f, 25.0f);
 	glVertex3f(2270.0f, 40.0f, 0.0f);
@@ -3564,6 +3641,7 @@ void dibujaEscenario(int render)
 	//Plano 3
 	glBegin(GL_QUADS);
 	glColor3f(0.13f, 0.24f, 0.17f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(2060.0f, 0.0f, 25.0f);
 	glVertex3f(2060.0f, 40.0f, 25.0f);
 	glVertex3f(2060.0f, 40.0f, 0.0f);
@@ -3573,6 +3651,7 @@ void dibujaEscenario(int render)
 	//Plano 4
 	glBegin(GL_QUADS);
 	glColor3f(0.14f, 0.42f, 0.22f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(2270.0f, 0.0f, 25.0f);
 	glVertex3f(2270.0f, 0.0f, 0.0f);
 	glVertex3f(2270.0f, 40.0f, 0.0f);
@@ -3583,57 +3662,58 @@ void dibujaEscenario(int render)
 
 	//Plano 1
 	glBegin(GL_QUADS);
-	glColor3f(0.7f, 0.2f, 0.1f);
-	glVertex3f(2060.0f, 40.0f, 4.0f);
-	glVertex3f(2130.0f, 40.0f, 4.0f);
-	glVertex3f(2130.0f, 45.0f, 4.0f);
-	glVertex3f(2060.0f, 45.0f, 4.0f);
+		glColor3f(0.7f, 0.2f, 0.1f);
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(2060.0f, 40.0f, 4.0f);
+		glVertex3f(2130.0f, 40.0f, 4.0f);
+		glVertex3f(2130.0f, 45.0f, 4.0f);
+		glVertex3f(2060.0f, 45.0f, 4.0f);
 	glEnd();
 
 	//Trampas de piso (1,2,7 y 8 moviles; 3,4,5 y 6 fijas)
 
 	//Trampa 1
 	glPushMatrix();
-	glTranslatef(420.0f, posGrupoTramp1[0], 12.5f);
-	dibujaTrampa2();
+		glTranslatef(420.0f, posGrupoTramp1[0], 12.5f);
+		dibujaTrampa2();
 	glPopMatrix();
 
 	//Trampa 2
 	glPushMatrix();
-	glTranslatef(445.0f, posGrupoTramp1[1], 12.5f);
-	dibujaTrampa2();
+		glTranslatef(445.0f, posGrupoTramp1[1], 12.5f);
+		dibujaTrampa2();
 	glPopMatrix();
 
 	//Trampa 3
 	glPushMatrix();
-	glTranslatef(500.0f, 100.0f, 12.5f);
-	glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
-	glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
-	dibujaTrampa2();
+		glTranslatef(500.0f, 100.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		dibujaTrampa2();
 	glPopMatrix();
 
 	//Trampa 4
 	glPushMatrix();
-	glTranslatef(550.0f, 100.0f, 12.5f);
-	glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
-	glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
-	dibujaTrampa2();
+		glTranslatef(550.0f, 100.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		dibujaTrampa2();
 	glPopMatrix();
 
 	//Trampa 5
 	glPushMatrix();
-	glTranslatef(1470.0f, 112.0f, 12.5f);
-	glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
-	glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		glTranslatef(1470.0f, 112.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
 	dibujaTrampa2();
 	glPopMatrix();
 
 	//Trampa 6
 	glPushMatrix();
-	glTranslatef(1540.0f, 112.0f, 12.5f);
-	glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
-	glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
-	dibujaTrampa2();
+		glTranslatef(1540.0f, 112.0f, 12.5f);
+		glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+		glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+		dibujaTrampa2();
 	glPopMatrix();
 
 	//Trampa 7
@@ -4074,7 +4154,7 @@ int RenderizaEscena(GLvoid)								// Aqui se dibuja todo lo que aparecera en la
 	glLoadIdentity();
 
 	//gluLookAt(80.0f, 120.0f, 170.0f, 0.0f, 0.0f, 0.0f, 0, 1, 0);
-	gluLookAt(PosCam.x + 1000, PosCam.y, PosCam.z, ObjCam.x + 1000, ObjCam.y, ObjCam.z, 0, 1, 0);
+	gluLookAt(PosCam.x, PosCam.y, PosCam.z, ObjCam.x, ObjCam.y, ObjCam.z, 0, 1, 0);
 
 	DibujaEjes();
 	dibujaEscenario(renderModo);
