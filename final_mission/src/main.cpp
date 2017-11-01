@@ -72,27 +72,71 @@ void dibujaEjes()
 	glColor3f(1.0f,1.0f,1.0f);
 }
 
-void dibujaEscenrio()
-{
-	v[8][3] = {
-				{-250.0f, 95.0f, 250.0f}, 
-				{250.0f, 95.0f, 250.0f}, 
-				{-250.0f, -95.0f, 250.0f},
-				{250.0f, -95.0f, 250.0f},
-				{-250.0f, 95.0f, -250.0f}, 
-			  	{250.0f, 95.0f, -250.0f}, 
-			  	{-250.0f, -95.0f, -250.0f},
-			  	{250.0f, -95.0f, -250.0f},
-			  }
+void dibujaPiso(){
+	float v[8][3] = {
+						{-250.0f, 100.0f, 250.0f}, 
+						{250.0f, 100.0f, 250.0f}, 
+						{-250.0f, -100.0f, 250.0f},
+						{250.0f, -100.0f, 250.0f},
+						{-250.0f, -100.0f, -250.0f}, 
+				  		{250.0f, -100.0f, -250.0f}, 
+				  		{250.0f, 100.0f, -250.0f},
+				  		{-250.0f, 100.0f, -250.0f}
+			  		};
+
 	//Plano superior
-	glBegin(GL_QUADS);
-		glColor3f(0.0f, 0.0f, 0.0f);
-		glVertex3v(v[0]);
-		glVertex3v(v[1]);
-		glVertex3v(v[6]);
-		glVertex3v(v[7]);
+	glBegin(GL_POLYGON);
+		glColor3f(0.7f, 0.7f, 0.0f);
+		glVertex3fv(v[0]);
+		glVertex3fv(v[1]);
+		glVertex3fv(v[6]);
+		glVertex3fv(v[7]);
 	glEnd();
-	
+
+	//Plano inferior
+	glBegin(GL_POLYGON);
+		glColor3f(0.4f, 0.7f, 0.7f);
+		glVertex3fv(v[2]);
+		glVertex3fv(v[4]);
+		glVertex3fv(v[5]);
+		glVertex3fv(v[3]);
+	glEnd();	
+
+	//Plano 1
+	glBegin(GL_POLYGON);
+		glColor3f(0.7f, 0.7f, 0.0f);
+		glVertex3fv(v[0]);
+		glVertex3fv(v[2]);
+		glVertex3fv(v[3]);
+		glVertex3fv(v[1]);
+	glEnd();
+
+	//Plano 2
+	glBegin(GL_POLYGON);
+		glColor3f(0.7f, 0.7f, 0.0f);
+		glVertex3fv(v[1]);
+		glVertex3fv(v[3]);
+		glVertex3fv(v[5]);
+		glVertex3fv(v[6]);
+	glEnd();
+
+	//Plano 3
+	glBegin(GL_POLYGON);
+		glColor3f(0.7f, 0.7f, 0.0f);
+		glVertex3fv(v[6]);
+		glVertex3fv(v[5]);
+		glVertex3fv(v[4]);
+		glVertex3fv(v[7]);
+	glEnd();
+
+	//Plano 4
+	glBegin(GL_POLYGON);
+		glColor3f(0.7f, 0.7f, 0.0f);
+		glVertex3fv(v[7]);
+		glVertex3fv(v[4]);
+		glVertex3fv(v[2]);
+		glVertex3fv(v[0]);
+	glEnd();
 }
 
 
@@ -104,9 +148,9 @@ void display ( void )
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // limpia pantalla y Depth Buffer
 	glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
 	glLoadIdentity();	// Reinicia matriz Modelview
-	gluLookAt(-100.0f + rotacionX, 120.0f + rotacionY, 10.f + rotacionZ, 250.0f, 0.0f, 250.0f, 0, 1, 0);
+	gluLookAt(100.0f + rotacionX, 520.0f + rotacionY, 100.f + rotacionZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
 	dibujaEjes();
-	dibujaEscenrio();
+	dibujaPiso();
 	glFlush(); //TODO: Entender que hace
 
 }

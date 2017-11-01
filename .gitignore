@@ -1,2 +1,5 @@
 .idea/
 output.txt
+*.sublime-*
+final_mission/bin
+final_mission/src/*.o

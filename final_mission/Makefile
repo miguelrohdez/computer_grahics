@@ -1,18 +1,20 @@
-LIBS = -lGL -lGLU -lglut
+# Directorios
+BIN_DIR = ./bin
+SRC_DIR = ./src
+INCLUDE_DIR = ./include
+LIB_DIR = ./lib
 
-CODIGO_FUENTE = main.cpp
-TARGET = main
+all:
+	#(cd $(SRC_DIR); make)
+	(cd $(BIN_DIR); make)	
 
-$(TARGET): $(CODIGO_FUENTE)
-	gcc $(CODIGO_FUENTE) $(LIBS) -o $(TARGET)
-
-.PHONY: clean run
+.PHONY: clear
 
 clean:
-	-rm $(TARGET)
+	(cd $(SRC_DIR); make clean)
+	(cd $(BIN_DIR); make clean)	
 
 run:
-	-make
-	-./main
-	
-$(TARGET): $(CODIGO_FUENTE)
+	make
+	(cd $(BIN_DIR); make run)
+
