@@ -1,13 +1,12 @@
-LIBS = -lGL -lGLU -lglut
+LIBS = -lGL -lGLU -lglut -lm -lstdc++
+CODIGO_FUENTE = Prisma.cpp Cube.cpp Texture.cpp main.cpp #TODO
+TARGET = main #TODO
 
-CODIGO_FUENTE = .cpp #TODO
-TARGET = #TODO
 
 $(TARGET): $(CODIGO_FUENTE)
-	gcc $(CODIGO_FUENTE) $(LIBS) -o $(TARGET)
+	$(CXX) $(CODIGO_FUENTE) $(LIBS) -o $(TARGET)
 
 .PHONY: clean run
 
 clean:
 	-rm $(TARGET)
-	
