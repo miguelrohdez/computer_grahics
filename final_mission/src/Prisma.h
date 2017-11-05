@@ -7,24 +7,17 @@
 
 #include "Texture.h"
 #include "GL/glut.h"
+#include "Color.h"
 #include <stdio.h>
 
 class Prisma {
 private:
     CTexture textures[6];
-    float size[3];
-    float color[3];
+    float x, y, z;
+    Color color;
 public:
-    Prisma();
-    Prisma(float size[3]);
-    Prisma(CTexture texure);
-    Prisma(CTexture texures[6]);
-    Prisma(float size[3],  CTexture texures[6]);
-    Prisma(float size[3],  CTexture texure);
-    Prisma(float width, float height, float depth);
-    Prisma(float width, float height, float depth, float color[3]);
-    Prisma(float width, float height, float depth, CTexture texture);
-    Prisma(float width, float height, float depth, CTexture textures[6]);
+
+    Prisma(float width=0.0f, float height=0.0f, float depth=0.0f, Color color=Color(), CTexture textures[6]=NULL);
     void draw();
     void draw(float w, float h, float d);
     void draw(float w, float h, float d, CTexture t);
@@ -33,13 +26,12 @@ public:
     void draw(CTexture t);
     void draw(float *size, CTexture *t);
     void draw(float *size, CTexture t);
-    void draw(float *color);
+    void draw(Color color);
     void setSize(float width, float height, float depth);
     void setSize(float size[3]);
     void setTexture(CTexture t[6]);
     void setTexture(CTexture t);
-    void setColor(float colores[3]);
-    void setColor(float r, float g, float b);
+    void setColor(Color color);
     void toDebug();
 };
 

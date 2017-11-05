@@ -1,69 +1,22 @@
 #include "Prisma.h"
 
-
-Prisma::Prisma() {
-    setSize(1,1,1);
-    setTexture(NULL);
-    setColor(0,0,0);
-}
-
-Prisma::Prisma(float width, float height, float depth, CTexture *textures){
-    setSize(width, height, depth);
+Prisma::Prisma(float width, float height, float depth, Color color, CTexture *textures):
+color{color}, x{0.5*width}, y{0.5*height}, z{0.5*depth}
+{
     setTexture(textures);
-    setColor(0,0,0);
-}
-
-Prisma::Prisma(CTexture texture) {
-    setSize(1, 1, 1);
-    setTexture(texture);
-    setColor(0,0,0);
-}
-
-Prisma::Prisma(CTexture *textures) {
-    setSize(1,1,1);
-    setTexture(textures);
-    setColor(0,0,0);
-}
-
-Prisma::Prisma(float *size, CTexture texture) {
-    setSize(size);
-    setTexture(texture);
-    setColor(0,0,0);
-}
-
-Prisma::Prisma(float *size, CTexture *texures) {
-    setSize(size);
-    setTexture(textures);
-    setColor(0,0,0);
-}
-
-Prisma::Prisma(float width, float height, float depth) {
-    setSize(width, height, depth);
-    setTexture(NULL);
-    setColor(0,0,0);
-}
-
-Prisma::Prisma(float width, float height, float depth, float *color) {
-    setSize(width, height, depth);
-    setColor(color);
-}
-
-Prisma::Prisma(float width, float height, float depth, CTexture texture) {
-    setSize(width, height, depth);
-    setTexture(texture);
-    setColor(0,0,0);
 }
 
 void Prisma::setSize(float *size) {
-    for (int i = 0; i < 3; ++i) {
-        this->size[i] = 0.5 * size[i];
-    }
+    this->x = size[0];
+    this->y = size[1];
+    this->z = size[2];
 }
 
+
 void Prisma::setSize(float width, float height, float depth) {
-    this->size[0] = 0.5f * width;
-    this->size[1] = 0.5f * height;
-    this->size[2] = 0.5f * depth;
+    this->x = 0.5f * width;
+    this->y = 0.5f * height;
+    this->z = 0.5f * depth;
 }
 
 void Prisma::setTexture(CTexture *t) {
@@ -74,46 +27,32 @@ void Prisma::setTexture(CTexture *t) {
     }
 }
 
-Prisma::Prisma(float *size) {
-    setSize(size);
-    setTexture(NULL);
-    setColor(0,0,0);
-}
-
 void Prisma::setTexture(CTexture t) {
-    if (t.GLindex == NULL) {
+    if (t.GLindex != NULL) {
         for (int i = 0; i < 6; ++i) {
             this->textures[i] = t;
         }
     }
 }
 
-void Prisma::setColor(float *color) {
-    for (int i = 0; i < 3; ++i) {
-        this->color[i] = color[i];
-    }
-}
-
-void Prisma::setColor(float r, float g, float b) {
-    color[0] = r;
-    color[1] = g;
-    color[2] = b;
+void Prisma::setColor(Color color) {
+    this->color = color;
 }
 
 void Prisma::draw() {
     float v[8][3] = {
-            {-size[0], size[1], size[2]},
-            {size[0], size[1], size[2]},
-            {-size[0], -size[1], size[2]},
-            {size[0], -size[1], size[2]},
-            {-size[0], -size[1], -size[2]},
-            {size[0], -size[1], -size[2]},
-            {size[0], size[1], -size[2]},
-            {-size[0], size[1], -size[2]}
+            {-x,  y,  z},
+            { x,  y,  z},
+            {-x, -y,  z},
+            { x, -y,  z},
+            {-x, -y, -z},
+            { x, -y, -z},
+            { x,  y, -z},
+            {-x,  y, -z}
     };
 
     //Plano superior
-    glColor3f(this->color[0], this->color[1], this->color[2]);
+    glColor3fv(this->color.getRGB());
     glBegin(GL_QUADS);
     glVertex3fv(v[0]);
     glVertex3fv(v[1]);
@@ -163,7 +102,8 @@ void Prisma::draw() {
 }
 
 void Prisma::toDebug() {
-    printf("%f %f %f\n", this->size[0], this->size[1], this->size[2]);
+    printf("Size %f %f %f\n", this->x, this->y, this->z);
+    printf("RGB: %f %f %f\n", this->color.getR(), this->color.getG(), this->color.getB());
 }
 
 void Prisma::draw(CTexture t) {
@@ -176,7 +116,7 @@ void Prisma::draw(CTexture *t) {
     draw();
 }
 
-void Prisma::draw(float *color) {
+void Prisma::draw(Color color) {
     setColor(color);
     draw();
 }

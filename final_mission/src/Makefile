@@ -1,12 +1,16 @@
 LIBS = -lGL -lGLU -lglut -lm -lstdc++
-CODIGO_FUENTE = Prisma.cpp Cube.cpp Texture.cpp main.cpp #TODO
+CODIGO_FUENTE = Prisma.cpp Texture.cpp Color.cpp main.cpp #TODO
 TARGET = main #TODO
 
 
-$(TARGET): $(CODIGO_FUENTE)
+main: $(CODIGO_FUENTE)
 	$(CXX) $(CODIGO_FUENTE) $(LIBS) -o $(TARGET)
 
 .PHONY: clean run
 
 clean:
 	-rm $(TARGET)
+
+run:
+	make
+	./main

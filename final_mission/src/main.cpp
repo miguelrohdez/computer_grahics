@@ -8,7 +8,6 @@
 
 #include <GL/glut.h>
 #include "Prisma.h"
-#include "Cube.h"
 
 #define VELOCIDAD_CAMARA 10
 
@@ -16,11 +15,14 @@ float mueve = 1.0f;
 float rotacionX = 0.0f;
 float rotacionY = 0.0f;
 float rotacionZ = 0.0f;
+float traslacionX = 0.0f;
+float traslacionY = 0.0f;
+float traslacionZ = 0.0f;
 
 /*
  * Función para inicializar parámetros
  */
-void InitGL(GLvoid) {
+void InitGL() {
     glShadeModel(GL_SMOOTH);                            // Activa Smooth Shading
     glClearColor(0.3f, 0.3f, 0.3f, 0.5f);                // Fondo negro
     glClearDepth(1.0f);                                    // Valor para el Depth Buffer
@@ -72,18 +74,67 @@ void dibujaEjes() {
     glColor3f(1.0f, 1.0f, 1.0f);
 }
 
+void dibujarTerreno()
+{
+    Color c = Color(0.7f, 0.3f, 0.10f);
+    Prisma p = Prisma(200, 30, 200, c);
+    p.draw();
+}
+
+
+void dibujarCasa()
+{
+    Color gris = Color(0.5f, 0.5f, 0.5f);
+    Prisma c = Prisma(100, 25, 0.3, gris);
+    glTranslatef(0, 0, -65.5);
+    c.draw(); // A
+    glTranslatef(25, 0, 30);
+    c.draw(50, 25, 0.3); // E
+    glTranslatef(-60, 0, 0);
+    c.draw(30, 25, 0.3); // F
+    glTranslatef(0, 0, 20);
+    c.draw(30, 25, 0.3); // H
+    glTranslatef(5, 0, 40);
+    c.draw(40, 25, 0.3); // M
+    glTranslatef(35, 0, 40);
+    c.draw(50, 25, 0.3); // O
+    glTranslatef(-25, 0, -7.5);
+    c.draw(0.3, 25, 15); // Ñ
+    glTranslatef(0, 0, -25);
+    c.draw(0.3, 25, 15); // N
+    glTranslatef(10, 0, -27.5);
+    c.draw(0.3, 25, 40); // L
+    glTranslatef(10, 0, -25);
+    c.draw(0.3, 25, 30); // J
+    glTranslatef(-20, 0, 0);
+    c.draw(0.3, 25, 10); // I
+    glTranslatef(-30, 0, 0);
+    c.draw(0.3, 25, 90); // G
+    glTranslatef(40, 0, -30);
+    c.draw(0.3, 25, 30); // D
+    glTranslatef(40, 0, -5);
+    c.draw(0.3, 25, 20); // C
+    glTranslatef(20, 0, 5);
+    c.draw(0.3, 25, 30);// B
+    glTranslatef(-20, 0, 70);
+    c.draw(0.3, 25, 90);
+
+
+}
+
 /*
  * Función que dibuja
  */
 void display(void) {
-    float color[3] = {0.545, 0.271, 0.075};
-    Prisma p = Prisma(500, 10, 500, color);
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // limpia pantalla y Depth Buffer
     glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
     glLoadIdentity();    // Reinicia matriz Modelview
-    gluLookAt(100.0f + rotacionX, 520.0f + rotacionY, 100.f + rotacionZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
+    glTranslatef(rotacionX, rotacionY, rotacionZ);
+    gluLookAt(100.0f + traslacionX, 520.0f + traslacionY, 10.f + traslacionZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
     dibujaEjes();
-    p.draw();
+    dibujarTerreno();
+    dibujarCasa();
     glFlush(); //TODO: Entender que hace
 
 }
@@ -119,22 +170,22 @@ void keyboard(unsigned char key, int x, int y) {
             exit(0);
             break;
         case 'a':
-            rotacionX -= VELOCIDAD_CAMARA;
+            traslacionX -= VELOCIDAD_CAMARA;
             break;
         case 'd':
-            rotacionX += VELOCIDAD_CAMARA;
+            traslacionX += VELOCIDAD_CAMARA;
             break;
         case 's':
-            rotacionY -= VELOCIDAD_CAMARA;
+            traslacionY -= VELOCIDAD_CAMARA;
             break;
         case 'w':
-            rotacionY += VELOCIDAD_CAMARA;
+            traslacionY += VELOCIDAD_CAMARA;
             break;
         case 'q':
-            rotacionZ -= VELOCIDAD_CAMARA;
+            traslacionZ -= VELOCIDAD_CAMARA;
             break;
         case 'e':
-            rotacionZ += VELOCIDAD_CAMARA;
+            traslacionZ += VELOCIDAD_CAMARA;
             break;
     }
     glutPostRedisplay();
@@ -143,8 +194,36 @@ void keyboard(unsigned char key, int x, int y) {
 /*
 * Función para el manejo de teclas especiales
 */
-void specialKeys(int key, int x, int y) {
-    glutPostRedisplay();
+void specialKeys(int key, int x, int y)
+{
+  switch ( key ) {
+	case GLUT_KEY_PAGE_UP:
+		rotacionZ += 2;
+		break;
+	case GLUT_KEY_PAGE_DOWN:
+		rotacionZ -= 2;
+		break;
+
+    case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
+		rotacionX += 2;
+		break;
+
+    case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
+		rotacionX -= 2;
+		break;
+
+	case GLUT_KEY_LEFT:
+		rotacionY -= 2;
+		break;
+
+	case GLUT_KEY_RIGHT:
+		rotacionY += 2;
+		break;
+
+    default:
+		break;
+  }
+  glutPostRedisplay();
 }
 
 
