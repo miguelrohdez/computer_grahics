@@ -7,9 +7,13 @@
  */
 
 #include <GL/glut.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
 #include "Prisma.h"
+#include "Camera.h"
 
-#define VELOCIDAD_CAMARA 10
+CCamera camara;
+GLfloat g_lookupdown = 0.0f;    // Look Position In The Z-Axis (NEW)
 
 float mueve = 1.0f;
 float rotacionX = 0.0f;
@@ -31,6 +35,7 @@ void InitGL() {
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
     glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
     glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
+    camara.Position_Camera(0,2.5f,3, 0,2.5f,0, 0, 1, 0);
 }
 
 
@@ -131,7 +136,9 @@ void display(void) {
     glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
     glLoadIdentity();    // Reinicia matriz Modelview
     glTranslatef(rotacionX, rotacionY, rotacionZ);
-    gluLookAt(100.0f + traslacionX, 520.0f + traslacionY, 10.f + traslacionZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
+    //gluLookAt(100.0f + traslacionX, 520.0f + traslacionY, 10.f + traslacionZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
+    glRotatef(g_lookupdown,1.0f,0,0);
+    gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z, camara.mView.x, camara.mView.y, camara.mView.z, camara.mUp.x,   camara.mUp.y,   camara.mUp.z);
     dibujaEjes();
     dibujarTerreno();
     dibujarCasa();
@@ -163,61 +170,71 @@ void reshape(int width, int height) {
 /*
 * Función que maneja el teclado
 */
-// Para cerrar la ventana con la tecla ESC
-void keyboard(unsigned char key, int x, int y) {
-    switch (key) {
-        case 27:
-            exit(0);
-            break;
-        case 'a':
-            traslacionX -= VELOCIDAD_CAMARA;
-            break;
-        case 'd':
-            traslacionX += VELOCIDAD_CAMARA;
-            break;
-        case 's':
-            traslacionY -= VELOCIDAD_CAMARA;
-            break;
-        case 'w':
-            traslacionY += VELOCIDAD_CAMARA;
-            break;
-        case 'q':
-            traslacionZ -= VELOCIDAD_CAMARA;
-            break;
-        case 'e':
-            traslacionZ += VELOCIDAD_CAMARA;
-            break;
-    }
-    glutPostRedisplay();
+void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
+{
+	switch ( key ) {
+
+		case 'w':   //Movimientos de camara
+		case 'W':
+			camara.Move_Camera( CAMERASPEED+0.2 );
+			break;
+
+		case 's':
+		case 'S':
+			camara.Move_Camera(-(CAMERASPEED+0.2));
+			break;
+
+		case 'a':
+		case 'A':
+			camara.Strafe_Camera(-(CAMERASPEED+0.4));
+			break;
+
+		case 'd':
+		case 'D':
+			camara.Strafe_Camera( CAMERASPEED+0.4 );
+			break;
+
+    case 'e':
+    case 'E':
+      camara.UpDown_Camera(CAMERASPEED);
+      break;
+
+    case 'q':
+    case 'Q':
+      camara.UpDown_Camera(-CAMERASPEED);
+        break;
+
+		case 27:        // Cuando Esc es presionado...
+			exit ( 0 );   // Salimos del programa
+			break;
+		default:        // Cualquier otra
+			break;
+  }
+
+  glutPostRedisplay();
 }
 
 /*
 * Función para el manejo de teclas especiales
 */
-void specialKeys(int key, int x, int y)
+void arrow_keys ( int a_keys, int x, int y )  // Funcion para manejo de teclas especiales (arrow keys)
 {
-  switch ( key ) {
-	case GLUT_KEY_PAGE_UP:
-		rotacionZ += 2;
-		break;
-	case GLUT_KEY_PAGE_DOWN:
-		rotacionZ -= 2;
-		break;
+  switch ( a_keys ) {
 
     case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
-		rotacionX += 2;
+		  g_lookupdown -= 1.0f;
 		break;
 
     case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
-		rotacionX -= 2;
+		  g_lookupdown += 1.0f;
 		break;
 
 	case GLUT_KEY_LEFT:
-		rotacionY -= 2;
+		camara.Rotate_View(-CAMERASPEED);
 		break;
 
 	case GLUT_KEY_RIGHT:
-		rotacionY += 2;
+		camara.Rotate_View( CAMERASPEED);
 		break;
 
     default:
@@ -242,7 +259,7 @@ int main(int argc, char **argv) {
     glutDisplayFunc(display); // Función de dibujo
     glutReshapeFunc(reshape); // Función en caso de cambio de tamano
     glutKeyboardFunc(keyboard); // Función de manejo de teclado
-    glutSpecialFunc(specialKeys); // Función manejo teclas especiales
+    glutSpecialFunc(arrow_keys); // Función manejo teclas especiales
     glutMainLoop();
 
     return 0;
