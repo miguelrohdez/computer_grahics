@@ -11,6 +11,7 @@
 #include <GL/gl.h>
 #include "Prisma.h"
 #include "Camera.h"
+#include "Plane.h"
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f;    // Look Position In The Z-Axis (NEW)
@@ -62,12 +63,12 @@ void inicializarTexturas() {
     fachadaInterior.BuildGLTexture();
     fachadaInterior.ReleaseImage();
 
-    barda[0] = fachadaInterior;
-    barda[1] = fachadaInterior;
-    barda[2] = fachadaInterior;
-    barda[3] = fachadaExterior;
-    barda[4] = fachadaExterior;
-    barda[5] = fachadaExterior;
+        barda[0] = fachadaInterior;
+        barda[1] = fachadaInterior;
+        barda[2] = fachadaInterior;
+        barda[3] = fachadaExterior;
+        barda[4] = fachadaExterior;
+        barda[5] = fachadaExterior;
 }
 
 /*
@@ -223,6 +224,7 @@ void display(void) {
         glTranslatef(0,95,0);
         dibujarSkyBox();
     glPopMatrix();
+
     glPushMatrix();
             dibujarTerreno();
     glPopMatrix();
@@ -236,14 +238,14 @@ void display(void) {
         glTranslatef(0, 12.5, 0);
         dibujarCasa();
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
     glTranslatef(10, 0.025, 10);
     dibujarMesa();
 
-
+    glDisable(GL_TEXTURE_2D);
     glFlush(); //TODO: Entender que hace
     glutSwapBuffers();
 }
+
 
 /*
 * Funcion para el reajuste de dibujo en ventana

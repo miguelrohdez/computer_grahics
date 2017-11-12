@@ -1,12 +1,16 @@
 #include <math.h>
 #include "Vertex.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-Vertex::Vertex(float x, float y, float z) {
+Vertex::Vertex(){
+}
+
+Vertex::Vertex(float x, float y, float z): x{x}, y{y}, z{z} {
 	setValues(x,y,z);
 }
 
-Vertex::Vertex(int x, int y, int z) {
+Vertex::Vertex(int x, int y, int z) : x{x}, y{y}, z{z}{
 	setValues(x,y,z);
 }
 
@@ -21,7 +25,7 @@ Vertex::Vertex(int *c) {
 float* Vertex::getValues() {
 	float *values;
 
-	values = (float *) calloc(3, sizeof(float));
+	values = (float *) malloc(3 * sizeof(float));
 	values[0] = this->x;
 	values[1] = this->y;
 	values[2] = this->z;
@@ -57,4 +61,8 @@ float Vertex::getY() {
 
 float Vertex::getZ() {
 	return this->z;
+}
+
+void Vertex::toString() {
+	printf("[VERTEX] X: %0.3f|Y: %0.3f|Z: %0.3f\n", x,y,z);
 }

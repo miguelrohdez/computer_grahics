@@ -4,7 +4,7 @@
 class Vertex {
 	float x, y, z;
 public:
-	Vertex(){};
+	Vertex();
 	Vertex(float x, float y, float z);
 	Vertex(int x, int y, int z);
 	Vertex(float *c);
@@ -16,6 +16,7 @@ public:
 	float getX();
 	float getY();
 	float getZ();
+	void toString();
 };
 
 #endif

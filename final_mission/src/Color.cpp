@@ -2,7 +2,7 @@
 #include <stdio.h>
 Color::Color()
 {
-	Color(1,1,1);
+	Color(1.0f,1.0f,1.0f);
 }
 
 Color::Color(int r, int g, int b)
@@ -41,4 +41,8 @@ float Color::getB() {
 
 float* Color::getRGB() {
 	return this->rgb;
+}
+
+void Color::toString() {
+	printf("r:%0.3f - g:%0.3f - b:%0.3f\n", rgb[0], rgb[1], rgb[2]);
 }

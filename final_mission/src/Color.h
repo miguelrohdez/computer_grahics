@@ -14,6 +14,7 @@ public:
 	float getG();
 	float getB();
 	float* getRGB();
+	void toString();
 };
 
 
