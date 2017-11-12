@@ -22,6 +22,7 @@ public:
     void draw();
     void drawSky();
     void draw(float w, float h, float d);
+    void draw(float w, float h, float d, Color c);
     void draw(float w, float h, float d, CTexture t);
     void draw(float w, float h, float d, CTexture *t);
     void draw(CTexture *t);

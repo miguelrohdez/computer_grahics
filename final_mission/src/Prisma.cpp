@@ -202,6 +202,12 @@ void Prisma::draw(float w, float h, float d) {
     draw();
 }
 
+void Prisma::draw(float w, float h, float d, Color c) {
+    setSize(w,h,d);
+    setColor(c);
+    draw();
+}
+
 void Prisma::draw(float w, float h, float d, CTexture t) {
     setSize(w,h,d);
     setTexture(t);

@@ -23,14 +23,22 @@ float traslacionX = 0.0f;
 float traslacionY = 0.0f;
 float traslacionZ = 0.0f;
 
-
 /*
  * Texturas
  */
 CTexture terreno;
 CTexture tiles;
-CTexture pared;
+CTexture fachadaExterior;
+CTexture fachadaInterior;
 CTexture textureSkyBox;
+CTexture  barda[6];
+/*
+ * Colores
+ */
+Color saddleBrown = Color(0.545f, 0.271f, 0.075f);
+Color sienna = Color(0.627f, 0.322f, 0.176f);
+Color cafeMesa = Color(0.09f, 0.06f, 0.05f);
+
 
 
 void inicializarTexturas() {
@@ -46,9 +54,20 @@ void inicializarTexturas() {
     tiles.BuildGLTexture();
     tiles.ReleaseImage();
 
-    pared.LoadTGA("Texturas/ladrillos2.tga");
-    pared.BuildGLTexture();
-    pared.ReleaseImage();
+    fachadaExterior.LoadTGA("Texturas/ladrillos2.tga");
+    fachadaExterior.BuildGLTexture();
+    fachadaExterior.ReleaseImage();
+
+    fachadaInterior.LoadTGA("Texturas/pintura_roja.tga");
+    fachadaInterior.BuildGLTexture();
+    fachadaInterior.ReleaseImage();
+
+    barda[0] = fachadaInterior;
+    barda[1] = fachadaInterior;
+    barda[2] = fachadaInterior;
+    barda[3] = fachadaExterior;
+    barda[4] = fachadaExterior;
+    barda[5] = fachadaExterior;
 }
 
 /*
@@ -124,17 +143,32 @@ void dibujarPiso() {
     p.draw();
 }
 
+void dibujarMesa() {
+    Prisma m = Prisma(8, 0.5, 3, cafeMesa);
+    m.draw();
+    glTranslatef(0.0f, 0.35, 0.0f);
+    m.draw(8.5, 0.25, 3.5, sienna);
+    glTranslatef(0.0f, 4.1f, 0.0f);
+    m.draw(7.0f, 8.0f, 3.0f, cafeMesa);
+    glTranslatef(0.0f, 4.1f, 0.0f);
+    m.draw(8.5, 0.2, 3.5, sienna);
+    glTranslatef(0.0f, 0.35f, 0.3f);
+    m.draw(15, 0.1, 10, cafeMesa);
+}
+
+
 void dibujarCasa() {
     Color n = Color(1.0f, 1.0f, 1.0f);
     Prisma c = Prisma(100, 25, 0.3, n);
-    c.setTexture(pared);
+    c.setTexture(barda);
     //c.setRepetitionTexture(2);
     glTranslatef(0, 0, -65.5);
     c.draw(); // A
     glTranslatef(25, 0, 30);
     c.draw(50, 25, 0.3); // E
     glTranslatef(-60, 0, 0);
-    c.draw(30, 25, 0.3); // F
+    c.draw(30, 25, 0.3, fachadaInterior); // F
+    c.setTexture(barda);
     glTranslatef(0, 0, 20);
     c.draw(30, 25, 0.3); // H
     glTranslatef(5, 0, 40);
@@ -154,11 +188,12 @@ void dibujarCasa() {
     glTranslatef(-30, 0, 0);
     c.draw(0.3, 25, 90); // G
     glTranslatef(40, 0, -30);
-    c.draw(0.3, 25, 30); // D
+    c.draw(0.3, 25, 30, fachadaInterior); // D
     glTranslatef(40, 0, -5);
     c.draw(0.3, 25, 20); // C
+    c.setTexture(barda);
     glTranslatef(20, 0, 5);
-    c.draw(0.3, 25, 30);// B
+    c.draw(0.3, 25, 30); // B
     glTranslatef(-20, 0, 70);
     c.draw(0.3, 25, 90);
 }
@@ -202,7 +237,8 @@ void display(void) {
         dibujarCasa();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
-
+    glTranslatef(10, 0.025, 10);
+    dibujarMesa();
 
 
     glFlush(); //TODO: Entender que hace
