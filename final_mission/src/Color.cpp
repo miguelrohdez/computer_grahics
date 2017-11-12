@@ -2,8 +2,7 @@
 #include <stdio.h>
 Color::Color()
 {
-	printf("Default color\n");
-	Color(0,0,0);
+	Color(1,1,1);
 }
 
 Color::Color(int r, int g, int b)

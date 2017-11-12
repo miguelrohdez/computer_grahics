@@ -23,6 +23,34 @@ float traslacionX = 0.0f;
 float traslacionY = 0.0f;
 float traslacionZ = 0.0f;
 
+
+/*
+ * Texturas
+ */
+CTexture terreno;
+CTexture tiles;
+CTexture pared;
+CTexture textureSkyBox;
+
+
+void inicializarTexturas() {
+    textureSkyBox.LoadBMP("Texturas/skybox.bmp");
+	textureSkyBox.BuildGLTexture();
+	textureSkyBox.ReleaseImage();
+
+    terreno.LoadTGA("Texturas/tierra.tga");
+    terreno.BuildGLTexture();
+    terreno.ReleaseImage();
+
+    tiles.LoadTGA("Texturas/piso2.tga");
+    tiles.BuildGLTexture();
+    tiles.ReleaseImage();
+
+    pared.LoadTGA("Texturas/ladrillos2.tga");
+    pared.BuildGLTexture();
+    pared.ReleaseImage();
+}
+
 /*
  * Función para inicializar parámetros
  */
@@ -36,6 +64,7 @@ void InitGL() {
     glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
     glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
     camara.Position_Camera(0,2.5f,3, 0,2.5f,0, 0, 1, 0);
+    inicializarTexturas();
 }
 
 
@@ -79,18 +108,27 @@ void dibujaEjes() {
     glColor3f(1.0f, 1.0f, 1.0f);
 }
 
-void dibujarTerreno()
-{
-    Color c = Color(0.7f, 0.3f, 0.10f);
-    Prisma p = Prisma(200, 30, 200, c);
+void dibujarTerreno() {
+    Color c = Color(1.0f, 1.0f, 1.0f);
+    Prisma p = Prisma(500, 10, 500, c);
+    p.setTexture(terreno);
+    p.setRepetitionTexture(20);
     p.draw();
 }
 
+void dibujarPiso() {
+    Color c = Color(1.0f, 1.0f, 1.0f);
+    Prisma p = Prisma(140, 5, 140, c);
+    p.setTexture(tiles);
+    p.setRepetitionTexture(20);
+    p.draw();
+}
 
-void dibujarCasa()
-{
-    Color gris = Color(0.5f, 0.5f, 0.5f);
-    Prisma c = Prisma(100, 25, 0.3, gris);
+void dibujarCasa() {
+    Color n = Color(1.0f, 1.0f, 1.0f);
+    Prisma c = Prisma(100, 25, 0.3, n);
+    c.setTexture(pared);
+    //c.setRepetitionTexture(2);
     glTranslatef(0, 0, -65.5);
     c.draw(); // A
     glTranslatef(25, 0, 30);
@@ -123,8 +161,12 @@ void dibujarCasa()
     c.draw(0.3, 25, 30);// B
     glTranslatef(-20, 0, 70);
     c.draw(0.3, 25, 90);
+}
 
-
+void dibujarSkyBox() {
+    Prisma p = Prisma(500, 200, 500, Color(1.0f, 1.0f, 1.0f));
+    p.setTexture(textureSkyBox);
+    p.drawSky();
 }
 
 /*
@@ -139,11 +181,32 @@ void display(void) {
     //gluLookAt(100.0f + traslacionX, 520.0f + traslacionY, 10.f + traslacionZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
     glRotatef(g_lookupdown,1.0f,0,0);
     gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z, camara.mView.x, camara.mView.y, camara.mView.z, camara.mUp.x,   camara.mUp.y,   camara.mUp.z);
-    dibujaEjes();
-    dibujarTerreno();
-    dibujarCasa();
-    glFlush(); //TODO: Entender que hace
 
+    dibujaEjes();
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+        glTranslatef(0,95,0);
+        dibujarSkyBox();
+    glPopMatrix();
+    glPushMatrix();
+            dibujarTerreno();
+    glPopMatrix();
+
+    glTranslatef(0, 7.5, 0);
+    glPushMatrix();
+        dibujarPiso();
+    glPopMatrix();
+    glTranslatef(0, 2.5, 0);
+    glPushMatrix();
+        glTranslatef(0, 12.5, 0);
+        dibujarCasa();
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+
+
+
+    glFlush(); //TODO: Entender que hace
+    glutSwapBuffers();
 }
 
 /*
@@ -251,7 +314,7 @@ void arrow_keys ( int a_keys, int x, int y )  // Funcion para manejo de teclas e
 */
 int main(int argc, char **argv) {
     glutInit(&argc, argv); // Inicializamos OpenGL
-    glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE); // Display Mode (Clores RGB y alpha | Buffer Sencillo )
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // Display Mode (Clores RGB y alpha | Buffer Sencillo )
     glutInitWindowSize(1920, 1080); // Tamaño de la Ventana
     glutInitWindowPosition(-1, -1); //Posicion de la Ventana
     glutCreateWindow("Complejo Residencial"); // Nombre de la Ventana

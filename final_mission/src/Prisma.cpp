@@ -1,7 +1,7 @@
 #include "Prisma.h"
 
 Prisma::Prisma(float width, float height, float depth, Color color, CTexture *textures):
-color{color}, x{0.5*width}, y{0.5*height}, z{0.5*depth}
+color{color}, x{0.5*width}, y{0.5*height}, z{0.5*depth}, repTexture{1}
 {
     setTexture(textures);
 }
@@ -50,56 +50,120 @@ void Prisma::draw() {
             { x,  y, -z},
             {-x,  y, -z}
     };
-
+    glBindTexture(GL_TEXTURE_2D, textures[0].GLindex);
     //Plano superior
     glColor3fv(this->color.getRGB());
     glBegin(GL_QUADS);
-    glVertex3fv(v[0]);
-    glVertex3fv(v[1]);
-    glVertex3fv(v[6]);
-    glVertex3fv(v[7]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[0]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[1]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[6]);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[7]);
     glEnd();
-
+    glBindTexture(GL_TEXTURE_2D, textures[1].GLindex);
     //Plano inferior
     glBegin(GL_QUADS);
-    glVertex3fv(v[2]);
-    glVertex3fv(v[4]);
-    glVertex3fv(v[5]);
-    glVertex3fv(v[3]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[2]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[4]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[5]);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[3]);
     glEnd();
-
+    glBindTexture(GL_TEXTURE_2D, textures[2].GLindex);
     //Plano 1
     glBegin(GL_QUADS);
-    glVertex3fv(v[0]);
-    glVertex3fv(v[2]);
-    glVertex3fv(v[3]);
-    glVertex3fv(v[1]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[0]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[2]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[3]);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[1]);
     glEnd();
-
+    glBindTexture(GL_TEXTURE_2D, textures[3].GLindex);
     //Plano 2
     glBegin(GL_QUADS);
-    glVertex3fv(v[1]);
-    glVertex3fv(v[3]);
-    glVertex3fv(v[5]);
-    glVertex3fv(v[6]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[1]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[3]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[5]);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[6]);
     glEnd();
-
+    glBindTexture(GL_TEXTURE_2D, textures[4].GLindex);
     //Plano 3
     glBegin(GL_QUADS);
-    glVertex3fv(v[6]);
-    glVertex3fv(v[5]);
-    glVertex3fv(v[4]);
-    glVertex3fv(v[7]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[6]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[5]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[4]);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[7]);
     glEnd();
-
+    glBindTexture(GL_TEXTURE_2D, textures[5].GLindex);
     //Plano 4
     glBegin(GL_QUADS);
-    glVertex3fv(v[7]);
-    glVertex3fv(v[4]);
-    glVertex3fv(v[2]);
-    glVertex3fv(v[0]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[7]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[4]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[2]);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[0]);
     glEnd();
 }
+
+
+void Prisma::drawSky() {
+    float v[8][3] = {
+            {-x,  y,  z},
+            { x,  y,  z},
+            {-x, -y,  z},
+            { x, -y,  z},
+            {-x, -y, -z},
+            { x, -y, -z},
+            { x,  y, -z},
+            {-x,  y, -z}
+    };
+    glBindTexture(GL_TEXTURE_2D, textures[0].GLindex);
+    //Plano superior
+    glColor3fv(this->color.getRGB());
+    glBegin(GL_QUADS);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[7]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[6]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[1]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[0]);
+    glEnd();
+    glBindTexture(GL_TEXTURE_2D, textures[1].GLindex);
+    //Plano inferior
+    glBegin(GL_QUADS);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[3]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[5]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[4]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[2]);
+    glEnd();
+    glBindTexture(GL_TEXTURE_2D, textures[2].GLindex);
+    //Plano 1
+    glBegin(GL_QUADS);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[1]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[3]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[2]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[0]);
+    glEnd();
+    glBindTexture(GL_TEXTURE_2D, textures[3].GLindex);
+    //Plano 2
+    glBegin(GL_QUADS);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[6]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[5]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[3]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[1]);
+    glEnd();
+    glBindTexture(GL_TEXTURE_2D, textures[4].GLindex);
+    //Plano 3
+    glBegin(GL_QUADS);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[7]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[4]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[5]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[6]);
+    glEnd();
+    glBindTexture(GL_TEXTURE_2D, textures[5].GLindex);
+    //Plano 4
+    glBegin(GL_QUADS);
+    glTexCoord2f(repTexture, 0.0f); glVertex3fv(v[0]);
+    glTexCoord2f(repTexture, repTexture); glVertex3fv(v[2]);
+    glTexCoord2f(0.0f, repTexture); glVertex3fv(v[4]);
+    glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[7]);
+    glEnd();
+}
+
 
 void Prisma::toDebug() {
     printf("Size %f %f %f\n", this->x, this->y, this->z);
@@ -148,4 +212,8 @@ void Prisma::draw(float w, float h, float d, CTexture *t) {
     setSize(w,h,d);
     setTexture(t);
     draw();
+}
+
+void Prisma::setRepetitionTexture(int rt) {
+    this->repTexture = rt;
 }
