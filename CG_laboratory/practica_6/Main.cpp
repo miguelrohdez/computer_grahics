@@ -2933,9 +2933,9 @@ void dibujaEscenario(int render)
 	glBegin(GL_QUADS);
 		glColor3f(0.0f, 0.8f, 0.8f);
 		glNormal3f(0.0f, 0.0f, 1.0f);
-		glTexCoord2f(0.0f, 0.4f); glVertex3f(975.0f, 0.0f, 25.0f);
-		glTexCoord2f(7.0f, 0.4f); glVertex3f(1370.0f, 0.0f, 25.0f);
-		glTexCoord2f(7.0f, 1.0f); glVertex3f(1370.0f, 10.0f, 25.0f);
+		glTexCoord2f(0.0f, 0.83f); glVertex3f(975.0f, 0.0f, 25.0f);
+		glTexCoord2f(6.999f, 0.83f); glVertex3f(1370.0f, 0.0f, 25.0f);
+		glTexCoord2f(6.999f, 1.0f); glVertex3f(1370.0f, 10.0f, 25.0f);
 		glTexCoord2f(0.0f, 1.0f); glVertex3f(975.0f, 10.0f, 25.0f);		 
 	glEnd();
 
@@ -3500,59 +3500,69 @@ void dibujaEscenario(int render)
 
 	//OBJETO 51 (4 planos) ///////////////
 
+	glBindTexture(GL_TEXTURE_2D, textura[14].texID);
+
 	//Plano 1
 	glBegin(GL_QUADS);
 		glColor3f(1.0f, 0.99f, 0.45f);
 		glNormal3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(1650.0f, 0.0f, 25.0f);
-		glVertex3f(1705.0f, 0.0f, 25.0f);
-		glVertex3f(1705.0f, 25.0f, 25.0f);
-		glVertex3f(1650.0f, 25.0f, 25.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(1650.0f, 0.0f, 25.0f);
+		glTexCoord2f(1.5f, 0.0f); glVertex3f(1705.0f, 0.0f, 25.0f);
+		glTexCoord2f(1.5f, 1.0f); glVertex3f(1705.0f, 25.0f, 25.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(1650.0f, 25.0f, 25.0f);
 	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, textura[11].texID);
 
 	//Plano 2
 	glBegin(GL_QUADS);
-		glColor3f(1.0f, 0.99f, 0.45f);
-		glNormal3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(1650.0f, 25.0f, 25.0f);
-		glVertex3f(1705.0f, 25.0f, 25.0f);
-		glVertex3f(1705.0f, 25.0f, 0.0f);
-		glVertex3f(1650.0f, 25.0f, 0.0f);
+		glColor3f(0.42f, 0.46f, 0.25f);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 0.5f); glVertex3f(1650.0f, 0.0f, 25.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(1650.0f, 25.0f, 25.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(1650.0f, 25.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.5f); glVertex3f(1650.0f, 0.0f, 0.0f);
 	glEnd();
 
 	//Plano 3
 	glBegin(GL_QUADS);
-		glColor3f(0.42f, 0.46f, 0.25f);
-		glNormal3f(-1.0f, 0.0f, 0.0f);
-		glVertex3f(1650.0f, 0.0f, 25.0f);
-		glVertex3f(1650.0f, 25.0f, 25.0f);
-		glVertex3f(1650.0f, 25.0f, 0.0f);
-		glVertex3f(1650.0f, 0.0f, 0.0f);
+		glColor3f(1.0f, 0.99f, 0.45f);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 0.5f); glVertex3f(1705.0f, 0.0f, 25.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(1705.0f, 0.0f, 0.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(1705.0f, 25.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.5f); glVertex3f(1705.0f, 25.0f, 25.0f);
 	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, textura[2].texID);
 
 	//Plano 4
 	glBegin(GL_QUADS);
 		glColor3f(1.0f, 0.99f, 0.45f);
-		glNormal3f(1.0f, 0.0f, 0.0f);
-		glVertex3f(1705.0f, 0.0f, 25.0f);
-		glVertex3f(1705.0f, 0.0f, 0.0f);
-		glVertex3f(1705.0f, 25.0f, 0.0f);
-		glVertex3f(1705.0f, 25.0f, 25.0f);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(1650.0f, 25.0f, 25.0f);
+		glTexCoord2f(1.5f, 0.0f); glVertex3f(1705.0f, 25.0f, 25.0f);
+		glTexCoord2f(1.5f, 1.0f); glVertex3f(1705.0f, 25.0f, 0.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(1650.0f, 25.0f, 0.0f);
 	glEnd();
 
+	
+
 	//OBJETO 52 (1 planos) /////////////// NOGGGG
+
+	glBindTexture(GL_TEXTURE_2D, textura[13].texID);
 
 	//Plano 1
 	glBegin(GL_QUADS);
 		glColor3f(0.7f, 0.2f, 0.1f);
 		glNormal3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(1650.0f, 25.0f, 4.0f);
-		glVertex3f(1705.0f, 25.0f, 4.0f);
-		glVertex3f(1705.0f, 30.0f, 4.0f);
-		glVertex3f(1650.0f, 30.0f, 4.0f);
+		glTexCoord2f(-0.09f, 0.0f); glVertex3f(1650.0f, 25.0f, 4.0f);
+		glTexCoord2f(2.0f, 0.0f); glVertex3f(1705.0f, 25.0f, 4.0f);
+		glTexCoord2f(2.0f, 1.0f); glVertex3f(1705.0f, 30.0f, 4.0f);
+		glTexCoord2f(-0.09f, 1.0f); glVertex3f(1650.0f, 30.0f, 4.0f);
 	glEnd();
 
-	//OBJETO 53 (4 planos) ///////////////
+	//OBJETO 53 (4 planos) ///////////////	
 
 	//Plano 1
 	glBegin(GL_QUADS);
