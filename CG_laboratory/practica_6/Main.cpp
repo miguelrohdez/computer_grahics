@@ -101,7 +101,7 @@ FRAME KeyFrame2p1[maxKF2]; //Contenedor para almacenar cada keyframe de la secue
 varsAnim varsAnimP1; //datos de para animacion del player 1
 
 //Variables para iluminacion
-GLfloat LightPos[] = {-100.0f, 50.0f, 50.0f, 1.0f};		// Posición de la luz
+GLfloat LightPos[] = {-120.0f, 40.0f, 50.0f, 1.0f};		// Posición de la luz
 GLfloat LightAmb[] = { 0.7f, 0.7f, 0.7f, 1.0f};			// Valores de la componente ambiente
 GLfloat LightDif[] = { 1.0f, 1.0f, 1.0f, 1.0f};			// Valores de la componente difusa
 GLfloat LightSpc[] = { 0.8f, 0.8f, 0.8f, 1.0f};			// Valores de la componente especular
@@ -1100,21 +1100,32 @@ void DibujaEjes()
 	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
-void dibujaCilindro(float radio, int lados, float altura, int modoRender)
+void dibujaCilindro(float radio, int lados, float altura, int modoRender, int usaTextura)
 {
 	CVector Na, Nb, Nc, Nd;
 	float ang;
+	float s1, s2, t1=0.0f, t2=2.0f;  // Para texturas
 	float a[3], b[3], c[3], d[3];
 	float delta;
 	float deltaColor;
+	float deltaEse;
 
-	deltaColor = 1.0f / lados;
+
+	deltaEse = 1.0 / lados;
 	delta = 360.0f / lados;
 
 	SeleccionaMaterial(2);
+
+	if(usaTextura)
+	{
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, textura[12].texID);
+	}
+
 	for (int i = 0; i < lados; i++)  //Por la forma de renderizar de openGL se usa for
 	{
 		ang = i*delta;
+		s1 = 1.0f - (i * deltaEse);
 
 		a[0] = radio*(float)cos(ang*PI / 180.0f);  //Conversión de ángulo a RAD
 		a[1] = 0.0f;
@@ -1125,6 +1136,7 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 		b[2] = a[2];
 
 		ang = (i + 1)*delta;  // Se utiliza theta sig. Delta theta = i+1
+		s2 = 1.0f - ((i + 1) * deltaEse);
 
 		c[0] = radio*(float)cos(ang*PI / 180.0f);
 		c[1] = altura;
@@ -1143,18 +1155,17 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 		if (modoRender == 1) glBegin(GL_QUADS);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
 		glNormal3f(Na.x, Na.y, Na.z);
-		glVertex3f(a[0], a[1], a[2]);
+		glTexCoord2f(s1, t1); glVertex3f(a[0], a[1], a[2]);
 		glNormal3f(Nb.x, Nb.y, Nb.z);
-		glVertex3f(b[0], b[1], b[2]);
+		glTexCoord2f(s1, t2); glVertex3f(b[0], b[1], b[2]);
 		glNormal3f(Nc.x, Nc.y, Nc.z);
-		glVertex3f(c[0], c[1], c[2]);
+		glTexCoord2f(s2, t2); glVertex3f(c[0], c[1], c[2]);
 		glNormal3f(Nd.x, Nd.y, Nd.z);
-		glVertex3f(d[0], d[1], d[2]);
+		glTexCoord2f(s2, t1); glVertex3f(d[0], d[1], d[2]);
 		glEnd();
 
 		//Tapa superior
-		glColor3f(0.3f, 0.3f, 0.3f);
-
+	
 		if (modoRender == 1) glBegin(GL_TRIANGLES);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
 		glNormal3f(0.0f, 1.0f, 0.0f);
@@ -1164,7 +1175,6 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 		glEnd();
 
 		//Tapa inferior
-		glColor3f(0.3f, 0.3f, 0.3f);
 
 		if (modoRender == 1) glBegin(GL_TRIANGLES);// sólido
 		else if (modoRender == 2) glBegin(GL_LINE_LOOP);// alambrado
@@ -1174,6 +1184,7 @@ void dibujaCilindro(float radio, int lados, float altura, int modoRender)
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glEnd();
 	}
+	glDisable(GL_TEXTURE_2D);
 	SeleccionaMaterial(0);
 }
 
@@ -1355,20 +1366,20 @@ void dibujaTrampa1(float posY)
 	glPushMatrix();
 		glTranslatef(0.0f, posY, 0.0f);
 		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
-		dibujaCilindro(1.75f, 12, 30.0f, 1);
+		dibujaCilindro(1.75f, 12, 30.0f, 1, 1);
 	glPopMatrix();
 
 	//Cilindro fijo
 	glPushMatrix();
 		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
-		dibujaCilindro(2.5f, 12, 6.0f, 1);
+		dibujaCilindro(2.5f, 12, 6.0f, 1, 0);
 	glPopMatrix();
 
 	//Cilindro ancho
 	glPushMatrix();
 		glTranslatef(0.0f, posY - 2.0f, 0.0f);
 		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
-		dibujaCilindro(3.5f, 12, 2.0f, 1);
+		dibujaCilindro(3.5f, 12, 2.0f, 1, 0);
 	glPopMatrix();
 	 
 	//Picos de las trampas de techo
@@ -1547,6 +1558,7 @@ void dibujaTrampa2()
 void dibujaEscenario(int render)
 {
 	static int blink=0;
+	static float s_mov =0.0f;
 
 	if(render == 1)//sólido
 		glPolygonMode(GL_FRONT,GL_FILL);
@@ -1613,11 +1625,16 @@ void dibujaEscenario(int render)
 	glBegin(GL_QUADS);
 		glColor3f(0.0f, 1.0f, 0.0f);
 		glNormal3f(0.0f, 1.0f, 0.0f);
-		glTexCoord2f(0.0f, 0.0f); glVertex3f( 80.0f, 10.0f, 25.0f);
-		glTexCoord2f(3.0f, 0.0f); glVertex3f(200.0f, 10.0f, 25.0f);
-		glTexCoord2f(3.0f, 1.0f); glVertex3f(200.0f, 10.0f,  0.0f);
-		glTexCoord2f(0.0f, 1.0f); glVertex3f( 80.0f, 10.0f,  0.0f);
+		glTexCoord2f(0.0f+s_mov, 0.0f); glVertex3f( 80.0f, 10.0f, 25.0f);
+		glTexCoord2f(3.0f+s_mov, 0.0f); glVertex3f(200.0f, 10.0f, 25.0f);
+		glTexCoord2f(3.0f+s_mov, 1.0f); glVertex3f(200.0f, 10.0f,  0.0f);
+		glTexCoord2f(0.0f+s_mov, 1.0f); glVertex3f( 80.0f, 10.0f,  0.0f);
 	glEnd();
+
+	if(s_mov < 1.0f)
+		s_mov += 0.01f;
+	else
+		s_mov = 0.0f;
 
 	//OBJETO 3 (4 planos) ///////////////
 
@@ -3687,8 +3704,8 @@ void dibujaEscenario(int render)
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(1870.0f, 10.0f, 7.0f);
 	glTexCoord2f(1.0f, 0.0f); glVertex3f(1873.0f, 10.0f, 7.0f);
-	glTexCoord2f(1.0f, 2.0f); glVertex3f(1873.0f, 140.0f, 7.0f);
-	glTexCoord2f(0.0f, 2.0f); glVertex3f(1870.0f, 140.0f, 7.0f);
+	glTexCoord2f(1.0f, 2.0f); glVertex3f(1873.0f, 40.0f, 7.0f);
+	glTexCoord2f(0.0f, 2.0f); glVertex3f(1870.0f, 40.0f, 7.0f);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, textura[5].texID);
@@ -3771,8 +3788,8 @@ void dibujaEscenario(int render)
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(1897.0f, 10.0f, 7.0f);
 	glTexCoord2f(1.0f, 0.0f); glVertex3f(1900.0f, 10.0f, 7.0f);
-	glTexCoord2f(1.0f, 2.0f); glVertex3f(1900.0f, 140.0f, 7.0f);
-	glTexCoord2f(0.0f, 2.0f); glVertex3f(1897.0f, 140.0f, 7.0f);
+	glTexCoord2f(1.0f, 2.0f); glVertex3f(1900.0f, 40.0f, 7.0f);
+	glTexCoord2f(0.0f, 2.0f); glVertex3f(1897.0f, 40.0f, 7.0f);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, textura[5].texID);
@@ -4174,6 +4191,7 @@ void dibujaEscenario(int render)
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
+
 
 	//Trampas de piso (1,2,7 y 8 moviles; 3,4,5 y 6 fijas)
 
