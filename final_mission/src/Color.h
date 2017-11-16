@@ -7,9 +7,7 @@ private:
 public:
 	Color();
 	Color(int r, int g, int b);
-	Color(int *rgb);
 	Color(float r, float g, float b);
-	Color(float *rgb);
 	float getR();
 	float getG();
 	float getB();

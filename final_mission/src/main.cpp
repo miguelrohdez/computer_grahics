@@ -32,6 +32,7 @@ CTexture tiles;
 CTexture fachadaExterior;
 CTexture fachadaInterior;
 CTexture textureSkyBox;
+CTexture cuadroDebug;
 CTexture  barda[6];
 /*
  * Colores
@@ -59,6 +60,10 @@ void inicializarTexturas() {
     fachadaExterior.BuildGLTexture();
     fachadaExterior.ReleaseImage();
 
+    cuadroDebug.LoadTGA("Texturas/cuadro.tga");
+    cuadroDebug.BuildGLTexture();
+    cuadroDebug.ReleaseImage();
+
     fachadaInterior.LoadTGA("Texturas/pintura_roja.tga");
     fachadaInterior.BuildGLTexture();
     fachadaInterior.ReleaseImage();
@@ -83,7 +88,7 @@ void InitGL() {
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
     glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
     glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
-    camara.Position_Camera(0,2.5f,3, 0,2.5f,0, 0, 1, 0);
+    camara.Position_Camera(10,60,-50, 0,30,0, 0, 1, 0);
     inicializarTexturas();
 }
 
@@ -205,6 +210,17 @@ void dibujarSkyBox() {
     p.drawSky();
 }
 
+
+void dibujarPlano() {
+    Vertex v1 = Vertex(20,0,0);
+    Vertex v2 = Vertex(0,0,0);
+    Vertex v3 = Vertex(0,20,0);
+    Vertex v4 = Vertex(20,20 ,0);
+    Plane p = Plane(cuadroDebug, v1, v2, v3, v4);
+    p.draw();
+    p.toString();
+}
+
 /*
  * Función que dibuja
  */
@@ -241,7 +257,11 @@ void display(void) {
     glTranslatef(10, 0.025, 10);
     dibujarMesa();
 
+    glTranslatef(20, 20, 0);
+    dibujarPlano();
     glDisable(GL_TEXTURE_2D);
+
+
     glFlush(); //TODO: Entender que hace
     glutSwapBuffers();
 }

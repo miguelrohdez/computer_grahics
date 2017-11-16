@@ -7,9 +7,9 @@ Plane::Plane() {
 }
 Plane::Plane(CTexture t, Vertex v1, Vertex v2, Vertex v3, Vertex v4, int repAxisA, int repAxisB, Color c) {
 	setVertex(v1, v2, v3, v4);
-	calculateRepetitions(repAxisA, repAxisB);
 	setColor(c);
 	setTexture(t);
+	calculateRepetitions(repAxisA, repAxisB);
 }
 
 Plane::Plane(Vertex v1, Vertex v2, Vertex v3, Vertex v4, CTexture t) {
@@ -21,10 +21,10 @@ void Plane::draw() {
 	glBindTexture(GL_TEXTURE_2D, texture.GLindex);
     //glColor3fv(this->color.getRGB());
     glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[0].getValues());
-		glTexCoord2f(0.0f, axisBRep); glVertex3fv(v[1].getValues());
-		glTexCoord2f(axisARep, axisBRep); glVertex3fv(v[2].getValues());
-		glTexCoord2f(axisARep, 0.0f); glVertex3fv(v[3].getValues());
+		glTexCoord2f(0.0, axisARep); glVertex3fv(v[0].getValues());
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[1].getValues());
+		glTexCoord2f(axisBRep, 0.0f); glVertex3fv(v[2].getValues());
+		glTexCoord2f(axisBRep, axisARep); glVertex3fv(v[3].getValues());
     glEnd();
 }
 
@@ -35,10 +35,10 @@ void Plane::drawInverse() {
 	glBindTexture(GL_TEXTURE_2D, texture.GLindex);
     glColor3fv(this->color.getRGB());
     glBegin(GL_QUADS);
-		glTexCoord2f(axisARep, 0.0f); glVertex3fv(v[3].getValues());
-		glTexCoord2f(axisARep, axisBRep); glVertex3fv(v[2].getValues());
-		glTexCoord2f(0.0f, axisBRep); glVertex3fv(v[1].getValues());
-		glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[0].getValues());
+		glTexCoord2f(axisBRep, axisARep); glVertex3fv(v[3].getValues());
+		glTexCoord2f(axisBRep, 0.0f); glVertex3fv(v[2].getValues());
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[1].getValues());
+		glTexCoord2f(0.0, axisARep); glVertex3fv(v[0].getValues());
     glEnd();
 }
 
@@ -48,7 +48,7 @@ void Plane::drawInverse() {
  */
 void Plane::calculateRepetitions(int repAxisA, int repAxisB) {
 	this->axisARep =  (v[0].distance(v[1]) / 10) * repAxisA;
-	this->axisBRep =  (v[2].distance(v[3]) / 10) * repAxisB;
+	this->axisBRep =  (v[1].distance(v[2]) / 10) * repAxisB;
 }
 
 void Plane::setTexture(CTexture t) {

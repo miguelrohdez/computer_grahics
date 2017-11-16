@@ -18,16 +18,6 @@ Color::Color(float r, float g, float b)
 	//printf("COLOR: %f %f %f\n", this->rgb[0], this->rgb[1], this->rgb[2]);
 }
 
-Color::Color(int rgb[3])
-{
-	Color(rgb[0], rgb[1], rgb[2]);
-}
-
-Color::Color(float rgb[3])
-{
-	Color(rgb[0], rgb[1], rgb[2]);
-}
-
 float Color::getR() {
 	return this->rgb[0];
 }
@@ -44,5 +34,5 @@ float* Color::getRGB() {
 }
 
 void Color::toString() {
-	printf("r:%0.3f - g:%0.3f - b:%0.3f\n", rgb[0], rgb[1], rgb[2]);
+	printf("r:%0.3f - g:%0.3f - b:%0.3f\n", this->rgb[0], this->rgb[1], this->rgb[2]);
 }
