@@ -47,8 +47,8 @@ void Plane::drawInverse() {
  * vea estirada
  */
 void Plane::calculateRepetitions(int repAxisA, int repAxisB) {
-	this->axisARep =  (v[0].distance(v[1]) / 10) * repAxisA;
-	this->axisBRep =  (v[1].distance(v[2]) / 10) * repAxisB;
+	this->axisARep =  (v[0].distance(v[1]) / 20) * repAxisA;
+	this->axisBRep =  (v[1].distance(v[2]) / 20) * repAxisB;
 }
 
 void Plane::setTexture(CTexture t) {

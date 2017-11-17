@@ -59,7 +59,6 @@ void Prisma::draw() {
         Plane(textures[5], v[7], v[4], v[2], v[0]) // YZ X negativa
     };
     for (size_t i = 0; i < 6; i++) {
-        //p[i].toString();
         p[i].draw();
     }
 }

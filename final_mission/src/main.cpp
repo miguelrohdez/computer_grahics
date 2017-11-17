@@ -3,7 +3,6 @@
  * Alumnos:
  * Barriga Martinez Diego Alberto
  * Oropeza Vilchis Luis Alberto
- *
  */
 
 #include <GL/glut.h>
@@ -14,26 +13,23 @@
 #include "Plane.h"
 
 CCamera camara;
-GLfloat g_lookupdown = 0.0f;    // Look Position In The Z-Axis (NEW)
+GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
 
-float mueve = 1.0f;
 float rotacionX = 0.0f;
 float rotacionY = 0.0f;
 float rotacionZ = 0.0f;
-float traslacionX = 0.0f;
-float traslacionY = 0.0f;
-float traslacionZ = 0.0f;
 
 /*
  * Texturas
  */
-CTexture terreno;
+CTexture pasto;
 CTexture tiles;
 CTexture fachadaExterior;
 CTexture fachadaInterior;
 CTexture textureSkyBox;
 CTexture cuadroDebug;
 CTexture  barda[6];
+
 /*
  * Colores
  */
@@ -48,32 +44,33 @@ void inicializarTexturas() {
 	textureSkyBox.BuildGLTexture();
 	textureSkyBox.ReleaseImage();
 
-    terreno.LoadTGA("Texturas/tierra.tga");
-    terreno.BuildGLTexture();
-    terreno.ReleaseImage();
+    pasto.LoadTGA("Texturas/pasto3.tga");
+    pasto.BuildGLTexture();
+    pasto.ReleaseImage();
 
     tiles.LoadTGA("Texturas/piso2.tga");
     tiles.BuildGLTexture();
     tiles.ReleaseImage();
 
-    fachadaExterior.LoadTGA("Texturas/ladrillos2.tga");
+    fachadaExterior.LoadTGA("Texturas/ladrillos2s.tga");
     fachadaExterior.BuildGLTexture();
     fachadaExterior.ReleaseImage();
-
-    cuadroDebug.LoadTGA("Texturas/cuadro.tga");
-    cuadroDebug.BuildGLTexture();
-    cuadroDebug.ReleaseImage();
 
     fachadaInterior.LoadTGA("Texturas/pintura_roja.tga");
     fachadaInterior.BuildGLTexture();
     fachadaInterior.ReleaseImage();
 
-        barda[0] = fachadaInterior;
-        barda[1] = fachadaInterior;
-        barda[2] = fachadaInterior;
-        barda[3] = fachadaExterior;
-        barda[4] = fachadaExterior;
-        barda[5] = fachadaExterior;
+    /* Imagen para depurar las texturas*/
+    cuadroDebug.LoadTGA("Texturas/cuadro.tga");
+    cuadroDebug.BuildGLTexture();
+    cuadroDebug.ReleaseImage();
+
+    barda[0] = fachadaInterior;
+    barda[1] = fachadaInterior;
+    barda[2] = fachadaInterior;
+    barda[3] = fachadaExterior;
+    barda[4] = fachadaExterior;
+    barda[5] = fachadaExterior;
 }
 
 /*
@@ -88,55 +85,46 @@ void InitGL() {
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
     glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
     glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
-    camara.Position_Camera(10,60,-50, 0,30,0, 0, 1, 0);
+    camara.Position_Camera(10, 60, -50, 0, 30, 0, 0, 1, 0);
     inicializarTexturas();
 }
 
 
 void dibujaEjes() {
-
     glBegin(GL_LINES);
-    //Eje X
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glVertex3f(-1000.0f, 0.0f, 0.0f);
-    glVertex3f(1000.0f, 0.0f, 0.0f);
-
-    //Eje Y
-    glColor3f(0.0f, 1.0f, 0.0f);
-    glVertex3f(0.0f, -1000.0f, 0.0f);
-    glVertex3f(0.0f, 1000.0f, 0.0f);
-
-    //Eje Z
-    glColor3f(0.0f, 0.0f, 1.0f);
-    glVertex3f(0.0f, 0.0f, -1000.0f);
-    glVertex3f(0.0f, 0.0f, 1000.0f);
+        //Eje X
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex3f(-1000.0f, 0.0f, 0.0f);
+        glVertex3f(1000.0f, 0.0f, 0.0f);
+        //Eje Y
+        glColor3f(0.0f, 1.0f, 0.0f);
+        glVertex3f(0.0f, -1000.0f, 0.0f);
+        glVertex3f(0.0f, 1000.0f, 0.0f);
+        //Eje Z
+        glColor3f(0.0f, 0.0f, 1.0f);
+        glVertex3f(0.0f, 0.0f, -1000.0f);
+        glVertex3f(0.0f, 0.0f, 1000.0f);
     glEnd();
-
     glPointSize(10.0f);
-
     glBegin(GL_POINTS);
-    //"Flecha" eje X
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glVertex3f(1000.0f, 0.0f, 0.0f);
-
-    //"Flecha" eje Y
-    glColor3f(0.0f, 1.0f, 0.0f);
-    glVertex3f(0.0f, 1000.0f, 0.0f);
-
-    //"Flecha" eje Z
-    glColor3f(0.0f, 0.0f, 1.0f);
-    glVertex3f(0.0f, 0.0f, 1000.0f);
+        //"Flecha" eje X
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex3f(1000.0f, 0.0f, 0.0f);
+        //"Flecha" eje Y
+        glColor3f(0.0f, 1.0f, 0.0f);
+        glVertex3f(0.0f, 1000.0f, 0.0f);
+        //"Flecha" eje Z
+        glColor3f(0.0f, 0.0f, 1.0f);
+        glVertex3f(0.0f, 0.0f, 1000.0f);
     glEnd();
-
     glPointSize(1.0f);
-
     glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 void dibujarTerreno() {
     Color c = Color(1.0f, 1.0f, 1.0f);
     Prisma p = Prisma(500, 10, 500, c);
-    p.setTexture(terreno);
+    p.setTexture(pasto);
     p.setRepetitionTexture(20);
     p.draw();
 }
@@ -210,15 +198,14 @@ void dibujarSkyBox() {
     p.drawSky();
 }
 
-
+/* Función para depurar los planos */
 void dibujarPlano() {
-    Vertex v1 = Vertex(20,0,0);
+    Vertex v1 = Vertex(5,0,0);
     Vertex v2 = Vertex(0,0,0);
-    Vertex v3 = Vertex(0,20,0);
-    Vertex v4 = Vertex(20,20 ,0);
+    Vertex v3 = Vertex(0,10,0);
+    Vertex v4 = Vertex(5,10 ,0);
     Plane p = Plane(cuadroDebug, v1, v2, v3, v4);
     p.draw();
-    p.toString();
 }
 
 /*
@@ -226,42 +213,37 @@ void dibujarPlano() {
  */
 void display(void) {
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // limpia pantalla y Depth Buffer
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
-    glLoadIdentity();    // Reinicia matriz Modelview
+    glLoadIdentity();
     glTranslatef(rotacionX, rotacionY, rotacionZ);
-    //gluLookAt(100.0f + traslacionX, 520.0f + traslacionY, 10.f + traslacionZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
     glRotatef(g_lookupdown,1.0f,0,0);
-    gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z, camara.mView.x, camara.mView.y, camara.mView.z, camara.mUp.x,   camara.mUp.y,   camara.mUp.z);
+    gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
+              camara.mView.x, camara.mView.y, camara.mView.z,
+              camara.mUp.x, camara.mUp.y, camara.mUp.z);
 
     dibujaEjes();
     glEnable(GL_TEXTURE_2D);
-    glPushMatrix();
+    glPushMatrix(); // Skybox
         glTranslatef(0,95,0);
         dibujarSkyBox();
     glPopMatrix();
-
-    glPushMatrix();
+    glPushMatrix(); // Pasto
             dibujarTerreno();
     glPopMatrix();
-
     glTranslatef(0, 7.5, 0);
-    glPushMatrix();
+    glPushMatrix(); // Piso casa
         dibujarPiso();
     glPopMatrix();
     glTranslatef(0, 2.5, 0);
-    glPushMatrix();
+    glPushMatrix(); // Paredes
         glTranslatef(0, 12.5, 0);
         dibujarCasa();
     glPopMatrix();
     glTranslatef(10, 0.025, 10);
     dibujarMesa();
-
     glTranslatef(20, 20, 0);
-    dibujarPlano();
     glDisable(GL_TEXTURE_2D);
-
-
     glFlush(); //TODO: Entender que hace
     glutSwapBuffers();
 }
@@ -270,19 +252,14 @@ void display(void) {
 /*
 * Funcion para el reajuste de dibujo en ventana
 */
-
 void reshape(int width, int height) {
-    if (height == 0) // Prevenir division entre cero
-        height = 1;
-
+    float relation;
+    height = (height == 0) ? 1 : height;
     glViewport(0, 0, width, height);
-
     glMatrixMode(GL_PROJECTION); // Seleccionamos Projection Matrix
     glLoadIdentity();
-
-    //glFrustum(-500, 500, -500, 500, 0, 20);  //TODO: Cambio de valores
-    gluPerspective(60, width / height, 1.0f, 10000.0f);
-
+    relation = (float)width / (float)height;
+    gluPerspective(20*relation, relation, 1.0f, 10000.0f);
     glMatrixMode(GL_MODELVIEW); // Seleccionamos Modelview Matrix
     glLoadIdentity();
 }
@@ -291,81 +268,63 @@ void reshape(int width, int height) {
 /*
 * Función que maneja el teclado
 */
-void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
-{
-	switch ( key ) {
-
-		case 'w':   //Movimientos de camara
-		case 'W':
-			camara.Move_Camera( CAMERASPEED+0.2 );
-			break;
-
-		case 's':
-		case 'S':
-			camara.Move_Camera(-(CAMERASPEED+0.2));
-			break;
-
-		case 'a':
-		case 'A':
-			camara.Strafe_Camera(-(CAMERASPEED+0.4));
-			break;
-
-		case 'd':
-		case 'D':
-			camara.Strafe_Camera( CAMERASPEED+0.4 );
-			break;
-
-    case 'e':
-    case 'E':
-      camara.UpDown_Camera(CAMERASPEED);
-      break;
-
-    case 'q':
-    case 'Q':
-      camara.UpDown_Camera(-CAMERASPEED);
-        break;
-
-		case 27:        // Cuando Esc es presionado...
-			exit ( 0 );   // Salimos del programa
-			break;
-		default:        // Cualquier otra
-			break;
-  }
-
-  glutPostRedisplay();
+void keyboard(unsigned char key, int x, int y) {
+    switch (key) {
+        case 'w':   //Movimientos de camara
+        case 'W':
+            camara.Move_Camera( CAMERASPEED+0.1 );
+            break;
+        case 's':
+        case 'S':
+            camara.Move_Camera(-(CAMERASPEED+0.1));
+            break;
+        case 'a':
+        case 'A':
+            camara.Strafe_Camera(-(CAMERASPEED+0.1));
+            break;
+        case 'd':
+        case 'D':
+            camara.Strafe_Camera( CAMERASPEED+0.1 );
+            break;
+        case 'e':
+        case 'E':
+            camara.UpDown_Camera(CAMERASPEED);
+            break;
+        case 'q':
+        case 'Q':
+            camara.UpDown_Camera(-CAMERASPEED);
+            break;
+        case 27:        // Cuando Esc es presionado...
+            exit ( 0 );   // Salimos del programa
+            break;
+        default:        // Cualquier otra
+            break;
+    }
+    glutPostRedisplay();
 }
 
 /*
 * Función para el manejo de teclas especiales
 */
-void arrow_keys ( int a_keys, int x, int y )  // Funcion para manejo de teclas especiales (arrow keys)
-{
-  switch ( a_keys ) {
-
-    case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
-		  g_lookupdown -= 1.0f;
-		break;
-
-    case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
-		  g_lookupdown += 1.0f;
-		break;
-
-	case GLUT_KEY_LEFT:
-		camara.Rotate_View(-CAMERASPEED);
-		break;
-
-	case GLUT_KEY_RIGHT:
-		camara.Rotate_View( CAMERASPEED);
-		break;
-
-    default:
-		break;
-  }
-  glutPostRedisplay();
+void arrow_keys(int a_keys, int x, int y) {
+    switch ( a_keys ) {
+        case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
+            g_lookupdown -= 1.0f;
+            break;
+        case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
+            g_lookupdown += 1.0f;
+            break;
+        case GLUT_KEY_LEFT:
+            camara.Rotate_View(-CAMERASPEED);
+            break;
+        case GLUT_KEY_RIGHT:
+            camara.Rotate_View( CAMERASPEED);
+            break;
+        default:
+            break;
+    }
+    glutPostRedisplay();
 }
-
-
-//TODO: Función para las animaciones
 
 /*
 * Función principal
