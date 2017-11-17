@@ -52,7 +52,7 @@ void inicializarTexturas() {
     tiles.BuildGLTexture();
     tiles.ReleaseImage();
 
-    fachadaExterior.LoadTGA("Texturas/ladrillos2s.tga");
+    fachadaExterior.LoadTGA("Texturas/ladrillos2.tga");
     fachadaExterior.BuildGLTexture();
     fachadaExterior.ReleaseImage();
 
@@ -123,17 +123,16 @@ void dibujaEjes() {
 
 void dibujarTerreno() {
     Color c = Color(1.0f, 1.0f, 1.0f);
-    Prisma p = Prisma(500, 10, 500, c);
+    Prisma p = Prisma(500, 5, 500, c);
+    p.setRepetitionTexture(0.5);
     p.setTexture(pasto);
-    p.setRepetitionTexture(20);
     p.draw();
 }
 
 void dibujarPiso() {
     Color c = Color(1.0f, 1.0f, 1.0f);
-    Prisma p = Prisma(140, 5, 140, c);
+    Prisma p = Prisma(280, 1, 280, c);
     p.setTexture(tiles);
-    p.setRepetitionTexture(20);
     p.draw();
 }
 
@@ -151,45 +150,45 @@ void dibujarMesa() {
 }
 
 
-void dibujarCasa() {
+void dibujarCasa(float heightWall, float scale, float textureRep=0.3f) {
     Color n = Color(1.0f, 1.0f, 1.0f);
-    Prisma c = Prisma(100, 25, 0.3, n);
+    Prisma c = Prisma(100*scale, heightWall, 0.3, n);
+    c.setRepetitionTexture(textureRep);
     c.setTexture(barda);
-    //c.setRepetitionTexture(2);
-    glTranslatef(0, 0, -65.5);
+    glTranslatef(0, 0, -65.5*scale);
     c.draw(); // A
-    glTranslatef(25, 0, 30);
-    c.draw(50, 25, 0.3); // E
-    glTranslatef(-60, 0, 0);
-    c.draw(30, 25, 0.3, fachadaInterior); // F
+    glTranslatef(25*scale, 0, 30*scale);
+    c.draw(50*scale, heightWall, 0.3); // E
+    glTranslatef(-60*scale, 0, 0);
+    c.draw(30*scale, heightWall, 0.3, fachadaInterior); // F
     c.setTexture(barda);
-    glTranslatef(0, 0, 20);
-    c.draw(30, 25, 0.3); // H
-    glTranslatef(5, 0, 40);
-    c.draw(40, 25, 0.3); // M
-    glTranslatef(35, 0, 40);
-    c.draw(50, 25, 0.3); // O
-    glTranslatef(-25, 0, -7.5);
-    c.draw(0.3, 25, 15); // Ñ
-    glTranslatef(0, 0, -25);
-    c.draw(0.3, 25, 15); // N
-    glTranslatef(10, 0, -27.5);
-    c.draw(0.3, 25, 40); // L
-    glTranslatef(10, 0, -25);
-    c.draw(0.3, 25, 30); // J
-    glTranslatef(-20, 0, 0);
-    c.draw(0.3, 25, 10); // I
-    glTranslatef(-30, 0, 0);
-    c.draw(0.3, 25, 90); // G
-    glTranslatef(40, 0, -30);
-    c.draw(0.3, 25, 30, fachadaInterior); // D
-    glTranslatef(40, 0, -5);
-    c.draw(0.3, 25, 20); // C
+    glTranslatef(0, 0, 20*scale);
+    c.draw(30*scale, heightWall, 0.3); // H
+    glTranslatef(5*scale, 0, 40*scale);
+    c.draw(40*scale, heightWall, 0.3); // M
+    glTranslatef(35*scale, 0, 40*scale);
+    c.draw(50*scale, heightWall, 0.3); // O
+    glTranslatef(-25*scale, 0, -7.5*scale);
+    c.draw(0.3, heightWall, 15*scale); // Ñ
+    glTranslatef(0, 0, -25*scale);
+    c.draw(0.3, heightWall, 15*scale); // N
+    glTranslatef(10*scale, 0, -27.5*scale);
+    c.draw(0.3, heightWall, 40*scale); // L
+    glTranslatef(10*scale, 0, -25*scale);
+    c.draw(0.3, heightWall, 30*scale); // J
+    glTranslatef(-20*scale, 0, 0);
+    c.draw(0.3, heightWall, 10*scale); // I
+    glTranslatef(-30*scale, 0, 0);
+    c.draw(0.3, heightWall, 90*scale); // G
+    glTranslatef(40*scale, 0, -30*scale);
+    c.draw(0.3, heightWall, 30*scale, fachadaInterior); // D
+    glTranslatef(40*scale, 0, -5*scale);
+    c.draw(0.3, heightWall, 20*scale); // C
     c.setTexture(barda);
-    glTranslatef(20, 0, 5);
-    c.draw(0.3, 25, 30); // B
-    glTranslatef(-20, 0, 70);
-    c.draw(0.3, 25, 90);
+    glTranslatef(20*scale, 0, 5*scale);
+    c.draw(0.3, heightWall, 30*scale); // B
+    glTranslatef(-20*scale, 0, 70*scale);
+    c.draw(0.3, heightWall, 90*scale);
 }
 
 void dibujarSkyBox() {
@@ -204,7 +203,7 @@ void dibujarPlano() {
     Vertex v2 = Vertex(0,0,0);
     Vertex v3 = Vertex(0,10,0);
     Vertex v4 = Vertex(5,10 ,0);
-    Plane p = Plane(cuadroDebug, v1, v2, v3, v4);
+    Plane p = Plane(v1, v2, v3, v4, cuadroDebug);
     p.draw();
 }
 
@@ -231,14 +230,14 @@ void display(void) {
     glPushMatrix(); // Pasto
             dibujarTerreno();
     glPopMatrix();
-    glTranslatef(0, 7.5, 0);
+    glTranslatef(0, 2.5, 0);
     glPushMatrix(); // Piso casa
         dibujarPiso();
     glPopMatrix();
-    glTranslatef(0, 2.5, 0);
+    glTranslatef(0, 0.5, 0);
     glPushMatrix(); // Paredes
         glTranslatef(0, 12.5, 0);
-        dibujarCasa();
+        dibujarCasa(25.0, 2.0);
     glPopMatrix();
     glTranslatef(10, 0.025, 10);
     dibujarMesa();
@@ -272,19 +271,19 @@ void keyboard(unsigned char key, int x, int y) {
     switch (key) {
         case 'w':   //Movimientos de camara
         case 'W':
-            camara.Move_Camera( CAMERASPEED+0.1 );
+            camara.Move_Camera( CAMERASPEED );
             break;
         case 's':
         case 'S':
-            camara.Move_Camera(-(CAMERASPEED+0.1));
+            camara.Move_Camera(-(CAMERASPEED));
             break;
         case 'a':
         case 'A':
-            camara.Strafe_Camera(-(CAMERASPEED+0.1));
+            camara.Strafe_Camera(-(CAMERASPEED));
             break;
         case 'd':
         case 'D':
-            camara.Strafe_Camera( CAMERASPEED+0.1 );
+            camara.Strafe_Camera( CAMERASPEED);
             break;
         case 'e':
         case 'E':

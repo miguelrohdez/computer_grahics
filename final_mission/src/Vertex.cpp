@@ -6,11 +6,11 @@
 Vertex::Vertex(){
 }
 
-Vertex::Vertex(float x, float y, float z): x{x}, y{y}, z{z} {
+Vertex::Vertex(float x, float y, float z) {
 	setValues(x,y,z);
 }
 
-Vertex::Vertex(int x, int y, int z) : x{x}, y{y}, z{z}{
+Vertex::Vertex(int x, int y, int z) {
 	setValues(x,y,z);
 }
 

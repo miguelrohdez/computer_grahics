@@ -2,7 +2,9 @@
 #include <stdio.h>
 Color::Color()
 {
-	Color(1.0f,1.0f,1.0f);
+	for (size_t i = 0; i < 3; i++) {
+		rgb[i] = 1.0;
+	}
 }
 
 Color::Color(int r, int g, int b)
@@ -15,7 +17,6 @@ Color::Color(float r, float g, float b)
 	this->rgb[0] = r;
 	this->rgb[1] = g;
 	this->rgb[2] = b;
-	//printf("COLOR: %f %f %f\n", this->rgb[0], this->rgb[1], this->rgb[2]);
 }
 
 float Color::getR() {

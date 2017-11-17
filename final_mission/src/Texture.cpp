@@ -3,7 +3,7 @@
 #include <string.h>
 #include <GL/glut.h>
 #include <stdlib.h>
-bool CTexture::LoadTGA(char *filename)			// Loads A TGA File Into Memory
+bool CTexture::LoadTGA(const char *filename)			// Loads A TGA File Into Memory
 {
 	unsigned char	TGAheader[12]={0,0,2,0,0,0,0,0,0,0,0,0};	// Uncompressed TGA Header
 	unsigned char	TGAcompare[12];					// Used To Compare TGA Header
@@ -75,7 +75,7 @@ bool CTexture::LoadTGA(char *filename)			// Loads A TGA File Into Memory
 	return true;											// Texture Building Went Ok, Return True
 }
 
-bool CTexture::LoadBMP(char* filename)
+bool CTexture::LoadBMP(const char* filename)
 {
     FILE *file;
     unsigned long size;                 // size of the image in bytes.

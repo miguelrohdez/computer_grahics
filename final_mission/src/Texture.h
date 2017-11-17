@@ -13,8 +13,8 @@ public:
 	int		height;		    // Image Height
 	unsigned int    GLindex;
 
-	bool LoadTGA(char* filename);		// Loads A TGA File Into Memory
-	bool LoadBMP(char* filename);
+	bool LoadTGA(const char* filename);		// Loads A TGA File Into Memory
+	bool LoadBMP(const char* filename);
 	void BuildGLTexture();
 	void ReleaseImage();
 };
