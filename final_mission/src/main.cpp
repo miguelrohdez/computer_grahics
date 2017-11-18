@@ -11,6 +11,9 @@
 #include "Prisma.h"
 #include "Camera.h"
 #include "Plane.h"
+#include "Cilindro.h"
+
+#define PI 3.1415063
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -41,8 +44,8 @@ Color cafeMesa = Color(0.09f, 0.06f, 0.05f);
 
 void inicializarTexturas() {
     textureSkyBox.LoadBMP("Texturas/skybox.bmp");
-	textureSkyBox.BuildGLTexture();
-	textureSkyBox.ReleaseImage();
+	  textureSkyBox.BuildGLTexture();
+	  textureSkyBox.ReleaseImage();
 
     pasto.LoadTGA("Texturas/pasto3.tga");
     pasto.BuildGLTexture();
@@ -240,9 +243,66 @@ void dibujaSillon(){
 
 }
 
-void dibujaAvion(){
-  
+void dibujaCilindro(float radio, float planes, float height){
+  float ang;
+  float a[3], b[3], c[3], d[3];
+  float delta;
+
+  delta = 360.0f / planes;
+
+  for (int i = 0; i < planes; i++)  //Por la forma de renderizar de openGL se usa for
+  {
+    ang = i*delta;
+
+    a[0] = radio*(float)cos(ang*PI / 180.0f);  //Conversi�n de �ngulo a RAD
+    a[1] = 0.0f;
+    a[2] = radio*(float)sin(ang*PI / 180.0f);
+
+    b[0] = a[0];  // Se calcula igual y se reutiliza
+    b[1] = height;  // El vertice b est� arriba por ello se usa height
+    b[2] = a[2];
+
+    ang = (i + 1)*delta;  // Se utiliza theta sig. Delta theta = i+1
+
+    c[0] = radio*(float)cos(ang*PI / 180.0f);
+    c[1] = height;
+    c[2] = radio*(float)sin(ang*PI / 180.0f);
+
+    d[0] = c[0];
+    d[1] = 0.0f;
+    d[2] = c[2];
+
+    glBegin(GL_QUADS);
+      glVertex3f(a[0], a[1], a[2]);
+      glVertex3f(b[0], b[1], b[2]);
+      glVertex3f(c[0], c[1], c[2]);
+      glVertex3f(d[0], d[1], d[2]);
+    glEnd();
+
+    //Tapa superior
+
+    glBegin(GL_TRIANGLES);
+      glVertex3f(c[0], c[1], c[2]);
+      glVertex3f(b[0], b[1], b[2]);
+      glVertex3f(0.0f, height, 0.0f);
+    glEnd();
+
+    //Tapa inferior
+
+    glBegin(GL_TRIANGLES);
+      glVertex3f(a[0], a[1], a[2]);
+      glVertex3f(d[0], d[1], d[2]);
+    glEnd();
+  }
 }
+
+
+void dibujaAvion(){
+
+    glTranslatef(10, 30, 0);
+    dibujaCilindro(30, 20, 20);
+}
+
 /*
  * Función que dibuja
  */
@@ -280,6 +340,7 @@ void display(void) {
     glTranslatef(0, 40, 0);
 
     dibujaSillon();
+    dibujaAvion();
     glTranslatef(20, 20, 0);
     glDisable(GL_TEXTURE_2D);
 
