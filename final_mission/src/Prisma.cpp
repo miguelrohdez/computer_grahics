@@ -1,17 +1,20 @@
 #include "Prisma.h"
 #include "Plane.h"
+
 Prisma::Prisma() {
     Color c(1,1,1);
     setSize(1,1,1);
     setColor(c);
     setRepetitionTexture(1);
 }
+
 Prisma::Prisma(float width, float height, float depth, Color color, CTexture *textures) {
     setSize(width, height, depth);
     setTexture(textures);
     setColor(color);
     setRepetitionTexture(1);
 }
+
 Prisma::Prisma(float width, float height, float depth, Color color) {
     setSize(width, height, depth);
     setColor(color);
@@ -76,7 +79,6 @@ void Prisma::draw() {
     }
 }
 
-
 void Prisma::drawSky() {
     float v[8][3] = {
             {-x,  y,  z},
@@ -138,7 +140,6 @@ void Prisma::drawSky() {
         glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[7]);
     glEnd();
 }
-
 
 void Prisma::toDebug() {
     printf("Size %f %f %f\n", this->x, this->y, this->z);
