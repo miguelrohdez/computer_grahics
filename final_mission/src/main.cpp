@@ -323,17 +323,20 @@ void dibujaCilindro(float radio, float planes, float height){
 
     //Tapa inferior
 
-    glBegin(GL_TRIANGLES);
+    glBegin(GL_TRIANGLES);      
       glVertex3f(a[0], a[1], a[2]);
       glVertex3f(d[0], d[1], d[2]);
+      glVertex3f(0.0f, 0.0f, 0.0f);
     glEnd();
   }
 }
 
 
 void dibujaAvion(){
-
+    glTranslatef(0, 30, 0);
+    dibujaCilindro(20, 10, 60);
 }
+
 
 /*
  * Función que dibuja
