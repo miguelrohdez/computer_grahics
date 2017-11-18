@@ -151,6 +151,7 @@ void dibujarMesa() {
 
 
 void dibujarCasa(float heightWall, float scale, float textureRep=0.3f) {
+    GLfloat alturaTecho = heightWall - 12.0f;
     Color n = Color(1.0f, 1.0f, 1.0f);
     Prisma c = Prisma(100*scale, heightWall, 0.3, n);
     c.setRepetitionTexture(textureRep);
@@ -189,6 +190,16 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.3f) {
     c.draw(0.3, heightWall, 30*scale); // B
     glTranslatef(-20*scale, 0, 70*scale);
     c.draw(0.3, heightWall, 90*scale);
+
+    //Secciones de Techo
+    //Tres secciones: comienza en O y terminan en B
+    glTranslatef(-25*scale, alturaTecho, 25*scale);
+    c.draw(50*scale, 1, 40*scale); // 1
+    glTranslatef(-15*scale, 0, -65*scale);
+    c.draw(80*scale,  1, 90*scale); // 2
+    glTranslatef(50*scale, 0, -30*scale);
+    c.draw(20*scale, 1, 30*scale); // 3
+
 }
 
 void dibujarSkyBox() {
@@ -217,7 +228,7 @@ void display(void) {
     glLoadIdentity();
     glTranslatef(rotacionX, rotacionY, rotacionZ);
     glRotatef(g_lookupdown,1.0f,0,0);
-    gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
+    gluLookAt(camara.mPos.x, camara.mPos.y + 250.0f, camara.mPos.z,
               camara.mView.x, camara.mView.y, camara.mView.z,
               camara.mUp.x, camara.mUp.y, camara.mUp.z);
 
