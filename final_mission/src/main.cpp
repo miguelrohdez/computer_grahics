@@ -88,7 +88,7 @@ void InitGL() {
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
     glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
     glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
-    camara.Position_Camera(10, 60, -50, 0, 30, 0, 0, 1, 0);
+    camara.Position_Camera(10, 50, -50, 0, 30, 0, 0, 1, 0);
     inicializarTexturas();
 }
 
@@ -154,45 +154,79 @@ void dibujarMesa() {
 
 
 void dibujarCasa(float heightWall, float scale, float textureRep=0.3f) {
+    float anchoBarda = 1.1f;
     GLfloat alturaTecho = heightWall - 12.0f;
     Color n = Color(1.0f, 1.0f, 1.0f);
-    Prisma c = Prisma(100*scale, heightWall, 0.3, n);
+    Prisma c = Prisma(30 * scale, heightWall, anchoBarda, n);
+
     c.setRepetitionTexture(textureRep);
     c.setTexture(barda);
-    glTranslatef(0, 0, -65.5*scale);
-    c.draw(); // A
-    glTranslatef(25*scale, 0, 30*scale);
-    c.draw(50*scale, heightWall, 0.3); // E
-    glTranslatef(-60*scale, 0, 0);
-    c.draw(30*scale, heightWall, 0.3, fachadaInterior); // F
-    c.setTexture(barda);
-    glTranslatef(0, 0, 20*scale);
-    c.draw(30*scale, heightWall, 0.3); // H
-    glTranslatef(5*scale, 0, 40*scale);
-    c.draw(40*scale, heightWall, 0.3); // M
-    glTranslatef(35*scale, 0, 40*scale);
-    c.draw(50*scale, heightWall, 0.3); // O
-    glTranslatef(-25*scale, 0, -7.5*scale);
-    c.draw(0.3, heightWall, 15*scale); // Ñ
-    glTranslatef(0, 0, -25*scale);
-    c.draw(0.3, heightWall, 15*scale); // N
-    glTranslatef(10*scale, 0, -27.5*scale);
-    c.draw(0.3, heightWall, 40*scale); // L
-    glTranslatef(10*scale, 0, -25*scale);
-    c.draw(0.3, heightWall, 30*scale); // J
-    glTranslatef(-20*scale, 0, 0);
-    c.draw(0.3, heightWall, 10*scale); // I
-    glTranslatef(-30*scale, 0, 0);
-    c.draw(0.3, heightWall, 90*scale); // G
-    glTranslatef(40*scale, 0, -30*scale);
-    c.draw(0.3, heightWall, 30*scale, fachadaInterior); // D
-    glTranslatef(40*scale, 0, -5*scale);
-    c.draw(0.3, heightWall, 20*scale); // C
-    c.setTexture(barda);
-    glTranslatef(20*scale, 0, 5*scale);
-    c.draw(0.3, heightWall, 30*scale); // B
-    glTranslatef(-20*scale, 0, 70*scale);
-    c.draw(0.3, heightWall, 90*scale);
+    glTranslatef(-50 * scale, 0, 50 * scale); // A
+        c.draw();
+
+    glTranslatef(-15 * scale, 0, -10 * scale); // B
+        c.draw(anchoBarda, heightWall, 20 * scale);
+
+    glTranslatef(30 * scale, 0, 0); // C
+        c.draw(anchoBarda, heightWall, 20 * scale, fachadaInterior);
+        c.setTexture(barda);
+
+    glTranslatef(-20 * scale, 0, -10 * scale); // D
+        c.draw(20*scale, heightWall, anchoBarda);
+
+    glTranslatef(75 * scale, 0, 0); // E
+        c.draw(90*scale, heightWall, anchoBarda);
+
+    glTranslatef(-55 * scale, 0, -15 * scale); // F
+        c.draw(anchoBarda, heightWall, 30 * scale);
+
+    glTranslatef(-30 * scale, 0, -5 * scale); // G
+        c.draw(anchoBarda, heightWall, 40 * scale);
+
+    glTranslatef(130 * scale, 0, -5 * scale); // H
+        c.draw(anchoBarda, heightWall, 50 * scale);
+
+    glTranslatef(-85 * scale, 0, -5 * scale); // I
+        c.draw(30 * scale, heightWall, anchoBarda);
+
+    glTranslatef(-30 * scale, 0, -10 * scale); // J
+        c.draw(30 * scale, heightWall, anchoBarda);
+
+    glTranslatef(55 * scale, 0, 0); // K
+        c.draw(40 * scale, heightWall, anchoBarda);
+
+    glTranslatef(-25 * scale, 0, -10 * scale); // L
+        c.draw(10 * scale, heightWall, anchoBarda);
+
+    glTranslatef(52.5 * scale, 0, 0); // M
+        c.draw(15 * scale, heightWall, anchoBarda);
+
+    glTranslatef(25 * scale, 0, 0); // N
+        c.draw(15 * scale, heightWall, anchoBarda);
+
+    glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ
+        c.draw(anchoBarda, heightWall, 40 * scale);
+
+    glTranslatef(90 * scale, 0, -5 * scale); // O
+        c.draw(anchoBarda, heightWall, 30 * scale);
+
+    glTranslatef(-60 * scale, 0, 0); // P
+        c.draw(anchoBarda, heightWall, 30 * scale);
+
+    glTranslatef(20 * scale, 0, 0); // Q
+        c.draw(anchoBarda, heightWall, 30 * scale);
+
+    glTranslatef(-35 * scale, 0, -15 * scale); // R
+        c.draw(30 * scale, heightWall, anchoBarda);
+
+    glTranslatef(25 * scale, 0, 0); // S
+        c.draw(20 * scale, heightWall, anchoBarda);
+
+    glTranslatef(30 * scale, 0, 0); // T
+        c.draw(40 * scale, heightWall, anchoBarda);
+
+    glTranslatef(20 * scale, 0, 35 * scale); // Q
+        c.draw(anchoBarda, heightWall, 10 * scale);
 
     //Secciones de Techo
     //Tres secciones: comienza en O y terminan en B
@@ -299,8 +333,6 @@ void dibujaCilindro(float radio, float planes, float height){
 
 void dibujaAvion(){
 
-    glTranslatef(10, 30, 0);
-    dibujaCilindro(30, 20, 20);
 }
 
 /*
