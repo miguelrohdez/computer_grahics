@@ -13,6 +13,7 @@
 #include "Plane.h"
 #include "TextureLoader.h"
 #include "Cylinder.h"
+#include "Cone.h"
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -239,6 +240,11 @@ void testCylinder() {
 	c.draw();
 }
 
+void testCone() {
+	Cone c(10, 10, textures.cuadroDebug);
+	c.draw();
+}
+
 /*
  * Función que dibuja
  */
@@ -277,7 +283,7 @@ void display(void) {
 	dibujaSillon();
 	glTranslatef(20, 20, 0);
 	glTranslatef(30, 30, 30);
-	testCylinder();
+	testCone();
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
