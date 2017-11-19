@@ -4,9 +4,14 @@
 #include "Texture.h"
 #include "Color.h"
 
+#ifndef CONSTANT_PI
+	#define PI 3.1415926535897
+#endif
+#ifndef CONSTANT_RESOLUTION
+	#define resolution 30
+#endif
+
 class Cylinder {
-	static constexpr float PI = 3.1415926535897;
-	static constexpr float resolution = 30;
 	float radioTop, radioBottom, height;
 	float scale;
 	CTexture texture;

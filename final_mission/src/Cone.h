@@ -3,10 +3,14 @@
 
 #include "Texture.h"
 #include "Color.h"
+#ifndef CONSTANT_PI
+	#define PI 3.1415926535897
+#endif
+#ifndef CONSTANT_RESOLUTION
+	#define resolution 30
+#endif
 
 class Cone {
-	static const float PI = 3.1415926535897;
-	static const float resolution = 30;
 	float height, radio;
 	float scale;
 	CTexture texture;
