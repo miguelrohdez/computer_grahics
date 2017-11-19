@@ -236,7 +236,7 @@ void dibujaAvion(){
 }
 
 void testCylinder() {
-	Cylinder c(10, 0, 10, textures.cuadroDebug);
+	Cylinder c(10, 4, 10, textures.cuadroDebug);
 	c.draw();
 }
 
