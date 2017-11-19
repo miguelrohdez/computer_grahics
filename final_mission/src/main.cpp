@@ -42,7 +42,7 @@ void InitGL() {
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
 	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-	camara.Position_Camera(150, 35, 150, 0, 35, 0, 0, 1, 0);
+	camara.Position_Camera(150, 135, 150, 0, 35, 0, 0, 1, 0);
 	textures.load();
 }
 
@@ -108,6 +108,58 @@ void dibujarMesa() {
 	m.draw(8.5, 0.2, 3.5, sienna);
 	glTranslatef(0.0f, 0.4f, 0.6f);
 	m.draw(15, 0.2, 10, cafeMesa);
+}
+
+/* Función que dibuja un sillon */
+void dibujaSillon(){
+
+	// TODO: cambio en las texturas
+	Prisma s = Prisma(20, 5, 10, cafeMesa);
+
+	s.draw(textures.cuadroDebug);
+	glPushMatrix();
+		glTranslatef(8.5, 3.5, 0);
+		s.draw(2, 2, 10);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-8.5, 3.5, 0);
+		s.draw(2, 2, 10);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(0, 3.5, 4);
+		s.draw(15, 3, 1.5);
+	glPopMatrix();
+}
+
+/* Función que dibuja una cama*/
+void dibujaCama(){
+
+	// TODO: Cambio en las texturas
+	Prisma cam = Prisma(20, 2, 23, cafeMesa);
+
+	cam.draw(textures.pinturaRoja);
+
+	//Almohadas
+	glPushMatrix();
+		glTranslatef(5, 1, 9);
+		cam.draw(8, 0.7f, 4, textures.cuadroDebug);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-5, 1, 9);
+		cam.draw(8, 0.7f, 4, textures.cuadroDebug);
+	glPopMatrix();
+
+	//Cabecera
+	glPushMatrix();
+		glTranslatef(0, 0.5, 11.9);
+		cam.draw(20, 7, 0.7f, textures.pinturaAmarilla);
+	glPopMatrix();
+
+	//Base
+	glPushMatrix();
+		glTranslatef(0, -2, -0.1);
+		cam.draw(21.2, 2, 23.2, textures.tiles);
+	glPopMatrix();
 }
 
 
@@ -211,24 +263,6 @@ void dibujarPlano() {
 	p.draw();
 }
 
-/* Función que dibuja un sillon */
-void dibujaSillon(){
-	Prisma s = Prisma(20, 5, 10, cafeMesa);
-
-	s.draw(textures.cuadroDebug);
-	glPushMatrix();
-		glTranslatef(8.5, 3.5, 0);
-		s.draw(2, 2, 10);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(-8.5, 3.5, 0);
-		s.draw(2, 2, 10);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(0, 3.5, 4);
-		s.draw(15, 3, 1.5);
-	glPopMatrix();
-}
 
 void dibujaAvion(){
 
@@ -274,10 +308,13 @@ void display(void) {
 	glTranslatef(10, 0, 10);
 	  dibujarMesa();
 	glTranslatef(0, 40, 0);
-	dibujaSillon();
+		dibujaSillon();
 	glTranslatef(20, 20, 0);
 	glTranslatef(30, 30, 30);
-	testCylinder();
+		testCylinder();
+	glTranslatef(-50, -50, -70);
+	dibujaCama();
+
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
@@ -328,7 +365,7 @@ void keyboard(unsigned char key, int x, int y) {
 		case 'q':
 		case 'Q':
 			camara.UpDown_Camera(-CAMERASPEED);
-			break;
+			break;		
 		case 27:        // Cuando Esc es presionado...
 			exit ( 0 );   // Salimos del programa
 			break;
