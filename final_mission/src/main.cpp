@@ -13,6 +13,7 @@
 #include "Plane.h"
 #include "TextureLoader.h"
 #include "Cylinder.h"
+#include "Cone.h"
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -269,7 +270,12 @@ void dibujaAvion(){
 }
 
 void testCylinder() {
-	Cylinder c(10, 10, textures.cuadroDebug);
+	Cylinder c(10, 4, 10, textures.cuadroDebug);
+	c.draw();
+}
+
+void testCone() {
+	Cone c(10, 10, textures.cuadroDebug);
 	c.draw();
 }
 
