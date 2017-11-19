@@ -22,6 +22,7 @@ public:
 	CTexture pinturaAmarilla;
 	CTexture pinturaNegra;
 	CTexture rotoplas;
+	CTexture madera;
 	CTexture skyBox;
 	CTexture cuadroDebug;
 	CTexture bardaA[6];

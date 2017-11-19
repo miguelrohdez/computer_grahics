@@ -82,7 +82,6 @@ void dibujaEjes() {
 void dibujarTerreno() {
 	Color c = Color(1.0f, 1.0f, 1.0f);
 	Prisma p = Prisma(500, 5, 500, c);
-
 	p.setRepetitionTexture(0.5);
 	p.setTexture(textures.pasto2);
 	p.draw();
@@ -91,7 +90,6 @@ void dibujarTerreno() {
 void dibujarPiso() {
 	Color c = Color(1.0f, 1.0f, 1.0f);
 	Prisma p = Prisma(280, 1, 280, c);
-
 	p.setTexture(textures.tiles);
 	p.draw();
 }
@@ -112,23 +110,23 @@ void dibujarMesa() {
 }
 
 /* Función que dibuja un sillon */
-void dibujaSillon(){
+void dibujaSillon(float scale){
 
 	// TODO: cambio en las texturas
-	Prisma s = Prisma(20, 5, 10, cafeMesa);
+	Prisma s = Prisma(20*scale, 5*scale, 10*scale, cafeMesa);
 
 	s.draw(textures.cuadroDebug);
 	glPushMatrix();
-		glTranslatef(8.5, 3.5, 0);
-		s.draw(2, 2, 10);
+		glTranslatef(8.5*scale, 3.5*scale, 0);
+		s.draw(2*scale, 2*scale, 10*scale);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(-8.5, 3.5, 0);
-		s.draw(2, 2, 10);
+		glTranslatef(-8.5*scale, 3.5*scale, 0);
+		s.draw(2*scale, 2*scale, 10*scale);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0, 3.5, 4);
-		s.draw(15, 3, 1.5);
+		glTranslatef(0*scale, 3.5*scale, 4*scale);
+		s.draw(15*scale, 3*scale, 1.5*scale);
 	glPopMatrix();
 }
 
@@ -159,7 +157,7 @@ void dibujaCama(){
 	//Base
 	glPushMatrix();
 		glTranslatef(0, -2, -0.1);
-		cam.draw(21.2, 2, 23.2, textures.tiles);
+		cam.draw(21.2, 2, 23.2, textures.madera);
 	glPopMatrix();
 }
 
@@ -221,7 +219,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 	glPopMatrix();
 
 	//Secciones de Techo
-	heightWall += 0.55; // Se suma ancho del techo
+	/*heightWall += 0.55; // Se suma ancho del techo
 	glPushMatrix();
 		glTranslatef(-50 * scale, heightWall, 40 * scale); // AT
 		c.draw(30, anchoBarda, 20, textures.techoA);
@@ -243,7 +241,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		c.draw(40, anchoBarda, 40, textures.techoI);
 		glTranslatef(-30 * scale, 0, -5 * scale); // JT
 		c.draw(20, anchoBarda, 30, textures.techoJ);
-	glPopMatrix();
+	glPopMatrix();*/
 }
 
 void dibujarSkyBox() {
@@ -306,26 +304,43 @@ void display(void) {
 		glTranslatef(0,95,0);
 		dibujarSkyBox();
 	glPopMatrix();
+
 	glPushMatrix(); // Pasto
 		dibujarTerreno();
 	glPopMatrix();
+
 	glTranslatef(0, 2.5, 0);
 	glPushMatrix(); // Piso casa
 		dibujarPiso();
 	glPopMatrix();
+
 	glTranslatef(0, 0.5, 0);
 	glPushMatrix(); // Paredes
 		glTranslatef(0, 25, 0);
 		dibujarCasa(25.0, 2.0);
 	glPopMatrix();
+
 	glTranslatef(10, 0, 10);
-	  dibujarMesa();
-	glTranslatef(0, 40, 0);
-		dibujaSillon();
-	glTranslatef(20, 20, 0);
+	glPushMatrix();
+		dibujarMesa();
+	glPopMatrix();
+
+	glTranslatef(70, 2, 0);
+	glPushMatrix();
+		glRotatef(90, 0, 1, 0);
+		dibujaSillon(2.0f);
+	glPopMatrix();
+		
 	glTranslatef(30, 30, 30);
-	dibujarRotoplas();
-	dibujaCama();
+	glPushMatrix();
+		dibujarRotoplas();
+	glPopMatrix();
+
+	glTranslatef(30, -30, 30);		
+	glPushMatrix();
+		dibujaCama();
+	glPopMatrix();
+
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
