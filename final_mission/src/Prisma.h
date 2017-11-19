@@ -14,6 +14,7 @@ class Prisma {
 private:
     CTexture textures[6];
     float x, y, z;
+    float scale;
     Color color;
     float repTexture;
 public:
@@ -37,6 +38,7 @@ public:
     void setTexture(CTexture t);
     void setColor(Color color);
     void setRepetitionTexture(float rt);
+    void setScale(float s);
     void toDebug();
 };
 
