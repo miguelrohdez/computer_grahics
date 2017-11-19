@@ -236,7 +236,7 @@ void dibujaAvion(){
 }
 
 void testCylinder() {
-	Cylinder c(10, 10, textures.cuadroDebug);
+	Cylinder c(10, 0, 10, textures.cuadroDebug);
 	c.draw();
 }
 
@@ -283,7 +283,7 @@ void display(void) {
 	dibujaSillon();
 	glTranslatef(20, 20, 0);
 	glTranslatef(30, 30, 30);
-	testCone();
+	testCylinder();
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();

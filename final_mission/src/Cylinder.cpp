@@ -1,64 +1,85 @@
 #include "Cylinder.h"
 
 Cylinder::Cylinder() {
-	setRadio(1.0f);
+	setRadioTop(1.0f);
+	setRadioBottom(1.0f);
 	setHeight(1.0f);
 	setColor(Color(1,1,1));
 }
 
 Cylinder::Cylinder(float radio, float height, CTexture texture) {
-	setRadio(radio);
+	setRadioTop(radio);
+	setRadioBottom(radio);
 	setHeight(height);
 	setTexture(texture);
 	setColor(Color(1,1,1));
 }
 
+Cylinder::Cylinder(float radioTop, float radioBottom, float height, CTexture texture) {
+	setRadioTop(radioTop);
+	setRadioBottom(radioBottom);
+	setHeight(height);
+	setTexture(texture);
+	setColor(Color(1, 1, 1));
+}
+
+void Cylinder::draw(float radioTop, float radioBottom, float height, CTexture texture) {
+	setRadioTop(radioTop);
+	setRadioBottom(radioBottom);
+	setHeight(height);
+	setTexture(texture);
+	draw();
+}
+
+void Cylinder::draw(float radioTop, float radioBottom, float height) {
+	setRadioTop(radioTop);
+	setRadioBottom(radioBottom);
+	setHeight(height);
+	draw();
+}
+
 void Cylinder::draw(float radio, float height, CTexture texture) {
-	setRadio(radio);
+	setRadioTop(radio);
+	setRadioBottom(radio);
 	setHeight(height);
 	setTexture(texture);
 	draw();
 }
 
 void Cylinder::draw(float radio, float height) {
-	setRadio(radio);
+	setRadioTop(radio);
+	setRadioBottom(radio);
 	setHeight(height);
 	draw();
 }
 
 void Cylinder::draw() {
-
-	float v1[]={0.0, 0.0, 0.0};
-	float v2[]={0.0, 0.0, 0.0};
-	float v3[]={0.0, 0.0, 0.0};
-	float v4[]={0.0, 0.0, 0.0};
-	float v5[]={0.0, 0.0, 0.0};
-
-	float angle=2*3.14/resolution;
-
+	float v1[] = {0.0, 0.0, 0.0};
+	float v2[] = {0.0, 0.0, 0.0};
+	float v3[] = {0.0, 0.0, 0.0};
+	float v4[] = {0.0, 0.0, 0.0};
+	float v5[] = {0.0, 0.0, 0.0};
+	float angle = 2 * PI / resolution;
 	//float ctext_s = 1/resolution-1;
 	float ctext_s = 1.0/resolution;
 	float ctext_t = 0.0;
 
+	for(int i = 0; i < resolution; i++) {
+		v2[0] = radioTop*cos(angle*i);
+		v2[1] = 0;
+		v2[2] = radioTop*sin(angle*i);
 
-	for(int i=0; i <resolution; i++)
-	{
+		v3[0] = radioTop*cos(angle*(i+1));
+		v3[1] = 0;
+		v3[2] = radioTop*sin(angle*(i+1));
 
-		v2[0]=radio*cos(angle*i);
-		v2[1]=0;
-		v2[2]=radio*sin(angle*i);
+		v4[0] = radioBottom*cos(angle*i);
+		v4[1] = height;
+		v4[2] = radioBottom*sin(angle*i);
 
-		v3[0]=radio*cos(angle*(i+1));
-		v3[1]=0;
-		v3[2]=radio*sin(angle*(i+1));
-
-		v4[0]=radio*cos(angle*i);
-		v4[1]=height;
-		v4[2]=radio*sin(angle*i);
-
-		v5[0]=radio*cos(angle*(i+1));
-		v5[1]=height;
-		v5[2]=radio*sin(angle*(i+1));
+		v5[0] = radioBottom*cos(angle*(i+1));
+		v5[1] = height;
+		v5[2] = radioBottom*sin(angle*(i+1));
 
 		glBegin(GL_POLYGON);
 			glNormal3f( 0.0f, -1.0f, 0.0f);
@@ -97,6 +118,10 @@ void Cylinder::setHeight(float h) {
 	this->height = h;
 }
 
-void Cylinder::setRadio(float r) {
-	this->radio = r;
+void Cylinder::setRadioBottom(float r) {
+	this->radioBottom = r;
+}
+
+void Cylinder::setRadioTop(float r) {
+	this->radioTop = r;
 }
