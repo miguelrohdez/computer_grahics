@@ -5,8 +5,8 @@
 #include "Color.h"
 
 class Cone {
-	static const float PI = 3.1415926535897;
-	static const float resolution = 30;
+	static constexpr float PI = 3.1415926535897;
+	static constexpr float resolution = 30;
 	float height, radio;
 	float scale;
 	CTexture texture;

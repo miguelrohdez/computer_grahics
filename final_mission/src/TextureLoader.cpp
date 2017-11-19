@@ -77,6 +77,10 @@ void TextureLoader::load() {
 	rotoplas.BuildGLTexture();
 	rotoplas.ReleaseImage();
 
+	madera.LoadTGA("Texturas/madera.tga");
+	madera.BuildGLTexture();
+	madera.ReleaseImage();
+
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();
