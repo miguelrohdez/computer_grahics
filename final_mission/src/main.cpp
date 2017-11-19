@@ -21,7 +21,7 @@ float rotacionY = 0.0f;
 float rotacionZ = 0.0f;
 
 /*
- * Texturas
+ * Para usar texturas
  */
 TextureLoader textures;
 
@@ -36,198 +36,199 @@ Color cafeMesa = Color(0.09f, 0.06f, 0.05f);
  * Función para inicializar parámetros
  */
 void InitGL() {
-    glClearColor(0.3f, 0.3f, 0.3f, 0.5f);                // Fondo negro
-    glClearDepth(1.0f);                                    // Valor para el Depth Buffer
-    glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
-    glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-    glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
-    glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
-    camara.Position_Camera(10, 50, -50, 0, 30, 0, 0, 1, 0);
-    textures.load();
+	glClearColor(0.3f, 0.3f, 0.3f, 0.5f);                // Fondo negro
+	glClearDepth(1.0f);                                    // Valor para el Depth Buffer
+	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
+	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
+	glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
+	glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
+	camara.Position_Camera(10, 50, -50, 0, 30, 0, 0, 1, 0);
+	textures.load();
 }
 
 
 void dibujaEjes() {
-    glBegin(GL_LINES);
-        //Eje X
-        glColor3f(1.0f, 0.0f, 0.0f);
-        glVertex3f(-1000.0f, 0.0f, 0.0f);
-        glVertex3f(1000.0f, 0.0f, 0.0f);
-        //Eje Y
-        glColor3f(0.0f, 1.0f, 0.0f);
-        glVertex3f(0.0f, -1000.0f, 0.0f);
-        glVertex3f(0.0f, 1000.0f, 0.0f);
-        //Eje Z
-        glColor3f(0.0f, 0.0f, 1.0f);
-        glVertex3f(0.0f, 0.0f, -1000.0f);
-        glVertex3f(0.0f, 0.0f, 1000.0f);
-    glEnd();
-    glPointSize(10.0f);
-    glBegin(GL_POINTS);
-        //"Flecha" eje X
-        glColor3f(1.0f, 0.0f, 0.0f);
-        glVertex3f(1000.0f, 0.0f, 0.0f);
-        //"Flecha" eje Y
-        glColor3f(0.0f, 1.0f, 0.0f);
-        glVertex3f(0.0f, 1000.0f, 0.0f);
-        //"Flecha" eje Z
-        glColor3f(0.0f, 0.0f, 1.0f);
-        glVertex3f(0.0f, 0.0f, 1000.0f);
-    glEnd();
-    glPointSize(1.0f);
-    glColor3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_LINES);
+		//Eje X
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(-1000.0f, 0.0f, 0.0f);
+		glVertex3f(1000.0f, 0.0f, 0.0f);
+		//Eje Y
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(0.0f, -1000.0f, 0.0f);
+		glVertex3f(0.0f, 1000.0f, 0.0f);
+		//Eje Z
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(0.0f, 0.0f, -1000.0f);
+		glVertex3f(0.0f, 0.0f, 1000.0f);
+	glEnd();
+	glPointSize(10.0f);
+	glBegin(GL_POINTS);
+		//"Flecha" eje X
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(1000.0f, 0.0f, 0.0f);
+		//"Flecha" eje Y
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(0.0f, 1000.0f, 0.0f);
+		//"Flecha" eje Z
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(0.0f, 0.0f, 1000.0f);
+	glEnd();
+	glPointSize(1.0f);
+	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 void dibujarTerreno() {
-    Color c = Color(1.0f, 1.0f, 1.0f);
-    Prisma p = Prisma(500, 5, 500, c);
-    p.setRepetitionTexture(0.5);
-    p.setTexture(textures.pasto);
-    p.draw();
+	Color c = Color(1.0f, 1.0f, 1.0f);
+	Prisma p = Prisma(500, 5, 500, c);
+
+	p.setRepetitionTexture(0.5);
+	p.setTexture(textures.pasto2);
+	p.draw();
 }
 
 void dibujarPiso() {
-    Color c = Color(1.0f, 1.0f, 1.0f);
-    Prisma p = Prisma(280, 1, 280, c);
-    p.setTexture(textures.tiles);
-    p.draw();
+	Color c = Color(1.0f, 1.0f, 1.0f);
+	Prisma p = Prisma(280, 1, 280, c);
+
+	p.setTexture(textures.tiles);
+	p.draw();
 }
 
 void dibujarMesa() {
-    Prisma m = Prisma(8, 0.5, 3, cafeMesa);
-    m.setScale(2.0f);
-    m.draw();
-    glTranslatef(0.0f, 0.75, 0.0f);
-    m.draw(8.5, 0.25, 3.5, sienna);
-    glTranslatef(0.0f, 7.25f, 0.0f);
-    m.draw(7.0f, 7.0f, 3.0f, cafeMesa);
-    glTranslatef(0.0f, 7.2f, 0.0f);
-    m.draw(8.5, 0.2, 3.5, sienna);
-    glTranslatef(0.0f, 0.4f, 0.6f);
-    m.draw(15, 0.2, 10, cafeMesa);
+	Prisma m = Prisma(8, 0.5, 3, cafeMesa);
+
+	m.setScale(2.0f);
+	m.draw();
+	glTranslatef(0.0f, 0.75, 0.0f);
+	m.draw(8.5, 0.25, 3.5, sienna);
+	glTranslatef(0.0f, 7.25f, 0.0f);
+	m.draw(7.0f, 7.0f, 3.0f, cafeMesa);
+	glTranslatef(0.0f, 7.2f, 0.0f);
+	m.draw(8.5, 0.2, 3.5, sienna);
+	glTranslatef(0.0f, 0.4f, 0.6f);
+	m.draw(15, 0.2, 10, cafeMesa);
 }
 
 
-void dibujarCasa(float heightWall, float scale, float textureRep=0.3f) {
-    float anchoBarda = 1.1f;
-    float alturaTecho = heightWall - 12.0f;
-    Color n = Color(1.0f, 1.0f, 1.0f);
-    Prisma c = Prisma(30, heightWall, anchoBarda, n);
-    c.setRepetitionTexture(textureRep);
-    c.setTexture(textures.bardaA);
-    c.setScale(scale);
-    glPushMatrix(); // Bardas
-        glTranslatef(-50 * scale, 0, 50 * scale); // A
-            c.draw();
-        glTranslatef(-15 * scale, 0, -10 * scale); // B
-            c.draw(anchoBarda, heightWall, 20);
-        glTranslatef(30 * scale, 0, 0); // C
-            c.draw(anchoBarda, heightWall, 20, textures.fachadaInterior);
-            c.setTexture(textures.bardaA);
-        glTranslatef(-20 * scale, 0, -10 * scale); // D
-            c.draw(20, heightWall, anchoBarda);
-        glTranslatef(75 * scale, 0, 0); // E
-            c.draw(90, heightWall, anchoBarda);
-        glTranslatef(-55 * scale, 0, -15 * scale); // F
-            c.draw(anchoBarda, heightWall, 30);
-        glTranslatef(-30 * scale, 0, -5 * scale); // G
-            c.draw(anchoBarda, heightWall, 40);
-        glTranslatef(130 * scale, 0, -5 * scale); // H
-            c.draw(anchoBarda, heightWall, 50);
-        glTranslatef(-85 * scale, 0, -5 * scale); // I
-            c.draw(30, heightWall, anchoBarda);
-        glTranslatef(-30 * scale, 0, -10 * scale); // J
-            c.draw(30, heightWall, anchoBarda);
-        glTranslatef(55 * scale, 0, 0); // K
-            c.draw(40, heightWall, anchoBarda);
-        glTranslatef(-25 * scale, 0, -10 * scale); // L
-            c.draw(10, heightWall, anchoBarda);
-        glTranslatef(52.5 * scale, 0, 0); // M
-            c.draw(15, heightWall, anchoBarda);
-        glTranslatef(25 * scale, 0, 0); // N
-            c.draw(15, heightWall, anchoBarda);
-        glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ
-            c.draw(anchoBarda, heightWall, 40);
-        glTranslatef(90 * scale, 0, -5 * scale); // O
-            c.draw(anchoBarda, heightWall, 30);
-        glTranslatef(-60 * scale, 0, 0); // P
-            c.draw(anchoBarda, heightWall, 30);
-        glTranslatef(20 * scale, 0, 0); // Q
-            c.draw(anchoBarda, heightWall, 30);
-        glTranslatef(-35 * scale, 0, -15 * scale); // R
-            c.draw(30, heightWall, anchoBarda);
-        glTranslatef(25 * scale, 0, 0); // S
-            c.draw(20, heightWall, anchoBarda);
-        glTranslatef(30 * scale, 0, 0); // T
-            c.draw(40, heightWall, anchoBarda);
-        glTranslatef(20 * scale, 0, 35 * scale); // Q
-            c.draw(anchoBarda, heightWall, 10);
-    glPopMatrix();
-    //Secciones de Techo
-    //Tres secciones: comienza en O y terminan en B
-    heightWall += 0.55; // Se suma ancho del techo
-    glPushMatrix();
-        glTranslatef(-50 * scale, heightWall, 40 * scale); // AT
-            c.draw(30, anchoBarda, 20   );
-        glTranslatef(30 * scale, 0, -25 * scale); // BT
-            c.draw(30, anchoBarda, 30);
-        glTranslatef(-30 * scale, 0, -5 * scale); // CT
-            c.draw(30, anchoBarda, 40);
-        glTranslatef(60 * scale, 0, 0); // DT
-            c.draw(30, anchoBarda, 40);
-        glTranslatef(35 * scale, 0, -5 * scale); // ET
-            c.draw(40, anchoBarda, 50);
-        glTranslatef(-55 * scale, 0, -10 * scale); // FT
-            c.draw(10, anchoBarda, 10);
-        glTranslatef(-15 * scale, 0, -5 * scale); // GT
-            c.draw(20, anchoBarda, 20);
-        glTranslatef(-25 * scale, 0, -20 * scale); // HT
-            c.draw(30, anchoBarda, 40);
-        glTranslatef(55 * scale, 0, 0); // IT
-            c.draw(40, anchoBarda, 40);
-        glTranslatef(-30 * scale, 0, -5 * scale); // JT
-            c.draw(20, anchoBarda, 30);
-    glPopMatrix();
+void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
+	float anchoBarda = 1.1f;
+	Color n = Color(1.0f, 1.0f, 1.0f);
+	Prisma c = Prisma(30, heightWall, anchoBarda, n);
 
+	c.setRepetitionTexture(textureRep);
+	c.setTexture(textures.bardaA);
+	c.setScale(scale);
+	glPushMatrix(); // Bardas
+		glTranslatef(-50 * scale, 0, 50 * scale); // A
+		c.draw();
+		c.setTexture(textures.bardaA);
+		glTranslatef(-15 * scale, 0, -10 * scale); // B
+		c.draw(anchoBarda, heightWall, 20, textures.bardaB);
+		glTranslatef(30 * scale, 0, 0); // C
+		c.draw(anchoBarda, heightWall, 20, textures.bardaC);
+		glTranslatef(-20 * scale, 0, -10 * scale); // D
+		c.draw(20, heightWall, anchoBarda, textures.bardaD);
+		glTranslatef(75 * scale, 0, 0); // E
+		c.draw(90, heightWall, anchoBarda, textures.bardaE);
+		glTranslatef(-55 * scale, 0, -15 * scale); // F
+		c.draw(anchoBarda, heightWall, 30, textures.bardaF);
+		glTranslatef(-30 * scale, 0, -5 * scale); // G
+		c.draw(anchoBarda, heightWall, 40, textures.bardaG);
+		glTranslatef(130 * scale, 0, -5 * scale); // H
+		c.draw(anchoBarda, heightWall, 50, textures.bardaH);
+		glTranslatef(-85 * scale, 0, -5 * scale); // I
+		c.draw(30, heightWall, anchoBarda, textures.bardaI);
+		glTranslatef(-30 * scale, 0, -10 * scale); // J
+		c.draw(30, heightWall, anchoBarda, textures.bardaJ);
+		glTranslatef(55 * scale, 0, 0); // K
+		c.draw(40, heightWall, anchoBarda, textures.bardaK);
+		glTranslatef(-25 * scale, 0, -10 * scale); // L
+		c.draw(10, heightWall, anchoBarda, textures.bardaL);
+		glTranslatef(52.5 * scale, 0, 0); // M
+		c.draw(15, heightWall, anchoBarda, textures.bardaM);
+		glTranslatef(25 * scale, 0, 0); // N
+		c.draw(15, heightWall, anchoBarda, textures.bardaN);
+		glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ
+		c.draw(anchoBarda, heightWall, 40, textures.bardaNE);
+		glTranslatef(90 * scale, 0, -5 * scale); // O
+		c.draw(anchoBarda, heightWall, 30, textures.bardaO);
+		glTranslatef(-60 * scale, 0, 0); // P
+		c.draw(anchoBarda, heightWall, 30, textures.bardaP);
+		glTranslatef(20 * scale, 0, 0); // Q
+		c.draw(anchoBarda, heightWall, 30, textures.bardaQ);
+		glTranslatef(-35 * scale, 0, -15 * scale); // R
+		c.draw(30, heightWall, anchoBarda, textures.bardaR);
+		glTranslatef(25 * scale, 0, 0); // S
+		c.draw(20, heightWall, anchoBarda, textures.bardaS);
+		glTranslatef(30 * scale, 0, 0); // T
+		c.draw(40, heightWall, anchoBarda, textures.bardaT);
+		glTranslatef(20 * scale, 0, 35 * scale); // U
+		c.draw(anchoBarda, heightWall, 10, textures.bardaU);
+	glPopMatrix();
+
+	//Secciones de Techo
+	heightWall += 0.55; // Se suma ancho del techo
+	glPushMatrix();
+		glTranslatef(-50 * scale, heightWall, 40 * scale); // AT
+		c.draw(30, anchoBarda, 20   );
+		glTranslatef(30 * scale, 0, -25 * scale); // BT
+		c.draw(30, anchoBarda, 30);
+		glTranslatef(-30 * scale, 0, -5 * scale); // CT
+		c.draw(30, anchoBarda, 40);
+		glTranslatef(60 * scale, 0, 0); // DT
+		c.draw(30, anchoBarda, 40);
+		glTranslatef(35 * scale, 0, -5 * scale); // ET
+		c.draw(40, anchoBarda, 50);
+		glTranslatef(-55 * scale, 0, -10 * scale); // FT
+		c.draw(10, anchoBarda, 10);
+		glTranslatef(-15 * scale, 0, -5 * scale); // GT
+		c.draw(20, anchoBarda, 20);
+		glTranslatef(-25 * scale, 0, -20 * scale); // HT
+		c.draw(30, anchoBarda, 40);
+		glTranslatef(55 * scale, 0, 0); // IT
+		c.draw(40, anchoBarda, 40);
+		glTranslatef(-30 * scale, 0, -5 * scale); // JT
+		c.draw(20, anchoBarda, 30);
+	glPopMatrix();
 }
 
 void dibujarSkyBox() {
-    Prisma p = Prisma(500, 200, 500, Color(1.0f, 1.0f, 1.0f));
-    p.setTexture(textures.skyBox);
-    p.drawSky();
+	Prisma p = Prisma(500, 200, 500, Color(1.0f, 1.0f, 1.0f));
+
+	p.setTexture(textures.skyBox);
+	p.drawSky();
 }
 
 /* Función para depurar los planos */
 void dibujarPlano() {
-    Vertex v1 = Vertex(5,0,0);
-    Vertex v2 = Vertex(0,0,0);
-    Vertex v3 = Vertex(0,10,0);
-    Vertex v4 = Vertex(5,10 ,0);
-    Plane p = Plane(v1, v2, v3, v4, textures.cuadroDebug);
-    p.draw();
+	Vertex v1 = Vertex(5,0,0);
+	Vertex v2 = Vertex(0,0,0);
+	Vertex v3 = Vertex(0,10,0);
+	Vertex v4 = Vertex(5,10 ,0);
+	Plane p = Plane(v1, v2, v3, v4, textures.cuadroDebug);
+
+	p.draw();
 }
 
 /* Función que dibuja un sillon */
 void dibujaSillon(){
-    Prisma s = Prisma(20, 5, 10, cafeMesa);
-    s.draw(textures.cuadroDebug);
+	Prisma s = Prisma(20, 5, 10, cafeMesa);
 
-    glPushMatrix();
-      glTranslatef(8.5, 3.5, 0);
-      s.draw(2, 2, 10);
-    glPopMatrix();
-
-    glPushMatrix();
-      glTranslatef(-8.5, 3.5, 0);
-      s.draw(2, 2, 10);
-    glPopMatrix();
-
-    glPushMatrix();
-      glTranslatef(0, 3.5, 4);
-      s.draw(15, 3, 1.5);
-    glPopMatrix();
-
+	s.draw(textures.cuadroDebug);
+	glPushMatrix();
+		glTranslatef(8.5, 3.5, 0);
+		s.draw(2, 2, 10);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-8.5, 3.5, 0);
+		s.draw(2, 2, 10);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(0, 3.5, 4);
+		s.draw(15, 3, 1.5);
+	glPopMatrix();
 }
 
 void dibujaAvion(){
