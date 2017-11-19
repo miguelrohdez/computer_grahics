@@ -245,6 +245,13 @@ void testCone() {
 	c.draw();
 }
 
+void dibujarRotoplas() {
+	Cylinder c(4.5, 7, textures.rotoplas);
+	c.draw();
+	glTranslatef(0, 7, 0);
+	c.draw(4.5, 2.5, 2, textures.pinturaNegra);
+}
+
 /*
  * Función que dibuja
  */
@@ -283,7 +290,7 @@ void display(void) {
 	dibujaSillon();
 	glTranslatef(20, 20, 0);
 	glTranslatef(30, 30, 30);
-	testCylinder();
+	dibujarRotoplas();
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
