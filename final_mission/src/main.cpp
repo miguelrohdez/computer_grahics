@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "Plane.h"
 #include "TextureLoader.h"
+#include "Cylinder.h"
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -41,8 +42,6 @@ void InitGL() {
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
 	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-	glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
-	glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
 	camara.Position_Camera(150, 35, 150, 0, 35, 0, 0, 1, 0);
 	textures.load();
 }
@@ -234,6 +233,12 @@ void dibujaSillon(){
 void dibujaAvion(){
 
 }
+
+void testCylinder() {
+	Cylinder c(10, 10, textures.cuadroDebug);
+	c.draw();
+}
+
 /*
  * Función que dibuja
  */
@@ -271,9 +276,9 @@ void display(void) {
 	glTranslatef(0, 40, 0);
 	dibujaSillon();
 	glTranslatef(20, 20, 0);
+	glTranslatef(30, 30, 30);
+	testCylinder();
 	glDisable(GL_TEXTURE_2D);
-
-
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
 }
