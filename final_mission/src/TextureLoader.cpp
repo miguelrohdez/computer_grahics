@@ -69,6 +69,14 @@ void TextureLoader::load() {
 	pinturaBlanca3.BuildGLTexture();
 	pinturaBlanca3.ReleaseImage();
 
+	pinturaNegra.LoadTGA("Texturas/pintura_negra.tga");
+	pinturaNegra.BuildGLTexture();
+	pinturaNegra.ReleaseImage();
+
+	rotoplas.LoadTGA("Texturas/rotoplas.tga");
+	rotoplas.BuildGLTexture();
+	rotoplas.ReleaseImage();
+
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();
