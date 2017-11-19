@@ -57,6 +57,18 @@ void TextureLoader::load() {
 	pinturaAmarilla.BuildGLTexture();
 	pinturaAmarilla.ReleaseImage();
 
+	pinturaBlanca1.LoadTGA("Texturas/pintura_blanca1.tga");
+	pinturaBlanca1.BuildGLTexture();
+	pinturaBlanca1.ReleaseImage();
+
+	pinturaBlanca2.LoadTGA("Texturas/pintura_blanca2.tga");
+	pinturaBlanca2.BuildGLTexture();
+	pinturaBlanca2.ReleaseImage();
+
+	pinturaBlanca3.LoadTGA("Texturas/pintura_blanca3.tga");
+	pinturaBlanca3.BuildGLTexture();
+	pinturaBlanca3.ReleaseImage();
+
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();

@@ -16,6 +16,9 @@ public:
 	CTexture ladrillos3;
 	CTexture ladrillos4;
 	CTexture pinturaRoja;
+	CTexture pinturaBlanca1;
+	CTexture pinturaBlanca2;
+	CTexture pinturaBlanca3;
 	CTexture pinturaAmarilla;
 	CTexture skyBox;
 	CTexture cuadroDebug;

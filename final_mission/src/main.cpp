@@ -43,7 +43,7 @@ void InitGL() {
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
 	glCullFace(GL_BACK);                                // Configurado para eliminar caras traseras
 	glEnable(GL_CULL_FACE);                                // Activa eliminacion de caras ocultas
-	camara.Position_Camera(10, 50, -50, 0, 30, 0, 0, 1, 0);
+	camara.Position_Camera(150, 35, 150, 0, 35, 0, 0, 1, 0);
 	textures.load();
 }
 
@@ -172,7 +172,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 	heightWall += 0.55; // Se suma ancho del techo
 	glPushMatrix();
 		glTranslatef(-50 * scale, heightWall, 40 * scale); // AT
-		c.draw(30, anchoBarda, 20   );
+		c.draw(30, anchoBarda, 20, textures.pinturaBlanca1);
 		glTranslatef(30 * scale, 0, -25 * scale); // BT
 		c.draw(30, anchoBarda, 30);
 		glTranslatef(-30 * scale, 0, -5 * scale); // CT
@@ -239,43 +239,43 @@ void dibujaAvion(){
  */
 void display(void) {
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
-    glLoadIdentity();
-    glTranslatef(rotacionX, rotacionY, rotacionZ);
-    glRotatef(g_lookupdown,1.0f,0,0);
-    gluLookAt(camara.mPos.x, camara.mPos.y + 20.0f, camara.mPos.z,
-              camara.mView.x, camara.mView.y, camara.mView.z,
-              camara.mUp.x, camara.mUp.y, camara.mUp.z);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
+	glLoadIdentity();
+	glTranslatef(rotacionX, rotacionY, rotacionZ);
+	glRotatef(g_lookupdown,1.0f,0,0);
+	gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
+			  camara.mView.x, camara.mView.y, camara.mView.z,
+			  camara.mUp.x, camara.mUp.y, camara.mUp.z);
 
-    dibujaEjes();
-    glEnable(GL_TEXTURE_2D);
-    glPushMatrix(); // Skybox
-        glTranslatef(0,95,0);
-        dibujarSkyBox();
-    glPopMatrix();
-    glPushMatrix(); // Pasto
-        dibujarTerreno();
-    glPopMatrix();
-    glTranslatef(0, 2.5, 0);
-    glPushMatrix(); // Piso casa
-        dibujarPiso();
-    glPopMatrix();
-    glTranslatef(0, 0.5, 0);
-    glPushMatrix(); // Paredes
-        glTranslatef(0, 25, 0);
-        dibujarCasa(25.0, 2.0);
-    glPopMatrix();
-    glTranslatef(10, 0, 10);
-      dibujarMesa();
-    glTranslatef(0, 40, 0);
-    dibujaSillon();
-    glTranslatef(20, 20, 0);
-    glDisable(GL_TEXTURE_2D);
+	dibujaEjes();
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix(); // Skybox
+		glTranslatef(0,95,0);
+		dibujarSkyBox();
+	glPopMatrix();
+	glPushMatrix(); // Pasto
+		dibujarTerreno();
+	glPopMatrix();
+	glTranslatef(0, 2.5, 0);
+	glPushMatrix(); // Piso casa
+		dibujarPiso();
+	glPopMatrix();
+	glTranslatef(0, 0.5, 0);
+	glPushMatrix(); // Paredes
+		glTranslatef(0, 25, 0);
+		dibujarCasa(25.0, 2.0);
+	glPopMatrix();
+	glTranslatef(10, 0, 10);
+	  dibujarMesa();
+	glTranslatef(0, 40, 0);
+	dibujaSillon();
+	glTranslatef(20, 20, 0);
+	glDisable(GL_TEXTURE_2D);
 
 
-    glFlush(); //TODO: Entender que hace
-    glutSwapBuffers();
+	glFlush(); //TODO: Entender que hace
+	glutSwapBuffers();
 }
 
 
@@ -283,15 +283,15 @@ void display(void) {
 * Funcion para el reajuste de dibujo en ventana
 */
 void reshape(int width, int height) {
-    float relation;
-    height = (height == 0) ? 1 : height;
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION); // Seleccionamos Projection Matrix
-    glLoadIdentity();
-    relation = (float)width / (float)height;
-    gluPerspective(20*relation, relation, 1.0f, 10000.0f);
-    glMatrixMode(GL_MODELVIEW); // Seleccionamos Modelview Matrix
-    glLoadIdentity();
+	float relation;
+	height = (height == 0) ? 1 : height;
+	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION); // Seleccionamos Projection Matrix
+	glLoadIdentity();
+	relation = (float)width / (float)height;
+	gluPerspective(20*relation, relation, 1.0f, 10000.0f);
+	glMatrixMode(GL_MODELVIEW); // Seleccionamos Modelview Matrix
+	glLoadIdentity();
 }
 
 
@@ -299,78 +299,78 @@ void reshape(int width, int height) {
 * Función que maneja el teclado
 */
 void keyboard(unsigned char key, int x, int y) {
-    switch (key) {
-        case 'w':   //Movimientos de camara
-        case 'W':
-            camara.Move_Camera( CAMERASPEED );
-            break;
-        case 's':
-        case 'S':
-            camara.Move_Camera(-(CAMERASPEED));
-            break;
-        case 'a':
-        case 'A':
-            camara.Strafe_Camera(-(CAMERASPEED));
-            break;
-        case 'd':
-        case 'D':
-            camara.Strafe_Camera( CAMERASPEED);
-            break;
-        case 'e':
-        case 'E':
-            camara.UpDown_Camera(CAMERASPEED);
-            break;
-        case 'q':
-        case 'Q':
-            camara.UpDown_Camera(-CAMERASPEED);
-            break;
-        case 27:        // Cuando Esc es presionado...
-            exit ( 0 );   // Salimos del programa
-            break;
-        default:        // Cualquier otra
-            break;
-    }
-    glutPostRedisplay();
+	switch (key) {
+		case 'w':   //Movimientos de camara
+		case 'W':
+			camara.Move_Camera( CAMERASPEED );
+			break;
+		case 's':
+		case 'S':
+			camara.Move_Camera(-(CAMERASPEED));
+			break;
+		case 'a':
+		case 'A':
+			camara.Strafe_Camera(-(CAMERASPEED));
+			break;
+		case 'd':
+		case 'D':
+			camara.Strafe_Camera( CAMERASPEED);
+			break;
+		case 'e':
+		case 'E':
+			camara.UpDown_Camera(CAMERASPEED);
+			break;
+		case 'q':
+		case 'Q':
+			camara.UpDown_Camera(-CAMERASPEED);
+			break;
+		case 27:        // Cuando Esc es presionado...
+			exit ( 0 );   // Salimos del programa
+			break;
+		default:        // Cualquier otra
+			break;
+	}
+	glutPostRedisplay();
 }
 
 /*
 * Función para el manejo de teclas especiales
 */
 void arrow_keys(int a_keys, int x, int y) {
-    switch ( a_keys ) {
-        case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
-            g_lookupdown -= 1.0f;
-            break;
-        case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
-            g_lookupdown += 1.0f;
-            break;
-        case GLUT_KEY_LEFT:
-            camara.Rotate_View(-CAMERASPEED);
-            break;
-        case GLUT_KEY_RIGHT:
-            camara.Rotate_View( CAMERASPEED);
-            break;
-        default:
-            break;
-    }
-    glutPostRedisplay();
+	switch ( a_keys ) {
+		case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
+			g_lookupdown -= 1.0f;
+			break;
+		case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
+			g_lookupdown += 1.0f;
+			break;
+		case GLUT_KEY_LEFT:
+			camara.Rotate_View(-CAMERASPEED);
+			break;
+		case GLUT_KEY_RIGHT:
+			camara.Rotate_View( CAMERASPEED);
+			break;
+		default:
+			break;
+	}
+	glutPostRedisplay();
 }
 
 /*
 * Función principal
 */
 int main(int argc, char **argv) {
-    glutInit(&argc, argv); // Inicializamos OpenGL
-    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // Display Mode (Clores RGB y alpha | Buffer Sencillo )
-    glutInitWindowSize(1920, 1080); // Tamaño de la Ventana
-    glutInitWindowPosition(-1, -1); //Posicion de la Ventana
-    glutCreateWindow("Complejo Residencial"); // Nombre de la Ventana
-    InitGL(); // Parametros iniciales de la aplicacion
-    glutDisplayFunc(display); // Función de dibujo
-    glutReshapeFunc(reshape); // Función en caso de cambio de tamano
-    glutKeyboardFunc(keyboard); // Función de manejo de teclado
-    glutSpecialFunc(arrow_keys); // Función manejo teclas especiales
-    glutMainLoop();
+	glutInit(&argc, argv); // Inicializamos OpenGL
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // Display Mode (Clores RGB y alpha | Buffer Sencillo )
+	glutInitWindowSize(1920, 1080); // Tamaño de la Ventana
+	glutInitWindowPosition(-1, -1); //Posicion de la Ventana
+	glutCreateWindow("Complejo Residencial"); // Nombre de la Ventana
+	InitGL(); // Parametros iniciales de la aplicacion
+	glutDisplayFunc(display); // Función de dibujo
+	glutReshapeFunc(reshape); // Función en caso de cambio de tamano
+	glutKeyboardFunc(keyboard); // Función de manejo de teclado
+	glutSpecialFunc(arrow_keys); // Función manejo teclas especiales
+	glutMainLoop();
 
-    return 0;
+	return 0;
 }
