@@ -85,9 +85,40 @@ void TextureLoader::createArrays() {
 // 4 YZ con X positiva
 // 5 YZ con X negativa
 
+	techoA[0] = techoA[2] = techoA[3] = techoA[4] =  techoA[5] = pinturaBlanca3;
+	techoA[1] = pinturaBlanca1;
+
+	techoB[0] = techoB[2] = techoB[3] = techoB[4] =  techoB[5] = pinturaBlanca3;
+	techoB[1] = pinturaBlanca1;
+
+	techoC[0] = techoC[2] = techoC[3] = techoC[4] =  techoC[5] = pinturaBlanca3;
+	techoC[1] = pinturaBlanca1;
+
+	techoD[0] = techoD[2] = techoD[3] = techoD[4] =  techoD[5] = pinturaBlanca3;
+	techoD[1] = pinturaBlanca1;
+
+	techoE[0] = techoE[2] = techoE[3] = techoE[4] =  techoE[5] = pinturaBlanca3;
+	techoE[1] = pinturaBlanca1;
+
+	techoF[0] = techoF[2] = techoF[3] = techoF[4] =  techoF[5] = pinturaBlanca3;
+	techoF[1] = pinturaBlanca1;
+
+	techoG[0] = techoG[2] = techoG[3] = techoG[4] = techoG[5] =  pinturaBlanca3;
+	techoG[1] = pinturaBlanca1;
+
+	techoH[0] = techoH[2] = techoH[3] = techoH[4] = techoH[5] = pinturaBlanca3;
+	techoH[1] = pinturaBlanca1;
+
+	techoI[0] = techoI[2] = techoI[3] = techoI[4] = techoI[5] = pinturaBlanca3;
+	techoI[1] = pinturaBlanca1;
+
+	techoJ[0] = techoJ[2] = techoJ[3] = techoJ[4] =  techoJ[5] = pinturaBlanca3;
+	techoJ[1] = pinturaBlanca1;
+
 	bardaU[0] = bardaU[1] = ladrillos3;
 	bardaU[2] = bardaU[3] = bardaU[4] = pinturaRoja;
 	bardaU[5] = pinturaAmarilla;
+
 	bardaT[0] = bardaT[1] = bardaT[4] = bardaT[3] = bardaT[5] = ladrillos3;
 	bardaT[2] = pinturaAmarilla;
 

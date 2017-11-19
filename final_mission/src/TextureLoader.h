@@ -44,6 +44,16 @@ public:
 	CTexture bardaS[6];
 	CTexture bardaT[6];
 	CTexture bardaU[6];
+	CTexture techoA[6];
+	CTexture techoB[6];
+	CTexture techoC[6];
+	CTexture techoD[6];
+	CTexture techoE[6];
+	CTexture techoF[6];
+	CTexture techoG[6];
+	CTexture techoH[6];
+	CTexture techoI[6];
+	CTexture techoJ[6];
 	TextureLoader();
 	void load();
 	void createArrays();

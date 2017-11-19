@@ -172,25 +172,25 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 	heightWall += 0.55; // Se suma ancho del techo
 	glPushMatrix();
 		glTranslatef(-50 * scale, heightWall, 40 * scale); // AT
-		c.draw(30, anchoBarda, 20, textures.pinturaBlanca1);
+		c.draw(30, anchoBarda, 20, textures.techoA);
 		glTranslatef(30 * scale, 0, -25 * scale); // BT
-		c.draw(30, anchoBarda, 30);
+		c.draw(30, anchoBarda, 30, textures.techoB);
 		glTranslatef(-30 * scale, 0, -5 * scale); // CT
-		c.draw(30, anchoBarda, 40);
+		c.draw(30, anchoBarda, 40, textures.techoC);
 		glTranslatef(60 * scale, 0, 0); // DT
-		c.draw(30, anchoBarda, 40);
+		c.draw(30, anchoBarda, 40, textures.techoD);
 		glTranslatef(35 * scale, 0, -5 * scale); // ET
-		c.draw(40, anchoBarda, 50);
+		c.draw(40, anchoBarda, 50, textures.techoE);
 		glTranslatef(-55 * scale, 0, -10 * scale); // FT
-		c.draw(10, anchoBarda, 10);
+		c.draw(10, anchoBarda, 10, textures.techoF);
 		glTranslatef(-15 * scale, 0, -5 * scale); // GT
-		c.draw(20, anchoBarda, 20);
+		c.draw(20, anchoBarda, 20, textures.techoG);
 		glTranslatef(-25 * scale, 0, -20 * scale); // HT
-		c.draw(30, anchoBarda, 40);
+		c.draw(30, anchoBarda, 40, textures.techoH);
 		glTranslatef(55 * scale, 0, 0); // IT
-		c.draw(40, anchoBarda, 40);
+		c.draw(40, anchoBarda, 40, textures.techoI);
 		glTranslatef(-30 * scale, 0, -5 * scale); // JT
-		c.draw(20, anchoBarda, 30);
+		c.draw(20, anchoBarda, 30, textures.techoJ);
 	glPopMatrix();
 }
 
