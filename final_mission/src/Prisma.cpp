@@ -1,21 +1,27 @@
 #include "Prisma.h"
 #include "Plane.h"
+
 Prisma::Prisma() {
     Color c(1,1,1);
     setSize(1,1,1);
     setColor(c);
     setRepetitionTexture(1);
+    setScale(1.0f);
 }
+
 Prisma::Prisma(float width, float height, float depth, Color color, CTexture *textures) {
     setSize(width, height, depth);
     setTexture(textures);
     setColor(color);
     setRepetitionTexture(1);
+    setScale(1.0f);
 }
+
 Prisma::Prisma(float width, float height, float depth, Color color) {
     setSize(width, height, depth);
     setColor(color);
     setRepetitionTexture(1);
+    setScale(1.0f);
 }
 
 void Prisma::setSize(float *size) {
@@ -51,6 +57,9 @@ void Prisma::setColor(Color color) {
 }
 
 void Prisma::draw() {
+    this->x *= scale;
+    this->y *= scale;
+    this->z *= scale;
     Vertex v[8] = {
         Vertex(-x,  y,  z),
         Vertex( x,  y,  z),
@@ -75,7 +84,6 @@ void Prisma::draw() {
         p[i].draw();
     }
 }
-
 
 void Prisma::drawSky() {
     float v[8][3] = {
@@ -139,7 +147,6 @@ void Prisma::drawSky() {
     glEnd();
 }
 
-
 void Prisma::toDebug() {
     printf("Size %f %f %f\n", this->x, this->y, this->z);
     printf("RGB: %f %f %f\n", this->color.getR(), this->color.getG(), this->color.getB());
@@ -193,6 +200,14 @@ void Prisma::draw(float w, float h, float d, CTexture *t) {
     setSize(w,h,d);
     setTexture(t);
     draw();
+}
+
+void Prisma::setScale(float s) {
+    if (this->scale >= 1.0) {
+        this->scale = s;
+    } else {
+        this->scale = 1.0f;
+    }
 }
 
 void Prisma::setRepetitionTexture(float rt) {

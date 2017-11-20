@@ -1,6 +1,7 @@
 LIBS = -lGL -lGLU -lglut -lm -lstdc++
 CODIGO_FUENTE = Prisma.cpp Texture.cpp Color.cpp main.cpp Camera.cpp \
-				Plane.cpp Vertex.cpp
+				Plane.cpp Vertex.cpp TextureLoader.cpp Cylinder.cpp \
+				Cone.cpp
 TARGET = main #TODO
 
 
