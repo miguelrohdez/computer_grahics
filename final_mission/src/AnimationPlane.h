@@ -5,7 +5,7 @@
 #include "Prisma.h"
 #include "Cylinder.h"
 #include "Texture.h"
-#define iMaxSteps 90
+#define iMaxSteps 90.0f
 #define FILE_KEYFRAME_PLANE "keyframe_plane.frm"
 
 
@@ -14,6 +14,7 @@ class AnimationPlane {
 	KeyFrame frames[20];
 	int iCurrentSteps;
 	int current;
+	int numFrames;
 	bool activate;
 	float translate[3];
 	float rotate[3];
@@ -31,10 +32,12 @@ public:
 	void backward();
 	void up();
 	void down();
-	void rotateYPositive();
-	void rotateYNegative();
+	void rotateXPositive();
+	void rotateXNegative();
 	void saveToFile();
 	void setTexture(CTexture t);
+	void setActivate(bool v);
+	void resetValues();
 };
 
 #endif

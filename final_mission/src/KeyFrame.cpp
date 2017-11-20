@@ -1,41 +1,49 @@
 #include "KeyFrame.h"
+#include <stdio.h>
 
 KeyFrame::KeyFrame() {
 	for (int i = 0; i < 3; i++) {
 		this->translation[i] = 0.0f;
 		this->rotation[i] = 0.0f;
-		this->increment[i] = 0.0f;
+		this->incrementPos[i] = 0.0f;
+		this->incrementRot[i] = 0.0f;
 	}
 }
 
-void KeyFrame::setTranslations(float *translations) {
-	setTranslationX(translations[0]);
-	setTranslationY(translations[1]);
-	setTranslationZ(translations[2]);
+void KeyFrame::setTranslations(float *t) {
+	setTranslationX(t[0]);
+	setTranslationY(t[1]);
+	setTranslationZ(t[2]);
 }
 
-void KeyFrame::setRotations(float *rotations) {
-	setRotationX(rotations[0]);
-	setRotationY(rotations[1]);
-	setRotationZ(rotations[2]);
+void KeyFrame::setRotations(float *r) {
+	setRotationX(r[0]);
+	setRotationY(r[1]);
+	setRotationZ(r[2]);
 }
 
-void KeyFrame::setIncrements(float *rotations) {
-	setIncrementX(increment[0]);
-	setIncrementY(increment[1]);
-	setIncrementZ(increment[2]);
+void KeyFrame::setIncPosX(float i) {
+	this->incrementPos[0] = i;
 }
 
-void KeyFrame::setIncrementX(float i) {
-	this->increment[0] = i;
+void KeyFrame::setIncPosY(float i) {
+	this->incrementPos[1] = i;
 }
 
-void KeyFrame::setIncrementY(float i) {
-	this->increment[1] = i;
+void KeyFrame::setIncPosZ(float i) {
+	this->incrementPos[2] = i;
 }
 
-void KeyFrame::setIncrementZ(float i) {
-	this->increment[2] = i;
+void KeyFrame::setIncRotX(float i) {
+	this->incrementRot[0] = i;
+}
+
+void KeyFrame::setIncRotY(float i) {
+	this->incrementRot[1] = i;
+}
+
+void KeyFrame::setIncRotZ(float i) {
+	this->incrementRot[2] = i;
 }
 
 void KeyFrame::setRotationX(float r) {
@@ -62,10 +70,6 @@ void KeyFrame::setTranslationZ(float t) {
 	this->translation[2] = t;
 }
 
-void KeyFrame::toString() {
-
-}
-
 float KeyFrame::getPosX() {
 	return this->translation[0];
 }
@@ -90,14 +94,37 @@ float KeyFrame::getRotZ() {
 	return this->rotation[2];
 }
 
-float KeyFrame::getIncX() {
-	return this->rotation[0];
+float KeyFrame::getIncPosX() {
+	return this->incrementPos[0];
 }
 
-float KeyFrame::getIncY() {
-	return this->rotation[1];
+float KeyFrame::getIncPosY() {
+	return this->incrementPos[1];
 }
 
-float KeyFrame::getIncZ() {
-	return this->rotation[2];
+float KeyFrame::getIncPosZ() {
+	return this->incrementPos[2];
+}
+
+float KeyFrame::getIncRotX() {
+	return this->incrementRot[0];
+}
+
+float KeyFrame::getIncRotY() {
+	return this->incrementRot[1];
+}
+
+float KeyFrame::getIncRotZ() {
+	return this->incrementRot[2];
+}
+
+void KeyFrame::toString() {
+	printf("##### FRAME\n");
+	for (int i = 0; i < 3; i++) {
+		printf("EJE [%d] -> T: %0.2f, R: %0.2f, IT: %0.2f, IR: %0.2f\n", i, translation[i],
+												rotation[i],
+												incrementPos[i],
+												incrementRot[i]);
+	}
+	printf("\n");
 }

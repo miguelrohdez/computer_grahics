@@ -4,7 +4,8 @@
 class KeyFrame {
 	float translation[3];
 	float rotation[3];
-	float increment[3];
+	float incrementPos[3];
+	float incrementRot[3];
 public:
 	KeyFrame();
 	/*
@@ -18,16 +19,18 @@ public:
 	*/
 	void setTranslations(float t[3]);
 	void setRotations(float r[3]);
-	void setIncrements(float i[3]);
 	void setTranslationX(float tX);
 	void setTranslationY(float tY);
 	void setTranslationZ(float tZ);
 	void setRotationX(float rX);
 	void setRotationY(float rY);
 	void setRotationZ(float rZ);
-	void setIncrementX(float iX);
-	void setIncrementY(float iY);
-	void setIncrementZ(float iZ);
+	void setIncPosX(float iX);
+	void setIncPosY(float iY);
+	void setIncPosZ(float iZ);
+	void setIncRotX(float iX);
+	void setIncRotY(float iY);
+	void setIncRotZ(float iZ);
 	void toString();
 	float getPosX();
 	float getPosY();
@@ -35,9 +38,12 @@ public:
 	float getRotX();
 	float getRotY();
 	float getRotZ();
-	float getIncX();
-	float getIncY();
-	float getIncZ();
+	float getIncPosX();
+	float getIncPosY();
+	float getIncPosZ();
+	float getIncRotX();
+	float getIncRotY();
+	float getIncRotZ();
 };
 
 class KeyFrameCoche: KeyFrame {

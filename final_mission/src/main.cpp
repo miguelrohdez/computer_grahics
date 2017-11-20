@@ -51,6 +51,7 @@ void InitGL() {
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
 	camara.Position_Camera(0, 50, -120, 0, 35, 0, 0, 1, 0);
 	textures.load();
+	plane.loadData();
 }
 
 
@@ -462,7 +463,10 @@ void display(void) {
 	glutSwapBuffers();
 }
 
-
+void animation() {
+	plane.update();
+	glutPostRedisplay();
+}
 /*
 * Funcion para el reajuste de dibujo en ventana
 */
@@ -528,10 +532,24 @@ void keyboard(unsigned char key, int x, int y) {
 			plane.down();
 			break;
 		case 'v':
-			plane.rotateYPositive();
+			plane.rotateXPositive();
 			break;
 		case 'V':
-			plane.rotateYNegative();
+			plane.rotateXNegative();
+			break;
+		case 'M':
+		case 'm':
+			plane.saveToFile();
+			break;
+		case 'n':
+		case 'N':
+			plane.saveKeyframe();
+			break;
+		case 'b':
+			plane.setActivate(true);
+			break;
+		case 'B':
+			plane.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
 			exit(0);   // Salimos del programa
@@ -579,6 +597,7 @@ int main(int argc, char **argv) {
 	glutReshapeFunc(reshape); // Función en caso de cambio de tamano
 	glutKeyboardFunc(keyboard); // Función de manejo de teclado
 	glutSpecialFunc(arrow_keys); // Función manejo teclas especiales
+	glutIdleFunc(animation);
 	glutMainLoop();
 
 	return 0;
