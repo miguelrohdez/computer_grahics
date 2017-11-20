@@ -21,8 +21,17 @@ public:
 	CTexture pinturaBlanca3;
 	CTexture pinturaAmarilla;
 	CTexture pinturaNegra;
+	CTexture pinturaAzul;
+	CTexture pinturaSucia;
+	CTexture pinturaSucia1;
+	CTexture sillon;
+	CTexture sillon1;	
+	CTexture almohada;
+	CTexture cobija;
 	CTexture rotoplas;
+	CTexture noise;	
 	CTexture madera;
+	CTexture madera1;	
 	CTexture skyBox;
 	CTexture cuadroDebug;
 	CTexture bardaA[6];

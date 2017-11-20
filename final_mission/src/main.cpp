@@ -43,7 +43,7 @@ void InitGL() {
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
 	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-	camara.Position_Camera(150, 135, 150, 0, 35, 0, 0, 1, 0);
+	camara.Position_Camera(0, 50, -120, 0, 35, 0, 0, 1, 0);
 	textures.load();
 }
 
@@ -110,55 +110,91 @@ void dibujarMesa() {
 }
 
 /* Función que dibuja un sillon */
-void dibujaSillon(float scale){
+void dibujaSillon(float scale, CTexture sillonT=textures.sillon){
 
-	// TODO: cambio en las texturas
-	Prisma s = Prisma(20*scale, 5*scale, 10*scale, cafeMesa);
+	// Base
+	Prisma s = Prisma(20*scale, 3.5*scale, 10*scale, cafeMesa);	
+	s.draw(sillonT);
 
-	s.draw(textures.cuadroDebug);
+	// Recarga brazos
 	glPushMatrix();
-		glTranslatef(8.5*scale, 3.5*scale, 0);
+		glTranslatef(8.5*scale, 2.8*scale, 0);
 		s.draw(2*scale, 2*scale, 10*scale);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(-8.5*scale, 3.5*scale, 0);
+		glTranslatef(-8.5*scale, 2.8*scale, 0);
 		s.draw(2*scale, 2*scale, 10*scale);
 	glPopMatrix();
+
+	// Respaldo
 	glPushMatrix();
-		glTranslatef(0*scale, 3.5*scale, 4*scale);
+		glTranslatef(0*scale, 3*scale, 4.3*scale);
 		s.draw(15*scale, 3*scale, 1.5*scale);
 	glPopMatrix();
 }
 
 /* Función que dibuja una cama*/
-void dibujaCama(){
+void dibujaCama(float scale){
+	
+	Prisma cam = Prisma(20*scale, 2*scale, 23*scale, cafeMesa);
 
-	// TODO: Cambio en las texturas
-	Prisma cam = Prisma(20, 2, 23, cafeMesa);
-
-	cam.draw(textures.pinturaRoja);
+	cam.draw(textures.cobija);
 
 	//Almohadas
 	glPushMatrix();
-		glTranslatef(5, 1, 9);
-		cam.draw(8, 0.7f, 4, textures.cuadroDebug);
+		glTranslatef(5*scale, 1*scale, 9*scale);
+		cam.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(-5, 1, 9);
-		cam.draw(8, 0.7f, 4, textures.cuadroDebug);
+		glTranslatef(-5*scale, 1*scale, 9*scale);
+		cam.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada);
 	glPopMatrix();
 
 	//Cabecera
 	glPushMatrix();
-		glTranslatef(0, 0.5, 11.9);
-		cam.draw(20, 7, 0.7f, textures.pinturaAmarilla);
+		glTranslatef(0*scale, 0.5*scale, 11.9*scale);
+		cam.draw(20*scale, 7*scale, 0.7f*scale, textures.madera1);
 	glPopMatrix();
 
 	//Base
 	glPushMatrix();
-		glTranslatef(0, -2, -0.1);
-		cam.draw(21.2, 2, 23.2, textures.madera);
+		glTranslatef(0*scale, -2*scale, -0.1*scale);
+		cam.draw(21.2*scale, 2*scale, 23.2*scale, textures.madera);
 	glPopMatrix();
+}
+
+
+void dibujaMuebleTv(float scale=1.0f){
+	Prisma mtv = Prisma(20*scale, 15*scale, 7*scale, cafeMesa);
+	mtv.draw(textures.madera1);
+}
+
+void dibujaTv(float scale=1.0f){
+	// Base
+	Prisma tv = Prisma(5.5*scale, 0.2*scale, 0.3*scale, cafeMesa);
+	tv.draw(textures.pinturaNegra);	
+
+	// Base (cilindro)
+	glPushMatrix();
+		glTranslatef(0*scale, 0.05*scale, 0*scale);
+		Cylinder b(0.3*scale, 1.5*scale, textures.pinturaNegra);
+		b.draw();
+	glPopMatrix();
+
+	// Marco
+	glPushMatrix();
+		glTranslatef(0*scale, 5*scale, 0*scale);
+		tv.draw(15*scale, 7*scale, 0.5*scale);
+
+		// Pantalla
+		glPushMatrix();
+			glTranslatef(0*scale, 0*scale, -0.2*scale);			
+			tv.setRepetitionTexture(0.7f);
+			tv.draw(13*scale, 6*scale, 0.2*scale, textures.noise);			
+		glPopMatrix();
+	glPopMatrix();
+
+
 }
 
 
@@ -174,52 +210,86 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		glTranslatef(-50 * scale, 0, 50 * scale); // A
 		c.draw();
 		c.setTexture(textures.bardaA);
+
 		glTranslatef(-15 * scale, 0, -10 * scale); // B
 		c.draw(anchoBarda, heightWall, 20, textures.bardaB);
+
 		glTranslatef(30 * scale, 0, 0); // C
 		c.draw(anchoBarda, heightWall, 20, textures.bardaC);
+
 		glTranslatef(-20 * scale, 0, -10 * scale); // D
+		c.setRepetitionTexture(0.4f);
 		c.draw(20, heightWall, anchoBarda, textures.bardaD);
+		c.setRepetitionTexture(textureRep);
+
 		glTranslatef(75 * scale, 0, 0); // E
 		c.draw(90, heightWall, anchoBarda, textures.bardaE);
+	
 		glTranslatef(-55 * scale, 0, -15 * scale); // F
+		c.setRepetitionTexture(0.3f);
 		c.draw(anchoBarda, heightWall, 30, textures.bardaF);
+
 		glTranslatef(-30 * scale, 0, -5 * scale); // G
+		c.setRepetitionTexture(0.25f);
 		c.draw(anchoBarda, heightWall, 40, textures.bardaG);
+		c.setRepetitionTexture(textureRep);
+
 		glTranslatef(130 * scale, 0, -5 * scale); // H
 		c.draw(anchoBarda, heightWall, 50, textures.bardaH);
+
 		glTranslatef(-85 * scale, 0, -5 * scale); // I
 		c.draw(30, heightWall, anchoBarda, textures.bardaI);
+
 		glTranslatef(-30 * scale, 0, -10 * scale); // J
+		c.setRepetitionTexture(0.3f);
 		c.draw(30, heightWall, anchoBarda, textures.bardaJ);
+		c.setRepetitionTexture(textureRep);
+
 		glTranslatef(55 * scale, 0, 0); // K
 		c.draw(40, heightWall, anchoBarda, textures.bardaK);
+
 		glTranslatef(-25 * scale, 0, -10 * scale); // L
 		c.draw(10, heightWall, anchoBarda, textures.bardaL);
+
 		glTranslatef(52.5 * scale, 0, 0); // M
 		c.draw(15, heightWall, anchoBarda, textures.bardaM);
+
 		glTranslatef(25 * scale, 0, 0); // N
 		c.draw(15, heightWall, anchoBarda, textures.bardaN);
+
 		glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ
+		c.setRepetitionTexture(0.3f);
 		c.draw(anchoBarda, heightWall, 40, textures.bardaNE);
+		c.setRepetitionTexture(textureRep);
+
 		glTranslatef(90 * scale, 0, -5 * scale); // O
 		c.draw(anchoBarda, heightWall, 30, textures.bardaO);
+
 		glTranslatef(-60 * scale, 0, 0); // P
+		c.setRepetitionTexture(0.3f);
 		c.draw(anchoBarda, heightWall, 30, textures.bardaP);
+		c.setRepetitionTexture(textureRep);
+
 		glTranslatef(20 * scale, 0, 0); // Q
 		c.draw(anchoBarda, heightWall, 30, textures.bardaQ);
+
 		glTranslatef(-35 * scale, 0, -15 * scale); // R
+		c.setRepetitionTexture(0.3f);
 		c.draw(30, heightWall, anchoBarda, textures.bardaR);
+		c.setRepetitionTexture(textureRep);
+
 		glTranslatef(25 * scale, 0, 0); // S
 		c.draw(20, heightWall, anchoBarda, textures.bardaS);
+
 		glTranslatef(30 * scale, 0, 0); // T
 		c.draw(40, heightWall, anchoBarda, textures.bardaT);
+
 		glTranslatef(20 * scale, 0, 35 * scale); // U
 		c.draw(anchoBarda, heightWall, 10, textures.bardaU);
 	glPopMatrix();
 
 	//Secciones de Techo
-	/*heightWall += 0.55; // Se suma ancho del techo
+	heightWall += 0.55; // Se suma ancho del techo
 	glPushMatrix();
 		glTranslatef(-50 * scale, heightWall, 40 * scale); // AT
 		c.draw(30, anchoBarda, 20, textures.techoA);
@@ -241,7 +311,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		c.draw(40, anchoBarda, 40, textures.techoI);
 		glTranslatef(-30 * scale, 0, -5 * scale); // JT
 		c.draw(20, anchoBarda, 30, textures.techoJ);
-	glPopMatrix();*/
+	glPopMatrix();
 }
 
 void dibujarSkyBox() {
@@ -277,11 +347,16 @@ void testCone() {
 	c.draw();
 }
 
-void dibujarRotoplas() {
-	Cylinder c(4.5, 7, textures.rotoplas);
+void dibujarRotoplas(float scale) {
+	Cylinder c(4.5*scale, 7*scale, textures.rotoplas);
 	c.draw();
-	glTranslatef(0, 7, 0);
-	c.draw(4.5, 2.5, 2, textures.pinturaNegra);
+	glTranslatef(0*scale, 7*scale, 0*scale);
+	c.draw(4.5*scale, 2.5*scale, 2*scale, textures.pinturaNegra);
+}
+
+void dibujaTocador(float scale=1.0f){
+	Prisma t = Prisma(45*scale, 15*scale, 8*scale, cafeMesa);
+	t.draw(textures.madera1);
 }
 
 /*
@@ -325,20 +400,54 @@ void display(void) {
 		dibujarMesa();
 	glPopMatrix();
 
-	glTranslatef(70, 2, 0);
 	glPushMatrix();
-		glRotatef(90, 0, 1, 0);
-		dibujaSillon(2.0f);
-	glPopMatrix();
-		
-	glTranslatef(30, 30, 30);
-	glPushMatrix();
-		dibujarRotoplas();
+		glTranslatef(95, 2, -10);
+		glRotatef(180, 0, 1, 0);
+		dibujaSillon(2.0f);		
 	glPopMatrix();
 
-	glTranslatef(30, -30, 30);		
 	glPushMatrix();
-		dibujaCama();
+		glTranslatef(63, 2, 20);
+		glRotatef(-90, 0, 1, 0);
+		dibujaSillon(2.0f);		
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(107, 2, 40);
+		glRotatef(40, 0, 1, 0);
+		dibujaMuebleTv(0.7f);
+		glPushMatrix();
+			glTranslatef(0, 5.5, 0);
+			dibujaTv(1.5f);
+		glPopMatrix();
+	glPopMatrix();
+		
+	
+	glPushMatrix();
+		glTranslatef(-50, 50, -70);
+		dibujarRotoplas(3.0f);
+	glPopMatrix();
+
+
+	glPushMatrix();
+		glTranslatef(10, 5, -84);
+		glRotatef(180, 0, 1, 0);
+		dibujaCama(2.0f);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-35, 6, -80);
+		glRotatef(90, 0, 1, 0);
+		dibujaTocador();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(10, 6, -33.5);
+		dibujaMuebleTv();
+		glPushMatrix();
+			glTranslatef(0, 7.5, 0);
+			dibujaTv(2.0f);
+		glPopMatrix();
 	glPopMatrix();
 
 	glDisable(GL_TEXTURE_2D);
