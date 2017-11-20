@@ -9,6 +9,22 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	avionVerde.LoadTGA("Texturas/avion_verde.tga");
+	avionVerde.BuildGLTexture();
+	avionVerde.ReleaseImage();
+
+	avionBlanco1.LoadTGA("Texturas/avion_blanco1.tga");
+	avionBlanco1.BuildGLTexture();
+	avionBlanco1.ReleaseImage();
+
+	avionBlanco2.LoadTGA("Texturas/avion_blanco2.tga");
+	avionBlanco2.BuildGLTexture();
+	avionBlanco2.ReleaseImage();
+
+	avionGris.LoadTGA("Texturas/avion_gris.tga");
+	avionGris.BuildGLTexture();
+	avionGris.ReleaseImage();
+
 	pasto1.LoadTGA("Texturas/pasto1.tga");
 	pasto1.BuildGLTexture();
 	pasto1.ReleaseImage();

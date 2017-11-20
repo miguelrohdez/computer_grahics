@@ -5,6 +5,10 @@
 
 class TextureLoader {
 public:
+	CTexture avionVerde;
+	CTexture avionBlanco1;
+	CTexture avionBlanco2;
+	CTexture avionGris;
 	CTexture bathroom1;
 	CTexture bathroom2;
 	CTexture pasto1;
@@ -25,13 +29,13 @@ public:
 	CTexture pinturaSucia;
 	CTexture pinturaSucia1;
 	CTexture sillon;
-	CTexture sillon1;	
+	CTexture sillon1;
 	CTexture almohada;
 	CTexture cobija;
 	CTexture rotoplas;
-	CTexture noise;	
+	CTexture noise;
 	CTexture madera;
-	CTexture madera1;	
+	CTexture madera1;
 	CTexture skyBox;
 	CTexture cuadroDebug;
 	CTexture bardaA[6];

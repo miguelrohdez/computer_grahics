@@ -49,9 +49,10 @@ void InitGL() {
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
 	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-	camara.Position_Camera(0, 50, -120, 0, 35, 0, 0, 1, 0);
+	camara.Position_Camera(100, 200, 100, 0, 200, 0, 0, 1, 0);
 	textures.load();
 	plane.loadData();
+	plane.setTextures(textures.avionGris, textures.avionVerde);
 }
 
 
@@ -88,7 +89,7 @@ void dibujaEjes() {
 
 void dibujarTerreno() {
 	Color c = Color(1.0f, 1.0f, 1.0f);
-	Prisma p = Prisma(1000, 5, 1000, c);
+	Prisma p = Prisma(2000, 5, 2000, c);
 	p.setRepetitionTexture(0.5);
 	p.setTexture(textures.pasto2);
 	p.draw();
@@ -322,7 +323,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 }
 
 void dibujarSkyBox() {
-	Prisma p = Prisma(1000, 200, 1000, Color(1.0f, 1.0f, 1.0f));
+	Prisma p = Prisma(2000, 1500, 2000, Color(1.0f, 1.0f, 1.0f));
 
 	p.setTexture(textures.skyBox);
 	p.drawSky();

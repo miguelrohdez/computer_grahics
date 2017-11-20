@@ -1,5 +1,8 @@
 #include "AnimationPlane.h"
 #include <stdio.h>
+#include "Prisma.h"
+#include "Cylinder.h"
+#include "Color.h"
 
 AnimationPlane::AnimationPlane() {
 	this->current = 0;
@@ -28,7 +31,7 @@ void AnimationPlane::loadData() {
 	}
 	fclose(data);
 	resetValues();
-	printf("Frames cargados correctamente.");
+	printf("Frames cargados correctamente.\n");
 	fflush(stdout);
 }
 
@@ -62,12 +65,43 @@ void AnimationPlane::interpolate() {
 }
 
 void AnimationPlane::draw() {
-	Cylinder c(10, 50, texture);
+	Cylinder c(25, 250, textureBody);
+	Prisma p(10.f, 10.f, 10.f, Color(1,1,1));
+	p.setTexture(textureWing);
 
 	glTranslatef(translate[0], translate[1], translate[2]);
-	glRotatef(90, 0, 0, 1);
 	glRotatef(rotate[0], 1, 0, 0);
-	c.draw();
+	glPushMatrix(); // Pico frontal
+		glRotatef(90, 0, 0, 1);
+		c.draw();
+		glTranslatef(0, 250, 0);
+		c.draw(25, 5, 30);
+	glPopMatrix();
+	glPushMatrix(); // Cola
+		glTranslatef(0, 40, 0);
+		p.draw(15, 40, 4);
+		glTranslatef(0, 15, 0);
+		glPushMatrix();
+			glTranslatef(0, 0, 15);
+			p.draw(5, 4, 30);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0, -15);
+			p.draw(5, 4, 30);
+		glPopMatrix();
+	glPopMatrix();
+	glPushMatrix(); // Alas
+		glTranslatef(-125, 0, 0);
+		glPushMatrix();
+			glTranslatef(0, 0, 62.5);
+			p.draw(40, 6, 130);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0, -62.5);
+			p.draw(40, 6, 130);
+		glPopMatrix();
+	glPopMatrix();
+
 }
 
 void AnimationPlane::saveKeyframe() {
@@ -129,8 +163,9 @@ void AnimationPlane::saveToFile() {
 	printf("Frames guardados exitosamente.\n");
 }
 
-void AnimationPlane::setTexture(CTexture t) {
-	this->texture = t;
+void AnimationPlane::setTextures(CTexture tBody, CTexture tWing) {
+	this->textureBody = tBody;
+	this->textureWing = tWing;
 }
 
 void AnimationPlane::setActivate(bool v) {
