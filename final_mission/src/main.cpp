@@ -14,6 +14,7 @@
 #include "TextureLoader.h"
 #include "Cylinder.h"
 #include "Cone.h"
+#include "AnimationPlane.h"
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -21,6 +22,11 @@ GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
 float rotacionX = 0.0f;
 float rotacionY = 0.0f;
 float rotacionZ = 0.0f;
+
+/*
+ * KeyFrames
+ */
+AnimationPlane plane;
 
 /*
  * Para usar texturas
@@ -81,7 +87,7 @@ void dibujaEjes() {
 
 void dibujarTerreno() {
 	Color c = Color(1.0f, 1.0f, 1.0f);
-	Prisma p = Prisma(500, 5, 500, c);
+	Prisma p = Prisma(1000, 5, 1000, c);
 	p.setRepetitionTexture(0.5);
 	p.setTexture(textures.pasto2);
 	p.draw();
@@ -113,7 +119,7 @@ void dibujarMesa() {
 void dibujaSillon(float scale, CTexture sillonT=textures.sillon){
 
 	// Base
-	Prisma s = Prisma(20*scale, 3.5*scale, 10*scale, cafeMesa);	
+	Prisma s = Prisma(20*scale, 3.5*scale, 10*scale, cafeMesa);
 	s.draw(sillonT);
 
 	// Recarga brazos
@@ -135,7 +141,7 @@ void dibujaSillon(float scale, CTexture sillonT=textures.sillon){
 
 /* Función que dibuja una cama*/
 void dibujaCama(float scale){
-	
+
 	Prisma cam = Prisma(20*scale, 2*scale, 23*scale, cafeMesa);
 
 	cam.draw(textures.cobija);
@@ -172,7 +178,7 @@ void dibujaMuebleTv(float scale=1.0f){
 void dibujaTv(float scale=1.0f){
 	// Base
 	Prisma tv = Prisma(5.5*scale, 0.2*scale, 0.3*scale, cafeMesa);
-	tv.draw(textures.pinturaNegra);	
+	tv.draw(textures.pinturaNegra);
 
 	// Base (cilindro)
 	glPushMatrix();
@@ -188,9 +194,9 @@ void dibujaTv(float scale=1.0f){
 
 		// Pantalla
 		glPushMatrix();
-			glTranslatef(0*scale, 0*scale, -0.2*scale);			
+			glTranslatef(0*scale, 0*scale, -0.2*scale);
 			tv.setRepetitionTexture(0.7f);
-			tv.draw(13*scale, 6*scale, 0.2*scale, textures.noise);			
+			tv.draw(13*scale, 6*scale, 0.2*scale, textures.noise);
 		glPopMatrix();
 	glPopMatrix();
 
@@ -224,7 +230,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 
 		glTranslatef(75 * scale, 0, 0); // E
 		c.draw(90, heightWall, anchoBarda, textures.bardaE);
-	
+
 		glTranslatef(-55 * scale, 0, -15 * scale); // F
 		c.setRepetitionTexture(0.3f);
 		c.draw(anchoBarda, heightWall, 30, textures.bardaF);
@@ -315,7 +321,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 }
 
 void dibujarSkyBox() {
-	Prisma p = Prisma(500, 200, 500, Color(1.0f, 1.0f, 1.0f));
+	Prisma p = Prisma(1000, 200, 1000, Color(1.0f, 1.0f, 1.0f));
 
 	p.setTexture(textures.skyBox);
 	p.drawSky();
@@ -403,13 +409,13 @@ void display(void) {
 	glPushMatrix();
 		glTranslatef(95, 2, -10);
 		glRotatef(180, 0, 1, 0);
-		dibujaSillon(2.0f);		
+		dibujaSillon(2.0f);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(63, 2, 20);
 		glRotatef(-90, 0, 1, 0);
-		dibujaSillon(2.0f);		
+		dibujaSillon(2.0f);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -421,8 +427,8 @@ void display(void) {
 			dibujaTv(1.5f);
 		glPopMatrix();
 	glPopMatrix();
-		
-	
+
+
 	glPushMatrix();
 		glTranslatef(-50, 50, -70);
 		dibujarRotoplas(3.0f);
@@ -449,7 +455,8 @@ void display(void) {
 			dibujaTv(2.0f);
 		glPopMatrix();
 	glPopMatrix();
-
+	glTranslatef(20, 20, -20);
+	plane.draw();
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
@@ -500,9 +507,34 @@ void keyboard(unsigned char key, int x, int y) {
 		case 'q':
 		case 'Q':
 			camara.UpDown_Camera(-CAMERASPEED);
-			break;		
+			break;
+		/* Temporal para keyframes */
+		case 'z':
+			plane.left();
+			break;
+		case 'Z':
+			plane.right();
+			break;
+		case 'x':
+			plane.fordward();
+			break;
+		case 'X':
+			plane.backward();
+			break;
+		case 'c':
+			plane.up();
+			break;
+		case 'C':
+			plane.down();
+			break;
+		case 'v':
+			plane.rotateYPositive();
+			break;
+		case 'V':
+			plane.rotateYNegative();
+			break;
 		case 27:        // Cuando Esc es presionado...
-			exit ( 0 );   // Salimos del programa
+			exit(0);   // Salimos del programa
 			break;
 		default:        // Cualquier otra
 			break;

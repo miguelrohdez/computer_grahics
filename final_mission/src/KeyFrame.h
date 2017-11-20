@@ -7,6 +7,7 @@ class KeyFrame {
 	float increment[3];
 public:
 	KeyFrame();
+	/*
 	KeyFrame(float *translations, float *rotations, float *increments);
 	KeyFrame(float *translations);
 	KeyFrame(float *rotations);
@@ -14,6 +15,7 @@ public:
 	KeyFrame(float *translations, float *rotations);
 	KeyFrame(float *rotations, float *increments);
 	KeyFrame(float *translations, float *increments);
+	*/
 	void setTranslations(float t[3]);
 	void setRotations(float r[3]);
 	void setIncrements(float i[3]);
@@ -26,6 +28,16 @@ public:
 	void setIncrementX(float iX);
 	void setIncrementY(float iY);
 	void setIncrementZ(float iZ);
+	void toString();
+	float getPosX();
+	float getPosY();
+	float getPosZ();
+	float getRotX();
+	float getRotY();
+	float getRotZ();
+	float getIncX();
+	float getIncY();
+	float getIncZ();
 };
 
 class KeyFrameCoche: KeyFrame {
