@@ -26,7 +26,7 @@ void AnimationPlane::loadData() {
 	printf("Cargando frames ...\n");
 	while (fread(&frames[this->numFrames], sizeof(KeyFrame), 1, data) == 1) {
 		printf("Frame[%d]\n", this->numFrames);
-		frames[this->numFrames].toString();
+		// frames[this->numFrames].toString(); // Para depurar valores cargados
 		this->numFrames++;
 	}
 	fclose(data);
@@ -156,7 +156,7 @@ void AnimationPlane::saveToFile() {
 	}
 	for (int i = 0; i < current; i++) {
 		printf("Guardando Frame: \n");
-		frames[i].toString();
+		//frames[i].toString(); // Para depurar valores guardados
 		fwrite(&frames[i], sizeof(KeyFrame), 1, data);
 	}
 	fclose(data);

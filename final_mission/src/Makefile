@@ -1,18 +1,15 @@
-LIBS = -lGL -lGLU -lglut -lm -lstdc++
-CODIGO_FUENTE = Prisma.cpp Texture.cpp Color.cpp main.cpp Camera.cpp \
+LIBS = -lGL -lGLU -lglut -lm -lstdc++ -I../include
+
+CODIGO_FUENTE = Prisma.cpp Texture.cpp Color.cpp Camera.cpp \
 				Plane.cpp Vertex.cpp TextureLoader.cpp Cylinder.cpp \
 				Cone.cpp AnimationPlane.cpp KeyFrame.cpp
-TARGET = main #TODO
+TARGET = objetos
 
 
 main: $(CODIGO_FUENTE)
-	$(CXX) $(CODIGO_FUENTE) $(LIBS) -o $(TARGET)
+	$(CXX) -c $(CODIGO_FUENTE) $(LIBS)
 
-.PHONY: clean run
+.PHONY: clean
 
 clean:
-	-rm $(TARGET)
-
-run:
-	make
-	./main
+	-rm *.o

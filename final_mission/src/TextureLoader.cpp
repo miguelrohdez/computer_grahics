@@ -5,136 +5,136 @@ TextureLoader::TextureLoader() {
 }
 
 void TextureLoader::load() {
-	skyBox.LoadBMP("Texturas/skybox.bmp");
+	skyBox.LoadBMP("../res/Texturas/skybox.bmp");
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
-	avionVerde.LoadTGA("Texturas/avion_verde.tga");
+	avionVerde.LoadTGA("../res/Texturas/avion_verde.tga");
 	avionVerde.BuildGLTexture();
 	avionVerde.ReleaseImage();
 
-	avionBlanco1.LoadTGA("Texturas/avion_blanco1.tga");
+	avionBlanco1.LoadTGA("../res/Texturas/avion_blanco1.tga");
 	avionBlanco1.BuildGLTexture();
 	avionBlanco1.ReleaseImage();
 
-	avionBlanco2.LoadTGA("Texturas/avion_blanco2.tga");
+	avionBlanco2.LoadTGA("../res/Texturas/avion_blanco2.tga");
 	avionBlanco2.BuildGLTexture();
 	avionBlanco2.ReleaseImage();
 
-	avionGris.LoadTGA("Texturas/avion_gris.tga");
+	avionGris.LoadTGA("../res/Texturas/avion_gris.tga");
 	avionGris.BuildGLTexture();
 	avionGris.ReleaseImage();
 
-	pasto1.LoadTGA("Texturas/pasto1.tga");
+	pasto1.LoadTGA("../res/Texturas/pasto1.tga");
 	pasto1.BuildGLTexture();
 	pasto1.ReleaseImage();
 
-	pasto2.LoadTGA("Texturas/pasto2.tga");
+	pasto2.LoadTGA("../res/Texturas/pasto2.tga");
 	pasto2.BuildGLTexture();
 	pasto2.ReleaseImage();
 
-	pasto3.LoadTGA("Texturas/pasto3.tga");
+	pasto3.LoadTGA("../res/Texturas/pasto3.tga");
 	pasto3.BuildGLTexture();
 	pasto3.ReleaseImage();
 
-	tiles.LoadTGA("Texturas/piso2.tga");
+	tiles.LoadTGA("../res/Texturas/piso2.tga");
 	tiles.BuildGLTexture();
 	tiles.ReleaseImage();
 
-	bathroom1.LoadTGA("Texturas/tiles_bath1.tga");
+	bathroom1.LoadTGA("../res/Texturas/tiles_bath1.tga");
 	bathroom1.BuildGLTexture();
 	bathroom1.ReleaseImage();
 
-	bathroom2.LoadTGA("Texturas/tiles_bath2.tga");
+	bathroom2.LoadTGA("../res/Texturas/tiles_bath2.tga");
 	bathroom2.BuildGLTexture();
 	bathroom2.ReleaseImage();
 
-	ladrillos1.LoadTGA("Texturas/ladrillos1.tga");
+	ladrillos1.LoadTGA("../res/Texturas/ladrillos1.tga");
 	ladrillos1.BuildGLTexture();
 	ladrillos1.ReleaseImage();
 
-	ladrillos2.LoadTGA("Texturas/ladrillos2.tga");
+	ladrillos2.LoadTGA("../res/Texturas/ladrillos2.tga");
 	ladrillos2.BuildGLTexture();
 	ladrillos2.ReleaseImage();
 
-	ladrillos3.LoadTGA("Texturas/ladrillos3.tga");
+	ladrillos3.LoadTGA("../res/Texturas/ladrillos3.tga");
 	ladrillos3.BuildGLTexture();
 	ladrillos3.ReleaseImage();
 
-	ladrillos4.LoadTGA("Texturas/ladrillos4.tga");
+	ladrillos4.LoadTGA("../res/Texturas/ladrillos4.tga");
 	ladrillos4.BuildGLTexture();
 	ladrillos4.ReleaseImage();
 
-	pinturaRoja.LoadTGA("Texturas/pintura_roja.tga");
+	pinturaRoja.LoadTGA("../res/Texturas/pintura_roja.tga");
 	pinturaRoja.BuildGLTexture();
 	pinturaRoja.ReleaseImage();
 
-	pinturaAmarilla.LoadTGA("Texturas/pintura_amarilla.tga");
+	pinturaAmarilla.LoadTGA("../res/Texturas/pintura_amarilla.tga");
 	pinturaAmarilla.BuildGLTexture();
 	pinturaAmarilla.ReleaseImage();
 
-	pinturaBlanca1.LoadTGA("Texturas/pintura_blanca1.tga");
+	pinturaBlanca1.LoadTGA("../res/Texturas/pintura_blanca1.tga");
 	pinturaBlanca1.BuildGLTexture();
 	pinturaBlanca1.ReleaseImage();
 
-	pinturaBlanca2.LoadTGA("Texturas/pintura_blanca2.tga");
+	pinturaBlanca2.LoadTGA("../res/Texturas/pintura_blanca2.tga");
 	pinturaBlanca2.BuildGLTexture();
 	pinturaBlanca2.ReleaseImage();
 
-	pinturaBlanca3.LoadTGA("Texturas/pintura_blanca3.tga");
+	pinturaBlanca3.LoadTGA("../res/Texturas/pintura_blanca3.tga");
 	pinturaBlanca3.BuildGLTexture();
 	pinturaBlanca3.ReleaseImage();
 
-	pinturaNegra.LoadTGA("Texturas/pintura_negra.tga");
+	pinturaNegra.LoadTGA("../res/Texturas/pintura_negra.tga");
 	pinturaNegra.BuildGLTexture();
 	pinturaNegra.ReleaseImage();
 
-	pinturaAzul.LoadTGA("Texturas/pintura_azul.tga");
+	pinturaAzul.LoadTGA("../res/Texturas/pintura_azul.tga");
 	pinturaAzul.BuildGLTexture();
 	pinturaAzul.ReleaseImage();
 
-	pinturaSucia.LoadTGA("Texturas/pintura_sucia.tga");
+	pinturaSucia.LoadTGA("../res/Texturas/pintura_sucia.tga");
 	pinturaSucia.BuildGLTexture();
 	pinturaSucia.ReleaseImage();
 
-	pinturaSucia1.LoadTGA("Texturas/sucio.tga");
+	pinturaSucia1.LoadTGA("../res/Texturas/sucio.tga");
 	pinturaSucia1.BuildGLTexture();
 	pinturaSucia1.ReleaseImage();
 
-	sillon.LoadTGA("Texturas/sillon.tga");
+	sillon.LoadTGA("../res/Texturas/sillon.tga");
 	sillon.BuildGLTexture();
 	sillon.ReleaseImage();
 
-	sillon1.LoadTGA("Texturas/sillon1.tga");
+	sillon1.LoadTGA("../res/Texturas/sillon1.tga");
 	sillon1.BuildGLTexture();
 	sillon1.ReleaseImage();
 
-	almohada.LoadTGA("Texturas/almohada.tga");
+	almohada.LoadTGA("../res/Texturas/almohada.tga");
 	almohada.BuildGLTexture();
 	almohada.ReleaseImage();
 
-	cobija.LoadTGA("Texturas/cobija.tga");
+	cobija.LoadTGA("../res/Texturas/cobija.tga");
 	cobija.BuildGLTexture();
 	cobija.ReleaseImage();
 
-	noise.LoadTGA("Texturas/noise.tga");
+	noise.LoadTGA("../res/Texturas/noise.tga");
 	noise.BuildGLTexture();
 	noise.ReleaseImage();
 
-	rotoplas.LoadTGA("Texturas/rotoplas.tga");
+	rotoplas.LoadTGA("../res/Texturas/rotoplas.tga");
 	rotoplas.BuildGLTexture();
 	rotoplas.ReleaseImage();
 
-	madera.LoadTGA("Texturas/madera.tga");
+	madera.LoadTGA("../res/Texturas/madera.tga");
 	madera.BuildGLTexture();
 	madera.ReleaseImage();
 
-	madera1.LoadTGA("Texturas/madera1.tga");
+	madera1.LoadTGA("../res/Texturas/madera1.tga");
 	madera1.BuildGLTexture();
 	madera1.ReleaseImage();
 
 	/* Imagen para depurar las texturas*/
-	cuadroDebug.LoadTGA("Texturas/cuadro.tga");
+	cuadroDebug.LoadTGA("../res/Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();
 	cuadroDebug.ReleaseImage();
 	createArrays();

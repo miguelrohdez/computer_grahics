@@ -6,7 +6,7 @@
 #include "Cylinder.h"
 #include "Texture.h"
 #define iMaxSteps 400.0f
-#define FILE_KEYFRAME_PLANE "Keyframes/keyframe_plane.frm"
+#define FILE_KEYFRAME_PLANE "../res/Keyframes/keyframe_plane.frm"
 
 
 class AnimationPlane {
