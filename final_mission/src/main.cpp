@@ -28,6 +28,7 @@ float rotacionZ = 0.0f;
  * KeyFrames
  */
 AnimationReloj reloj;
+AnimationPlane avion;
 
 /*
  * Para usar texturas
@@ -48,6 +49,19 @@ Color sienna = Color(0.627f, 0.322f, 0.176f);
 Color cafeMesa = Color(0.09f, 0.06f, 0.05f);
 Color negro(0.0f, 0.0f, 0.0f);
 Color blanco(1.0f, 1.0f, 1.0f);
+
+/*
+ * Función que carga y da valores a las animaciones
+ */
+void loadKeyFrames() {
+	reloj.loadData();
+	avion.loadData();
+
+	reloj.setTextures(textures.reloj, textures.pinturaNegra);
+	avion.setTextures(textures.avionGris, textures.avionVerde);
+	reloj.setActivate(true);
+}
+
 /*
  * Función para inicializar parámetros
  */
@@ -59,8 +73,7 @@ void InitGL() {
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
 	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);
 	textures.load();
-	reloj.loadData();
-	reloj.setTextures(textures.reloj, textures.pinturaNegra);
+	loadKeyFrames();
 	p = Prisma(1.0, 1.0, 1.0, blanco);
 	c = Cylinder(1.0, 1.0, textures.pinturaNegra);
 }
@@ -520,6 +533,7 @@ void display(void) {
 
 	glTranslatef(90, 70, -37.75);
 	reloj.draw();
+	avion.draw();
 
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
@@ -529,6 +543,7 @@ void display(void) {
 
 void animation() {
 	reloj.update();
+	avion.update();
 	glutPostRedisplay();
 }
 
@@ -604,17 +619,17 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		case 'M':
 		case 'm':
-			reloj.saveToFile();
+			//reloj.saveToFile();
 			break;
 		case 'n':
 		case 'N':
-			reloj.saveKeyframe();
+			//reloj.saveKeyframe();
 			break;
 		case 'b':
-			reloj.setActivate(true);
+			avion.setActivate(true);
 			break;
 		case 'B':
-			reloj.setActivate(false);
+			//reloj.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
 			exit(0);   // Salimos del programa
