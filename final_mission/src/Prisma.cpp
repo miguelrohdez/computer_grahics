@@ -15,6 +15,7 @@ Prisma::Prisma(float width, float height, float depth, Color color, CTexture *te
     setColor(color);
     setRepetitionTexture(1);
     setScale(1.0f);
+	enableRepetition();
 }
 
 Prisma::Prisma(float width, float height, float depth, Color color) {
@@ -22,6 +23,7 @@ Prisma::Prisma(float width, float height, float depth, Color color) {
     setColor(color);
     setRepetitionTexture(1);
     setScale(1.0f);
+	enableRepetition();
 }
 
 void Prisma::setSize(float *size) {
@@ -80,7 +82,10 @@ void Prisma::draw() {
         Plane(v[7], v[4], v[2], v[0], textures[5]) // YZ X negativa
     };
     for (size_t i = 0; i < 6; i++) {
-        p[i].calculateRepetitions(repTexture, repTexture);
+		if (this->flagRepetition)
+        	p[i].calculateRepetitions(repTexture, repTexture);
+		else
+			p[i].noRepetition();
         p[i].draw();
     }
 }
@@ -212,4 +217,12 @@ void Prisma::setScale(float s) {
 
 void Prisma::setRepetitionTexture(float rt) {
     this->repTexture = rt;
+}
+
+void Prisma::disableRepetition() {
+	this->flagRepetition = false;
+}
+
+void Prisma::enableRepetition() {
+	this->flagRepetition = true;
 }
