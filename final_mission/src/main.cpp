@@ -111,16 +111,16 @@ void dibujarPiso() {
 
 void dibujarMesa() {
 
-	p.setScale(2.0f);
-	p.draw(8, 0.5, 3);
-	glTranslatef(0.0f, 0.75, 0.0f);
-	p.draw(8.5, 0.25, 3.5, sienna);
-	glTranslatef(0.0f, 7.25f, 0.0f);
-	p.draw(7.0f, 7.0f, 3.0f, cafeMesa);
-	glTranslatef(0.0f, 7.2f, 0.0f);
-	p.draw(8.5, 0.2, 3.5, sienna);
-	glTranslatef(0.0f, 0.4f, 0.6f);
-	p.draw(15, 0.2, 10, cafeMesa);
+	p.setScale(4.0f);
+	p.draw(8, 0.5, 3, textures.madera1);
+	glTranslatef(0.0f, 0.75*2, 0.0f);
+	p.draw(8.5, 0.25, 3.5, textures.pinturaBlanca2);
+	glTranslatef(0.0f, 7.25f*2, 0.0f);
+	p.draw(7.0f, 7.0f, 3.0f, textures.madera1);
+	glTranslatef(0.0f, 7.2f*2, 0.0f);
+	p.draw(8.5, 0.2, 3.5, textures.pinturaBlanca2);
+	glTranslatef(0.0f, 0.4f*2, 0.6f*2);
+	p.draw(15, 0.2, 10, textures.madera1);
 	p.setScale(1.0);
 }
 
@@ -225,17 +225,17 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		glTranslatef(30 * scale, 0, 0); // C
 		p.draw(anchoBarda, heightWall, 20, textures.bardaC);
 
-		glTranslatef(-20 * scale, 0, -10 * scale); // D		
-		p.draw(20, heightWall, anchoBarda, textures.bardaD);		
+		glTranslatef(-20 * scale, 0, -10 * scale); // D
+		p.draw(20, heightWall, anchoBarda, textures.bardaD);
 
 		glTranslatef(75 * scale, 0, 0); // E
 		p.draw(90, heightWall, anchoBarda, textures.bardaE);
 
-		glTranslatef(-55 * scale, 0, -15 * scale); // F		
+		glTranslatef(-55 * scale, 0, -15 * scale); // F
 		p.draw(anchoBarda, heightWall, 30, textures.bardaF);
 
-		glTranslatef(-30 * scale, 0, -5 * scale); // G		
-		p.draw(anchoBarda, heightWall, 40, textures.bardaG);		
+		glTranslatef(-30 * scale, 0, -5 * scale); // G
+		p.draw(anchoBarda, heightWall, 40, textures.bardaG);
 
 		glTranslatef(130 * scale, 0, -5 * scale); // H
 		p.draw(anchoBarda, heightWall, 50, textures.bardaH);
@@ -243,8 +243,8 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		glTranslatef(-85 * scale, 0, -5 * scale); // I
 		p.draw(30, heightWall, anchoBarda, textures.bardaI);
 
-		glTranslatef(-30 * scale, 0, -10 * scale); // J	
-		p.draw(30, heightWall, anchoBarda, textures.bardaJ);		
+		glTranslatef(-30 * scale, 0, -10 * scale); // J
+		p.draw(30, heightWall, anchoBarda, textures.bardaJ);
 
 		glTranslatef(55 * scale, 0, 0); // K
 		p.draw(40, heightWall, anchoBarda, textures.bardaK);
@@ -258,20 +258,20 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		glTranslatef(25 * scale, 0, 0); // N
 		p.draw(15, heightWall, anchoBarda, textures.bardaN);
 
-		glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ		
-		p.draw(anchoBarda, heightWall, 40, textures.bardaNE);		
+		glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ
+		p.draw(anchoBarda, heightWall, 40, textures.bardaNE);
 
 		glTranslatef(90 * scale, 0, -5 * scale); // O
 		p.draw(anchoBarda, heightWall, 30, textures.bardaO);
 
-		glTranslatef(-60 * scale, 0, 0); // P		
-		p.draw(anchoBarda, heightWall, 30, textures.bardaP);		
+		glTranslatef(-60 * scale, 0, 0); // P
+		p.draw(anchoBarda, heightWall, 30, textures.bardaP);
 
 		glTranslatef(20 * scale, 0, 0); // Q
 		p.draw(anchoBarda, heightWall, 30, textures.bardaQ);
 
-		glTranslatef(-35 * scale, 0, -15 * scale); // R		
-		p.draw(30, heightWall, anchoBarda, textures.bardaR);		
+		glTranslatef(-35 * scale, 0, -15 * scale); // R
+		p.draw(30, heightWall, anchoBarda, textures.bardaR);
 
 		glTranslatef(25 * scale, 0, 0); // S
 		p.draw(20, heightWall, anchoBarda, textures.bardaS);
@@ -518,11 +518,7 @@ void display(void) {
 		dibujaAlberca(1.5f);
 	glPopMatrix();
 
-
-	glTranslatef(20, 20, -20);
-	plane.draw();
-
-	glTranslatef(0, 120, 0);
+	glTranslatef(90, 70, -37.75);
 	reloj.draw();
 
 	glDisable(GL_TEXTURE_2D);
