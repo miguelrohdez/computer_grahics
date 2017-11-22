@@ -9,6 +9,10 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	lavabo.LoadTGA("../res/Texturas/lavabo.tga");
+	lavabo.BuildGLTexture();
+	lavabo.ReleaseImage();
+
 	reloj.LoadTGA("../res/Texturas/reloj.tga");
 	reloj.BuildGLTexture();
 	reloj.ReleaseImage();
@@ -200,6 +204,9 @@ void TextureLoader::createArrays() {
 // 3 XY con Z negativa
 // 4 YZ con X positiva
 // 5 YZ con X negativa
+	lavaboComplete[0] = lavabo;
+	lavaboComplete[1] = lavaboComplete[2] = lavaboComplete[3] = lavaboComplete[4] = \
+	lavaboComplete[5] = pinturaBlanca1;
 
 	techoA[0] = techoA[2] = techoA[3] = techoA[4] =  techoA[5] = pinturaBlanca3;
 	techoA[1] = pinturaBlanca1;

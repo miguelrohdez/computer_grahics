@@ -11,6 +11,7 @@ public:
 	CTexture door3;
 	CTexture door4;
 	CTexture door5;
+	CTexture lavabo;
 	CTexture avionVerde;
 	CTexture avionBlanco1;
 	CTexture avionBlanco2;
@@ -51,6 +52,7 @@ public:
 	CTexture skyBox;
 	CTexture agua;
 	CTexture cuadroDebug;
+	CTexture lavaboComplete[6];
 	CTexture bardaA[6];
 	CTexture bardaB[6];
 	CTexture bardaC[6];

@@ -412,6 +412,13 @@ void dibujarPlano() {
 	p.draw();
 }
 
+void dibujaLavabo(float scale) {
+	p.setScale(scale);
+	p.disableRepetition();
+	p.draw(4, 1, 5, textures.lavaboComplete);
+	p.enableRepetition();
+	p.setScale(1.0f);
+}
 
 void testCylinder() {
 	Cylinder c(10, 10, textures.cuadroDebug);
@@ -588,11 +595,8 @@ void display(void) {
 	glPushMatrix();
 		glTranslatef(100, 0, 236);
 		dibujaGarage();
-	glPopMatrix();|
+	glPopMatrix();
 
-	//glTranslatef(0, 120, 0);
-	glTranslatef(90, 70, -37.75);
-	reloj.draw();
 	glPushMatrix();
 		glTranslatef(90, 70, -37.75);
 		reloj.draw();
@@ -606,6 +610,15 @@ void display(void) {
 		glTranslatef(-230, 0, 160);
 		glRotatef(90, 0, -1, 0);
 		dibujarRetrete();
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-130, 45, -140);
+		dibujaLavabo(4.0f);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-200, 40, 190);
+		glRotatef(90, 0, 1, 0);
+		dibujaLavabo(4);
 	glPopMatrix();
 	avion.draw();
 
