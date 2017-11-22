@@ -431,6 +431,14 @@ void dibujaAlberca(float scale=1.0f){
 	glPopMatrix();
 }
 
+void dibujarRetrete() {
+	c.draw(5, 8, 20, textures.pinturaBlanca2);
+	glTranslatef(0, 5, 6);
+	p.draw(6, 16, 16, textures.pinturaBlanca2);
+	glTranslatef(0, 8, 16);
+	p.draw(20, 32, 16);
+}
+
 /*
  * Función que dibuja
  */
@@ -530,9 +538,15 @@ void display(void) {
 		glRotatef(90, 0, 1, 0);
 		dibujaAlberca(1.5f);
 	glPopMatrix();
-
-	glTranslatef(90, 70, -37.75);
-	reloj.draw();
+	glPushMatrix();
+		glTranslatef(90, 70, -37.75);
+		reloj.draw();
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-100, 0, -170);
+		glRotatef(180, 0, 1, 0);
+		dibujarRetrete();
+	glPopMatrix();
 	avion.draw();
 
 	glDisable(GL_TEXTURE_2D);
