@@ -48,6 +48,11 @@ void Plane::calculateRepetitions(float repAxisA, float repAxisB) {
 	this->axisBRep =  (v[1].distance(v[2]) / 20.0) * repAxisB;
 }
 
+void Plane::noRepetition() {
+	this->axisARep = 1.0f;
+	this->axisBRep = 1.0f;
+}
+
 void Plane::setTexture(CTexture t) {
 	this->texture = t;
 }

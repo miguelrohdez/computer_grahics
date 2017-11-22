@@ -23,6 +23,7 @@ public:
 	void drawInverse();
 	void toString();
 	void calculateRepetitions(float repAxisA, float repAxisB);
+	void noRepetition();
 };
 
 #endif

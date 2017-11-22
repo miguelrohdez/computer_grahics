@@ -13,5 +13,6 @@ $(TARGET): $(SRC_DIR)/$(FILE)
 clean:
 	-rm main
 run:
+	make clean
 	make
 	./main

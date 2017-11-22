@@ -17,6 +17,7 @@ private:
     float scale;
     Color color;
     float repTexture;
+	bool flagRepetition;
 public:
     Prisma();
     Prisma(float width, float height, float depth, Color color, CTexture textures[6]);
@@ -40,6 +41,8 @@ public:
     void setRepetitionTexture(float rt);
     void setScale(float s);
     void toDebug();
+	void disableRepetition();
+	void enableRepetition();
 };
 
 

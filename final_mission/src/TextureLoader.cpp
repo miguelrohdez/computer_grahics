@@ -9,6 +9,10 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	reloj.LoadTGA("../res/Texturas/reloj.tga");
+	reloj.BuildGLTexture();
+	reloj.ReleaseImage();
+
 	avionVerde.LoadTGA("../res/Texturas/avion_verde.tga");
 	avionVerde.BuildGLTexture();
 	avionVerde.ReleaseImage();
