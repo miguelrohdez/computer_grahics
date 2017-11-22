@@ -43,7 +43,11 @@ public:
 	CTexture madera;
 	CTexture madera1;
 	CTexture camino;
+	CTexture piso;
 	CTexture poolFloor;
+	CTexture road;
+	CTexture tapete;
+	CTexture adoquin;
 	CTexture skyBox;
 	CTexture agua;
 	CTexture cuadroDebug;

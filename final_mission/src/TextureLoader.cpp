@@ -169,6 +169,22 @@ void TextureLoader::load() {
 	poolFloor.BuildGLTexture();
 	poolFloor.ReleaseImage();
 
+	road.LoadTGA("../res/Texturas/road.tga");
+	road.BuildGLTexture();
+	road.ReleaseImage();
+
+	tapete.LoadTGA("../res/Texturas/tapete.tga");
+	tapete.BuildGLTexture();
+	tapete.ReleaseImage();
+
+	adoquin.LoadTGA("../res/Texturas/adoquin.tga");
+	adoquin.BuildGLTexture();
+	adoquin.ReleaseImage();
+
+	piso.LoadTGA("../res/Texturas/piso.tga");
+	piso.BuildGLTexture();
+	piso.ReleaseImage();
+
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("../res/Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();

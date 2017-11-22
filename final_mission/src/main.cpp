@@ -110,7 +110,6 @@ void dibujarPiso() {
 }
 
 void dibujarMesa() {
-
 	p.setScale(2.0f);
 	p.draw(8, 0.5, 3);
 	glTranslatef(0.0f, 0.75, 0.0f);
@@ -203,10 +202,42 @@ void dibujaTv(float scale=1.0f){
 			p.draw(13*scale, 6*scale, 0.2*scale, textures.noise);
 		glPopMatrix();
 	glPopMatrix();
-
-
 }
 
+void dibujaTapete(float scale=1.0f){
+	glEnable( GL_ALPHA_TEST );	
+	glAlphaFunc( GL_GREATER, 0.1 );
+
+	p.setRepetitionTexture(0.35f);
+	p.draw(56*scale, 1*scale, 58*scale, textures.tapete);
+
+	glDisable( GL_ALPHA_TEST );
+}
+
+void dibujaCarretera(){
+	p.setRepetitionTexture(0.08f);
+	glRotatef(90, 0, 1, 0);
+	p.draw(250, 0.5, 2000, textures.road);
+}
+
+void dibujaGarage(){
+
+	// Piso de piedra (Alberca)
+	p.setRepetitionTexture(1.0f);
+	p.draw(360, 1, 35, textures.camino);
+
+	// Piso de piedra (Casa)
+	glPushMatrix();
+		glTranslatef(0, 0, -70);
+		p.draw(360, 1, 35, textures.camino);
+	glPopMatrix();
+
+	// Adoquinado inferior
+	glPushMatrix();
+		glTranslatef(0, 0, -35);
+		p.draw(360, 0.5, 156, textures.adoquin);
+	glPopMatrix();
+}
 
 void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 	float anchoBarda = 1.1f;
@@ -412,9 +443,10 @@ void dibujaAlberca(float scale=1.0f){
 		p.draw(150, 8, 280, textures.poolFloor);
 	glPopMatrix();
 
+	// Camino empedrado
 	glPushMatrix();
 		glTranslatef(170, 0, -15);
-		p.draw(200, 4, 40, textures.camino);
+		p.draw(200, 2, 50, textures.piso);
 	glPopMatrix();
 }
 
@@ -482,7 +514,13 @@ void display(void) {
 		glPopMatrix();
 	glPopMatrix();
 
+	glPushMatrix();
+		glTranslatef(200, 2, 70);
+		dibujaTapete();
+	glPopMatrix();
 
+
+	// Sección del techo
 	glPushMatrix();
 		glTranslatef(-50, 100, -70);
 		dibujarRotoplas(4.0f);
@@ -518,9 +556,19 @@ void display(void) {
 		dibujaAlberca(1.5f);
 	glPopMatrix();
 
+	// Carretera
+	glPushMatrix();
+		glTranslatef(0, 0, -700);
+		dibujaCarretera();
+	glPopMatrix();
 
-	glTranslatef(20, 20, -20);
-	plane.draw();
+	// Garage
+	glPushMatrix();
+		glTranslatef(100, 0, 236);
+		dibujaGarage();
+	glPopMatrix();
+	//glTranslatef(20, 20, -20);
+	//plane.draw();
 
 	glTranslatef(0, 120, 0);
 	reloj.draw();
