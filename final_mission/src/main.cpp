@@ -558,7 +558,7 @@ void display(void) {
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(240, 2, 100);
+		glTranslatef(240, 10, 100);
 		glRotatef(40, 0, 1, 0);
 		dibujaMuebleTv(1.4f);
 		glPushMatrix();
@@ -594,7 +594,7 @@ void display(void) {
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(35, 6, -50);
+		glTranslatef(35, 15, -50);
 		dibujaMuebleTv(2.0f);
 		glPushMatrix();
 			glTranslatef(0, 15, 0);
@@ -663,11 +663,11 @@ void display(void) {
 		dibujaSilla(4.0f);
 	glPopMatrix();
 	glPushMatrix(); // Cuarto Azul
-		glTranslatef(-220, 0, 75);
+		glTranslatef(-220, 10, 75);
 		dibujaCama(3.0f);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(-240, 2, -60);
+		glTranslatef(-240, 10, -60);
 		glRotatef(-40, 0, 1, 0);
 		dibujaMuebleTv(1.4f);
 		glPushMatrix();
@@ -676,12 +676,12 @@ void display(void) {
 		glPopMatrix();
 	glPopMatrix();
 	glPushMatrix(); // Cuarto
-		glTranslatef(-180, 0, -160);
+		glTranslatef(-180, 10, -160);
 		glRotatef(180, 0, 1, 0);
 		dibujaCama(3.0f);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(-205, 2, -30);
+		glTranslatef(-205, 10, -30);
 		glRotatef(180, 0, 1, 0);
 		dibujaMuebleTv(1.4f);
 		glPushMatrix();
