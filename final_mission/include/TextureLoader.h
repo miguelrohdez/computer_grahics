@@ -5,6 +5,7 @@
 
 class TextureLoader {
 public:
+	CTexture reloj;
 	CTexture avionVerde;
 	CTexture avionBlanco1;
 	CTexture avionBlanco2;
