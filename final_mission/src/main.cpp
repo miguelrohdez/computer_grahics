@@ -479,6 +479,30 @@ void dibujarRetrete() {
 	p.draw(30, 16, 10);
 }
 
+void dibujaSilla(float scale) {
+	p.setScale(scale);
+	p.draw(0.5, 5, 0.5, textures.madera1);
+	glTranslatef(4 * scale, 0, 0);
+	p.draw(0.5, 5, 0.5, textures.madera1);
+	glTranslatef(0, 0, 4 * scale);
+	p.draw(0.5, 5, 0.5, textures.madera1);
+	glTranslatef(-4 * scale, 0, 0);
+	p.draw(0.5, 5, 0.5, textures.madera1);
+	glTranslatef(2 * scale, 2.75 * scale, -2 * scale);
+	p.draw(4.5, 0.5, 4.5);
+	glTranslatef(-1.75 * scale, 2.75 * scale, 2 * scale);
+	p.draw(1, 5, 0.5);
+	glTranslatef(3.5 * scale, 0 , 0);
+	p.draw(1, 5, 0.5);
+	glTranslatef(-1.75 * scale, 2 * scale, 0);
+	p.draw(2.5, 1, 0.5);
+	glTranslatef(0, -1.75 * scale, 0);
+	p.draw(2.5, 1, 0.5);
+	glTranslatef(0, -1.75 * scale, 0);
+	p.draw(2.5, 1, 0.5);
+	p.setScale(1.0f);
+}
+
 /*
  * Función que dibuja
  */
@@ -516,7 +540,7 @@ void display(void) {
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(10, 0, 10);
+		glTranslatef(0, 0, 60);
 		dibujarMesa();
 	glPopMatrix();
 
@@ -619,6 +643,10 @@ void display(void) {
 		glTranslatef(-200, 40, 190);
 		glRotatef(90, 0, 1, 0);
 		dibujaLavabo(4);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(0, 6, 0);
+		dibujaSilla(4.0f);
 	glPopMatrix();
 	avion.draw();
 
