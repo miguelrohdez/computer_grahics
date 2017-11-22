@@ -39,7 +39,7 @@ void AnimationReloj::update() {
 			if (current > numFrames - 2) {
 				activate = false;
 				resetValues();
-				printf("Termina rotación reloj\n");
+				activate = true;
 			} else {
 				iCurrentSteps = 0; //Reset counter
 				interpolate();
