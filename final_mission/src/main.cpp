@@ -663,13 +663,31 @@ void display(void) {
 		dibujaSilla(4.0f);
 	glPopMatrix();
 	glPushMatrix(); // Cuarto Azul
-		glTranslatef(-22, 0, 75);
+		glTranslatef(-220, 0, 75);
 		dibujaCama(3.0f);
 	glPopMatrix();
-	glPushMatrix(); // Cuarto Azul
+	glPushMatrix();
+		glTranslatef(-240, 2, -60);
+		glRotatef(-40, 0, 1, 0);
+		dibujaMuebleTv(1.4f);
+		glPushMatrix();
+			glTranslatef(0, 10.5, 0);
+			dibujaTv(3.0f);
+		glPopMatrix();
+	glPopMatrix();
+	glPushMatrix(); // Cuarto
 		glTranslatef(-180, 0, -160);
 		glRotatef(180, 0, 1, 0);
 		dibujaCama(3.0f);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-205, 2, -30);
+		glRotatef(180, 0, 1, 0);
+		dibujaMuebleTv(1.4f);
+		glPushMatrix();
+			glTranslatef(0, 10.5, 0);
+			dibujaTv(3.0f);
+		glPopMatrix();
 	glPopMatrix();
 	avion.draw();
 
