@@ -6,6 +6,11 @@
 class TextureLoader {
 public:
 	CTexture reloj;
+	CTexture door1;
+	CTexture door2;
+	CTexture door3;
+	CTexture door4;
+	CTexture door5;
 	CTexture avionVerde;
 	CTexture avionBlanco1;
 	CTexture avionBlanco2;

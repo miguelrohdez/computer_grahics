@@ -13,6 +13,26 @@ void TextureLoader::load() {
 	reloj.BuildGLTexture();
 	reloj.ReleaseImage();
 
+	door1.LoadTGA("../res/Texturas/door1.tga");
+	door1.BuildGLTexture();
+	door1.ReleaseImage();
+
+	door2.LoadTGA("../res/Texturas/door2.tga");
+	door2.BuildGLTexture();
+	door2.ReleaseImage();
+
+	door3.LoadTGA("../res/Texturas/door3.tga");
+	door3.BuildGLTexture();
+	door3.ReleaseImage();
+
+	door4.LoadTGA("../res/Texturas/door4.tga");
+	door4.BuildGLTexture();
+	door4.ReleaseImage();
+
+	door5.LoadTGA("../res/Texturas/door5.tga");
+	door5.BuildGLTexture();
+	door5.ReleaseImage();
+
 	avionVerde.LoadTGA("../res/Texturas/avion_verde.tga");
 	avionVerde.BuildGLTexture();
 	avionVerde.ReleaseImage();
