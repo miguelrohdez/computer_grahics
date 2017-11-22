@@ -433,10 +433,10 @@ void dibujaAlberca(float scale=1.0f){
 
 void dibujarRetrete() {
 	c.draw(5, 8, 20, textures.pinturaBlanca2);
-	glTranslatef(0, 5, 6);
-	p.draw(6, 16, 16, textures.pinturaBlanca2);
-	glTranslatef(0, 8, 16);
-	p.draw(20, 32, 16);
+	glTranslatef(0, 10, 8);
+	p.draw(12, 16, 16, textures.pinturaBlanca2);
+	glTranslatef(0, 8, 13);
+	p.draw(30, 16, 10);
 }
 
 /*
@@ -542,9 +542,14 @@ void display(void) {
 		glTranslatef(90, 70, -37.75);
 		reloj.draw();
 	glPopMatrix();
-	glPushMatrix();
+	glPushMatrix(); // Retrete 1
 		glTranslatef(-100, 0, -170);
 		glRotatef(180, 0, 1, 0);
+		dibujarRetrete();
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-230, 0, 160);
+		glRotatef(90, 0, -1, 0);
 		dibujarRetrete();
 	glPopMatrix();
 	avion.draw();
