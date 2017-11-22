@@ -8,15 +8,6 @@ class KeyFrame {
 	float incrementRot[3];
 public:
 	KeyFrame();
-	/*
-	KeyFrame(float *translations, float *rotations, float *increments);
-	KeyFrame(float *translations);
-	KeyFrame(float *rotations);
-	KeyFrame(float *increments);
-	KeyFrame(float *translations, float *rotations);
-	KeyFrame(float *rotations, float *increments);
-	KeyFrame(float *translations, float *increments);
-	*/
 	void setTranslations(float t[3]);
 	void setRotations(float r[3]);
 	void setTranslationX(float tX);
@@ -46,8 +37,16 @@ public:
 	float getIncRotZ();
 };
 
-class KeyFrameCoche: KeyFrame {
-
+class KeyFrameReloj: KeyFrame {
+	float rotManecilla;
+	float incRotManecilla;
+public:
+	KeyFrameReloj();
+	float getRotManecilla();
+	void setRotManecilla(float r);
+	float getIncRotManecilla();
+	void setIncRotManecilla(float r);
+	void toString();
 };
 
 #endif

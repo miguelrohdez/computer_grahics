@@ -15,6 +15,7 @@
 #include "Cylinder.h"
 #include "Cone.h"
 #include "AnimationPlane.h"
+#include "AnimationReloj.h"
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -26,7 +27,7 @@ float rotacionZ = 0.0f;
 /*
  * KeyFrames
  */
-AnimationPlane plane;
+AnimationReloj reloj;
 
 /*
  * Para usar texturas
@@ -58,8 +59,8 @@ void InitGL() {
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
 	camara.Position_Camera(100, 200, 100, 0, 200, 0, 0, 1, 0);
 	textures.load();
-	plane.loadData();
-	plane.setTextures(textures.avionGris, textures.avionVerde);
+	reloj.loadData();
+	reloj.setTextures(textures.reloj, textures.pinturaNegra);
 	p = Prisma(1.0, 1.0, 1.0, blanco);
 	c = Cylinder(1.0, 1.0, textures.pinturaNegra);
 }
@@ -452,8 +453,8 @@ void display(void) {
 			dibujaTv(4.0f);
 		glPopMatrix();
 	glPopMatrix();
-	glTranslatef(20, 20, -20);
-	plane.draw();
+	glTranslatef(0, 120, 0);
+	reloj.draw();
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
@@ -461,7 +462,7 @@ void display(void) {
 }
 
 void animation() {
-	plane.update();
+	reloj.update();
 	glutPostRedisplay();
 }
 /*
@@ -511,42 +512,42 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		/* Temporal para keyframes */
 		case 'z':
-			plane.left();
+			//reloj.left();
 			break;
 		case 'Z':
-			plane.right();
+			//reloj.right();
 			break;
 		case 'x':
-			plane.fordward();
+			//reloj.fordward();
 			break;
 		case 'X':
-			plane.backward();
+			//reloj.backward();
 			break;
 		case 'c':
-			plane.up();
+			//reloj.up();
 			break;
 		case 'C':
-			plane.down();
+			//reloj.down();
 			break;
 		case 'v':
-			plane.rotateXPositive();
+			reloj.rotateManecilla();
 			break;
 		case 'V':
-			plane.rotateXNegative();
+			//reloj.rotateXNegative();
 			break;
 		case 'M':
 		case 'm':
-			plane.saveToFile();
+			reloj.saveToFile();
 			break;
 		case 'n':
 		case 'N':
-			plane.saveKeyframe();
+			reloj.saveKeyframe();
 			break;
 		case 'b':
-			plane.setActivate(true);
+			reloj.setActivate(true);
 			break;
 		case 'B':
-			plane.setActivate(false);
+			reloj.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
 			exit(0);   // Salimos del programa
