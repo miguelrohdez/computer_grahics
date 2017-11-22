@@ -21,6 +21,8 @@ public:
 	Cylinder(float radio, float height, CTexture texture);
 	Cylinder(float radioTop, float radioBottom, float height, CTexture texture);
 	void draw();
+	void drawHalf();
+	void drawHalf(float radio, float height, CTexture texture);
 	void draw(float radio, float height, CTexture texture);
 	void draw(float radio, float height);
 	void draw(float radioTop, float radioBottom, float height, CTexture texture);

@@ -137,6 +137,14 @@ void TextureLoader::load() {
 	agua.BuildGLTexture();
 	agua.ReleaseImage();
 
+	camino.LoadTGA("../res/Texturas/camino.tga");
+	camino.BuildGLTexture();
+	camino.ReleaseImage();
+
+	poolFloor.LoadTGA("../res/Texturas/pool_floor.tga");
+	poolFloor.BuildGLTexture();
+	poolFloor.ReleaseImage();
+
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("../res/Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();

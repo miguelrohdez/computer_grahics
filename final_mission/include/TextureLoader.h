@@ -36,6 +36,8 @@ public:
 	CTexture noise;
 	CTexture madera;
 	CTexture madera1;
+	CTexture camino;
+	CTexture poolFloor;
 	CTexture skyBox;
 	CTexture agua;
 	CTexture cuadroDebug;

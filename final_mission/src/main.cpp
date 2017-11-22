@@ -38,7 +38,7 @@ TextureLoader textures;
  */
 Prisma p;
 Cylinder c;
-
+Plane pl;
 /*
  * Colores
  */
@@ -56,7 +56,7 @@ void InitGL() {
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
 	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-	camara.Position_Camera(100, 200, 100, 0, 200, 0, 0, 1, 0);
+	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);
 	textures.load();
 	plane.loadData();
 	plane.setTextures(textures.avionGris, textures.avionVerde);
@@ -224,22 +224,17 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		glTranslatef(30 * scale, 0, 0); // C
 		p.draw(anchoBarda, heightWall, 20, textures.bardaC);
 
-		glTranslatef(-20 * scale, 0, -10 * scale); // D
-		p.setRepetitionTexture(0.4f);
-		p.draw(20, heightWall, anchoBarda, textures.bardaD);
-		p.setRepetitionTexture(textureRep);
+		glTranslatef(-20 * scale, 0, -10 * scale); // D		
+		p.draw(20, heightWall, anchoBarda, textures.bardaD);		
 
 		glTranslatef(75 * scale, 0, 0); // E
 		p.draw(90, heightWall, anchoBarda, textures.bardaE);
 
-		glTranslatef(-55 * scale, 0, -15 * scale); // F
-		p.setRepetitionTexture(0.3f);
+		glTranslatef(-55 * scale, 0, -15 * scale); // F		
 		p.draw(anchoBarda, heightWall, 30, textures.bardaF);
 
-		glTranslatef(-30 * scale, 0, -5 * scale); // G
-		p.setRepetitionTexture(0.25f);
-		p.draw(anchoBarda, heightWall, 40, textures.bardaG);
-		p.setRepetitionTexture(textureRep);
+		glTranslatef(-30 * scale, 0, -5 * scale); // G		
+		p.draw(anchoBarda, heightWall, 40, textures.bardaG);		
 
 		glTranslatef(130 * scale, 0, -5 * scale); // H
 		p.draw(anchoBarda, heightWall, 50, textures.bardaH);
@@ -247,10 +242,8 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		glTranslatef(-85 * scale, 0, -5 * scale); // I
 		p.draw(30, heightWall, anchoBarda, textures.bardaI);
 
-		glTranslatef(-30 * scale, 0, -10 * scale); // J
-		p.setRepetitionTexture(0.3f);
-		p.draw(30, heightWall, anchoBarda, textures.bardaJ);
-		p.setRepetitionTexture(textureRep);
+		glTranslatef(-30 * scale, 0, -10 * scale); // J	
+		p.draw(30, heightWall, anchoBarda, textures.bardaJ);		
 
 		glTranslatef(55 * scale, 0, 0); // K
 		p.draw(40, heightWall, anchoBarda, textures.bardaK);
@@ -264,26 +257,20 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		glTranslatef(25 * scale, 0, 0); // N
 		p.draw(15, heightWall, anchoBarda, textures.bardaN);
 
-		glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ
-		p.setRepetitionTexture(0.3f);
-		p.draw(anchoBarda, heightWall, 40, textures.bardaNE);
-		p.setRepetitionTexture(textureRep);
+		glTranslatef(-122.5 * scale, 0, -10 * scale); // Ñ		
+		p.draw(anchoBarda, heightWall, 40, textures.bardaNE);		
 
 		glTranslatef(90 * scale, 0, -5 * scale); // O
 		p.draw(anchoBarda, heightWall, 30, textures.bardaO);
 
-		glTranslatef(-60 * scale, 0, 0); // P
-		p.setRepetitionTexture(0.3f);
-		p.draw(anchoBarda, heightWall, 30, textures.bardaP);
-		p.setRepetitionTexture(textureRep);
+		glTranslatef(-60 * scale, 0, 0); // P		
+		p.draw(anchoBarda, heightWall, 30, textures.bardaP);		
 
 		glTranslatef(20 * scale, 0, 0); // Q
 		p.draw(anchoBarda, heightWall, 30, textures.bardaQ);
 
-		glTranslatef(-35 * scale, 0, -15 * scale); // R
-		p.setRepetitionTexture(0.3f);
-		p.draw(30, heightWall, anchoBarda, textures.bardaR);
-		p.setRepetitionTexture(textureRep);
+		glTranslatef(-35 * scale, 0, -15 * scale); // R		
+		p.draw(30, heightWall, anchoBarda, textures.bardaR);		
 
 		glTranslatef(25 * scale, 0, 0); // S
 		p.draw(20, heightWall, anchoBarda, textures.bardaS);
@@ -341,8 +328,8 @@ void dibujarPlano() {
 
 
 void testCylinder() {
-	Cylinder c(10, 4, 10, textures.cuadroDebug);
-	c.draw();
+	Cylinder c(10, 10, textures.cuadroDebug);
+	c.drawHalf();
 }
 
 void testCone() {
@@ -360,6 +347,34 @@ void dibujaTocador(float scale=1.0f){
 	p.setColor(cafeMesa);
 	p.draw(45*scale, 15*scale, 8*scale, textures.madera1);
 	p.setColor(blanco);
+}
+
+void dibujaAlberca(float scale=1.0f){
+	p.setColor(blanco);
+	p.draw(70*scale, 10*scale, 100*scale, textures.agua);
+
+	// Agua
+	glPushMatrix();
+		glTranslatef(0*scale, -5*scale, 50*scale);
+		c.drawHalf(35*scale, 10*scale, textures.agua);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0*scale, -5*scale, -50*scale);
+		glRotatef(180, 0, 1, 0);
+		c.drawHalf(35*scale, 10*scale, textures.agua);
+	glPopMatrix();
+
+	// Base exterior
+	glPushMatrix();
+		glTranslatef(0*scale, 2*scale, 0*scale);
+		p.draw(150, 8, 280, textures.poolFloor);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(170, 0, -15);
+		p.draw(200, 4, 40, textures.camino);
+	glPopMatrix();
 }
 
 /*
@@ -403,20 +418,21 @@ void display(void) {
 		dibujarMesa();
 	glPopMatrix();
 
+	// Sección de la sala
 	glPushMatrix();
-		//glTranslatef(95, 5.25, -10);
+		glTranslatef(200, 5.25, 15);
 		glRotatef(180, 0, 1, 0);
 		dibujaSillon(3.0f);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(63, 5.25, 20);
+		glTranslatef(150, 5.25, 60);
 		glRotatef(-90, 0, 1, 0);
 		dibujaSillon(3.0f);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(107, 2, 40);
+		glTranslatef(240, 2, 100);
 		glRotatef(40, 0, 1, 0);
 		dibujaMuebleTv(1.4f);
 		glPushMatrix();
@@ -432,26 +448,36 @@ void display(void) {
 	glPopMatrix();
 
 
+	// Sección de recamara amarilla
 	glPushMatrix();
-		glTranslatef(10, 9, -84);
+		glTranslatef(35, 12, -150);
 		glRotatef(180, 0, 1, 0);
 		dibujaCama(4.0f);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(-35, 15, -80);
+		glTranslatef(-48, 15, -140);
 		glRotatef(90, 0, 1, 0);
 		dibujaTocador(2.0f);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(10, 6, -33.5);
+		glTranslatef(35, 6, -50);
 		dibujaMuebleTv(2.0f);
 		glPushMatrix();
 			glTranslatef(0, 15, 0);
 			dibujaTv(4.0f);
 		glPopMatrix();
 	glPopMatrix();
+
+	// Alberca
+	glPushMatrix();
+		glTranslatef(-100, 0, 550);
+		glRotatef(90, 0, 1, 0);
+		dibujaAlberca(1.5f);
+	glPopMatrix();
+
+
 	glTranslatef(20, 20, -20);
 	plane.draw();
 	glDisable(GL_TEXTURE_2D);
@@ -464,6 +490,7 @@ void animation() {
 	plane.update();
 	glutPostRedisplay();
 }
+
 /*
 * Funcion para el reajuste de dibujo en ventana
 */
