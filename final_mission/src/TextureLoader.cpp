@@ -133,6 +133,10 @@ void TextureLoader::load() {
 	madera1.BuildGLTexture();
 	madera1.ReleaseImage();
 
+	agua.LoadTGA("../res/Texturas/agua.tga");
+	agua.BuildGLTexture();
+	agua.ReleaseImage();
+
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("../res/Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();
