@@ -37,6 +37,7 @@ public:
 	CTexture madera;
 	CTexture madera1;
 	CTexture skyBox;
+	CTexture agua;
 	CTexture cuadroDebug;
 	CTexture bardaA[6];
 	CTexture bardaB[6];

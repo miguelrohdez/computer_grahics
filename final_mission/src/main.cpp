@@ -105,7 +105,7 @@ void dibujarTerreno() {
 
 void dibujarPiso() {
 	p.setTexture(textures.tiles);
-	p.draw(280, 1, 280);
+	p.draw(560, 1, 560);
 }
 
 void dibujarMesa() {
@@ -148,28 +148,29 @@ void dibujaSillon(float scale, CTexture sillonT=textures.sillon){
 /* Función que dibuja una cama*/
 void dibujaCama(float scale){
 
-	p.draw(20*scale, 2*scale, 23*scale, textures.cobija);
+	// Colchon
+	p.draw(20*scale, 3*scale, 23*scale, textures.cobija);
 
 	//Almohadas
 	glPushMatrix();
-		glTranslatef(5*scale, 1*scale, 9*scale);
+		glTranslatef(5*scale, 1.5*scale, 9*scale);
 		p.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(-5*scale, 1*scale, 9*scale);
+		glTranslatef(-5*scale, 1.5*scale, 9*scale);
 		p.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada);
 	glPopMatrix();
 
 	//Cabecera
 	glPushMatrix();
 		glTranslatef(0*scale, 0.5*scale, 11.9*scale);
-		p.draw(20*scale, 7*scale, 0.7f*scale, textures.madera1);
+		p.draw(22*scale, 7*scale, 0.7f*scale, textures.madera1);
 	glPopMatrix();
 
 	//Base
 	glPushMatrix();
 		glTranslatef(0*scale, -2*scale, -0.1*scale);
-		p.draw(21.2*scale, 2*scale, 23.2*scale, textures.madera);
+		p.draw(21.2*scale, 3*scale, 23.2*scale, textures.madera);
 	glPopMatrix();
 }
 
@@ -297,7 +298,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 	//Secciones de Techo
 	heightWall += 0.55; // Se suma ancho del techo
 	glPushMatrix();
-		glTranslatef(-50 * scale, heightWall, 40 * scale); // AT
+		glTranslatef(-50 * scale, heightWall*(scale/2), 40 * scale); // AT
 		p.draw(30, anchoBarda, 20, textures.techoA);
 		glTranslatef(30 * scale, 0, -25 * scale); // BT
 		p.draw(30, anchoBarda, 30, textures.techoB);
@@ -393,62 +394,62 @@ void display(void) {
 
 	glTranslatef(0, 0.5, 0);
 	glPushMatrix(); // Paredes
-		glTranslatef(0, 25, 0);
-		dibujarCasa(25.0, 2.0);
+		glTranslatef(0, 50, 0);
+		dibujarCasa(25.0, 4.0);
 	glPopMatrix();
 
-	glTranslatef(10, 0, 10);
 	glPushMatrix();
+		glTranslatef(10, 0, 10);
 		dibujarMesa();
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(95, 2, -10);
+		//glTranslatef(95, 5.25, -10);
 		glRotatef(180, 0, 1, 0);
-		dibujaSillon(2.0f);
+		dibujaSillon(3.0f);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(63, 2, 20);
+		glTranslatef(63, 5.25, 20);
 		glRotatef(-90, 0, 1, 0);
-		dibujaSillon(2.0f);
+		dibujaSillon(3.0f);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(107, 2, 40);
 		glRotatef(40, 0, 1, 0);
-		dibujaMuebleTv(0.7f);
+		dibujaMuebleTv(1.4f);
 		glPushMatrix();
-			glTranslatef(0, 5.5, 0);
-			dibujaTv(1.5f);
+			glTranslatef(0, 10.5, 0);
+			dibujaTv(3.0f);
 		glPopMatrix();
 	glPopMatrix();
 
 
 	glPushMatrix();
-		glTranslatef(-50, 50, -70);
-		dibujarRotoplas(3.0f);
+		glTranslatef(-50, 100, -70);
+		dibujarRotoplas(4.0f);
 	glPopMatrix();
 
 
 	glPushMatrix();
-		glTranslatef(10, 5, -84);
+		glTranslatef(10, 9, -84);
 		glRotatef(180, 0, 1, 0);
-		dibujaCama(2.0f);
+		dibujaCama(4.0f);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(-35, 6, -80);
+		glTranslatef(-35, 15, -80);
 		glRotatef(90, 0, 1, 0);
-		dibujaTocador();
+		dibujaTocador(2.0f);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(10, 6, -33.5);
-		dibujaMuebleTv();
+		dibujaMuebleTv(2.0f);
 		glPushMatrix();
-			glTranslatef(0, 7.5, 0);
-			dibujaTv(2.0f);
+			glTranslatef(0, 15, 0);
+			dibujaTv(4.0f);
 		glPopMatrix();
 	glPopMatrix();
 	glTranslatef(20, 20, -20);
@@ -456,6 +457,7 @@ void display(void) {
 	glDisable(GL_TEXTURE_2D);
 	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
+
 }
 
 void animation() {
