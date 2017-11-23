@@ -23,7 +23,7 @@ public:
     Prisma(float width, float height, float depth, Color color, CTexture textures[6]);
     Prisma(float width, float height, float depth, Color color);
     void draw();
-    void drawSky();
+    void drawSky(float anim);
     void draw(float w, float h, float d);
     void draw(float w, float h, float d, Color c);
     void draw(float w, float h, float d, CTexture t);

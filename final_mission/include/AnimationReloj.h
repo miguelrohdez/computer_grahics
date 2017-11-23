@@ -4,7 +4,7 @@
 #include "KeyFrame.h"
 #include "Prisma.h"
 #include "Texture.h"
-#define iMaxStepsReloj 1000.0f
+#define iMaxStepsReloj 3500.0f
 #define FILE_KEYFRAME_RELOJ "../res/Keyframes/keyframe_reloj.frm"
 
 

@@ -20,9 +20,8 @@
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
 
-float rotacionX = 0.0f;
-float rotacionY = 0.0f;
-float rotacionZ = 0.0f;
+float animax = 0.0f;
+bool sentido = true;
 
 /*
  * KeyFrames
@@ -399,7 +398,7 @@ void dibujarSkyBox() {
 	p.setSize(2000, 1000, 2000);
 	p.setColor(blanco);
 	p.setTexture(textures.skyBox);
-	p.drawSky();
+	p.drawSky(animax);
 }
 
 /* Función para depurar los planos */
@@ -436,19 +435,20 @@ void dibujaTocador(float scale=1.0f){
 }
 
 void dibujaAlberca(float scale=1.0f){
+	p.disableRepetition();
 	p.setColor(blanco);
 	p.draw(70*scale, 10*scale, 100*scale, textures.agua);
-
+	p.enableRepetition();
 	// Agua
 	glPushMatrix();
 		glTranslatef(0*scale, -5*scale, 50*scale);
-		c.drawHalf(35*scale, 10*scale, textures.agua);
+		c.drawHalf(35*scale, 10*scale, textures.bathroom1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(0*scale, -5*scale, -50*scale);
 		glRotatef(180, 0, 1, 0);
-		c.drawHalf(35*scale, 10*scale, textures.agua);
+		c.drawHalf(35*scale, 10*scale, textures.bathroom1);
 	glPopMatrix();
 
 	// Base exterior
@@ -472,7 +472,6 @@ void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
 	glLoadIdentity();
-	glTranslatef(rotacionX, rotacionY, rotacionZ);
 	glRotatef(g_lookupdown,1.0f,0,0);
 	gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
 			  camara.mView.x, camara.mView.y, camara.mView.z,
@@ -594,8 +593,22 @@ void display(void) {
 }
 
 void animation() {
+		
+	if(sentido){
+		animax += 0.0001;
+		if(animax >= 1.0){
+			sentido = false;
+		}
+	}
+	else{
+		animax -= 0.0001;
+		if(animax <= 1.0){
+			sentido = true;
+		}
+	}
+
 	reloj.update();
-	avion.update();
+	avion.update();	
 	glutPostRedisplay();
 }
 
