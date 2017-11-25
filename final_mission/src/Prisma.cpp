@@ -90,7 +90,7 @@ void Prisma::draw() {
     }
 }
 
-void Prisma::drawSky() {
+void Prisma::drawSky(float anim) {
     float v[8][3] = {
             {-x,  y,  z},
             { x,  y,  z},
@@ -105,10 +105,10 @@ void Prisma::drawSky() {
     //Plano superior
     glColor3fv(this->color.getRGB());
     glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[1]);
-        glTexCoord2f(1.0f, 0.0f); glVertex3fv(v[0]);
-        glTexCoord2f(1.0f, 1.0f); glVertex3fv(v[7]);
-        glTexCoord2f(0.0f, 1.0f); glVertex3fv(v[6]);
+        glTexCoord2f(0.0f + anim, 0.0f); glVertex3fv(v[1]);
+        glTexCoord2f(1.0f + anim, 0.0f); glVertex3fv(v[0]);
+        glTexCoord2f(1.0f + anim, 1.0f); glVertex3fv(v[7]);
+        glTexCoord2f(0.0f + anim, 1.0f); glVertex3fv(v[6]);
     glEnd();
     glBindTexture(GL_TEXTURE_2D, textures[1].GLindex);
     //Plano inferior
@@ -121,34 +121,34 @@ void Prisma::drawSky() {
     glBindTexture(GL_TEXTURE_2D, textures[2].GLindex);
     //Plano 1
     glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[3]);
-        glTexCoord2f(1.0f, 0.0f); glVertex3fv(v[2]);
-        glTexCoord2f(1.0f, 1.0f); glVertex3fv(v[0]);
-        glTexCoord2f(0.0f, 1.0f); glVertex3fv(v[1]);
+        glTexCoord2f(0.0f + anim, 0.0f); glVertex3fv(v[3]);
+        glTexCoord2f(1.0f + anim, 0.0f); glVertex3fv(v[2]);
+        glTexCoord2f(1.0f + anim, 1.0f); glVertex3fv(v[0]);
+        glTexCoord2f(0.0f + anim, 1.0f); glVertex3fv(v[1]);
     glEnd();
     glBindTexture(GL_TEXTURE_2D, textures[3].GLindex);
     //Plano 2
     glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[5]);
-        glTexCoord2f(1.0f, 0.0f); glVertex3fv(v[3]);
-        glTexCoord2f(1.0f, 1.0f); glVertex3fv(v[1]);
-        glTexCoord2f(0.0f, 1.0f); glVertex3fv(v[6]);
+        glTexCoord2f(0.0f + anim, 0.0f); glVertex3fv(v[5]);
+        glTexCoord2f(1.0f + anim, 0.0f); glVertex3fv(v[3]);
+        glTexCoord2f(1.0f + anim, 1.0f); glVertex3fv(v[1]);
+        glTexCoord2f(0.0f + anim, 1.0f); glVertex3fv(v[6]);
     glEnd();
     glBindTexture(GL_TEXTURE_2D, textures[4].GLindex);
     //Plano 3
     glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[4]);
-        glTexCoord2f(1.0f, 0.0f); glVertex3fv(v[5]);
-        glTexCoord2f(1.0f, 1.0f); glVertex3fv(v[6]);
-        glTexCoord2f(0.0f, 1.0f); glVertex3fv(v[7]);
+        glTexCoord2f(0.0f + anim, 0.0f); glVertex3fv(v[4]);
+        glTexCoord2f(1.0f + anim, 0.0f); glVertex3fv(v[5]);
+        glTexCoord2f(1.0f + anim, 1.0f); glVertex3fv(v[6]);
+        glTexCoord2f(0.0f + anim, 1.0f); glVertex3fv(v[7]);
     glEnd();
     glBindTexture(GL_TEXTURE_2D, textures[5].GLindex);
     //Plano 4
     glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f); glVertex3fv(v[2]);
-        glTexCoord2f(1.0f, 0.0f); glVertex3fv(v[4]);
-        glTexCoord2f(1.0f, 1.0f); glVertex3fv(v[7]);
-        glTexCoord2f(0.0f, 1.0f); glVertex3fv(v[0]);
+        glTexCoord2f(0.0f + anim, 0.0f); glVertex3fv(v[2]);
+        glTexCoord2f(1.0f + anim, 0.0f); glVertex3fv(v[4]);
+        glTexCoord2f(1.0f + anim, 1.0f); glVertex3fv(v[7]);
+        glTexCoord2f(0.0f + anim, 1.0f); glVertex3fv(v[0]);
     glEnd();
 }
 

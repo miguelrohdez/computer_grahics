@@ -1,0 +1,19 @@
+1. Cambio de textura en el pasto
+2. Cambio de textura en el cielo
+3. Ventanas
+4. Cambio de texturas en recamaras
+5. Animaciones x3
+	5.1. Hacer carro 
+	5.2.
+	5.3.
+6. Animar texturas de televisiones
+7. Agregar sonido
+8. Posicionar la camara en lugares pertinentes
+9. Agregar muebles
+	9.1 Estufa
+	9.2 Barra
+10. Detalles en mubles existentes
+	10.1 Tocador
+	10.2 Sofas
+	10.3 Crear esfera
+	10.4 Crear arco	
