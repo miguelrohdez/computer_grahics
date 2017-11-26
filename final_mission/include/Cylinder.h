@@ -19,6 +19,7 @@ class Cylinder {
 public:
 	Cylinder();
 	Cylinder(float radio, float height, CTexture texture);
+	Cylinder(float radio, float height);
 	Cylinder(float radioTop, float radioBottom, float height, CTexture texture);
 	void draw();
 	void drawHalf();

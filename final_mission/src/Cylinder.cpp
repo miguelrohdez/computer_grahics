@@ -15,6 +15,13 @@ Cylinder::Cylinder(float radio, float height, CTexture texture) {
 	setColor(Color(1,1,1));
 }
 
+Cylinder::Cylinder(float radio, float height) {
+	setRadioTop(radio);
+	setRadioBottom(radio);
+	setHeight(height);
+	setColor(Color(1,1,1));
+}
+
 Cylinder::Cylinder(float radioTop, float radioBottom, float height, CTexture texture) {
 	setRadioTop(radioTop);
 	setRadioBottom(radioBottom);
