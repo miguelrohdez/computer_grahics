@@ -19,7 +19,7 @@
 #include "Elements.h"
 
 
-ALCdevice  *device = alcOpenDevice(NULL); // NULL implica el dispositivo por default
+ALCdevice  *device;
 ALCcontext *context;
 ALCenum error;
 ALfloat listenerOri[] = {0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
@@ -72,6 +72,7 @@ void freeAudio() {
 }
 
 void initAL() {
+	device = alcOpenDevice(NULL); // NULL implica el dispositivo por default
 	// Abre dispositivo de audio
 	if (!device) {
 			printf("No se pudo abrir el dispositivo de audio.\n");
@@ -437,8 +438,8 @@ void keyboard(unsigned char key, int x, int y) {
 			//reloj.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
-			freeAudio();
 			alutExit();
+			freeAudio();
 			exit(0);   // Salimos del programa
 			break;
 		default:        // Cualquier otra
