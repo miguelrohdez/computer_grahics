@@ -5,6 +5,7 @@
 
 class TextureLoader {
 public:
+	CTexture madera2;
 	CTexture cristalBlanco;
 	CTexture metal1;
 	CTexture reloj;

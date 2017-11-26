@@ -169,6 +169,10 @@ void TextureLoader::load() {
 	madera1.BuildGLTexture();
 	madera1.ReleaseImage();
 
+	madera2.LoadTGA("../res/Texturas/madera2.tga");
+	madera2.BuildGLTexture();
+	madera2.ReleaseImage();
+
 	agua.LoadTGA("../res/Texturas/agua.tga");
 	agua.BuildGLTexture();
 	agua.ReleaseImage();

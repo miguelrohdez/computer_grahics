@@ -518,6 +518,33 @@ void dibujarMesaCristal(float scale) {
 	glTranslatef(0, ht, 0);
 	c.draw(rc, hc, textures.cristalBlanco);
 }
+
+void dibujarEstante(float scale) {
+	float alto = 0.2f * scale; // Alto de las piezas de madera 2cm
+	float ancho = 3.0f * scale; // Ancho de las piezas de madera 30cm
+	float largo = 3.0f * scale; // Largo de las piezas 30cm
+	float d1 = 3.0f * scale; // distancia vertical entre piezas 30cm
+	float altoCostado = 3 * d1 + 4 * alto;
+	float anchoCostado = 0.2f * scale;
+
+	Prisma p(ancho, alto, largo);
+	p.setTexture(textures.madera);
+	p.draw();
+	glTranslatef(0, alto + d1, 0);
+	p.draw(ancho, alto, largo);
+	glTranslatef(0, alto + d1, 0);
+	p.draw(ancho, alto, largo);
+	glTranslatef(0, alto + d1, 0);
+	p.draw(ancho, alto, largo);
+	glTranslatef((ancho + anchoCostado) / 2, -(altoCostado - alto) / 2, 0);
+	p.draw(anchoCostado, altoCostado, largo);
+	glTranslatef(-(anchoCostado + ancho), 0, 0);
+	p.draw(anchoCostado, altoCostado, largo);
+	glTranslatef((ancho + anchoCostado) / 2, 0, -(largo + anchoCostado) / 2);
+	p.draw(ancho + (anchoCostado * 2), altoCostado, anchoCostado);
+
+}
+
 /*
  * Función que dibuja
  */
@@ -542,18 +569,18 @@ void display(void) {
 		dibujarTerreno();
 	glPopMatrix();
 
-	glTranslatef(0, 2.5, 0);
+	glTranslatef(0, 2.5, 0); // Eleva a la altura del pasto
 	glPushMatrix(); // Piso casa
 		dibujarPiso();
 	glPopMatrix();
 
-	glTranslatef(0, 0.5, 0);
+	glTranslatef(0, 0.5, 0); //Eleva a la altura del piso
 	glPushMatrix(); // Paredes
 		glTranslatef(0, 50, 0);
 		dibujarCasa(25.0, 4.0);
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix(); // Mesa madera
 		glTranslatef(0, 0, 60);
 		dibujarMesa();
 	glPopMatrix();
@@ -581,7 +608,7 @@ void display(void) {
 		glPopMatrix();
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix(); // Tapete
 		glTranslatef(200, 2, 70);
 		dibujaTapete();
 	glPopMatrix();
@@ -601,7 +628,7 @@ void display(void) {
 		dibujaCama(4.0f);
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix(); // Tocador
 		glTranslatef(-48, 15, -140);
 		glRotatef(90, 0, 1, 0);
 		dibujaTocador(2.0f);
@@ -639,7 +666,7 @@ void display(void) {
 		glTranslatef(90, 70, -37.75);
 		reloj.draw();
 	glPopMatrix();
-	glPushMatrix(); // Retrete 1
+	glPushMatrix(); // Retretes
 		glTranslatef(-100, 0, -170);
 		glRotatef(180, 0, 1, 0);
 		dibujarRetrete();
@@ -649,7 +676,7 @@ void display(void) {
 		glRotatef(90, 0, -1, 0);
 		dibujarRetrete();
 	glPopMatrix();
-	glPushMatrix();
+	glPushMatrix(); // Lavabos
 		glTranslatef(-130, 45, -140);
 		dibujaLavabo(4.0f);
 	glPopMatrix();
@@ -658,7 +685,7 @@ void display(void) {
 		glRotatef(90, 0, 1, 0);
 		dibujaLavabo(4);
 	glPopMatrix();
-	glPushMatrix();
+	glPushMatrix(); // Sillas
 		glTranslatef(-25, 10, 80);
 		dibujaSilla(4.0f);
 	glPopMatrix();
@@ -706,7 +733,11 @@ void display(void) {
 	glPushMatrix();
 		avion.draw();
 	glPopMatrix();
-
+	glPushMatrix();
+		glTranslatef(-250, 0.1, -188);
+		glRotatef(90, 0, 1, 0);
+		dibujarEstante(4.0f);
+	glPopMatrix();
 	glEnable(GL_BLEND); // Figuras con opacidad
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPushMatrix();
