@@ -89,6 +89,7 @@ void Cylinder::draw() {
 		v5[1] = height;
 		v5[2] = radioBottom * sin(angle * (i + 1));
 
+		glBindTexture(GL_TEXTURE_2D, texture.GLindex);
 		glBegin(GL_POLYGON);
 			glNormal3f( 0.0f, -1.0f, 0.0f);
 			glVertex3f(0.0, 0.0, 0.0);
@@ -103,7 +104,6 @@ void Cylinder::draw() {
 			glVertex3fv(v5);
 		glEnd();
 
-		glBindTexture(GL_TEXTURE_2D, texture.GLindex);
 		glBegin(GL_POLYGON);
 			glNormal3f( v2[0], 0.0f, v2[2]);
 			glTexCoord2f(ctext_s * i, 0.0f);		glVertex3fv(v2);
