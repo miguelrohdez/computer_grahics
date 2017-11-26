@@ -1,9 +1,9 @@
-LIBS = -lGL -lGLU -lglut -lm -lstdc++ -I ../include
+LIBS = -lGL -lGLU -lglut -lm -lstdc++ -lAL -I ../include
 
 CODIGO_FUENTE = Prisma.cpp Texture.cpp Color.cpp Camera.cpp \
 				Plane.cpp Vertex.cpp TextureLoader.cpp Cylinder.cpp \
 				Cone.cpp AnimationPlane.cpp KeyFrame.cpp KeyFrameReloj.cpp \
-				AnimationReloj.cpp
+				AnimationReloj.cpp Elements.cpp
 TARGET = main
 
 
@@ -15,4 +15,4 @@ $(TARGET): $(CODIGO_FUENTE)
 clean:
 	-rm *.o
 
-*.o: $(CODIGO_FUENTE) 
+*.o: $(CODIGO_FUENTE)

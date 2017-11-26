@@ -5,17 +5,26 @@
  * Oropeza Vilchis Luis Alberto
  */
 
-#include <GL/glut.h>
+//#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
-#include "Prisma.h"
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <AL/alut.h>
 #include "Camera.h"
-#include "Plane.h"
 #include "TextureLoader.h"
-#include "Cylinder.h"
-#include "Cone.h"
 #include "AnimationPlane.h"
 #include "AnimationReloj.h"
+#include "Elements.h"
+
+
+ALCdevice  *device;
+ALCcontext *context;
+ALCenum error;
+ALfloat listenerOri[] = {0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+ALuint source, buffer;
+ALint source_state;
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -35,21 +44,6 @@ AnimationPlane avion;
 TextureLoader textures;
 
 /*
- * Figuras
- */
-Prisma p;
-Cylinder c;
-Plane pl;
-/*
- * Colores
- */
-Color saddleBrown = Color(0.545f, 0.271f, 0.075f);
-Color sienna = Color(0.627f, 0.322f, 0.176f);
-Color cafeMesa = Color(0.09f, 0.06f, 0.05f);
-Color negro(0.0f, 0.0f, 0.0f);
-Color blanco(1.0f, 1.0f, 1.0f);
-
-/*
  * Función que carga y da valores a las animaciones
  */
 void loadKeyFrames() {
@@ -61,10 +55,70 @@ void loadKeyFrames() {
 	reloj.setActivate(true);
 }
 
+
+void checkError(ALenum e, int pos) {
+	if(e != AL_NO_ERROR) {
+		printf("Algo salió mal %d\n", pos);
+	}
+}
+
+void freeAudio() {
+	alDeleteSources(1, &source);
+	alDeleteBuffers(1, &buffer);
+	device = alcGetContextsDevice(context);
+	alcMakeContextCurrent(NULL);
+	alcDestroyContext(context);
+	alcCloseDevice(device);
+}
+
+void initAL() {
+	device = alcOpenDevice(NULL); // NULL implica el dispositivo por default
+	// Abre dispositivo de audio
+	if (!device) {
+			printf("No se pudo abrir el dispositivo de audio.\n");
+			exit(0);
+	} else {
+		printf("Dispotivio de audio abierto correctamente\n");
+	}
+	// Crea el contexto
+	context = alcCreateContext(device, NULL);
+	if (!alcMakeContextCurrent(context)) {
+		printf("Error al crear al contexto\n");
+	}
+	checkError(alGetError(), 0);
+
+	// Genera la fuente
+	alGenSources((ALuint)1, &source);
+	alSource3f(source, AL_POSITION, 0, 0, 0);
+	alSource3f(source, AL_VELOCITY, 0, 0, 0);
+	alSourcei(source, AL_LOOPING, AL_TRUE);
+	checkError(alGetError(), 4);
+
+	// Inicializar Listener
+	alListener3f(AL_POSITION, 0, 0, 00);
+	alListener3f(AL_VELOCITY, 0, 0, 0);
+	alListenerfv(AL_ORIENTATION, listenerOri);
+	checkError(alGetError(), 3);
+
+
+	// Genera el buffer para el audio
+	buffer = alutCreateBufferFromFile("../res/Sound/cowboy.wav");
+	if ( alutGetError() != ALUT_ERROR_NO_ERROR ) {
+		printf("Error al cargar el audio\n");
+	}
+
+	checkError(alGetError(), 5);
+	//Ligando buffer con source
+	alSourcei(source, AL_BUFFER, buffer);
+	checkError(alGetError(), 6);
+	alSourcePlay(source);
+
+}
+
 /*
  * Función para inicializar parámetros
  */
-void InitGL() {
+void initGL() {
 	glClearColor(0.3f, 0.3f, 0.3f, 0.5f);                // Fondo negro
 	glClearDepth(1.0f);                                    // Valor para el Depth Buffer
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
@@ -73,8 +127,6 @@ void InitGL() {
 	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);
 	textures.load();
 	loadKeyFrames();
-	p = Prisma(1.0, 1.0, 1.0, blanco);
-	c = Cylinder(1.0, 1.0, textures.pinturaNegra);
 }
 
 
@@ -569,18 +621,17 @@ void dibujarEstante(float scale) {
 	p.draw(anchoCostado, altoCostado, largo);
 	glTranslatef((ancho + anchoCostado) / 2, 0, -(largo + anchoCostado) / 2);
 	p.draw(ancho + (anchoCostado * 2), altoCostado, anchoCostado);
-
 }
 
 /*
  * Función que dibuja
  */
 void display(void) {
-
+	//alSourcePlay(source);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
 	glLoadIdentity();
-	glRotatef(g_lookupdown,1.0f,0,0);
+	glRotatef(g_lookupdown,1.0f, 0, 0);
 	gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
 			  camara.mView.x, camara.mView.y, camara.mView.z,
 			  camara.mUp.x, camara.mUp.y, camara.mUp.z);
@@ -589,7 +640,7 @@ void display(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix(); // Skybox
 		glTranslatef(0,450,0);
-		dibujarSkyBox();
+		dibujarSkyBox(animax);
 	glPopMatrix();
 
 	glPushMatrix(); // Pasto
@@ -616,13 +667,13 @@ void display(void) {
 	glPushMatrix();
 		glTranslatef(200, 5.25, -10);
 		glRotatef(180, 0, 1, 0);
-		dibujaSillon(4.5f);
+		dibujaSillon(4.5f, textures.sillon1);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(120, 5.25, 60);
 		glRotatef(-90, 0, 1, 0);
-		dibujaSillon(4.0f);
+		dibujaSillon(4.0f, textures.sillon1);	
 	glPopMatrix();
 
 	glPushMatrix();
@@ -643,7 +694,7 @@ void display(void) {
 
 	// Sección del techo
 	glPushMatrix();
-		glTranslatef(-50, 100, -70);
+		glTranslatef(-50, 105, -70);
 		dibujarRotoplas(4.0f);
 	glPopMatrix();
 
@@ -808,7 +859,7 @@ void reshape(int width, int height) {
 	glMatrixMode(GL_PROJECTION); // Seleccionamos Projection Matrix
 	glLoadIdentity();
 	relation = (float)width / (float)height;
-	gluPerspective(20*relation, relation, 1.0f, 10000.0f);
+	gluPerspective(20 * relation, relation, 1.0f, 10000.0f);
 	glMatrixMode(GL_MODELVIEW); // Seleccionamos Modelview Matrix
 	glLoadIdentity();
 }
@@ -883,6 +934,8 @@ void keyboard(unsigned char key, int x, int y) {
 			//reloj.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
+			alutExit();
+			freeAudio();
 			exit(0);   // Salimos del programa
 			break;
 		default:        // Cualquier otra
@@ -894,8 +947,8 @@ void keyboard(unsigned char key, int x, int y) {
 /*
 * Función para el manejo de teclas especiales
 */
-void arrow_keys(int a_keys, int x, int y) {
-	switch ( a_keys ) {
+void arrowKeys(int key, int x, int y) {
+	switch (key) {
 		case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
 			g_lookupdown -= 1.0f;
 			break;
@@ -919,17 +972,18 @@ void arrow_keys(int a_keys, int x, int y) {
 */
 int main(int argc, char **argv) {
 	glutInit(&argc, argv); // Inicializamos OpenGL
+	alutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // Display Mode (Clores RGB y alpha | Buffer Sencillo )
 	glutInitWindowSize(1920, 1080); // Tamaño de la Ventana
 	glutInitWindowPosition(-1, -1); //Posicion de la Ventana
 	glutCreateWindow("Complejo Residencial"); // Nombre de la Ventana
-	InitGL(); // Parametros iniciales de la aplicacion
+	initGL(); // Parametros iniciales de la aplicacion
+	initAL();
 	glutDisplayFunc(display); // Función de dibujo
 	glutReshapeFunc(reshape); // Función en caso de cambio de tamano
 	glutKeyboardFunc(keyboard); // Función de manejo de teclado
-	glutSpecialFunc(arrow_keys); // Función manejo teclas especiales
+	glutSpecialFunc(arrowKeys); // Función manejo teclas especiales
 	glutIdleFunc(animation);
 	glutMainLoop();
-
 	return 0;
 }
