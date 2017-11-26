@@ -2,7 +2,7 @@
 #define FINAL_PROJECT_VERTEX_H
 
 class Vertex {
-	float x, y, z;
+	float v[3];
 public:
 	Vertex();
 	Vertex(float x, float y, float z);
