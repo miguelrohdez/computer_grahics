@@ -1,4 +1,4 @@
-LIBS = -lGL -lGLU -lglut -lm -lstdc++ -I../include
+LIBS = -lGL -lGLU -lglut -lm -lstdc++ -lopenal -I../include -lalut
 
 SRC_DIR = ../src
 

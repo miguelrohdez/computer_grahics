@@ -5,16 +5,26 @@
  * Oropeza Vilchis Luis Alberto
  */
 
-#include <GL/glut.h>
+//#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
-//#include <AL/al.h>
-//#include <AL/alc.h>
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <AL/alut.h>
 #include "Camera.h"
 #include "TextureLoader.h"
 #include "AnimationPlane.h"
 #include "AnimationReloj.h"
 #include "Elements.h"
+
+
+ALCdevice  *device = alcOpenDevice(NULL); // NULL implica el dispositivo por default
+ALCcontext *context;
+ALCenum error;
+ALfloat listenerOri[] = {0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+ALuint source, buffer;
+ALint source_state;
 
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
@@ -45,10 +55,69 @@ void loadKeyFrames() {
 	reloj.setActivate(true);
 }
 
+
+void checkError(ALenum e, int pos) {
+	if(e != AL_NO_ERROR) {
+		printf("Algo salió mal %d\n", pos);
+	}
+}
+
+void freeAudio() {
+	alDeleteSources(1, &source);
+	alDeleteBuffers(1, &buffer);
+	device = alcGetContextsDevice(context);
+	alcMakeContextCurrent(NULL);
+	alcDestroyContext(context);
+	alcCloseDevice(device);
+}
+
+void initAL() {
+	// Abre dispositivo de audio
+	if (!device) {
+			printf("No se pudo abrir el dispositivo de audio.\n");
+			exit(0);
+	} else {
+		printf("Dispotivio de audio abierto correctamente\n");
+	}
+	// Crea el contexto
+	context = alcCreateContext(device, NULL);
+	if (!alcMakeContextCurrent(context)) {
+		printf("Error al crear al contexto\n");
+	}
+	checkError(alGetError(), 0);
+
+	// Genera la fuente
+	alGenSources((ALuint)1, &source);
+	alSource3f(source, AL_POSITION, 0, 0, 0);
+	alSource3f(source, AL_VELOCITY, 0, 0, 0);
+	alSourcei(source, AL_LOOPING, AL_TRUE);
+	checkError(alGetError(), 4);
+
+	// Inicializar Listener
+	alListener3f(AL_POSITION, 0, 0, 00);
+	alListener3f(AL_VELOCITY, 0, 0, 0);
+	alListenerfv(AL_ORIENTATION, listenerOri);
+	checkError(alGetError(), 3);
+
+
+	// Genera el buffer para el audio
+	buffer = alutCreateBufferFromFile("../res/Sound/cowboy.wav");
+	if ( alutGetError() != ALUT_ERROR_NO_ERROR ) {
+		printf("Error al cargar el audio\n");
+	}
+
+	checkError(alGetError(), 5);
+	//Ligando buffer con source
+	alSourcei(source, AL_BUFFER, buffer);
+	checkError(alGetError(), 6);
+	alSourcePlay(source);
+
+}
+
 /*
  * Función para inicializar parámetros
  */
-void InitGL() {
+void initGL() {
 	glClearColor(0.3f, 0.3f, 0.3f, 0.5f);                // Fondo negro
 	glClearDepth(1.0f);                                    // Valor para el Depth Buffer
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
@@ -63,11 +132,11 @@ void InitGL() {
  * Función que dibuja
  */
 void display(void) {
-
+	//alSourcePlay(source);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
 	glLoadIdentity();
-	glRotatef(g_lookupdown,1.0f,0,0);
+	glRotatef(g_lookupdown,1.0f, 0, 0);
 	gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
 			  camara.mView.x, camara.mView.y, camara.mView.z,
 			  camara.mUp.x, camara.mUp.y, camara.mUp.z);
@@ -130,7 +199,7 @@ void display(void) {
 
 	// Sección del techo
 	glPushMatrix();
-		glTranslatef(-50, 100, -70);
+		glTranslatef(-50, 105, -70);
 		dibujarRotoplas(4.0f);
 	glPopMatrix();
 
@@ -293,7 +362,7 @@ void reshape(int width, int height) {
 	glMatrixMode(GL_PROJECTION); // Seleccionamos Projection Matrix
 	glLoadIdentity();
 	relation = (float)width / (float)height;
-	gluPerspective(20*relation, relation, 1.0f, 10000.0f);
+	gluPerspective(20 * relation, relation, 1.0f, 10000.0f);
 	glMatrixMode(GL_MODELVIEW); // Seleccionamos Modelview Matrix
 	glLoadIdentity();
 }
@@ -368,6 +437,8 @@ void keyboard(unsigned char key, int x, int y) {
 			//reloj.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
+			freeAudio();
+			alutExit();
 			exit(0);   // Salimos del programa
 			break;
 		default:        // Cualquier otra
@@ -404,17 +475,18 @@ void arrowKeys(int key, int x, int y) {
 */
 int main(int argc, char **argv) {
 	glutInit(&argc, argv); // Inicializamos OpenGL
+	alutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // Display Mode (Clores RGB y alpha | Buffer Sencillo )
 	glutInitWindowSize(1920, 1080); // Tamaño de la Ventana
 	glutInitWindowPosition(-1, -1); //Posicion de la Ventana
 	glutCreateWindow("Complejo Residencial"); // Nombre de la Ventana
-	InitGL(); // Parametros iniciales de la aplicacion
+	initGL(); // Parametros iniciales de la aplicacion
+	initAL();
 	glutDisplayFunc(display); // Función de dibujo
 	glutReshapeFunc(reshape); // Función en caso de cambio de tamano
 	glutKeyboardFunc(keyboard); // Función de manejo de teclado
 	glutSpecialFunc(arrowKeys); // Función manejo teclas especiales
 	glutIdleFunc(animation);
 	glutMainLoop();
-
 	return 0;
 }
