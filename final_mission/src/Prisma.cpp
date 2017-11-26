@@ -26,6 +26,14 @@ Prisma::Prisma(float width, float height, float depth, Color color) {
 	enableRepetition();
 }
 
+Prisma::Prisma(float width, float height, float depth): color() {
+    setSize(width, height, depth);
+    setColor(Color(1, 1, 1));
+    setRepetitionTexture(1);
+    setScale(1.0f);
+	enableRepetition();
+}
+
 void Prisma::setSize(float *size) {
     this->x = size[0];
     this->y = size[1];
@@ -75,7 +83,7 @@ void Prisma::draw() {
 
     Plane p[6] = {
         Plane(v[0], v[1], v[6], v[7], textures[0]), // XZ Arriba
-        Plane(v[2], v[4], v[5], v[3], textures[1]), // XZ Abajo
+        Plane(v[4], v[5], v[3], v[2], textures[1]), // XZ Abajo
         Plane(v[0], v[2], v[3], v[1], textures[2]), // XY Z positiva
         Plane(v[6], v[5], v[4], v[7], textures[3]), // XY Z negativa
         Plane(v[1], v[3], v[5], v[6], textures[4]), // YZ en X positiva
