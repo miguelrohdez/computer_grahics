@@ -9,6 +9,14 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	metal1.LoadTGA("../res/Texturas/metal1.tga");
+	metal1.BuildGLTexture();
+	metal1.ReleaseImage();
+
+	cristalBlanco.LoadTGA("../res/Texturas/cristal_blanco.tga");
+	cristalBlanco.BuildGLTexture();
+	cristalBlanco.ReleaseImage();
+
 	lavabo.LoadTGA("../res/Texturas/lavabo.tga");
 	lavabo.BuildGLTexture();
 	lavabo.ReleaseImage();

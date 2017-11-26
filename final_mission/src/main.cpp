@@ -503,6 +503,21 @@ void dibujaSilla(float scale) {
 	p.setScale(1.0f);
 }
 
+void dibujarMesaCristal(float scale) {
+	float hb = 0.5f * scale; // Altura base 5 cm
+	float rb = 1.5f * scale; // Radio Base 0.3m
+	float ht = 4.5f * scale; // Altura tubo 1m
+	float rt = 0.5f * scale; // Radio tubo 5cm
+	float hc = 0.5f * scale; // Ancho Cristal 10cm
+	float rc = 5.0f * scale; // Radio cristal 0.9m
+
+	Cylinder c(rb, hb, textures.metal1);
+	c.draw();
+	glTranslatef(0, hb, 0);
+	c.draw(rt, ht);
+	glTranslatef(0, ht, 0);
+	c.draw(rc, hc, textures.cristalBlanco);
+}
 /*
  * Función que dibuja
  */
@@ -688,16 +703,23 @@ void display(void) {
 			dibujaTv(3.0f);
 		glPopMatrix();
 	glPopMatrix();
-	avion.draw();
+	glPushMatrix();
+		avion.draw();
+	glPopMatrix();
 
+	glEnable(GL_BLEND); // Figuras con opacidad
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glPushMatrix();
+		glTranslatef(200, 2, 70);
+		dibujarMesaCristal(4.0f);
+	glPopMatrix();
+	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
-	glFlush(); //TODO: Entender que hace
 	glutSwapBuffers();
-
 }
 
 void animation() {
-		
+
 	if(sentido){
 		animax += 0.0001;
 		if(animax >= 1.0){
@@ -712,7 +734,7 @@ void animation() {
 	}
 
 	reloj.update();
-	avion.update();	
+	avion.update();
 	glutPostRedisplay();
 }
 
