@@ -3,6 +3,7 @@
 #include <string.h>
 #include <GL/glut.h>
 #include <stdlib.h>
+
 bool CTexture::LoadTGA(const char *filename)			// Loads A TGA File Into Memory
 {
 	unsigned char	TGAheader[12]={0,0,2,0,0,0,0,0,0,0,0,0};	// Uncompressed TGA Header

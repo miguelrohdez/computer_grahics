@@ -9,6 +9,10 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	cielo.LoadTGA("../res/Texturas/cielo.tga");
+	cielo.BuildGLTexture();
+	cielo.ReleaseImage();
+
 	metal1.LoadTGA("../res/Texturas/metal1.tga");
 	metal1.BuildGLTexture();
 	metal1.ReleaseImage();
@@ -73,6 +77,10 @@ void TextureLoader::load() {
 	pasto3.BuildGLTexture();
 	pasto3.ReleaseImage();
 
+	pasto4.LoadTGA("../res/Texturas/pasto4.tga");
+	pasto4.BuildGLTexture();
+	pasto4.ReleaseImage();
+
 	tiles.LoadTGA("../res/Texturas/piso2.tga");
 	tiles.BuildGLTexture();
 	tiles.ReleaseImage();
@@ -105,6 +113,10 @@ void TextureLoader::load() {
 	pinturaRoja.BuildGLTexture();
 	pinturaRoja.ReleaseImage();
 
+	pinturaRoja2.LoadTGA("../res/Texturas/pintura_roja2.tga");
+	pinturaRoja2.BuildGLTexture();
+	pinturaRoja2.ReleaseImage();
+
 	pinturaAmarilla.LoadTGA("../res/Texturas/pintura_amarilla.tga");
 	pinturaAmarilla.BuildGLTexture();
 	pinturaAmarilla.ReleaseImage();
@@ -125,17 +137,9 @@ void TextureLoader::load() {
 	pinturaNegra.BuildGLTexture();
 	pinturaNegra.ReleaseImage();
 
-	pinturaAzul.LoadTGA("../res/Texturas/pintura_azul.tga");
-	pinturaAzul.BuildGLTexture();
-	pinturaAzul.ReleaseImage();
-
-	pinturaSucia.LoadTGA("../res/Texturas/pintura_sucia.tga");
-	pinturaSucia.BuildGLTexture();
-	pinturaSucia.ReleaseImage();
-
-	pinturaSucia1.LoadTGA("../res/Texturas/sucio.tga");
-	pinturaSucia1.BuildGLTexture();
-	pinturaSucia1.ReleaseImage();
+	pinturaFlores.LoadTGA("../res/Texturas/pintura_flores.tga");
+	pinturaFlores.BuildGLTexture();
+	pinturaFlores.ReleaseImage();
 
 	sillon.LoadTGA("../res/Texturas/sillon.tga");
 	sillon.BuildGLTexture();
@@ -188,6 +192,10 @@ void TextureLoader::load() {
 	road.LoadTGA("../res/Texturas/road.tga");
 	road.BuildGLTexture();
 	road.ReleaseImage();
+
+	ventana.LoadTGA("../res/Texturas/ventana.tga");
+	ventana.BuildGLTexture();
+	ventana.ReleaseImage();
 
 	tapete.LoadTGA("../res/Texturas/tapete.tga");
 	tapete.BuildGLTexture();
@@ -261,7 +269,7 @@ void TextureLoader::createArrays() {
 	bardaS[2] = bathroom2;
 
 	bardaR[0] = bardaR[1] = bardaR[4] = bardaR[3] = bardaR[5] = ladrillos3;
-	bardaR[2] = pinturaSucia;
+	bardaR[2] = pinturaRoja2;
 
 	bardaQ[0] = bardaQ[1] = bardaQ[3] = ladrillos3;
 	bardaQ[2] = bardaQ[4] = pinturaAmarilla;
@@ -270,13 +278,13 @@ void TextureLoader::createArrays() {
 	bardaP[0] = bardaP[1] = bardaP[3] = ladrillos3;
 	bardaP[2] = pinturaRoja;
 	bardaP[4] = bathroom2;
-	bardaP[5] = pinturaSucia;
+	bardaP[5] = pinturaRoja2;
 
 	bardaO[0] = bardaO[1] = bardaO[2] = bardaO[3] = bardaO[4] = ladrillos3;
 	bardaO[5] = pinturaAmarilla;
 
 	bardaNE[0] = bardaNE[1] = bardaNE[2] = bardaNE[3] = bardaNE[5] = ladrillos3;
-	bardaNE[4] = pinturaSucia;
+	bardaNE[4] = pinturaRoja2;
 
 	bardaN[0] = bardaN[1] = bardaN[3] = bardaN[4] = bardaN[5] = ladrillos3;
 	bardaN[2] = pinturaRoja;
@@ -292,8 +300,8 @@ void TextureLoader::createArrays() {
 	bardaK[3] = pinturaAmarilla;
 
 	bardaJ[0] = bardaJ[1] = bardaJ[4] = bardaJ[5] =  pinturaRoja;
-	bardaJ[3] = pinturaSucia;
-	bardaJ[2] = pinturaAzul;
+	bardaJ[3] = pinturaRoja2;
+	bardaJ[2] = pinturaFlores;
 
 	bardaI[0] = bardaI[1] = bardaI[2] = bardaI[3] = bardaI[4] = bardaI[5] = pinturaRoja;
 
@@ -301,11 +309,11 @@ void TextureLoader::createArrays() {
 	bardaH[5] = pinturaRoja;
 
 	bardaG[0] = bardaG[1] = bardaG[2] = bardaG[3] = bardaG[5] = ladrillos3;
-	bardaG[4] = pinturaAzul;
+	bardaG[4] = pinturaFlores;
 
 	bardaF[0] = bardaF[1] = bardaF[2] = ladrillos3;
 	bardaF[4] = bardaF[3] = pinturaRoja;
-	bardaF[5] = pinturaAzul;
+	bardaF[5] = pinturaFlores;
 
 	bardaE[0] = bardaE[1] = bardaE[2] = bardaE[4] = bardaE[5] = ladrillos3;
 	bardaE[3] = pinturaRoja;
@@ -322,5 +330,5 @@ void TextureLoader::createArrays() {
 	bardaD[0] = bardaD[1] = bardaD[5] = ladrillos3;
 	bardaD[2] = bathroom1;
 	bardaD[4] = pinturaRoja;
-	bardaD[3] = pinturaAzul;
+	bardaD[3] = pinturaFlores;
 }

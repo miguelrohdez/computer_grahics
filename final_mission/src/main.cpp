@@ -111,9 +111,9 @@ void dibujaEjes() {
 
 void dibujarTerreno() {
 	p.setColor(blanco);
-	p.setRepetitionTexture(0.5);
-	p.setTexture(textures.pasto2);
-	p.draw(2000, 5, 2000);
+	p.setRepetitionTexture(0.2);
+	p.setTexture(textures.pasto4);	
+	p.draw(2000, 5, 2000);	
 }
 
 void dibujarPiso() {
@@ -392,12 +392,39 @@ void dibujarCasa(float heightWall, float scale, float textureRep=0.8f) {
 		p.draw(11, heightWall, anchoBarda, textures.bardaM);
 	glPopMatrix();
 	p.setScale(1.0);
+
+	// Ventanas
+	// Viendo de frente
+	// Lado izquierdo
+	glPushMatrix();
+		glTranslatef(260, -35, 20);
+		glRotatef(90, 0, 1, 0);
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana);
+		p.enableRepetition();
+	glPopMatrix();
+
+	 // Frontal 1
+	glPushMatrix();
+		glTranslatef(30, -35, -200);	
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana);
+		p.enableRepetition();
+	glPopMatrix();
+
+	// Frontal 2
+	glPushMatrix();
+		glTranslatef(-180, -35, -200);	
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana);
+		p.enableRepetition();
+	glPopMatrix();
 }
 
 void dibujarSkyBox() {
 	p.setSize(2000, 1000, 2000);
 	p.setColor(blanco);
-	p.setTexture(textures.skyBox);
+	p.setTexture(textures.cielo);
 	p.drawSky(animax);
 }
 
@@ -467,7 +494,7 @@ void dibujaAlberca(float scale=1.0f){
 	// Camino empedrado
 	glPushMatrix();
 		glTranslatef(170, 0, -15);
-		p.draw(200, 2, 50, textures.piso);
+		p.draw(200, 2, 50, textures.camino);
 	glPopMatrix();
 }
 
@@ -587,15 +614,15 @@ void display(void) {
 
 	// Sección de la sala
 	glPushMatrix();
-		glTranslatef(200, 5.25, 15);
+		glTranslatef(200, 5.25, -10);
 		glRotatef(180, 0, 1, 0);
-		dibujaSillon(3.0f);
+		dibujaSillon(4.5f);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(150, 5.25, 60);
+		glTranslatef(120, 5.25, 60);
 		glRotatef(-90, 0, 1, 0);
-		dibujaSillon(3.0f);
+		dibujaSillon(4.0f);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -754,12 +781,14 @@ void animation() {
 	if(sentido){
 		animax += 0.0001;
 		if(animax >= 1.0){
+			printf("En sentido true cambio a false\n");
 			sentido = false;
 		}
 	}
-	else{
+	else if(sentido == false){
 		animax -= 0.0001;
 		if(animax <= 1.0){
+			printf("En sentido false cambio a true\n");
 			sentido = true;
 		}
 	}
