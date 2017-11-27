@@ -153,13 +153,30 @@ void TextureLoader::load() {
 	almohada.BuildGLTexture();
 	almohada.ReleaseImage();
 
+	almohada2.LoadTGA("../res/Texturas/almohada2.tga");
+	almohada2.BuildGLTexture();
+	almohada2.ReleaseImage();
+
 	cobija.LoadTGA("../res/Texturas/cobija.tga");
 	cobija.BuildGLTexture();
 	cobija.ReleaseImage();
 
+	cobija2.LoadTGA("../res/Texturas/cobija2.tga");
+	cobija2.BuildGLTexture();
+	cobija2.ReleaseImage();
+
 	noise.LoadTGA("../res/Texturas/noise.tga");
 	noise.BuildGLTexture();
 	noise.ReleaseImage();
+
+	ring.LoadTGA("../res/Texturas/ring.tga");
+	ring.BuildGLTexture();
+	ring.ReleaseImage();
+
+	ring2.LoadTGA("../res/Texturas/ring2.tga");
+	ring2.BuildGLTexture();
+	ring2.ReleaseImage();
+
 
 	rotoplas.LoadTGA("../res/Texturas/rotoplas.tga");
 	rotoplas.BuildGLTexture();
@@ -208,6 +225,10 @@ void TextureLoader::load() {
 	piso.LoadTGA("../res/Texturas/piso.tga");
 	piso.BuildGLTexture();
 	piso.ReleaseImage();
+
+	signal.LoadTGA("../res/Texturas/signal.tga");
+	signal.BuildGLTexture();
+	signal.ReleaseImage();
 
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("../res/Texturas/cuadro.tga");

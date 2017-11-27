@@ -14,9 +14,9 @@ void dibujarMesa();
 /* Función que dibuja un sillon */
 void dibujaSillon(float scale, CTexture sillonT);
 /* Función que dibuja una cama*/
-void dibujaCama(float scale);
+void dibujaCama(float scale, CTexture cobijaT);
 void dibujaMuebleTv(float scale=1.0f);
-void dibujaTv(float scale=1.0f);
+void dibujaTv(float scale, CTexture screeT);
 void dibujaTapete(float scale=1.0f);
 void dibujaCarretera();
 void dibujaGarage();

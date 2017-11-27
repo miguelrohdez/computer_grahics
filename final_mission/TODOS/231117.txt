@@ -1,13 +1,13 @@
-1. Cambio de textura en el pasto
-2. Cambio de textura en el cielo
-3. Ventanas
-4. Cambio de texturas en recamaras
+1. Cambio de textura en el pasto (Done)
+2. Cambio de textura en el cielo (Done)
+3. Ventanas (Done)
+4. Cambio de texturas en recamaras (Done)
 5. Animaciones x3
-	5.1. Hacer carro 
-	5.2.
-	5.3.
+	5.1. Hacer carro estacionandose
+	5.2. Aves en el cielo
+	5.3. Pelota botando en el jardin
 6. Animar texturas de televisiones
-7. Agregar sonido
+7. Agregar sonido (Done)
 8. Posicionar la camara en lugares pertinentes
 9. Agregar muebles
 	9.1 Estufa

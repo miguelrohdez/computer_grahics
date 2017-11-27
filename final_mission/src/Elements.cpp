@@ -54,8 +54,8 @@ void dibujaEjes() {
 void dibujarTerreno() {
 	Prisma p = Prisma(1, 1, 1);
 	p.setColor(blanco);
-	p.setRepetitionTexture(0.5);
-	p.setTexture(textures.pasto2);
+	p.setRepetitionTexture(0.3);
+	p.setTexture(textures.pasto4);
 	p.draw(2000, 5, 2000);
 }
 
@@ -82,7 +82,7 @@ void dibujarMesa() {
 }
 
 /* Función que dibuja un sillon */
-void dibujaSillon(float scale, CTexture sillonT=textures.sillon) {
+void dibujaSillon(float scale, CTexture sillonT) {
 	Prisma p = Prisma(1, 1, 1);
 	// Base
 	p.draw(20*scale, 3.5*scale, 10*scale, sillonT);
@@ -104,19 +104,21 @@ void dibujaSillon(float scale, CTexture sillonT=textures.sillon) {
 }
 
 /* Función que dibuja una cama*/
-void dibujaCama(float scale) {
+void dibujaCama(float scale, CTexture cobijaT) {
 	Prisma p = Prisma(1, 1, 1);
 	// Colchon
-	p.draw(20*scale, 3*scale, 23*scale, textures.cobija);
+	p.disableRepetition();
+	p.draw(20*scale, 3*scale, 23*scale, cobijaT);
+	p.enableRepetition();
 
 	//Almohadas
 	glPushMatrix();
 		glTranslatef(5*scale, 1.5*scale, 9*scale);
-		p.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada);
+		p.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada2);
 	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(-5*scale, 1.5*scale, 9*scale);
-		p.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada);
+		p.draw(8*scale, 0.7f*scale, 4*scale, textures.almohada2);
 	glPopMatrix();
 
 	//Cabecera
@@ -132,13 +134,12 @@ void dibujaCama(float scale) {
 	glPopMatrix();
 }
 
-
 void dibujaMuebleTv(float scale) {
 	Prisma p = Prisma(1, 1, 1);
 	p.draw(20*scale, 15*scale, 7*scale,textures.madera1);
 }
 
-void dibujaTv(float scale) {
+void dibujaTv(float scale, CTexture screenT) {
 	Prisma p = Prisma(1, 1, 1);
 	// Base
 	p.draw(5.5*scale, 0.2*scale, 0.3*scale, textures.pinturaNegra);
@@ -157,9 +158,10 @@ void dibujaTv(float scale) {
 
 		// Pantalla
 		glPushMatrix();
-			glTranslatef(0*scale, 0*scale, -0.2*scale);
-			p.setRepetitionTexture(0.7f);
-			p.draw(13*scale, 6*scale, 0.2*scale, textures.noise);
+			glTranslatef(0*scale, 0*scale, -0.2*scale);			
+			p.disableRepetition();
+			p.draw(13*scale, 6*scale, 0.2*scale, screenT);
+			p.enableRepetition();
 		glPopMatrix();
 	glPopMatrix();
 }
@@ -180,6 +182,18 @@ void dibujaCarretera() {
 	p.setRepetitionTexture(0.08f);
 	glRotatef(90, 0, 1, 0);
 	p.draw(250, 0.5, 2000, textures.road);
+
+	// Letrero
+	glPushMatrix();
+		glTranslatef(-100, 20, 0);
+		p.draw(1, 40, 1, textures.pinturaNegra);
+		glPushMatrix();
+			glTranslatef(0, 30, 0);
+			p.disableRepetition();
+			p.draw(50, 20, 0.2, textures.signal);
+			p.enableRepetition();
+		glPopMatrix();
+	glPopMatrix();
 }
 
 void dibujaGarage(){
@@ -342,13 +356,40 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 		p.draw(11, heightWall, anchoBarda, textures.bardaM);
 	glPopMatrix();
 	p.setScale(1.0);
+
+	/* Ventanas */
+	// Viendo de frente
+	// Lado izquierdo	
+	glPushMatrix();
+		glTranslatef(260, -35, 20);
+		glRotatef(90, 0, 1, 0);
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana);
+		p.enableRepetition();
+	glPopMatrix();
+
+	 // Frontal 1
+	glPushMatrix();
+		glTranslatef(30, -35, -200);	
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana);
+		p.enableRepetition();
+	glPopMatrix();
+
+	// Frontal 2
+	glPushMatrix();
+		glTranslatef(-180, -35, -200);	
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana);
+		p.enableRepetition();
+	glPopMatrix();	
 }
 
 void dibujarSkyBox(float animax) {
 	Prisma p = Prisma(1, 1, 1);
 	p.setSize(2000, 1000, 2000);
 	p.setColor(blanco);
-	p.setTexture(textures.skyBox);
+	p.setTexture(textures.cielo);
 	p.drawSky(animax);
 }
 
@@ -418,7 +459,7 @@ void dibujaAlberca(float scale) {
 	// Camino empedrado
 	glPushMatrix();
 		glTranslatef(170, 0, -15);
-		p.draw(200, 2, 50, textures.piso);
+		p.draw(200, 2, 50, textures.camino);
 	glPopMatrix();
 }
 

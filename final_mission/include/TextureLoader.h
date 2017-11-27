@@ -42,9 +42,14 @@ public:
 	CTexture sillon;
 	CTexture sillon1;
 	CTexture almohada;
+	CTexture almohada2;
 	CTexture cobija;
+	CTexture cobija2;
 	CTexture rotoplas;
 	CTexture noise;
+	CTexture ring;
+	CTexture ring2;
+	CTexture signal;
 	CTexture madera;
 	CTexture madera1;
 	CTexture camino;
