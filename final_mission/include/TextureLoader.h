@@ -61,10 +61,10 @@ public:
 	CTexture tapete;
 	CTexture adoquin;
 	CTexture skyBox;
-	CTexture cielo;
-	CTexture cielo2;
-	CTexture cielo3;
+	CTexture cielo;	
 	CTexture noche;
+	CTexture spaceX;
+	CTexture propulsor;	
 	CTexture agua;
 	CTexture cuadroDebug;
 	CTexture lavaboComplete[6];

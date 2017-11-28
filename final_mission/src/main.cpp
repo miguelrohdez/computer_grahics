@@ -16,6 +16,7 @@
 #include "TextureLoader.h"
 #include "AnimationPlane.h"
 #include "AnimationReloj.h"
+#include "AnimationRocket.h"
 #include "Elements.h"
 
 
@@ -37,6 +38,7 @@ bool sentido = true;
  */
 AnimationReloj reloj;
 AnimationPlane avion;
+AnimationRocket rocket;
 
 /*
  * Para usar texturas
@@ -50,9 +52,11 @@ TextureLoader textures;
 void loadKeyFrames() {
 	reloj.loadData();
 	avion.loadData();
+	rocket.loadData();
 
 	reloj.setTextures(textures.reloj, textures.pinturaNegra);
 	avion.setTextures(textures.avionGris, textures.avionVerde);
+	rocket.setTextures(textures.spaceX, textures.propulsor, textures.pinturaNegra);
 	reloj.setActivate(true);
 }
 
@@ -322,6 +326,11 @@ void display(void) {
 	glPushMatrix();
 		avion.draw();
 	glPopMatrix();
+
+	glPushMatrix();
+		rocket.draw();
+	glPopMatrix();
+
 	glPushMatrix();
 		glTranslatef(-250, 0.1, -188);
 		glRotatef(90, 0, 1, 0);
@@ -342,24 +351,25 @@ void display(void) {
  * Función de animación 
  */
 void animation() {
-/*
+
 	if(sentido){
-		animax += 0.00007;
+		animax += 0.00001;
 		if(animax >= 1.0){
 			printf("En sentido true cambio a false\n");
 			sentido = false;
 		}
 	}
 	else if(sentido == false){
-		animax -= 0.00007;
+		animax -= 0.00001;
 		if(animax <= -1.0){
 			printf("En sentido false cambio a true\n");
 			sentido = true;
 		}
-	}*/
+	}
 
 	reloj.update();
 	avion.update();
+	rocket.update();
 	glutPostRedisplay();
 }
 
@@ -410,42 +420,42 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		/* Temporal para keyframes */
 		case 'z':
-			//reloj.left();
+			rocket.left();
 			break;
 		case 'Z':
-			//reloj.right();
+			rocket.right();
 			break;
 		case 'x':
-			//reloj.fordward();
+			rocket.fordward();
 			break;
 		case 'X':
-			//reloj.backward();
+			rocket.backward();
 			break;
 		case 'c':
-			//reloj.up();
+			rocket.up();
 			break;
 		case 'C':
-			//reloj.down();
+			rocket.down();
 			break;
 		case 'v':
-			reloj.rotateManecilla();
+			rocket.rotateXPositive();
 			break;
 		case 'V':
-			//reloj.rotateXNegative();
+			rocket.rotateXNegative();
 			break;
 		case 'M':
 		case 'm':
-			//reloj.saveToFile();
+			rocket.saveToFile();
 			break;
 		case 'n':
 		case 'N':
-			//reloj.saveKeyframe();
+			rocket.saveKeyframe();
 			break;
 		case 'b':
-			avion.setActivate(true);
+			rocket.setActivate(true);
 			break;
 		case 'B':
-			//reloj.setActivate(false);
+			rocket.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();

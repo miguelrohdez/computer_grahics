@@ -11,19 +11,19 @@ void TextureLoader::load() {
 
 	cielo.LoadTGA("../res/Texturas/cielo.tga");
 	cielo.BuildGLTexture();
-	cielo.ReleaseImage();
-
-	cielo2.LoadTGA("../res/Texturas/cielo2.tga");
-	cielo2.BuildGLTexture();
-	cielo2.ReleaseImage();
-
-	cielo3.LoadTGA("../res/Texturas/cielo3.tga");
-	cielo3.BuildGLTexture();
-	cielo3.ReleaseImage();
+	cielo.ReleaseImage();	
 
 	noche.LoadTGA("../res/Texturas/noche.tga");
 	noche.BuildGLTexture();
 	noche.ReleaseImage();
+
+	spaceX.LoadTGA("../res/Texturas/spaceX.tga");
+	spaceX.BuildGLTexture();
+	spaceX.ReleaseImage();
+
+	propulsor.LoadTGA("../res/Texturas/propulsor.tga");
+	propulsor.BuildGLTexture();
+	propulsor.ReleaseImage();
 
 	metal1.LoadTGA("../res/Texturas/metal1.tga");
 	metal1.BuildGLTexture();
