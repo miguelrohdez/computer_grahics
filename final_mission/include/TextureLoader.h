@@ -26,6 +26,8 @@ public:
 	CTexture pasto3;
 	CTexture pasto4;
 	CTexture ventana;
+	CTexture ventana2;
+	CTexture ventana3;
 	CTexture tiles;
 	CTexture ladrillos1;
 	CTexture ladrillos2;
@@ -60,6 +62,9 @@ public:
 	CTexture adoquin;
 	CTexture skyBox;
 	CTexture cielo;
+	CTexture cielo2;
+	CTexture cielo3;
+	CTexture noche;
 	CTexture agua;
 	CTexture cuadroDebug;
 	CTexture lavaboComplete[6];

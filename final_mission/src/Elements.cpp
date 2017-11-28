@@ -137,6 +137,29 @@ void dibujaCama(float scale, CTexture cobijaT) {
 void dibujaMuebleTv(float scale) {
 	Prisma p = Prisma(1, 1, 1);
 	p.draw(20*scale, 15*scale, 7*scale,textures.madera1);
+
+	// Cajones
+	glPushMatrix();
+		glTranslatef(0*scale, 3.5*scale, -3.5*scale);
+		p.draw(16*scale, 5*scale, 1*scale, textures.madera2);
+
+		// Manija
+		glPushMatrix();
+			glTranslatef(0*scale, 0*scale, -0.5*scale);
+			p.draw(7*scale, 0.5*scale, 0.5*scale, textures.pinturaBlanca2);
+		glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0*scale, -3*scale, -3.5*scale);
+		p.draw(16*scale, 5*scale, 1*scale, textures.madera2);
+
+		// Manija
+		glPushMatrix();
+			glTranslatef(0*scale, 0*scale, -0.5*scale);
+			p.draw(7*scale, 0.5*scale, 0.5*scale, textures.pinturaBlanca2);
+		glPopMatrix();
+	glPopMatrix();
 }
 
 void dibujaTv(float scale, CTexture screenT) {
@@ -382,14 +405,55 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 		p.disableRepetition();
 		p.draw(50, 50, 5, textures.ventana);
 		p.enableRepetition();
+	glPopMatrix();
+
+	// Frontal 3
+	glPushMatrix();
+		glTranslatef(-100, -35, -200);	
+		p.disableRepetition();
+		p.draw(30, 20, 5, textures.ventana3);
+		p.enableRepetition();
 	glPopMatrix();	
+
+	// Trasera 1
+	glPushMatrix();
+		glTranslatef(-200, -35, 200);	
+		p.disableRepetition();
+		p.draw(30, 20, 5, textures.ventana3);
+		p.enableRepetition();
+	glPopMatrix();
+
+	 // Trasera 2
+	glPushMatrix();
+		glTranslatef(150, -35, 120);	
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana2);
+		p.enableRepetition();
+	glPopMatrix();	
+
+	// Trasera 3
+	glPushMatrix();
+		glTranslatef(30, -35, 120);	
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana2);
+		p.enableRepetition();
+	glPopMatrix();	
+
+	// Lado derecho
+	glPushMatrix();
+		glTranslatef(-260, -35, 20);
+		glRotatef(90, 0, 1, 0);
+		p.disableRepetition();
+		p.draw(50, 50, 5, textures.ventana2);
+		p.enableRepetition();
+	glPopMatrix();
 }
 
 void dibujarSkyBox(float animax) {
 	Prisma p = Prisma(1, 1, 1);
 	p.setSize(2000, 1000, 2000);
 	p.setColor(blanco);
-	p.setTexture(textures.cielo);
+	p.setTexture(textures.noche);
 	p.drawSky(animax);
 }
 
@@ -426,9 +490,32 @@ void dibujarRotoplas(float scale) {
 
 void dibujaTocador(float scale) {
 	Prisma p = Prisma(1, 1, 1);
-	p.setColor(cafeMesa);
+	//p.setColor(cafeMesa);
 	p.draw(45*scale, 15*scale, 8*scale, textures.madera1);
-	p.setColor(blanco);
+
+	// Cajones
+	glPushMatrix();
+		glTranslatef(0*scale, 3*scale, 4*scale);
+		p.draw(40*scale, 5*scale, 1*scale, textures.madera2);
+
+		// Manija
+		glPushMatrix();
+			glTranslatef(0*scale, 0*scale, 0.5*scale);
+			p.draw(7*scale, 0.5*scale, 0.5*scale, textures.pinturaBlanca2);
+		glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0*scale, -3*scale, 4*scale);
+		p.draw(40*scale, 5*scale, 1*scale, textures.madera2);
+
+		// Manija
+		glPushMatrix();
+			glTranslatef(0*scale, 0*scale, 0.5*scale);
+			p.draw(7*scale, 0.5*scale, 0.5*scale, textures.pinturaBlanca2);
+		glPopMatrix();
+	glPopMatrix();
+	//p.setColor(blanco);
 }
 
 void dibujaAlberca(float scale) {

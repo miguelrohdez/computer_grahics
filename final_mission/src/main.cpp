@@ -342,7 +342,7 @@ void display(void) {
  * Función de animación 
  */
 void animation() {
-
+/*
 	if(sentido){
 		animax += 0.00007;
 		if(animax >= 1.0){
@@ -352,11 +352,11 @@ void animation() {
 	}
 	else if(sentido == false){
 		animax -= 0.00007;
-		if(animax <= 1.0){
+		if(animax <= -1.0){
 			printf("En sentido false cambio a true\n");
 			sentido = true;
 		}
-	}
+	}*/
 
 	reloj.update();
 	avion.update();

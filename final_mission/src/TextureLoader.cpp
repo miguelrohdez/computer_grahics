@@ -13,6 +13,18 @@ void TextureLoader::load() {
 	cielo.BuildGLTexture();
 	cielo.ReleaseImage();
 
+	cielo2.LoadTGA("../res/Texturas/cielo2.tga");
+	cielo2.BuildGLTexture();
+	cielo2.ReleaseImage();
+
+	cielo3.LoadTGA("../res/Texturas/cielo3.tga");
+	cielo3.BuildGLTexture();
+	cielo3.ReleaseImage();
+
+	noche.LoadTGA("../res/Texturas/noche.tga");
+	noche.BuildGLTexture();
+	noche.ReleaseImage();
+
 	metal1.LoadTGA("../res/Texturas/metal1.tga");
 	metal1.BuildGLTexture();
 	metal1.ReleaseImage();
@@ -213,6 +225,14 @@ void TextureLoader::load() {
 	ventana.LoadTGA("../res/Texturas/ventana.tga");
 	ventana.BuildGLTexture();
 	ventana.ReleaseImage();
+
+	ventana2.LoadTGA("../res/Texturas/ventana2.tga");
+	ventana2.BuildGLTexture();
+	ventana2.ReleaseImage();
+
+	ventana3.LoadTGA("../res/Texturas/ventana3.tga");
+	ventana3.BuildGLTexture();
+	ventana3.ReleaseImage();
 
 	tapete.LoadTGA("../res/Texturas/tapete.tga");
 	tapete.BuildGLTexture();
