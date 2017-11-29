@@ -116,7 +116,7 @@ void initAL() {
 	//Ligando buffer con source
 	alSourcei(source, AL_BUFFER, buffer);
 	checkError(alGetError(), 6);
-	alSourcePlay(source);
+	//alSourcePlay(source);
 
 }
 
@@ -184,7 +184,7 @@ void display(void) {
 	glPushMatrix();
 		glTranslatef(120, 5.25, 60);
 		glRotatef(-90, 0, 1, 0);
-		dibujaSillon(4.0f, textures.sillon);	
+		dibujaSillon(4.0f, textures.sillon);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -294,7 +294,7 @@ void display(void) {
 	glPopMatrix();
 
 	// Cuarto Rojo
-	glPushMatrix(); 
+	glPushMatrix();
 		glTranslatef(-220, 10, 75);
 		dibujaCama(3.0f, textures.cobija);
 	glPopMatrix();
@@ -309,7 +309,7 @@ void display(void) {
 	glPopMatrix();
 
 	// Cuarto Floreado
-	glPushMatrix(); 
+	glPushMatrix();
 		glTranslatef(-180, 10, -160);
 		glRotatef(180, 0, 1, 0);
 		dibujaCama(3.0f, textures.cobija2);
@@ -348,7 +348,7 @@ void display(void) {
 }
 
 /*
- * Función de animación 
+ * Función de animación
  */
 void animation() {
 
@@ -420,42 +420,48 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		/* Temporal para keyframes */
 		case 'z':
-			rocket.left();
+			avion.left();
 			break;
 		case 'Z':
-			rocket.right();
+			avion.right();
 			break;
 		case 'x':
-			rocket.fordward();
+			avion.fordward();
 			break;
 		case 'X':
-			rocket.backward();
+			avion.backward();
 			break;
 		case 'c':
-			rocket.up();
+			avion.up();
 			break;
 		case 'C':
-			rocket.down();
+			avion.down();
 			break;
 		case 'v':
-			rocket.rotateXPositive();
+			avion.rotateXPositive();
 			break;
 		case 'V':
-			rocket.rotateXNegative();
+			avion.rotateXNegative();
 			break;
 		case 'M':
 		case 'm':
-			rocket.saveToFile();
+			avion.saveToFile();
 			break;
 		case 'n':
 		case 'N':
-			rocket.saveKeyframe();
+			avion.saveKeyframe();
 			break;
 		case 'b':
 			rocket.setActivate(true);
 			break;
 		case 'B':
 			rocket.setActivate(false);
+			break;
+		case 'h':
+			avion.setActivate(true);
+			break;
+		case 'H':
+			avion.setActivate(false);
 			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();
