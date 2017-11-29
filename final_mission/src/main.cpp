@@ -116,7 +116,7 @@ void initAL() {
 	//Ligando buffer con source
 	alSourcei(source, AL_BUFFER, buffer);
 	checkError(alGetError(), 6);
-	//alSourcePlay(source);
+	alSourcePlay(source);
 
 }
 
