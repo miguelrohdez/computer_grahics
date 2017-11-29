@@ -5,6 +5,9 @@
 
 class TextureLoader {
 public:
+	CTexture estufaHorno;
+	CTexture estufaQuemador;
+	CTexture estufaLateral;
 	CTexture madera2;
 	CTexture cristalBlanco;
 	CTexture metal1;
@@ -40,7 +43,7 @@ public:
 	CTexture pinturaBlanca3;
 	CTexture pinturaAmarilla;
 	CTexture pinturaNegra;
-	CTexture pinturaFlores;	
+	CTexture pinturaFlores;
 	CTexture sillon;
 	CTexture sillon1;
 	CTexture almohada;
@@ -61,10 +64,10 @@ public:
 	CTexture tapete;
 	CTexture adoquin;
 	CTexture skyBox;
-	CTexture cielo;	
+	CTexture cielo;
 	CTexture noche;
 	CTexture spaceX;
-	CTexture propulsor;	
+	CTexture propulsor;
 	CTexture agua;
 	CTexture cuadroDebug;
 	CTexture lavaboComplete[6];
@@ -100,6 +103,7 @@ public:
 	CTexture techoH[6];
 	CTexture techoI[6];
 	CTexture techoJ[6];
+	CTexture estufa[6];
 	TextureLoader();
 	void load();
 	void createArrays();

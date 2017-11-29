@@ -1,4 +1,4 @@
-LIBS = -lGL -lGLU -lglut -lm -lstdc++ -lAL -I ../include
+LIBS = -lGL -lGLU -lglut -lm -lstdc++ -I ../include
 
 CODIGO_FUENTE = Prisma.cpp Texture.cpp Color.cpp Camera.cpp \
 				Plane.cpp Vertex.cpp TextureLoader.cpp Cylinder.cpp \

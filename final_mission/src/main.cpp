@@ -336,6 +336,11 @@ void display(void) {
 		glRotatef(90, 0, 1, 0);
 		dibujarEstante(4.0f);
 	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-125, 20, 18);
+		dibujarEstufa(4.0);
+	glPopMatrix();
 	glEnable(GL_BLEND); // Figuras con opacidad
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPushMatrix();

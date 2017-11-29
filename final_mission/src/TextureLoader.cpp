@@ -9,9 +9,21 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	estufaHorno.LoadTGA("../res/Texturas/estufa.tga");
+	estufaHorno.BuildGLTexture();
+	estufaHorno.ReleaseImage();
+
+	estufaQuemador.LoadTGA("../res/Texturas/quemador.tga");
+	estufaQuemador.BuildGLTexture();
+	estufaQuemador.ReleaseImage();
+
+	estufaLateral.LoadTGA("../res/Texturas/estufa_lateral.tga");
+	estufaLateral.BuildGLTexture();
+	estufaLateral.ReleaseImage();
+
 	cielo.LoadTGA("../res/Texturas/cielo.tga");
 	cielo.BuildGLTexture();
-	cielo.ReleaseImage();	
+	cielo.ReleaseImage();
 
 	noche.LoadTGA("../res/Texturas/noche.tga");
 	noche.BuildGLTexture();
@@ -258,13 +270,18 @@ void TextureLoader::load() {
 }
 
 void TextureLoader::createArrays() {
-// Orden de los planos:
-// 0 XZ Arriba
-// 1 XZ Abajo
-// 2 XY con Z positiva
-// 3 XY con Z negativa
-// 4 YZ con X positiva
-// 5 YZ con X negativa
+	// Orden de los planos:
+	// 0 XZ Arriba
+	// 1 XZ Abajo
+	// 2 XY con Z positiva
+	// 3 XY con Z negativa
+	// 4 YZ con X positiva
+	// 5 YZ con X negativa
+
+	estufa[1] = estufa[2] = estufa[3] = estufa[5] = estufaLateral;
+	estufa[4] = estufaHorno;
+	estufa[0] = estufaQuemador;
+
 	lavaboComplete[0] = lavabo;
 	lavaboComplete[1] = lavaboComplete[2] = lavaboComplete[3] = lavaboComplete[4] = \
 	lavaboComplete[5] = pinturaBlanca1;

@@ -19,17 +19,17 @@ void AnimationReloj::loadData() {
 		printf("Error file: %s\n", FILE_KEYFRAME_RELOJ);
 		exit(0);
 	}
-	printf("Cargando frames ...\n");
+	//printf("Cargando frames ...\n");
 	while (fread(&frames[this->numFrames], sizeof(KeyFrameReloj), 1, data) == 1) {
 
-		printf("Frame[%d]\n", this->numFrames);
+		//printf("Frame[%d]\n", this->numFrames);
 		//frames[this->numFrames].toString(); // Para depurar valores cargados
 		this->numFrames++;
 	}
 	fclose(data);
 	resetValues();
-	printf("Frames cargados correctamente.\n");
-	fflush(stdout);
+	//printf("Frames cargados correctamente.\n");
+	//fflush(stdout);
 }
 
 void AnimationReloj::update() {

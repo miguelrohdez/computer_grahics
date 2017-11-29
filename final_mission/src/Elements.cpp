@@ -55,7 +55,7 @@ void dibujarTerreno() {
 	Prisma p = Prisma(1, 1, 1);
 	p.setColor(blanco);
 	p.setRepetitionTexture(0.3);
-	p.setTexture(textures.pasto4);
+	p.setTexture(textures.pasto3);
 	p.draw(2000, 5, 2000);
 }
 
@@ -181,7 +181,7 @@ void dibujaTv(float scale, CTexture screenT) {
 
 		// Pantalla
 		glPushMatrix();
-			glTranslatef(0*scale, 0*scale, -0.2*scale);			
+			glTranslatef(0*scale, 0*scale, -0.2*scale);
 			p.disableRepetition();
 			p.draw(13*scale, 6*scale, 0.2*scale, screenT);
 			p.enableRepetition();
@@ -382,7 +382,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 
 	/* Ventanas */
 	// Viendo de frente
-	// Lado izquierdo	
+	// Lado izquierdo
 	glPushMatrix();
 		glTranslatef(260, -35, 20);
 		glRotatef(90, 0, 1, 0);
@@ -393,7 +393,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 
 	 // Frontal 1
 	glPushMatrix();
-		glTranslatef(30, -35, -200);	
+		glTranslatef(30, -35, -200);
 		p.disableRepetition();
 		p.draw(50, 50, 5, textures.ventana);
 		p.enableRepetition();
@@ -401,7 +401,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 
 	// Frontal 2
 	glPushMatrix();
-		glTranslatef(-180, -35, -200);	
+		glTranslatef(-180, -35, -200);
 		p.disableRepetition();
 		p.draw(50, 50, 5, textures.ventana);
 		p.enableRepetition();
@@ -409,15 +409,15 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 
 	// Frontal 3
 	glPushMatrix();
-		glTranslatef(-100, -35, -200);	
+		glTranslatef(-100, -35, -200);
 		p.disableRepetition();
 		p.draw(30, 20, 5, textures.ventana3);
 		p.enableRepetition();
-	glPopMatrix();	
+	glPopMatrix();
 
 	// Trasera 1
 	glPushMatrix();
-		glTranslatef(-200, -35, 200);	
+		glTranslatef(-200, -35, 200);
 		p.disableRepetition();
 		p.draw(30, 20, 5, textures.ventana3);
 		p.enableRepetition();
@@ -425,19 +425,19 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 
 	 // Trasera 2
 	glPushMatrix();
-		glTranslatef(150, -35, 120);	
+		glTranslatef(150, -35, 120);
 		p.disableRepetition();
 		p.draw(50, 50, 5, textures.ventana2);
 		p.enableRepetition();
-	glPopMatrix();	
+	glPopMatrix();
 
 	// Trasera 3
 	glPushMatrix();
-		glTranslatef(30, -35, 120);	
+		glTranslatef(30, -35, 120);
 		p.disableRepetition();
 		p.draw(50, 50, 5, textures.ventana2);
 		p.enableRepetition();
-	glPopMatrix();	
+	glPopMatrix();
 
 	// Lado derecho
 	glPushMatrix();
@@ -624,5 +624,23 @@ void dibujarEstante(float scale) {
 	p.draw(anchoCostado, altoCostado, largo);
 	glTranslatef((ancho + anchoCostado) / 2, 0, -(largo + anchoCostado) / 2);
 	p.draw(ancho + (anchoCostado * 2), altoCostado, anchoCostado);
+}
 
+void dibujarEstufa(float scale) {
+	Prisma p(1, 1, 1, blanco);
+	p.disableRepetition();
+	float h1 = 10 * scale; // Volumen principal
+	float h2 = 2 * scale; // Pieza superior
+	float h3 = 0.2 * scale; // Pieza horno
+	float a1 = 5.5 * scale;
+	float a2 = 0.5 * scale;
+	float a3 = 0.2 * scale;
+	float l = 7 * scale; // Largo de las piezas
+	float offsetHorno = 2.3 * scale;
+
+	p.draw(a1, h1, l, textures.estufa);
+	glTranslatef(-(a1 - a2) / 2, (h1 + h2) / 2, 0);
+	p.draw(a2, h2, l, textures.pinturaNegra);
+	glTranslatef(a1 - a2/2 + a3/2, -(h3 + h2 + offsetHorno) / 2, 0);
+	p.draw(a3, h3, l, textures.pinturaNegra);
 }
