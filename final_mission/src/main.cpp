@@ -5,7 +5,6 @@
  * Oropeza Vilchis Luis Alberto
  */
 
-//#include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
@@ -17,6 +16,7 @@
 #include "AnimationPlane.h"
 #include "AnimationReloj.h"
 #include "AnimationRocket.h"
+#include "AnimationFridge.h"
 #include "Elements.h"
 
 
@@ -30,8 +30,10 @@ ALint source_state;
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
 
+/*
+ * Para animar SkyBox
+ */
 float animax = 0.0f;
-bool sentido = true;
 
 /*
  * KeyFrames
@@ -39,6 +41,11 @@ bool sentido = true;
 AnimationReloj reloj;
 AnimationPlane avion;
 AnimationRocket rocket;
+
+/*
+ * Máquinas de estado
+ */
+AnimationFridge refri;
 
 /*
  * Para usar texturas
@@ -60,6 +67,9 @@ void loadKeyFrames() {
 	reloj.setActivate(true);
 }
 
+void loadStateMachines() {
+	refri = AnimationFridge();
+}
 
 void checkError(ALenum e, int pos) {
 	if(e != AL_NO_ERROR) {
@@ -116,7 +126,7 @@ void initAL() {
 	//Ligando buffer con source
 	alSourcei(source, AL_BUFFER, buffer);
 	checkError(alGetError(), 6);
-	alSourcePlay(source);
+	//alSourcePlay(source);
 
 }
 
@@ -132,6 +142,7 @@ void initGL() {
 	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);
 	textures.load();
 	loadKeyFrames();
+	loadStateMachines();
 }
 
 /*
@@ -341,6 +352,11 @@ void display(void) {
 		glTranslatef(-125, 20, 18);
 		dibujarEstufa(4.0);
 	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-113, 20, 35);
+		refri.draw(4.0f, textures.crefri, textures.crefriPuerta, textures.crefriPuertaNevera);
+	glPopMatrix();
 	glEnable(GL_BLEND); // Figuras con opacidad
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPushMatrix();
@@ -356,25 +372,11 @@ void display(void) {
  * Función de animación
  */
 void animation() {
-
-	if(sentido){
-		animax += 0.00001;
-		if(animax >= 1.0){
-			printf("En sentido true cambio a false\n");
-			sentido = false;
-		}
-	}
-	else if(sentido == false){
-		animax -= 0.00001;
-		if(animax <= -1.0){
-			printf("En sentido false cambio a true\n");
-			sentido = true;
-		}
-	}
-
+	animax += 0.00001;
 	reloj.update();
 	avion.update();
 	rocket.update();
+	refri.update();
 	glutPostRedisplay();
 }
 
@@ -424,6 +426,7 @@ void keyboard(unsigned char key, int x, int y) {
 			camara.UpDown_Camera(-CAMERASPEED);
 			break;
 		/* Temporal para keyframes */
+		/*
 		case 'z':
 			avion.left();
 			break;
@@ -456,6 +459,7 @@ void keyboard(unsigned char key, int x, int y) {
 		case 'N':
 			avion.saveKeyframe();
 			break;
+			*/
 		case 'b':
 			rocket.setActivate(true);
 			break;
@@ -467,6 +471,12 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		case 'H':
 			avion.setActivate(false);
+			break;
+		case 'r':
+			refri.activateDoor1();
+			break;
+		case 'R':
+			refri.activateDoor2();
 			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();

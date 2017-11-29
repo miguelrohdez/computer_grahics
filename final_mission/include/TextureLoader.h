@@ -5,6 +5,12 @@
 
 class TextureLoader {
 public:
+	CTexture refriNevera;
+	CTexture refriPuerta;
+	CTexture refriLateral;
+	CTexture refriInterno;
+	CTexture refriPuertaInterno;
+	CTexture refriNeveraInterno;
 	CTexture estufaHorno;
 	CTexture estufaQuemador;
 	CTexture estufaLateral;
@@ -104,6 +110,9 @@ public:
 	CTexture techoI[6];
 	CTexture techoJ[6];
 	CTexture estufa[6];
+	CTexture crefri[6];
+	CTexture crefriPuerta[6];
+	CTexture crefriPuertaNevera[6];
 	TextureLoader();
 	void load();
 	void createArrays();

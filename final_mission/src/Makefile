@@ -3,7 +3,7 @@ LIBS = -lGL -lGLU -lglut -lm -lstdc++ -I ../include
 CODIGO_FUENTE = Prisma.cpp Texture.cpp Color.cpp Camera.cpp \
 				Plane.cpp Vertex.cpp TextureLoader.cpp Cylinder.cpp \
 				Cone.cpp AnimationPlane.cpp AnimationRocket.cpp KeyFrame.cpp KeyFrameReloj.cpp \
-				AnimationReloj.cpp Elements.cpp
+				AnimationReloj.cpp Elements.cpp AnimationFridge.cpp
 TARGET = main
 
 

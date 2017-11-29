@@ -9,6 +9,30 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	refriPuertaInterno.LoadTGA("../res/Texturas/refri_interno_normal.tga");
+	refriPuertaInterno.BuildGLTexture();
+	refriPuertaInterno.ReleaseImage();
+
+	refriNeveraInterno.LoadTGA("../res/Texturas/refri_interno_nevera.tga");
+	refriNeveraInterno.BuildGLTexture();
+	refriNeveraInterno.ReleaseImage();
+
+	refriInterno.LoadTGA("../res/Texturas/refri_interno.tga");
+	refriInterno.BuildGLTexture();
+	refriInterno.ReleaseImage();
+
+	refriPuerta.LoadTGA("../res/Texturas/refri_2.tga");
+	refriPuerta.BuildGLTexture();
+	refriPuerta.ReleaseImage();
+
+	refriNevera.LoadTGA("../res/Texturas/refri_nevera.tga");
+	refriNevera.BuildGLTexture();
+	refriNevera.ReleaseImage();
+
+	refriLateral.LoadTGA("../res/Texturas/refri_lateral.tga");
+	refriLateral.BuildGLTexture();
+	refriLateral.ReleaseImage();
+
 	estufaHorno.LoadTGA("../res/Texturas/estufa.tga");
 	estufaHorno.BuildGLTexture();
 	estufaHorno.ReleaseImage();
@@ -277,6 +301,17 @@ void TextureLoader::createArrays() {
 	// 3 XY con Z negativa
 	// 4 YZ con X positiva
 	// 5 YZ con X negativa
+
+	crefri[4] = refriInterno;
+	crefri[0] = crefri[1] = crefri[2] = crefri[3] = crefri[5] = refriLateral;
+
+	crefriPuerta[4] = refriPuerta;
+	crefriPuerta[5] = refriPuertaInterno;
+	crefriPuerta[0] = crefriPuerta[1] = crefriPuerta[2] = crefriPuerta[3] = refriLateral;
+
+	crefriPuertaNevera[4] = refriNevera;
+	crefriPuertaNevera[5] = refriNeveraInterno;
+	crefriPuertaNevera[0] = crefriPuertaNevera[1] = crefriPuertaNevera[2] = crefriPuertaNevera[3] = refriLateral;
 
 	estufa[1] = estufa[2] = estufa[3] = estufa[5] = estufaLateral;
 	estufa[4] = estufaHorno;

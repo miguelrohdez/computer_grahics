@@ -35,6 +35,5 @@ void dibujaSilla(float scale);
 void dibujarMesaCristal(float scale);
 void dibujarEstante(float scale);
 void dibujarEstufa(float scale);
-void dibujarRefrigerador(float scale);
 
 #endif
