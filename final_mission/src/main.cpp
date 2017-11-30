@@ -8,9 +8,8 @@
 #include <GL/freeglut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
-#include <AL/al.h>
-#include <AL/alc.h>
 #include <AL/alut.h>
+#include "Audio.h"
 #include "Camera.h"
 #include "TextureLoader.h"
 #include "AnimationPlane.h"
@@ -20,13 +19,6 @@
 #include "Elements.h"
 
 
-ALCdevice  *device;
-ALCcontext *context;
-ALCenum error;
-ALfloat listenerOri[] = {0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-ALuint source, buffer;
-ALint source_state;
-
 CCamera camara;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
 
@@ -34,6 +26,11 @@ GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
  * Para animar SkyBox
  */
 float animax = 0.0f;
+
+/*
+* Para cargar y usar audio
+*/
+Audio music;
 
 /*
  * KeyFrames
@@ -71,65 +68,6 @@ void loadStateMachines() {
 	refri = AnimationFridge();
 }
 
-void checkError(ALenum e, int pos) {
-	if(e != AL_NO_ERROR) {
-		printf("Algo salió mal %d\n", pos);
-	}
-}
-
-void freeAudio() {
-	alDeleteSources(1, &source);
-	alDeleteBuffers(1, &buffer);
-	device = alcGetContextsDevice(context);
-	alcMakeContextCurrent(NULL);
-	alcDestroyContext(context);
-	alcCloseDevice(device);
-}
-
-void initAL() {
-	device = alcOpenDevice(NULL); // NULL implica el dispositivo por default
-	// Abre dispositivo de audio
-	if (!device) {
-			printf("No se pudo abrir el dispositivo de audio.\n");
-			exit(0);
-	} else {
-		printf("Dispositivo de audio abierto correctamente\n");
-	}
-	// Crea el contexto
-	context = alcCreateContext(device, NULL);
-	if (!alcMakeContextCurrent(context)) {
-		printf("Error al crear al contexto\n");
-	}
-	checkError(alGetError(), 0);
-
-	// Genera la fuente
-	alGenSources((ALuint)1, &source);
-	alSource3f(source, AL_POSITION, 0, 0, 0);
-	alSource3f(source, AL_VELOCITY, 0, 0, 0);
-	alSourcei(source, AL_LOOPING, AL_TRUE);
-	checkError(alGetError(), 4);
-
-	// Inicializar Listener
-	alListener3f(AL_POSITION, 0, 0, 00);
-	alListener3f(AL_VELOCITY, 0, 0, 0);
-	alListenerfv(AL_ORIENTATION, listenerOri);
-	checkError(alGetError(), 3);
-
-
-	// Genera el buffer para el audio
-	buffer = alutCreateBufferFromFile("../res/Sound/jazz_piano.wav");
-	if ( alutGetError() != ALUT_ERROR_NO_ERROR ) {
-		printf("Error al cargar el audio\n");
-	}
-
-	checkError(alGetError(), 5);
-	//Ligando buffer con source
-	alSourcei(source, AL_BUFFER, buffer);
-	checkError(alGetError(), 6);
-	//alSourcePlay(source);
-
-}
-
 /*
  * Función para inicializar parámetros
  */
@@ -143,6 +81,7 @@ void initGL() {
 	textures.load();
 	loadKeyFrames();
 	loadStateMachines();
+	music.play();
 }
 
 /*
@@ -480,7 +419,7 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();
-			freeAudio();
+			music.deleteAudio();
 			exit(0);   // Salimos del programa
 			break;
 		default:        // Cualquier otra
@@ -522,8 +461,8 @@ int main(int argc, char **argv) {
 	glutInitWindowSize(1920, 1080); // Tamaño de la Ventana
 	glutInitWindowPosition(-1, -1); //Posicion de la Ventana
 	glutCreateWindow("Complejo Residencial"); // Nombre de la Ventana
+	music.loadData();
 	initGL(); // Parametros iniciales de la aplicacion
-	initAL();
 	glutDisplayFunc(display); // Función de dibujo
 	glutReshapeFunc(reshape); // Función en caso de cambio de tamano
 	glutKeyboardFunc(keyboard); // Función de manejo de teclado
