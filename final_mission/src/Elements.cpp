@@ -523,9 +523,9 @@ void dibujaAlberca(float scale) {
 	Cylinder c = Cylinder(1, 1);
 	p.disableRepetition();
 	p.setColor(blanco);
+	// Agua
 	p.draw(70*scale, 10*scale, 100*scale, textures.agua);
 	p.enableRepetition();
-	// Agua
 	glPushMatrix();
 		glTranslatef(0*scale, -5*scale, 50*scale);
 		c.drawHalf(35*scale, 10*scale, textures.bathroom1);

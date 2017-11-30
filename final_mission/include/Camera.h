@@ -35,6 +35,7 @@ class CCamera
 	public:
 
 		tVector3 mPos;
+		tVector3 mAuxP;
 		tVector3 mView;
 		tVector3 mUp;
 

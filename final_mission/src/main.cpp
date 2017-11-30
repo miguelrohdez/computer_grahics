@@ -27,13 +27,15 @@ ALfloat listenerOri[] = {0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
 ALuint source, buffer;
 ALint source_state;
 
-CCamera camara;
+CCamera camara, auxCamera;
 GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
+GLfloat g_lookaux = 0.0f; // Variable auxiliar para auxCamera
 
 /*
  * Para animar SkyBox
  */
 float animax = 0.0f;
+bool bandera = false;
 
 /*
  * KeyFrames
@@ -139,7 +141,7 @@ void initGL() {
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
 	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);
+	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);	
 	textures.load();
 	loadKeyFrames();
 	loadStateMachines();
@@ -152,11 +154,19 @@ void display(void) {
 	//alSourcePlay(source);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
-	glLoadIdentity();
-	glRotatef(g_lookupdown,1.0f, 0, 0);
-	gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
+	glLoadIdentity();	
+
+	if(bandera){
+		glRotatef(g_lookaux, 1.0f, 0, 0);
+		gluLookAt(auxCamera.mPos.x, auxCamera.mPos.y, auxCamera.mPos.z,
+			  auxCamera.mView.x, auxCamera.mView.y, auxCamera.mView.z,
+			  auxCamera.mUp.x, auxCamera.mUp.y, auxCamera.mUp.z);	
+	}else{
+		glRotatef(g_lookupdown, 1.0f, 0, 0);
+		gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
 			  camara.mView.x, camara.mView.y, camara.mView.z,
 			  camara.mUp.x, camara.mUp.y, camara.mUp.z);
+	}
 
 	dibujaEjes();
 	glEnable(GL_TEXTURE_2D);
@@ -372,7 +382,7 @@ void display(void) {
  * Función de animación
  */
 void animation() {
-	animax += 0.00001;
+	animax += 0.00009;
 	reloj.update();
 	avion.update();
 	rocket.update();
@@ -403,26 +413,32 @@ void keyboard(unsigned char key, int x, int y) {
 	switch (key) {
 		case 'w':   //Movimientos de camara
 		case 'W':
+			bandera = false;
 			camara.Move_Camera( CAMERASPEED );
 			break;
 		case 's':
 		case 'S':
+			bandera = false;
 			camara.Move_Camera(-(CAMERASPEED));
 			break;
 		case 'a':
 		case 'A':
+			bandera = false;
 			camara.Strafe_Camera(-(CAMERASPEED));
 			break;
 		case 'd':
 		case 'D':
+			bandera = false;
 			camara.Strafe_Camera( CAMERASPEED);
 			break;
 		case 'e':
 		case 'E':
+			bandera = false;
 			camara.UpDown_Camera(CAMERASPEED);
 			break;
 		case 'q':
 		case 'Q':
+			bandera = false;
 			camara.UpDown_Camera(-CAMERASPEED);
 			break;
 		/* Temporal para keyframes */
@@ -478,6 +494,31 @@ void keyboard(unsigned char key, int x, int y) {
 		case 'R':
 			refri.activateDoor2();
 			break;
+		case '1':
+			// Animación del Avión	
+			auxCamera.Position_Camera(-650, 800, -750, 40, 700, -750, 0, 1, 0);			
+			bandera = true;
+			break;
+		case '2':
+			// Alberca
+			auxCamera.Position_Camera(-100, 400, 700, -100, 0, 500, 0, 1, 0);			
+			bandera = true;
+			break;
+		case '3':
+			// Animación Cohéte
+			auxCamera.Position_Camera(800, 50, 0, 100, 150, 800, 0, 1, 0);			
+			bandera = true;
+			break;
+		case '4':
+			// Animación Reloj
+			auxCamera.Position_Camera(90, 70, 0, 100, 70, -100, 0, 1, 0);			
+			bandera = true;
+			break;
+		case '5':
+			// Animación refrigerador
+			auxCamera.Position_Camera(-30, 50, 30, -50, 47, 30, 0, 1, 0);			
+			bandera = true;
+			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();
 			freeAudio();
@@ -495,16 +536,28 @@ void keyboard(unsigned char key, int x, int y) {
 void arrowKeys(int key, int x, int y) {
 	switch (key) {
 		case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
-			g_lookupdown -= 1.0f;
+			if(bandera)
+				g_lookaux -= 1.0f;
+			else
+				g_lookupdown -= 1.0f;
 			break;
 		case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
-			g_lookupdown += 1.0f;
+			if(bandera)
+				g_lookaux += 1.0f;
+			else
+				g_lookupdown += 1.0f;
 			break;
 		case GLUT_KEY_LEFT:
-			camara.Rotate_View(-CAMERASPEED);
+			if(bandera)
+				auxCamera.Rotate_View(-CAMERASPEED);
+			else
+				camara.Rotate_View(-CAMERASPEED);			
 			break;
 		case GLUT_KEY_RIGHT:
-			camara.Rotate_View( CAMERASPEED);
+			if(bandera)
+				auxCamera.Rotate_View(CAMERASPEED);
+			else
+				camara.Rotate_View( CAMERASPEED);				
 			break;
 		default:
 			break;
