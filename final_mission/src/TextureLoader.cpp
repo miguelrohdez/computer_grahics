@@ -286,6 +286,11 @@ void TextureLoader::load() {
 	signal.BuildGLTexture();
 	signal.ReleaseImage();
 
+
+	explotion.LoadTGA("../res/Texturas/explotion.tga");
+	explotion.BuildGLTexture();
+	explotion.ReleaseImage();
+
 	/* Imagen para depurar las texturas*/
 	cuadroDebug.LoadTGA("../res/Texturas/cuadro.tga");
 	cuadroDebug.BuildGLTexture();

@@ -5,6 +5,7 @@
 
 class TextureLoader {
 public:
+	CTexture explotion;
 	CTexture refriNevera;
 	CTexture refriPuerta;
 	CTexture refriLateral;

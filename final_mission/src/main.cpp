@@ -71,7 +71,7 @@ void loadKeyFrames() {
 	reloj.setTextures(textures.reloj, textures.pinturaNegra);
 	avion.setTextures(textures.avionGris, textures.avionVerde);
 	avionCasa.setTextures(textures.cielo, textures.avionVerde);
-	rocket.setTextures(textures.spaceX, textures.propulsor, textures.pinturaNegra);
+	rocket.setTextures(textures.spaceX, textures.propulsor, textures.pinturaNegra, textures.explotion);
 	reloj.setActivate(true);
 }
 
@@ -336,6 +336,7 @@ void animation() {
 	animax += 0.00009;
 	reloj.update();
 	avion.update();
+	avionCasa.update();
 	rocket.update();
 	refri.update();
 	glutPostRedisplay();
@@ -494,7 +495,7 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		case '6':
 			// Animación Avion casa
-			camara.Position_Camera(30,30,30, -50, 47, 30, 0, 1, 0);						
+			camara.Position_Camera(-650, 80, -750, 40, 80, -750, 0, 1, 0);						
 			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();

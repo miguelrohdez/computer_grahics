@@ -67,15 +67,19 @@ void AnimationRocket::interpolate() {
 }
 
 void AnimationRocket::draw() {
+
 	Cylinder c(25, 250, textureBody);
 	//Prisma p(10.f, 10.f, 10.f, Color(1,1,1));
 	Cone co(1, 1, textureBase);
 
-	//p.setTexture(textureBase);
+	Prisma p = Prisma(130, 100, 0.01);
+	
+	p.setTexture(tExplotion);
 
 	glTranslatef(translate[0], translate[1], translate[2]);
 	glRotatef(rotate[0], 0, 1, 0);
 	glRotatef(-90, 0, 0, 1);
+	glTranslatef(10, 0, 0);
 
 	// Pico frontal
 	glPushMatrix();
@@ -90,6 +94,48 @@ void AnimationRocket::draw() {
 		glTranslatef(13, 0, 0);
 		glRotatef(90, 0, 0, 1);
 		co.draw(30, 40);
+		glEnable( GL_ALPHA_TEST );
+		glAlphaFunc( GL_GREATER, 0.1 );	
+		p.disableRepetition();
+
+		// Flamas
+		glPushMatrix();				
+			glTranslatef(0, -45, 0);			
+			p.draw();						
+		glPopMatrix();
+
+		glPushMatrix();			
+			glTranslatef(0, -45, 0);
+			glRotatef(90, 0, 1, 0);			
+			p.draw();						
+		glPopMatrix();
+
+		glPushMatrix();			
+			glTranslatef(0, -45, 0);
+			glRotatef(45, 0, 1, 0);			
+			p.draw();						
+		glPopMatrix();
+
+		glPushMatrix();			
+			glTranslatef(0, -45, 0);
+			glRotatef(-45, 0, 1, 0);			
+			p.draw();						
+		glPopMatrix();
+
+		glPushMatrix();			
+			glTranslatef(0, -45, 0);
+			glRotatef(135, 0, 1, 0);			
+			p.draw();						
+		glPopMatrix();
+
+		glPushMatrix();			
+			glTranslatef(0, -45, 0);
+			glRotatef(-135, 0, 1, 0);			
+			p.draw();						
+		glPopMatrix();
+
+		p.enableRepetition();			
+		glDisable(GL_ALPHA_TEST);
 	glPopMatrix();
 
 	// Cohetes laterales
@@ -105,6 +151,49 @@ void AnimationRocket::draw() {
 			glTranslatef(0, -153, 0);
 			glRotatef(0, 0, 0, 1);
 			co.draw(10, 20);
+
+			glEnable( GL_ALPHA_TEST );
+			glAlphaFunc( GL_GREATER, 0.1 );	
+			p.disableRepetition();
+
+			// Flamas
+			glPushMatrix();				
+				glTranslatef(0, -20, 0);			
+				p.draw(50, 50, 0.001);						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(90, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(45, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(-45, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(135, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(-135, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			p.enableRepetition();			
+			glDisable(GL_ALPHA_TEST);			
 		glPopMatrix();
 	glPopMatrix();
 
@@ -120,6 +209,49 @@ void AnimationRocket::draw() {
 			glTranslatef(0, -153, 0);
 			glRotatef(0, 0, 0, 1);
 			co.draw(10, 20);
+
+			glEnable( GL_ALPHA_TEST );
+			glAlphaFunc( GL_GREATER, 0.1 );	
+			p.disableRepetition();
+
+			// Flamas
+			glPushMatrix();				
+				glTranslatef(0, -20, 0);			
+				p.draw(50, 50, 0.001);						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(90, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(45, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(-45, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(135, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			glPushMatrix();			
+				glTranslatef(0, -20, 0);
+				glRotatef(-135, 0, 1, 0);			
+				p.draw();						
+			glPopMatrix();
+
+			p.enableRepetition();			
+			glDisable(GL_ALPHA_TEST);
 		glPopMatrix();
 	glPopMatrix();
 
@@ -185,10 +317,11 @@ void AnimationRocket::saveToFile() {
 	printf("Frames guardados exitosamente.\n");
 }
 
-void AnimationRocket::setTextures(CTexture tBody, CTexture tBase, CTexture tCab) {
+void AnimationRocket::setTextures(CTexture tBody, CTexture tBase, CTexture tCab, CTexture tExp) {
 	this->textureBody = tBody;
 	this->textureBase = tBase;
 	this->textureCab = tCab;
+	this->tExplotion = tExp;
 }
 
 void AnimationRocket::setActivate(bool v) {
