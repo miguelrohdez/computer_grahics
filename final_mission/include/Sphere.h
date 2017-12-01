@@ -8,7 +8,7 @@
 	#define PI 3.1415926535897
 #endif
 #ifndef RESOLUTION_SPHERE
-	#define RESOLUTION_SPHERE 60
+	#define RESOLUTION_SPHERE 15
 #endif
 
 class Sphere {

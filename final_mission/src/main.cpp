@@ -20,16 +20,9 @@
 #include "Elements.h"
 #include "Sphere.h"
 
-ALCdevice  *device;
-ALCcontext *context;
-ALCenum error;
-ALfloat listenerOri[] = {0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-ALuint source, buffer;
-ALint source_state;
-
 CCamera camara, auxCamera;
-GLfloat g_lookupdown = 0.0f; // Posición en el eje Z
-GLfloat g_lookaux = 0.0f; // Variable auxiliar para auxCamera
+GLfloat lookUpDown = 0.0f; // Posición en el eje Z
+GLfloat lookAux = 0.0f; // Variable auxiliar para auxCamera
 
 /*
  * Para animar SkyBox
@@ -111,12 +104,12 @@ void display(void) {
 	glLoadIdentity();
 
 	if(bandera){
-		glRotatef(g_lookaux, 1.0f, 0, 0);
+		glRotatef(lookAux, 1.0f, 0, 0);
 		gluLookAt(auxCamera.mPos.x, auxCamera.mPos.y, auxCamera.mPos.z,
 			  auxCamera.mView.x, auxCamera.mView.y, auxCamera.mView.z,
 			  auxCamera.mUp.x, auxCamera.mUp.y, auxCamera.mUp.z);
 	}else{
-		glRotatef(g_lookupdown, 1.0f, 0, 0);
+		glRotatef(lookUpDown, 1.0f, 0, 0);
 		gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
 			  camara.mView.x, camara.mView.y, camara.mView.z,
 			  camara.mUp.x, camara.mUp.y, camara.mUp.z);
@@ -545,15 +538,15 @@ void arrowKeys(int key, int x, int y) {
 	switch (key) {
 		case GLUT_KEY_UP:     // Presionamos tecla ARRIBA...
 			if(bandera)
-				g_lookaux -= 1.0f;
+				lookAux -= 1.0f;
 			else
-				g_lookupdown -= 1.0f;
+				lookUpDown -= 1.0f;
 			break;
 		case GLUT_KEY_DOWN:               // Presionamos tecla ABAJO...
 			if(bandera)
-				g_lookaux += 1.0f;
+				lookAux += 1.0f;
 			else
-				g_lookupdown += 1.0f;
+				lookUpDown += 1.0f;
 			break;
 		case GLUT_KEY_LEFT:
 			if(bandera)
