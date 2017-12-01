@@ -11,7 +11,7 @@
 
 
 class AnimationRocket {
-	CTexture textureBody, textureBase, textureCab;
+	CTexture textureBody, textureBase, textureCab, tExplotion;
 	KeyFrame frames[20];
 	int iCurrentSteps;
 	int current;
@@ -21,10 +21,11 @@ class AnimationRocket {
 	float rotate[3];
 public:
 	AnimationRocket();
-	AnimationRocket(CTexture textureBody, CTexture textureBase, CTexture textureCab);
+	AnimationRocket(CTexture textureBody, CTexture textureBase, CTexture textureCab, CTexture tExplotion);
 	void loadData();
 	void update();
 	void draw();
+	void draw(float offset);
 	void saveKeyframe();
 	void interpolate();
 	void left();
@@ -36,7 +37,7 @@ public:
 	void rotateXPositive();
 	void rotateXNegative();
 	void saveToFile();
-	void setTextures(CTexture tBody, CTexture tBase, CTexture tCab);
+	void setTextures(CTexture tBody, CTexture tBase, CTexture tCab, CTexture tExp);
 	void setActivate(bool v);
 	void resetValues();
 };

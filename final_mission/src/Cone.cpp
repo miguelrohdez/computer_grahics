@@ -38,6 +38,7 @@ void Cone::draw()
 	float ctext_s = 1.0 / resolution;
 
 	glBindTexture(GL_TEXTURE_2D, texture.GLindex);   // choose the texture to use.
+	
 	for(int i = 0; i < resolution; i++) {
 		v2[0] = radio * cos(angulo * i);
 		v2[1] = 0;

@@ -71,7 +71,7 @@ void CCamera::UpDown_Camera(float speed)
 	//printf("Valor View: %f\n",mView.z);
 
 	//vOrthoVector.y = -vVector.z;
-	vOrthoVector.y = 10;
+	vOrthoVector.y = 20;
 
 	//printf("Valor Vector: %f\n",vVector.z);
 	//vOrthoVector.z =  vVector.x;

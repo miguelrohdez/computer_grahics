@@ -12,6 +12,7 @@ class Plane {
 	Color color;
 	float axisARep;
 	float axisBRep;
+	float offsetY;
 	Vertex v[4];
 public:
 	Plane();
@@ -20,6 +21,7 @@ public:
 	void setColor(Color c);
 	void setVertex(Vertex v1, Vertex v2, Vertex v3, Vertex v4);
 	void draw();
+	void draw(float offsetY);
 	void drawInverse();
 	void toString();
 	void calculateRepetitions(float repAxisA, float repAxisB);

@@ -41,7 +41,7 @@ void Audio::loadData() {
 
 
 	// Genera el buffer para el audio
-	buffer = alutCreateBufferFromFile("../res/Sound/jazz_piano.wav");
+	buffer = alutCreateBufferFromFile("../res/Sonido/jazz_piano.wav");
 	if ( alutGetError() != ALUT_ERROR_NO_ERROR ) {
 		printf("Error al cargar el audio\n");
 	}

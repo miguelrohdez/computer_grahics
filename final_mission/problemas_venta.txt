@@ -1,0 +1,2 @@
+Al ser un proyecto escolar se tiene un tiempo sumamente limitado por lo que los detalles son precarios. Sabiendo que los clientes en general esperan un proyecto de computación gráfica con detalles de alta calidad tendríamos un problema para colocarlo en el mercado. Además, la complejidad para hacer un ejecutable multiplataforma (no solo hablando de los dispositivos de escritorio si no tambien los dispositivos mobiles) hacen que este problema tome dimensiones mayores por lo que la venta del proyecto se ve reducida a un publico muy específico.  
+

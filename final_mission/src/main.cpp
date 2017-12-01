@@ -34,8 +34,8 @@ GLfloat g_lookaux = 0.0f; // Variable auxiliar para auxCamera
 /*
  * Para animar SkyBox
  */
-float animax = 0.0f;
-bool bandera = false;
+float animax = 0.0f, flamaOffset = 0.0f;
+bool bandera = false, techoBan = true;
 
 /*
 * Para cargar y usar audio
@@ -47,6 +47,7 @@ Audio music;
  */
 AnimationReloj reloj;
 AnimationPlane avion;
+AnimationPlane avionCasa;
 AnimationRocket rocket;
 
 /*
@@ -66,12 +67,14 @@ TextureLoader textures;
  */
 void loadKeyFrames() {
 	reloj.loadData();
-	avion.loadData();
+	avion.loadData(FILE_KEYFRAME_PLANE);
+	avionCasa.loadData(FILE_KEYFRAME_PLANECASA);
 	rocket.loadData();
 
 	reloj.setTextures(textures.reloj, textures.pinturaNegra);
 	avion.setTextures(textures.avionGris, textures.avionVerde);
-	rocket.setTextures(textures.spaceX, textures.propulsor, textures.pinturaNegra);
+	avionCasa.setTextures(textures.cielo, textures.avionVerde);
+	rocket.setTextures(textures.spaceX, textures.propulsor, textures.pinturaNegra, textures.explotion);
 	reloj.setActivate(true);
 }
 
@@ -138,7 +141,7 @@ void display(void) {
 	glTranslatef(0, 0.5, 0); //Eleva a la altura del piso
 	glPushMatrix(); // Paredes
 		glTranslatef(0, 50, 0);
-		dibujarCasa(25.0, 4.0);
+		dibujarCasa(25.0, 4.0, techoBan);
 	glPopMatrix();
 
 	glPushMatrix(); // Mesa madera
@@ -174,13 +177,11 @@ void display(void) {
 		dibujaTapete();
 	glPopMatrix();
 
-
-	// Sección del techo
+		// Sección del techo
 	glPushMatrix();
 		glTranslatef(-50, 105, -70);
 		dibujarRotoplas(4.0f);
 	glPopMatrix();
-
 
 	// Sección de recamara amarilla
 	glPushMatrix();
@@ -295,12 +296,17 @@ void display(void) {
 			dibujaTv(3.0f, textures.ring);
 		glPopMatrix();
 	glPopMatrix();
+
 	glPushMatrix();
 		avion.draw();
 	glPopMatrix();
 
 	glPushMatrix();
-		rocket.draw();
+		avionCasa.draw();
+	glPopMatrix();
+
+	glPushMatrix();
+		rocket.draw(flamaOffset);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -347,8 +353,10 @@ void display(void) {
  */
 void animation() {
 	animax += 0.00009;
+	flamaOffset += 0.175;
 	reloj.update();
 	avion.update();
+	avionCasa.update();
 	rocket.update();
 	refri.update();
 	for (size_t i = 0; i < 4; i++) {
@@ -380,32 +388,47 @@ void keyboard(unsigned char key, int x, int y) {
 		case 'w':   //Movimientos de camara
 		case 'W':
 			bandera = false;
+			techoBan = true;
 			camara.Move_Camera( CAMERASPEED );
 			break;
 		case 's':
 		case 'S':
 			bandera = false;
+			techoBan = true;
 			camara.Move_Camera(-(CAMERASPEED));
 			break;
 		case 'a':
 		case 'A':
 			bandera = false;
+			techoBan = true;
 			camara.Strafe_Camera(-(CAMERASPEED));
 			break;
 		case 'd':
 		case 'D':
 			bandera = false;
+			techoBan = true;
 			camara.Strafe_Camera( CAMERASPEED);
 			break;
 		case 'e':
 		case 'E':
 			bandera = false;
+			techoBan = true;
 			camara.UpDown_Camera(CAMERASPEED);
 			break;
 		case 'q':
 		case 'Q':
 			bandera = false;
+			techoBan = true;
 			camara.UpDown_Camera(-CAMERASPEED);
+			break;
+		case 'T':
+			techoBan = true;
+			bandera = false;
+			break;
+		case 't':
+			auxCamera.Position_Camera(0, 900, 0, 0, 0, 0, 0, 0, 1);
+			techoBan = false;
+			bandera = true;
 			break;
 		case 'p':
 		case 'P':
@@ -414,40 +437,39 @@ void keyboard(unsigned char key, int x, int y) {
 			}
 			break;
 		/* Temporal para keyframes */
-		/*
+
 		case 'z':
-			avion.left();
+			avionCasa.left();
 			break;
 		case 'Z':
-			avion.right();
+			avionCasa.right();
 			break;
 		case 'x':
-			avion.fordward();
+			avionCasa.fordward();
 			break;
 		case 'X':
-			avion.backward();
+			avionCasa.backward();
 			break;
 		case 'c':
-			avion.up();
+			avionCasa.up();
 			break;
 		case 'C':
-			avion.down();
+			avionCasa.down();
 			break;
 		case 'v':
-			avion.rotateXPositive();
+			avionCasa.rotateXPositive();
 			break;
 		case 'V':
-			avion.rotateXNegative();
+			avionCasa.rotateXNegative();
 			break;
 		case 'M':
 		case 'm':
-			avion.saveToFile();
+			avionCasa.saveToFile(FILE_KEYFRAME_PLANECASA);
 			break;
 		case 'n':
 		case 'N':
-			avion.saveKeyframe();
+			avionCasa.saveKeyframe();
 			break;
-			*/
 		case 'b':
 			rocket.setActivate(true);
 			break;
@@ -460,6 +482,12 @@ void keyboard(unsigned char key, int x, int y) {
 		case 'H':
 			avion.setActivate(false);
 			break;
+		case 'i':
+			avionCasa.setActivate(true);
+			break;
+		case 'I':
+			avionCasa.setActivate(false);
+			break;
 		case 'r':
 			refri.activateDoor1();
 			break;
@@ -470,6 +498,7 @@ void keyboard(unsigned char key, int x, int y) {
 			// Animación del Avión
 			auxCamera.Position_Camera(-650, 800, -750, 40, 700, -750, 0, 1, 0);
 			bandera = true;
+			avion.setActivate(true);
 			break;
 		case '2':
 			// Alberca
@@ -480,6 +509,7 @@ void keyboard(unsigned char key, int x, int y) {
 			// Animación Cohéte
 			auxCamera.Position_Camera(800, 50, 0, 100, 150, 800, 0, 1, 0);
 			bandera = true;
+			rocket.setActivate(true);
 			break;
 		case '4':
 			// Animación Reloj
@@ -490,6 +520,12 @@ void keyboard(unsigned char key, int x, int y) {
 			// Animación refrigerador
 			auxCamera.Position_Camera(-30, 50, 30, -50, 47, 30, 0, 1, 0);
 			bandera = true;
+			break;
+		case '6':
+			// Animación Avion casa
+			auxCamera.Position_Camera(-650, 80, -750, 40, 80, -750, 0, 1, 0);
+			bandera	= true;
+			avionCasa.setActivate(true);
 			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();

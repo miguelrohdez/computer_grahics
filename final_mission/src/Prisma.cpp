@@ -98,6 +98,38 @@ void Prisma::draw() {
     }
 }
 
+void Prisma::draw(float offsetY) {
+    this->x *= scale;
+    this->y *= scale;
+    this->z *= scale;
+    Vertex v[8] = {
+        Vertex(-x,  y,  z),
+        Vertex( x,  y,  z),
+        Vertex(-x, -y,  z),
+        Vertex( x, -y,  z),
+        Vertex(-x, -y, -z),
+        Vertex( x, -y, -z),
+        Vertex( x,  y, -z),
+        Vertex(-x,  y, -z)
+    };
+
+    Plane p[6] = {
+        Plane(v[0], v[1], v[6], v[7], textures[0]), // XZ Arriba
+        Plane(v[4], v[5], v[3], v[2], textures[1]), // XZ Abajo
+        Plane(v[0], v[2], v[3], v[1], textures[2]), // XY Z positiva
+        Plane(v[6], v[5], v[4], v[7], textures[3]), // XY Z negativa
+        Plane(v[1], v[3], v[5], v[6], textures[4]), // YZ en X positiva
+        Plane(v[7], v[4], v[2], v[0], textures[5]) // YZ X negativa
+    };
+    for (size_t i = 0; i < 6; i++) {
+        if (this->flagRepetition)
+            p[i].calculateRepetitions(repTexture, repTexture);
+        else
+            p[i].noRepetition();
+        p[i].draw(offsetY);
+    }
+}
+
 void Prisma::drawSky(float anim) {
     float v[8][3] = {
             {-x,  y,  z},

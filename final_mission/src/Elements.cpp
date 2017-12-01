@@ -239,7 +239,7 @@ void dibujaGarage(){
 	glPopMatrix();
 }
 
-void dibujarCasa(float heightWall, float scale, float textureRep) {
+void dibujarCasa(float heightWall, float scale, bool techoBan, float textureRep) {
 	Prisma p = Prisma(1, 1, 1);
 	float anchoBarda = 1.1f;
 
@@ -315,70 +315,72 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 		p.draw(anchoBarda, heightWall, 10, textures.bardaU);
 	glPopMatrix();
 
-	//Secciones de Techo
-	heightWall += 0.55; // Se suma ancho del techo
-	glPushMatrix();
-		glTranslatef(-50 * scale, heightWall*(scale/2), 40 * scale); // AT
-		p.draw(30, anchoBarda, 20, textures.techoA);
-		glTranslatef(30 * scale, 0, -25 * scale); // BT
-		p.draw(30, anchoBarda, 30, textures.techoB);
-		glTranslatef(-30 * scale, 0, -5 * scale); // CT
-		p.draw(30, anchoBarda, 40, textures.techoC);
-		glTranslatef(60 * scale, 0, 0); // DT
-		p.draw(30, anchoBarda, 40, textures.techoD);
-		glTranslatef(35 * scale, 0, -5 * scale); // ET
-		p.draw(40, anchoBarda, 50, textures.techoE);
-		glTranslatef(-55 * scale, 0, -10 * scale); // FT
-		p.draw(10, anchoBarda, 10, textures.techoF);
-		glTranslatef(-15 * scale, 0, -5 * scale); // GT
-		p.draw(20, anchoBarda, 20, textures.techoG);
-		glTranslatef(-25 * scale, 0, -20 * scale); // HT
-		p.draw(30, anchoBarda, 40, textures.techoH);
-		glTranslatef(55 * scale, 0, 0); // IT
-		p.draw(40, anchoBarda, 40, textures.techoI);
-		glTranslatef(-30 * scale, 0, -5 * scale); // JT
-		p.draw(20, anchoBarda, 30, textures.techoJ);
-	glPopMatrix();
-	heightWall -= 5.55;
-	anchoBarda = 0.5;
-	p.disableRepetition();
-	glTranslatef(0, -2.5 * scale, 0);
-	glPushMatrix();
-		glTranslatef(-40.25 * scale, 0, 30 * scale); // P1
-		p.draw(9.75, heightWall, anchoBarda, textures.door1);
-		glTranslatef(10.25 * scale, 0, 0); // P2
-		p.draw(10, heightWall, anchoBarda, textures.door2);
-		glTranslatef(-5 * scale, 0, -34.75 * scale); // P3
-		p.draw(anchoBarda, heightWall, 9.35, textures.door3);
-		glTranslatef(0, 0, -10.5 * scale); // P4
-		p.draw(anchoBarda, heightWall, 9.35, textures.door3);
-		glTranslatef(20 * scale, 0, 0); // P5
-		p.draw(anchoBarda, heightWall, 9.6, textures.door4);
-		glTranslatef(-14.5 * scale, 0, -5 * scale); // P6
-		p.draw(9.5, heightWall, anchoBarda, textures.door5);
-		glTranslatef(75 * scale, 0, 0); // P7
-		p.draw(11, heightWall, anchoBarda, textures.door2);
-	glPopMatrix();
-	p.enableRepetition();
-	heightWall = 5;
-	anchoBarda = 1.1;
-	glTranslatef(0, 12.5 * scale, 0);
-	glPushMatrix();
-		glTranslatef(-40.25 * scale, 0, 30 * scale); // P1
-		p.draw(9.75, heightWall, anchoBarda, textures.bardaD);
-		glTranslatef(10.25 * scale, 0, 0); // P2
-		p.draw(10, heightWall, anchoBarda, textures.bardaE);
-		glTranslatef(-5 * scale, 0, -34.75 * scale); // P3
-		p.draw(anchoBarda, heightWall, 9.35, textures.bardaF);
-		glTranslatef(0, 0, -10.5 * scale); // P4
-		p.draw(anchoBarda, heightWall, 9.35, textures.bardaJ);
-		glTranslatef(20 * scale, 0, 0); // P5
-		p.draw(anchoBarda, heightWall, 9.6, textures.bardaK);
-		glTranslatef(-14.5 * scale, 0, -5 * scale); // P6
-		p.draw(9.5, heightWall, anchoBarda, textures.bardaL);
-		glTranslatef(75 * scale, 0, 0); // P7
-		p.draw(11, heightWall, anchoBarda, textures.bardaM);
-	glPopMatrix();
+	if(techoBan){
+		//Secciones de Techo
+		heightWall += 0.55; // Se suma ancho del techo
+		glPushMatrix();
+			glTranslatef(-50 * scale, heightWall*(scale/2), 40 * scale); // AT
+			p.draw(30, anchoBarda, 20, textures.techoA);
+			glTranslatef(30 * scale, 0, -25 * scale); // BT
+			p.draw(30, anchoBarda, 30, textures.techoB);
+			glTranslatef(-30 * scale, 0, -5 * scale); // CT
+			p.draw(30, anchoBarda, 40, textures.techoC);
+			glTranslatef(60 * scale, 0, 0); // DT
+			p.draw(30, anchoBarda, 40, textures.techoD);
+			glTranslatef(35 * scale, 0, -5 * scale); // ET
+			p.draw(40, anchoBarda, 50, textures.techoE);
+			glTranslatef(-55 * scale, 0, -10 * scale); // FT
+			p.draw(10, anchoBarda, 10, textures.techoF);
+			glTranslatef(-15 * scale, 0, -5 * scale); // GT
+			p.draw(20, anchoBarda, 20, textures.techoG);
+			glTranslatef(-25 * scale, 0, -20 * scale); // HT
+			p.draw(30, anchoBarda, 40, textures.techoH);
+			glTranslatef(55 * scale, 0, 0); // IT
+			p.draw(40, anchoBarda, 40, textures.techoI);
+			glTranslatef(-30 * scale, 0, -5 * scale); // JT
+			p.draw(20, anchoBarda, 30, textures.techoJ);
+		glPopMatrix();
+		heightWall -= 5.55;
+		anchoBarda = 0.5;
+		p.disableRepetition();
+		glTranslatef(0, -2.5 * scale, 0);
+		glPushMatrix();
+			glTranslatef(-40.25 * scale, 0, 30 * scale); // P1
+			p.draw(9.75, heightWall, anchoBarda, textures.door1);
+			glTranslatef(10.25 * scale, 0, 0); // P2
+			p.draw(10, heightWall, anchoBarda, textures.door2);
+			glTranslatef(-5 * scale, 0, -34.75 * scale); // P3
+			p.draw(anchoBarda, heightWall, 9.35, textures.door3);
+			glTranslatef(0, 0, -10.5 * scale); // P4
+			p.draw(anchoBarda, heightWall, 9.35, textures.door3);
+			glTranslatef(20 * scale, 0, 0); // P5
+			p.draw(anchoBarda, heightWall, 9.6, textures.door4);
+			glTranslatef(-14.5 * scale, 0, -5 * scale); // P6
+			p.draw(9.5, heightWall, anchoBarda, textures.door5);
+			glTranslatef(75 * scale, 0, 0); // P7
+			p.draw(11, heightWall, anchoBarda, textures.door2);
+		glPopMatrix();
+		p.enableRepetition();
+		heightWall = 5;
+		anchoBarda = 1.1;
+		glTranslatef(0, 12.5 * scale, 0);
+		glPushMatrix();
+			glTranslatef(-40.25 * scale, 0, 30 * scale); // P1
+			p.draw(9.75, heightWall, anchoBarda, textures.bardaD);
+			glTranslatef(10.25 * scale, 0, 0); // P2
+			p.draw(10, heightWall, anchoBarda, textures.bardaE);
+			glTranslatef(-5 * scale, 0, -34.75 * scale); // P3
+			p.draw(anchoBarda, heightWall, 9.35, textures.bardaF);
+			glTranslatef(0, 0, -10.5 * scale); // P4
+			p.draw(anchoBarda, heightWall, 9.35, textures.bardaJ);
+			glTranslatef(20 * scale, 0, 0); // P5
+			p.draw(anchoBarda, heightWall, 9.6, textures.bardaK);
+			glTranslatef(-14.5 * scale, 0, -5 * scale); // P6
+			p.draw(9.5, heightWall, anchoBarda, textures.bardaL);
+			glTranslatef(75 * scale, 0, 0); // P7
+			p.draw(11, heightWall, anchoBarda, textures.bardaM);
+		glPopMatrix();
+		
 	p.setScale(1.0);
 
 	/* Ventanas */
@@ -448,6 +450,7 @@ void dibujarCasa(float heightWall, float scale, float textureRep) {
 		p.draw(50, 50, 5, textures.ventana2);
 		p.enableRepetition();
 	glPopMatrix();
+	}
 }
 
 void dibujarSkyBox(float animax) {

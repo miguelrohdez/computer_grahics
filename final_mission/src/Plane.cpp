@@ -25,6 +25,17 @@ void Plane::draw() {
     glEnd();
 }
 
+void Plane::draw(float offsetY) {
+	glBindTexture(GL_TEXTURE_2D, texture.GLindex);
+    glColor3fv(this->color.getRGB());
+    glBegin(GL_QUADS);
+		glTexCoord2f(0.0, axisARep + offsetY); glVertex3fv(v[0].getValues());
+		glTexCoord2f(0.0f, 0.0f + offsetY); glVertex3fv(v[1].getValues());
+		glTexCoord2f(axisBRep, 0.0f + offsetY); glVertex3fv(v[2].getValues());
+		glTexCoord2f(axisBRep, axisARep + offsetY); glVertex3fv(v[3].getValues());
+    glEnd();
+}
+
 /*
  * Dibujar con el vector en sentido contrario
  */

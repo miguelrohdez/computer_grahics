@@ -14,19 +14,19 @@ AnimationPlane::AnimationPlane() {
 	}
 }
 
-void AnimationPlane::loadData() {
+void AnimationPlane::loadData(const char* name) {
 	FILE *data;
 	this->numFrames = 0;
 
-	data = fopen(FILE_KEYFRAME_PLANE, "r");
+	data = fopen(name, "r");
 	if (!data) {
-		printf("Error file: %s\n", FILE_KEYFRAME_PLANE);
+		printf("Error file: %s\n", name);
 		exit(0);
 	}
 	//printf("Cargando frames ...\n");
 	while (fread(&frames[this->numFrames], sizeof(KeyFrame), 1, data) == 1) {
-		//printf("Frame[%d]\n", this->numFrames);
-		//frames[this->numFrames].toString(); // Para depurar valores cargados
+		printf("Frame[%d]\n", this->numFrames);
+		frames[this->numFrames].toString(); // Para depurar valores cargados
 		this->numFrames++;
 	}
 	fclose(data);
@@ -146,17 +146,17 @@ void AnimationPlane::rotateXPositive() {
 	this->rotate[0] -= 5;
 }
 
-void AnimationPlane::saveToFile() {
+void AnimationPlane::saveToFile(const char* name) {
 	FILE *data;
 
-	data = fopen(FILE_KEYFRAME_PLANE, "w");
+	data = fopen(name, "w");
 	if (!data) {
-		printf("Error file %s\n", FILE_KEYFRAME_PLANE);
+		printf("Error file %s\n", name);
 		exit(0);
 	}
 	for (int i = 0; i < current; i++) {
 		printf("Guardando Frame: \n");
-		//frames[i].toString(); // Para depurar valores guardados
+		frames[i].toString(); // Para depurar valores guardados
 		fwrite(&frames[i], sizeof(KeyFrame), 1, data);
 	}
 	fclose(data);
