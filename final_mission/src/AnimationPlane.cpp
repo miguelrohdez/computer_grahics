@@ -25,8 +25,8 @@ void AnimationPlane::loadData(const char* name) {
 	}
 	//printf("Cargando frames ...\n");
 	while (fread(&frames[this->numFrames], sizeof(KeyFrame), 1, data) == 1) {
-		printf("Frame[%d]\n", this->numFrames);
-		frames[this->numFrames].toString(); // Para depurar valores cargados
+		//zprintf("Frame[%d]\n", this->numFrames);
+		//frames[this->numFrames].toString(); // Para depurar valores cargados
 		this->numFrames++;
 	}
 	fclose(data);
