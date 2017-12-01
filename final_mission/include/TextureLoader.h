@@ -5,6 +5,7 @@
 
 class TextureLoader {
 public:
+	CTexture burbuja;
 	CTexture refriNevera;
 	CTexture refriPuerta;
 	CTexture refriLateral;

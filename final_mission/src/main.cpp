@@ -16,7 +16,9 @@
 #include "AnimationReloj.h"
 #include "AnimationRocket.h"
 #include "AnimationFridge.h"
+#include "AnimationBall.h"
 #include "Elements.h"
+#include "Sphere.h"
 
 ALCdevice  *device;
 ALCcontext *context;
@@ -51,6 +53,7 @@ AnimationRocket rocket;
  * Máquinas de estado
  */
 AnimationFridge refri;
+AnimationBall ball[4];
 
 /*
  * Para usar texturas
@@ -74,6 +77,9 @@ void loadKeyFrames() {
 
 void loadStateMachines() {
 	refri = AnimationFridge();
+	for (size_t i = 0; i < 4; i++) {
+		ball[i] = AnimationBall();
+	}
 }
 
 /*
@@ -85,7 +91,7 @@ void initGL() {
 	glEnable(GL_DEPTH_TEST);                            // Activa Depth Testing
 	glDepthFunc(GL_LEQUAL);                                // Tipo de Depth Testing a usar
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);    // Correccion de cálculos de perspectiva
-	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);	
+	camara.Position_Camera(50, 50, 10, 0, 50, 0, 0, 1, 0);
 	textures.load();
 	loadKeyFrames();
 	loadStateMachines();
@@ -99,13 +105,13 @@ void display(void) {
 	//alSourcePlay(source);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW); //TODO: Entender que hace
-	glLoadIdentity();	
+	glLoadIdentity();
 
 	if(bandera){
 		glRotatef(g_lookaux, 1.0f, 0, 0);
 		gluLookAt(auxCamera.mPos.x, auxCamera.mPos.y, auxCamera.mPos.z,
 			  auxCamera.mView.x, auxCamera.mView.y, auxCamera.mView.z,
-			  auxCamera.mUp.x, auxCamera.mUp.y, auxCamera.mUp.z);	
+			  auxCamera.mUp.x, auxCamera.mUp.y, auxCamera.mUp.z);
 	}else{
 		glRotatef(g_lookupdown, 1.0f, 0, 0);
 		gluLookAt(camara.mPos.x, camara.mPos.y, camara.mPos.z,
@@ -116,7 +122,7 @@ void display(void) {
 	dibujaEjes();
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix(); // Skybox
-		glTranslatef(0,450,0);
+		glTranslatef(0, 450, 0);
 		dibujarSkyBox(animax);
 	glPopMatrix();
 
@@ -312,8 +318,21 @@ void display(void) {
 		glTranslatef(-113, 20, 35);
 		refri.draw(4.0f, textures.crefri, textures.crefriPuerta, textures.crefriPuertaNevera);
 	glPopMatrix();
+
 	glEnable(GL_BLEND); // Figuras con opacidad
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glPushMatrix();
+		glTranslatef(-100, 0, 550);
+		ball[0].draw(3.0f, textures.burbuja, -1, -1);
+		glTranslatef(50, 0, 0);
+		ball[1].draw(3.0f, textures.burbuja, -1, 1);
+		glTranslatef(0, 0, 50);
+		ball[2].draw(3.0f, textures.burbuja, 1, -1);
+		glTranslatef(-50, 0, -50);
+		ball[3].draw(3.0f, textures.burbuja, 1, 1);
+	glPopMatrix();
+
 	glPushMatrix();
 		glTranslatef(200, 2, 70);
 		dibujarMesaCristal(4.0f);
@@ -332,6 +351,9 @@ void animation() {
 	avion.update();
 	rocket.update();
 	refri.update();
+	for (size_t i = 0; i < 4; i++) {
+		ball[i].update();
+	}
 	glutPostRedisplay();
 }
 
@@ -349,7 +371,6 @@ void reshape(int width, int height) {
 	glMatrixMode(GL_MODELVIEW); // Seleccionamos Modelview Matrix
 	glLoadIdentity();
 }
-
 
 /*
 * Función que maneja el teclado
@@ -385,6 +406,12 @@ void keyboard(unsigned char key, int x, int y) {
 		case 'Q':
 			bandera = false;
 			camara.UpDown_Camera(-CAMERASPEED);
+			break;
+		case 'p':
+		case 'P':
+			for (size_t i = 0; i < 10; i++) {
+				ball[i].activate();
+			}
 			break;
 		/* Temporal para keyframes */
 		/*
@@ -440,28 +467,28 @@ void keyboard(unsigned char key, int x, int y) {
 			refri.activateDoor2();
 			break;
 		case '1':
-			// Animación del Avión	
-			auxCamera.Position_Camera(-650, 800, -750, 40, 700, -750, 0, 1, 0);			
+			// Animación del Avión
+			auxCamera.Position_Camera(-650, 800, -750, 40, 700, -750, 0, 1, 0);
 			bandera = true;
 			break;
 		case '2':
 			// Alberca
-			auxCamera.Position_Camera(-100, 400, 700, -100, 0, 500, 0, 1, 0);			
+			auxCamera.Position_Camera(-100, 400, 700, -100, 0, 500, 0, 1, 0);
 			bandera = true;
 			break;
 		case '3':
 			// Animación Cohéte
-			auxCamera.Position_Camera(800, 50, 0, 100, 150, 800, 0, 1, 0);			
+			auxCamera.Position_Camera(800, 50, 0, 100, 150, 800, 0, 1, 0);
 			bandera = true;
 			break;
 		case '4':
 			// Animación Reloj
-			auxCamera.Position_Camera(90, 70, 0, 100, 70, -100, 0, 1, 0);			
+			auxCamera.Position_Camera(90, 70, 0, 100, 70, -100, 0, 1, 0);
 			bandera = true;
 			break;
 		case '5':
 			// Animación refrigerador
-			auxCamera.Position_Camera(-30, 50, 30, -50, 47, 30, 0, 1, 0);			
+			auxCamera.Position_Camera(-30, 50, 30, -50, 47, 30, 0, 1, 0);
 			bandera = true;
 			break;
 		case 27:        // Cuando Esc es presionado...
@@ -496,13 +523,13 @@ void arrowKeys(int key, int x, int y) {
 			if(bandera)
 				auxCamera.Rotate_View(-CAMERASPEED);
 			else
-				camara.Rotate_View(-CAMERASPEED);			
+				camara.Rotate_View(-CAMERASPEED);
 			break;
 		case GLUT_KEY_RIGHT:
 			if(bandera)
 				auxCamera.Rotate_View(CAMERASPEED);
 			else
-				camara.Rotate_View( CAMERASPEED);				
+				camara.Rotate_View( CAMERASPEED);
 			break;
 		default:
 			break;

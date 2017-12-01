@@ -9,6 +9,10 @@ void TextureLoader::load() {
 	skyBox.BuildGLTexture();
 	skyBox.ReleaseImage();
 
+	burbuja.LoadTGA("../res/Texturas/burbuja.tga");
+	burbuja.BuildGLTexture();
+	burbuja.ReleaseImage();
+
 	refriPuertaInterno.LoadTGA("../res/Texturas/refri_interno_normal.tga");
 	refriPuertaInterno.BuildGLTexture();
 	refriPuertaInterno.ReleaseImage();

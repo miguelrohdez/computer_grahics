@@ -26,6 +26,7 @@ void dibujarSkyBox(float animax);
 void dibujarPlano();
 void dibujaLavabo(float scale);
 void testCylinder();
+void testSphere();
 void testCone();
 void dibujarRotoplas(float scale);
 void dibujaTocador(float scale=1.0f);

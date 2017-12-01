@@ -7,6 +7,7 @@
 #include "Cylinder.h"
 #include "TextureLoader.h"
 #include "Color.h"
+#include "Sphere.h"
 
 
 extern TextureLoader textures;
@@ -479,6 +480,13 @@ void dibujaLavabo(float scale) {
 void testCylinder() {
 	Cylinder c(10, 10, textures.cuadroDebug);
 	c.drawHalf();
+}
+
+void testSphere() {
+	Sphere s(10);
+	//s.setTexture(textures.ventana2);
+	s.setColor(blanco);
+	s.draw(15, textures.burbuja);
 }
 
 void dibujarRotoplas(float scale) {

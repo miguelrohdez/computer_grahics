@@ -3,7 +3,7 @@
 
 #include "Texture.h"
 #include "Color.h"
-#ifndef CONSTANT_PI
+#ifndef PI
 	#define PI 3.1415926535897
 #endif
 #ifndef CONSTANT_RESOLUTION
