@@ -7,7 +7,7 @@
 #include "Texture.h"
 #define iMaxSteps 400.0f
 #define FILE_KEYFRAME_PLANE "../res/Keyframes/keyframe_plane.frm"
-
+#define FILE_KEYFRAME_PLANECASA "../res/Keyframes/keyframe_plane_casa.frm"
 
 class AnimationPlane {
 	CTexture textureBody, textureWing;
@@ -21,7 +21,7 @@ class AnimationPlane {
 public:
 	AnimationPlane();
 	AnimationPlane(CTexture textureBody, CTexture textureWing);
-	void loadData();
+	void loadData(const char* name);
 	void update();
 	void draw();
 	void saveKeyframe();
@@ -34,7 +34,7 @@ public:
 	void down();
 	void rotateXPositive();
 	void rotateXNegative();
-	void saveToFile();
+	void saveToFile(const char* name);
 	void setTextures(CTexture tBody, CTexture tWing);
 	void setActivate(bool v);
 	void resetValues();

@@ -14,13 +14,13 @@ AnimationPlane::AnimationPlane() {
 	}
 }
 
-void AnimationPlane::loadData() {
+void AnimationPlane::loadData(const char* name) {
 	FILE *data;
 	this->numFrames = 0;
 
-	data = fopen(FILE_KEYFRAME_PLANE, "r");
+	data = fopen(name, "r");
 	if (!data) {
-		printf("Error file: %s\n", FILE_KEYFRAME_PLANE);
+		printf("Error file: %s\n", name);
 		exit(0);
 	}
 	//printf("Cargando frames ...\n");
@@ -146,12 +146,12 @@ void AnimationPlane::rotateXPositive() {
 	this->rotate[0] -= 5;
 }
 
-void AnimationPlane::saveToFile() {
+void AnimationPlane::saveToFile(const char* name) {
 	FILE *data;
 
-	data = fopen(FILE_KEYFRAME_PLANE, "w");
+	data = fopen(name, "w");
 	if (!data) {
-		printf("Error file %s\n", FILE_KEYFRAME_PLANE);
+		printf("Error file %s\n", name);
 		exit(0);
 	}
 	for (int i = 0; i < current; i++) {

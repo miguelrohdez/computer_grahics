@@ -20,7 +20,7 @@ void dibujaTv(float scale, CTexture screeT);
 void dibujaTapete(float scale=1.0f);
 void dibujaCarretera();
 void dibujaGarage();
-void dibujarCasa(float heightWall, float scale, float textureRep=0.8f);
+void dibujarCasa(float heightWall, float scale, bool techoBan, float textureRep=0.8f);
 void dibujarSkyBox(float animax);
 /* Función para depurar los planos */
 void dibujarPlano();
