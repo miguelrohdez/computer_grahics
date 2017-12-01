@@ -66,7 +66,7 @@ void AnimationRocket::interpolate() {
 	frames[current].setIncRotX((frames[current + 1].getRotX() - frames[current].getRotX()) / iMaxStepsRocket);
 }
 
-void AnimationRocket::draw() {
+void AnimationRocket::draw(float offsetY) {
 
 	Cylinder c(25, 250, textureBody);
 	//Prisma p(10.f, 10.f, 10.f, Color(1,1,1));
@@ -79,7 +79,7 @@ void AnimationRocket::draw() {
 	glTranslatef(translate[0], translate[1], translate[2]);
 	glRotatef(rotate[0], 0, 1, 0);
 	glRotatef(-90, 0, 0, 1);
-	glTranslatef(10, 0, 0);
+	glTranslatef(8, 0, 0);
 
 	// Pico frontal
 	glPushMatrix();
@@ -101,37 +101,37 @@ void AnimationRocket::draw() {
 		// Flamas
 		glPushMatrix();				
 			glTranslatef(0, -45, 0);			
-			p.draw();						
+			p.draw(offsetY);						
 		glPopMatrix();
 
 		glPushMatrix();			
 			glTranslatef(0, -45, 0);
 			glRotatef(90, 0, 1, 0);			
-			p.draw();						
+			p.draw(offsetY);						
 		glPopMatrix();
 
 		glPushMatrix();			
 			glTranslatef(0, -45, 0);
 			glRotatef(45, 0, 1, 0);			
-			p.draw();						
+			p.draw(offsetY);						
 		glPopMatrix();
 
 		glPushMatrix();			
 			glTranslatef(0, -45, 0);
 			glRotatef(-45, 0, 1, 0);			
-			p.draw();						
+			p.draw(offsetY);						
 		glPopMatrix();
 
 		glPushMatrix();			
 			glTranslatef(0, -45, 0);
 			glRotatef(135, 0, 1, 0);			
-			p.draw();						
+			p.draw(offsetY);						
 		glPopMatrix();
 
 		glPushMatrix();			
 			glTranslatef(0, -45, 0);
 			glRotatef(-135, 0, 1, 0);			
-			p.draw();						
+			p.draw(offsetY);						
 		glPopMatrix();
 
 		p.enableRepetition();			
@@ -147,52 +147,54 @@ void AnimationRocket::draw() {
 		c.draw(10, 2, 15);
 
 		// Base
-		glPushMatrix();
+		glPushMatrix();			
 			glTranslatef(0, -153, 0);
 			glRotatef(0, 0, 0, 1);
 			co.draw(10, 20);
 
+			Prisma p1 = Prisma(50, 50, 0.001);
+			p1.setTexture(tExplotion);
 			glEnable( GL_ALPHA_TEST );
 			glAlphaFunc( GL_GREATER, 0.1 );	
-			p.disableRepetition();
+			p1.disableRepetition();
 
 			// Flamas
 			glPushMatrix();				
-				glTranslatef(0, -20, 0);			
-				p.draw(50, 50, 0.001);						
+				glTranslatef(0, -20, 0);							
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(90, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(45, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(-45, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(135, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(-135, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
-			p.enableRepetition();			
+			p1.enableRepetition();			
 			glDisable(GL_ALPHA_TEST);			
 		glPopMatrix();
 	glPopMatrix();
@@ -212,45 +214,45 @@ void AnimationRocket::draw() {
 
 			glEnable( GL_ALPHA_TEST );
 			glAlphaFunc( GL_GREATER, 0.1 );	
-			p.disableRepetition();
+			p1.disableRepetition();
 
 			// Flamas
 			glPushMatrix();				
 				glTranslatef(0, -20, 0);			
-				p.draw(50, 50, 0.001);						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(90, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(45, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(-45, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(135, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
 			glPushMatrix();			
 				glTranslatef(0, -20, 0);
 				glRotatef(-135, 0, 1, 0);			
-				p.draw();						
+				p1.draw(offsetY);						
 			glPopMatrix();
 
-			p.enableRepetition();			
+			p1.enableRepetition();			
 			glDisable(GL_ALPHA_TEST);
 		glPopMatrix();
 	glPopMatrix();

@@ -32,7 +32,7 @@ GLfloat g_lookaux = 0.0f; // Variable auxiliar para auxCamera
 /*
  * Para animar SkyBox
  */
-float animax = 0.0f;
+float animax = 0.0f, flamaOffset = 0.0f;
 bool bandera = false, techoBan = true;
 
 /*
@@ -300,7 +300,7 @@ void display(void) {
 	glPopMatrix();
 
 	glPushMatrix();
-		rocket.draw();
+		rocket.draw(flamaOffset);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -334,6 +334,7 @@ void display(void) {
  */
 void animation() {
 	animax += 0.00009;
+	flamaOffset += 0.175;
 	reloj.update();
 	avion.update();
 	avionCasa.update();
@@ -495,7 +496,9 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		case '6':
 			// Animación Avion casa
-			camara.Position_Camera(-650, 80, -750, 40, 80, -750, 0, 1, 0);						
+			auxCamera.Position_Camera(-650, 80, -750, 40, 80, -750, 0, 1, 0);
+			bandera	= true;
+			avionCasa.setActivate(true);					
 			break;
 		case 27:        // Cuando Esc es presionado...
 			alutExit();

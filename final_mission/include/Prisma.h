@@ -24,6 +24,7 @@ public:
     Prisma(float width, float height, float depth, Color color);
 	Prisma(float width, float height, float depth);
     void draw();
+    void draw(float offsetY);
     void drawSky(float anim);
     void draw(float w, float h, float d);
     void draw(float w, float h, float d, Color c);

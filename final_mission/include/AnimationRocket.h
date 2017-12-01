@@ -25,6 +25,7 @@ public:
 	void loadData();
 	void update();
 	void draw();
+	void draw(float offset);
 	void saveKeyframe();
 	void interpolate();
 	void left();
